@@ -2913,8 +2913,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2932,7 +2932,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "18124904-1807-4be1-8f81-40be900ad9a3";
+				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -2954,8 +2954,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2967,7 +2967,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "18124904-1807-4be1-8f81-40be900ad9a3";
+				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -2979,8 +2979,8 @@
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FBAuto/ShareSDK/Connection",
@@ -3026,7 +3026,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "18124904-1807-4be1-8f81-40be900ad9a3";
+				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3039,8 +3039,8 @@
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FBAuto/ShareSDK/Connection",
@@ -3086,7 +3086,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "18124904-1807-4be1-8f81-40be900ad9a3";
+				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
