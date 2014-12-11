@@ -76,6 +76,10 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 //取
 + (id)cacheForKey:(NSString *)key;
 
++ (void)cacheBool:(BOOL)boo ForKey:(NSString *)key;
+
++ (BOOL)cacheBoolForKey:(NSString *)key;
+
 #pragma - mark 小工具
 
 +(NSString *)ddecodeSpecialCharactersStringWith:(NSString *)input;

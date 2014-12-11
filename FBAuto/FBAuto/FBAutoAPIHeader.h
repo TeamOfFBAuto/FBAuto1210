@@ -34,6 +34,8 @@
 #define LOGIN_PASS @"LOGIN_PASS"//登录密码
 
 
+#define FIRST_LAUNCH @"firstLaunch" //第一次启动
+
 //保存用户信息
 
 #define USERPHONENUMBER @"iphonenumber"
@@ -48,7 +50,12 @@
 
 #define USERPASSWORD @"userpassword"
 
-#define KPageSize  20 //每页条数
+
+#define FBAUTO_APPID @"904576362" //e车 appStore appid
+
+
+
+#define KPageSize  30 //每页条数
 
 #define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-车型数据更新时间(更新成功之后与服务器时间更新一致)
 

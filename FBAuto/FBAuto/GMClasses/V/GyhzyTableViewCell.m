@@ -52,6 +52,14 @@
         self.touxiangImageView = imaV;
         [self.contentView addSubview:imaV];
         
+        //头像点击btn
+        UIButton *headBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        headBtn.frame = imaV.frame;
+        headBtn.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:headBtn];
+        
+        self.headButton = headBtn;
+        
         //公司全称
         UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imaV.frame)+10, 14, 240, 15)];
         nameLabel.font = [UIFont systemFontOfSize:14];

@@ -347,8 +347,7 @@
     menuBgView.backgroundColor = [UIColor colorWithHexString:@"ff9c00"];
     [self.view addSubview:menuBgView];
     
-//    NSArray *items = @[@"车型",@"版本",@"地区",@"定金",@"更多"];
-    NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"高级"];
+    NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"更多"];
     
     CGFloat everyWidth = (320 - 4) / items.count;//每个需要的宽度
     CGFloat needWidth = 0.0;

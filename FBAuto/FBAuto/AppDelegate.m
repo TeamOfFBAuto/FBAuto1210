@@ -151,8 +151,7 @@
     
     //版本更新
     
-     //test FBLife 605673005 fbauto
-    [[LCWTools shareInstance]versionForAppid:@"904576362" Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
+    [[LCWTools shareInstance]versionForAppid:FBAUTO_APPID Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
        
         NSLog(@"updateContent %@ %@",updateUrl,updateContent);
         
@@ -160,7 +159,15 @@
     
     //车型数据更新
     [self getCarUpdateState];
-
+    
+    //提示 好评推荐
+    
+    if ([LCWTools cacheBoolForKey:FIRST_LAUNCH] == NO) {
+        [self gotoAppStore];
+        
+        [LCWTools cacheBool:YES ForKey:FIRST_LAUNCH];
+    }
+    
     self.window.rootViewController = [self preprareViewControllers];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -168,6 +175,19 @@
     return YES;
 }
 
+#pragma mark - 好评推荐
+
+//去app页面评价
+
+- (void)gotoAppStore{
+    
+    UIAlertView *commentAlert = [[UIAlertView alloc]initWithTitle:@"" message:@"好评鼓励!" delegate:self cancelButtonTitle:@"拒绝" otherButtonTitles:@"鼓励", nil];
+    commentAlert.tag = 3000;
+    [commentAlert show];
+    
+//    NSString *str = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",FBAUTO_APPID];
+    
+}
 
 #pragma mark - 网络请求判断是否需要更新车型数据
 
@@ -1017,6 +1037,19 @@
             NSLog(@"YES");
             
             [RCIMClient reconnect:nil];
+        }
+    }else if (3000 == alertView.tag){
+        
+        if (0 == buttonIndex) {
+            
+            
+            
+            
+        }
+        if (1 == buttonIndex) {
+            
+            NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/us/app/id%@?mt=8",FBAUTO_APPID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
     }
 }

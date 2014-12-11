@@ -104,7 +104,11 @@
     //    NSArray *titles1 = @[@"地区",@"车型"];
     NSArray *titles1 = @[@"车型"];
     //    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观色",@"内饰色",@"定金"];
-    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观色",@"内饰色"];
+//    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观色",@"内饰色"];
+    
+    //外观 内饰 合为一
+    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观、内饰"];
+
     
     UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, 300, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:firstLabel];
@@ -280,18 +284,18 @@
             title = @"外观颜色";
         }
             break;
-        case 105:
-        {
-            aStyle = Data_Color_In;
-            title = @"内饰颜色";
-        }
-            break;
-        case 106:
-        {
-            aStyle = Data_Money;
-            title = @"定金";
-        }
-            break;
+//        case 105:
+//        {
+//            aStyle = Data_Color_In;
+//            title = @"内饰颜色";
+//        }
+//            break;
+//        case 106:
+//        {
+//            aStyle = Data_Money;
+//            title = @"定金";
+//        }
+//            break;
             
         default:
             break;
@@ -348,9 +352,27 @@
                 break;
             case Data_Color_In:
             {
-                _color_in = [paramId intValue];
+//                _color_in = [paramId intValue];
+//                
+//                _color_in_custom = paramName;
                 
-                _color_in_custom = paramName;
+                //内饰 外观结合一起
+                //外观在前
+                
+                NSArray *names = [paramName componentsSeparatedByString:@","];
+                NSArray *ids = [paramId componentsSeparatedByString:@","];
+                
+                if (names.count == 2) {
+                    _color_in_custom = names[1];
+                    _color_out_custom = names[0];
+                    
+                }
+                
+                if (ids.count == 2) {
+                    _color_in = [ids[1] intValue];
+                    _color_out = [ids[0] intValue];
+                }
+                
             }
                 break;
             case Data_Area:
@@ -550,11 +572,20 @@
         [self labelWithTag:101 + 2].text  = [self showForText:[dic objectForKey:@"spot_future"]];
         _spot_future = (int)[MENU_TIMELIMIT indexOfObject:[dic objectForKey:@"spot_future"]];
         
-        [self labelWithTag:102 + 2].text  = [self showForText:[dic objectForKey:@"color_out"]];
-        _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
+//        [self labelWithTag:102 + 2].text  = [self showForText:[dic objectForKey:@"color_out"]];
+//        _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
+//        
+//        [self labelWithTag:103 + 2].text  = [self showForText:[dic objectForKey:@"color_in"]];
+//        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
         
-        [self labelWithTag:103 + 2].text  = [self showForText:[dic objectForKey:@"color_in"]];
+        
+        //前外 后 内
+        NSString *color_Out_In = [NSString stringWithFormat:@"%@,%@",[dic objectForKey:@"color_out"],[dic objectForKey:@"color_in"]];
+        [self labelWithTag:102 + 2].text = color_Out_In;
+        
+        _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
         _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
+        
         
         [self labelWithTag:104 + 2].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
         _deposit = [[dic objectForKey:@"deposit"]intValue];

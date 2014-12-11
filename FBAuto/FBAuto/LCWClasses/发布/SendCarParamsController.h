@@ -27,7 +27,8 @@ typedef enum{
     Data_Area_City, //地区 城市
     
     Data_Car_Type_Custom, //车型 自定义
-    Data_Car_Style_Custom //车款 自定义
+    Data_Car_Style_Custom, //车款 自定义
+    Data_Color_Out_In //内饰 外观合一起
     
 }DATASTYLE;
 
@@ -50,6 +51,9 @@ typedef void(^ SelectParamsBlock) (DATASTYLE style,NSString *paramName,NSString 
 
 @property(nonatomic,retain)NSString *provinceId;//省份
 @property(nonatomic,retain)NSString *cityId;//城市
+
+@property(nonatomic,retain)NSString *color_out_name;//外观颜色name
+@property(nonatomic,assign)int color_out_id;//外观颜色id
 
 - (void)selectParamBlock:(SelectParamsBlock)aBlock;
 

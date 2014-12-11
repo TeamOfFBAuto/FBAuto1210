@@ -42,7 +42,7 @@
     if (theIndexPatch.section == 0) {
         self.kuang.tag = theIndexPatch.row+1;//1 2 3 4
     }else if (theIndexPatch.section == 1){
-        self.kuang.tag = theIndexPatch.row +5;//5 6 7
+        self.kuang.tag = theIndexPatch.row + 5;//5 6 7 8
     }
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gdoTap:)];
     [self.kuang addGestureRecognizer:tap];
@@ -71,13 +71,17 @@
         self.titileLabel.text = @"我的求购";
     }else if (theIndexPatch.row == 3 && theIndexPatch.section == 0){
         self.titileLabel.text = @"我的收藏";
-    }else if (theIndexPatch.row == 0 && theIndexPatch.section == 1){
+    }
+    
+    else if (theIndexPatch.row == 0 && theIndexPatch.section == 1){
         self.titileLabel.text = @"修改密码";
     }else if (theIndexPatch.row == 1 && theIndexPatch.section == 1){
-        self.titileLabel.text = @"联系我们";
+        self.titileLabel.text = @"版本检查";
     }else if (theIndexPatch.row == 2 && theIndexPatch.section == 1){
-        self.titileLabel.text = @"消息设置";
+        self.titileLabel.text = @"联系我们";
     }else if (theIndexPatch.row == 3 && theIndexPatch.section == 1){
+        self.titileLabel.text = @"消息设置";
+    }else if (theIndexPatch.row == 4 && theIndexPatch.section == 1){
         self.titileLabel.text = @"退出登录";
     }
     

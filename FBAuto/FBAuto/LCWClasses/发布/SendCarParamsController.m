@@ -189,7 +189,13 @@
             }else if (self.dataStyle == Data_Color_In || self.dataStyle == Data_Color_Out){
                 
                 
-                selectBlock(self.dataStyle,TF.text,selectColor_row);
+//                selectBlock(self.dataStyle,TF.text,selectColor_row);
+                
+                [self clickToColorWithOutName:TF.text outId:[selectColor_row intValue]];
+                
+                if (self.dataStyle == Data_Color_Out) {
+                    return;
+                }
             }
             
             if (self.rootVC) {
@@ -209,6 +215,48 @@
 
 - (void)createNewCustomColor
 {
+    
+}
+
+//颜色选择 (内饰外观合为一)
+
+- (void)clickToColorWithOutName:(NSString *)select outId:(int)row
+{
+    if (self.dataStyle == Data_Color_Out) {
+        
+        //push到下一个页面
+        
+        
+        SendCarParamsController *base = [[SendCarParamsController alloc]init];
+        base.hidesBottomBarWhenPushed = YES;
+        base.navigationTitle = @"内饰颜色";
+        base.dataStyle = Data_Color_In;
+        base.selectLabel = self.selectLabel;
+        
+        base.color_out_name = select;//记录outColor name
+        base.color_out_id = row;//记录 outcolor id
+        
+        base.haveLimit = self.haveLimit;
+        
+        base.rootVC = self.rootVC;
+        
+        [base selectParamBlock:^(DATASTYLE style, NSString *paramName, NSString *paramId) {
+            
+            selectBlock(style,paramName,paramId);
+            
+        }];
+        
+        [self.navigationController pushViewController:base animated:YES];
+        
+        return;
+    }
+    
+    //前为 colorOut 后为 colorIn 用,分割
+    select = [NSString stringWithFormat:@"%@,%@",self.color_out_name,select];
+    NSString *idString = [NSString stringWithFormat:@"%d,%d",self.color_out_id,row];
+    
+    selectBlock(self.dataStyle,select,idString);
+    
     
 }
 
@@ -718,9 +766,60 @@
         }
     }
     
-    selectBlock(self.dataStyle,select,[NSString stringWithFormat:@"%d",row]);
+    [self clickToColorWithOutName:select outId:row];
     
-    [self clickToBack:nil];
+    if (self.dataStyle == Data_Color_Out) {
+        return;
+    }
+    
+    if (self.rootVC) {
+        [self.navigationController popToViewController:self.rootVC animated:YES];
+    }else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+//    if (self.dataStyle == Data_Color_Out) {
+//        
+//        //push到下一个页面
+//        
+//        
+//        SendCarParamsController *base = [[SendCarParamsController alloc]init];
+//        base.hidesBottomBarWhenPushed = YES;
+//        base.navigationTitle = @"内饰颜色";
+//        base.dataStyle = Data_Color_In;
+//        base.selectLabel = self.selectLabel;
+//        
+//        base.color_out_name = select;//记录outColor name
+//        base.color_out_id = row;//记录 outcolor id
+//
+//        base.rootVC = self.rootVC;
+//        
+//        [base selectParamBlock:^(DATASTYLE style, NSString *paramName, NSString *paramId) {
+//            
+//            selectBlock(style,paramName,paramId);
+//            
+//        }];
+//        
+//        [self.navigationController pushViewController:base animated:YES];
+//        
+//        return;
+//    }
+//    
+//    //前为 colorOut 后为 colorIn 用,分割
+//    select = [NSString stringWithFormat:@"%@,%@",self.color_out_name,select];
+//    NSString *idString = [NSString stringWithFormat:@"%d,%d",self.color_out_id,row];
+//    
+////    selectBlock(self.dataStyle,select,[NSString stringWithFormat:@"%d",row]);
+//    
+//    selectBlock(self.dataStyle,select,idString);
+//    
+//    if (self.rootVC) {
+//        [self.navigationController popToViewController:self.rootVC animated:YES];
+//    }else
+//    {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

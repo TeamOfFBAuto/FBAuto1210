@@ -295,15 +295,27 @@
         
         _spot_future = (int)[MENU_TIMELIMIT indexOfObject:[dic objectForKey:@"spot_future"]];
         
-        [weakSelf labelWithTag:103].text = [dic objectForKey:@"color_out"];
+        //前外 后 内
+        NSString *color_Out_In = [NSString stringWithFormat:@"%@,%@",[dic objectForKey:@"color_out"],[dic objectForKey:@"color_in"]];
+        [weakSelf labelWithTag:103].text = color_Out_In;
         
         _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
-        
-        [weakSelf labelWithTag:104].text = [dic objectForKey:@"color_in"];
-        
         _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
         
-        [weakSelf labelWithTag:105].text = [dic objectForKey:@"build_time"];
+        [weakSelf labelWithTag:104].text = [dic objectForKey:@"build_time"];
+        
+        
+        //外观 内饰 合为一 之前
+        
+//        [weakSelf labelWithTag:103].text = [dic objectForKey:@"color_out"];
+//        
+//        _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
+//        
+//        [weakSelf labelWithTag:104].text = [dic objectForKey:@"color_in"];
+//        
+//        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
+//        
+//        [weakSelf labelWithTag:105].text = [dic objectForKey:@"build_time"];
         
         build_time = [dic objectForKey:@"build_time"];
         
@@ -317,11 +329,16 @@
             
             NSString *url = [aImageDic objectForKey:@"link"];
             NSString *imageId = [aImageDic objectForKey:@"imgid"];
-            [imageUrls addObject:url];
             
-            [photosArray addObject:imageId];//编辑的时候里面开始存放的是 图片id
+            if (imageId.length > 0) {
             
-            [weakSelf updateScrollViewAndPhotoButton:nil imageUrl:url];
+                [imageUrls addObject:url];
+                
+                [photosArray addObject:imageId];//编辑的时候里面开始存放的是 图片id
+                
+                [weakSelf updateScrollViewAndPhotoButton:nil imageUrl:url];
+            }
+            
         }
         
     } failBlock:^(NSDictionary *failDic, NSError *erro) {
@@ -489,7 +506,7 @@
         
         NSLog(@"dateBlock %@",dateString);
         
-        Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:105];
+        Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:104];
         btn.contentLabel.text = dateString;
         
         build_time = [dateString isEqualToString:@"不填写"] ? @" " : dateString;
@@ -556,7 +573,9 @@
     secondBgView.layer.borderColor = [UIColor colorWithHexString:@"b4b4b4"].CGColor;
     [bigBgScroll addSubview:secondBgView];
     
-    NSArray *titles = @[@"车型",@"版本",@"库存",@"外观颜色",@"内饰颜色",@"生产日期"];
+//    NSArray *titles = @[@"车型",@"版本",@"库存",@"外观、内饰",@"内饰颜色",@"生产日期"];
+
+    NSArray *titles = @[@"车型",@"版本",@"库存",@"外观、内饰",@"生产日期"];
     for (int i = 0; i < titles.count; i ++) {
         Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(0, 45 * i, secondBgView.width, 45) title:[titles objectAtIndex:i] target:self action:@selector(clickToParams:) sectionStyle:Section_Normal image:nil];
         btn.tag = 100 + i;
@@ -758,19 +777,14 @@
             title = @"外观颜色";
         }
             break;
-        case 104:
-        {
-            aStyle = Data_Color_In;
-            title = @"内饰颜色";
-        }
-            break;
-        case 106:
+
+        case 105:
         {
             aStyle = Data_Price;
             title = @"价格";
         }
             break;
-        case 105:
+        case 104:
         {
             NSLog(@"生产日期");
             
@@ -842,9 +856,24 @@
                 break;
             case Data_Color_In:
             {
-                _color_in = [paramId intValue];
+                //内饰 外观结合一起
+                //外观在前
                 
-                _color_in_custom = paramName;
+                NSArray *names = [paramName componentsSeparatedByString:@","];
+                NSArray *ids = [paramId componentsSeparatedByString:@","];
+                
+                if (names.count == 2) {
+                    _color_in_custom = names[1];
+                    _color_out_custom = names[0];
+
+                }
+                
+                if (ids.count == 2) {
+                    _color_in = [ids[1] intValue];
+                    _color_out = [ids[0] intValue];
+                }
+                
+                
             }
                 break;
                 
@@ -879,7 +908,7 @@
         return;
     }
     
-    for (int i = 0; i < 6; i ++) {
+    for (int i = 0; i < 5; i ++) {
         
         Section_Button *btn1 = (Section_Button *)[secondBgView viewWithTag:100 + i];
         
@@ -899,12 +928,9 @@
                 
             }else if (i == 3)
             {
-                [self alertText:@"请选择外观颜色"];
+                [self alertText:@"请选择外观、内饰颜色"];
                 
             }else if (i == 4)
-            {
-                [self alertText:@"请选择内饰颜色"];
-            }else if (i == 5)
             {
                 [self alertText:@"请选择生产日期"];
             }
@@ -912,6 +938,8 @@
             return;
         }
     }
+    
+    NSLog(@"fafafafafa");
     
     
     if ([LCWTools isValidateFloat:priceTF.text] || [LCWTools isValidateInt:priceTF.text]) {

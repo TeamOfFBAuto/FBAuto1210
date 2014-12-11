@@ -22,7 +22,13 @@
 
 #import "DXAlertView.h"
 
+#import "SJAvatarBrowser.h"
+
 @interface GuserZyViewController ()
+{
+    UIImageView *headImageView;
+    NSString *touxingUrl;//头像 小图地址
+}
 
 @end
 
@@ -63,17 +69,27 @@
     [self.view addSubview:_tableView];
     
     
-    UIButton *rightButton2 =[[UIButton alloc]initWithFrame:CGRectMake(0,8,46,29)];
-    [rightButton2 addTarget:self action:@selector(clickToAdd:) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton2 setImage:[UIImage imageNamed:@"jiahaoyou 92_58"] forState:UIControlStateNormal];
-    UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
-    self.navigationItem.rightBarButtonItems = @[save_item2];
+    if ([self.userId isEqualToString:[GMAPI getUid]]) {
+        //说明是自己
+        
+        self.bottomBgView.hidden = YES;
+        
+    }else
+    {
+        UIButton *rightButton2 =[[UIButton alloc]initWithFrame:CGRectMake(0,8,46,29)];
+        [rightButton2 addTarget:self action:@selector(clickToAdd:) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton2 setImage:[UIImage imageNamed:@"jiahaoyou 92_58"] forState:UIControlStateNormal];
+        UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
+        self.navigationItem.rightBarButtonItems = @[save_item2];
+    }
+    
+    
     
     _page = 1;
     [self prepareUeserInfo];//获取用户信息
-//    [self prepareUserCar];//获取用户车源信息
     
     [_tableView showRefreshHeader:YES];
+    
     
 }
 
@@ -156,6 +172,9 @@
         
         
         [self.headImage sd_setImageWithURL:[NSURL URLWithString:guserModel.headimage] placeholderImage:[UIImage imageNamed:@"detail_test.jpg"]];
+        
+        touxingUrl = guserModel.headimage;
+        
     } failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSString *str = [failDic objectForKey:ERROR_INFO];
         UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -217,9 +236,13 @@
         
         NSLog(@"failDic %@",failDic);
         
-//        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        int erroCode = [failDic[@"errocode"] intValue];
         
-        [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
+        if (erroCode != 2) { //2 代表数据为空
+            
+            [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
+        }
+        
         
         if (_tableView.isReloadData) {
             
@@ -301,6 +324,12 @@
         [cell configWithCarModel:_dataArray[indexPath.row-4] userModel:self.guserModel];
     }
     
+    if (indexPath.row == 0) {
+        headImageView = cell.touxiangImageView;
+
+    }
+    
+    [cell.headButton addTarget:self action:@selector(clickToBigPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
     //最后一个cell的分割线
     if (indexPath.row == _dataArray.count+3) {
@@ -409,11 +438,22 @@
 }
 
 
-
-
-
-
 #pragma mark - 最下面的view的点击事件
+
+//看大图
+
+- (void)clickToBigPhoto:(UIButton *)sender
+{
+    
+    NSMutableString *str = [NSMutableString stringWithString:touxingUrl];
+    [str replaceOccurrencesOfString:@"Thu" withString:@"ori" options:0 range:NSMakeRange(0, str.length)];
+
+    
+    [SJAvatarBrowser showImage:headImageView imageUrl:str];
+    
+
+}
+
 - (IBAction)clickToDial:(UIButton *)sender {
     
     DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"是否立即拨打电话" contentText:nil leftButtonTitle:@"拨打" rightButtonTitle:@"取消" isInput:NO];

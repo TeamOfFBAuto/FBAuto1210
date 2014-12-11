@@ -23,6 +23,8 @@
 @property(nonatomic,strong)UILabel *jianjieLabel;//简介
 @property(nonatomic,strong)UIImageView *touxiangImageView;//头像imageview
 
+@property (nonatomic,retain)UIButton *headButton;//头像事件
+
 //车源
 @property(nonatomic,strong)UILabel *carNameLabel;//车源名称
 @property(nonatomic,strong)UILabel *carPriceLabel;//价钱

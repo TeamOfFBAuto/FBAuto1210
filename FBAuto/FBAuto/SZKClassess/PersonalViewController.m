@@ -90,6 +90,19 @@
     
     [self.view addSubview:self.userFaceImv];
     
+    //添加头像的点击事件
+    
+    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    CGRect aFrame = _userFaceImv.frame;
+    aFrame.size.width = 320;
+    
+    headButton.frame = aFrame;
+    headButton.backgroundColor = [UIColor clearColor];
+    [headButton addTarget:self action:@selector(clickToUserHome:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:headButton];
+    
+    
     //公司名称
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.userFaceImv.frame)+10, CGRectGetMinY(self.userFaceImv.frame)+4, 245, 17)];
     self.nameLabel.font = [UIFont systemFontOfSize:14];
@@ -206,7 +219,7 @@
     
     int number = [[RCIM sharedRCIM] getTotalUnreadCount];
     
-    if (number == 0) {
+    if (number <= 0) {
         self.xiaoxiRedPointView.hidden = YES;
         self.xiaoxiNumLabel.hidden = YES;
     }else{
@@ -218,7 +231,7 @@
     
     int notice = [[LCWTools cacheForKey:NOTICE_NEW_COUNT]integerValue];
     
-    if (notice == 0) {
+    if (notice <= 0) {
         self.tongzhiRedPointView.hidden = YES;
         self.tongzhiNumLabel.hidden = YES;
     }else{
@@ -232,6 +245,17 @@
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     [delegate updateTabbarNumber:(number + notice)];
+}
+
+#pragma mark 事件处理
+
+- (void)clickToUserHome:(UIButton *)sender
+{
+    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+    personal.title = self.nameLabel.text;
+    personal.userId = [GMAPI getUid];
+    personal.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:personal animated:YES];
 }
 
 
@@ -277,7 +301,7 @@
     if (section == 0) {
         num = 4;
     }else if (section == 1){
-        num = 4;
+        num = 5;
     }
     
     return num;
@@ -380,15 +404,25 @@
             gmarkvc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:gmarkvc animated:YES];
             
-        }else if (index == 6){//联系我们
+        }else if (index == 6){ //版本检查
+            
+            
+            [[LCWTools shareInstance]versionForAppid:FBAUTO_APPID Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
+                
+                NSLog(@"updateContent %@ %@",updateUrl,updateContent);
+                
+            }];
+            
+        }
+        else if (index == 7){//联系我们
             [self.navigationController pushViewController:[[GlxwmViewController alloc]init] animated:YES];
             //测试
             //[self.navigationController pushViewController:[[GyhzyViewController alloc]init] animated:YES];
             
             
-        }else if (index == 7){//消息设置
+        }else if (index == 8){//消息设置
             [self.navigationController pushViewController:[[GMessageSViewController alloc]init]animated:YES];
-        }else if (index == 8){//退出登录
+        }else if (index == 9){//退出登录
             
             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [al show];

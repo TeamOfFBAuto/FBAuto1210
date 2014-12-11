@@ -1000,6 +1000,18 @@
 }
 
 
++ (void)cacheBool:(BOOL)boo ForKey:(NSString *)key
+{
+    [[NSUserDefaults standardUserDefaults]setBool:boo forKey:key];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
++ (BOOL)cacheBoolForKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:key];
+}
+
 #pragma - mark 查询数据
 
 //查询
