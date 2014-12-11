@@ -211,6 +211,7 @@
 		13A1A9421980AC7A00E09666 /* LShareSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9411980AC7A00E09666 /* LShareSheetView.m */; };
 		13A1A9451980ADB100E09666 /* LImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9441980ADB100E09666 /* LImageButton.m */; };
 		13A37C881A1DCCBD00AECDB9 /* shoucang_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A37C871A1DCCBD00AECDB9 /* shoucang_cancel@2x.png */; };
+		13A5B0D61A397644006E2C4C /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A5B0D51A397644006E2C4C /* FindViewController.m */; };
 		13A61BD319FE4F37007BF353 /* SRMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A61BD219FE4F37007BF353 /* SRMonthPicker.m */; };
 		13A8E8AA19E669CA004E7DB1 /* FBChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8E8A919E669CA004E7DB1 /* FBChatListController.m */; };
 		13AB60DB1A1F43E9002C5543 /* baocun92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */; };
@@ -719,6 +720,8 @@
 		13A1A9431980ADB100E09666 /* LImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LImageButton.h; sourceTree = "<group>"; };
 		13A1A9441980ADB100E09666 /* LImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LImageButton.m; sourceTree = "<group>"; };
 		13A37C871A1DCCBD00AECDB9 /* shoucang_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoucang_cancel@2x.png"; sourceTree = "<group>"; };
+		13A5B0D41A397644006E2C4C /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindViewController.h; sourceTree = "<group>"; };
+		13A5B0D51A397644006E2C4C /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
 		13A61BD119FE4F37007BF353 /* SRMonthPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRMonthPicker.h; sourceTree = "<group>"; };
 		13A61BD219FE4F37007BF353 /* SRMonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRMonthPicker.m; sourceTree = "<group>"; };
 		13A8E8A819E669CA004E7DB1 /* FBChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBChatListController.h; sourceTree = "<group>"; };
@@ -2203,6 +2206,8 @@
 				190BFD84195AAD800098E0F4 /* FindCarViewController.m */,
 				13737C8C1965420000941746 /* PersonalViewController.h */,
 				13737C8D1965420000941746 /* PersonalViewController.m */,
+				13A5B0D41A397644006E2C4C /* FindViewController.h */,
+				13A5B0D51A397644006E2C4C /* FindViewController.m */,
 			);
 			path = SZKClassess;
 			sourceTree = "<group>";
@@ -2719,6 +2724,7 @@
 				13807501196E74A500AD3D03 /* EGORefreshTableFooterView.m in Sources */,
 				13A61BD319FE4F37007BF353 /* SRMonthPicker.m in Sources */,
 				E3219BD91982431700EA026D /* GuserModel.m in Sources */,
+				13A5B0D61A397644006E2C4C /* FindViewController.m in Sources */,
 				138B4A1119664ED500B974A5 /* FBAddFriendsController.m in Sources */,
 				1351C5CC197A704F000F7391 /* FindCarPublishController.m in Sources */,
 				137FEB091974D48100CDBD89 /* CarBrand.m in Sources */,

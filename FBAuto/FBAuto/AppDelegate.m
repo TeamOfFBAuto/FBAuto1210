@@ -17,6 +17,8 @@
 
 //#import "PersonalViewController.h"//个人中心
 
+#import "FindViewController.h" //发现
+
 #import "GloginViewController.h"//登录页面
 
 #import "ASIHTTPRequest.h"
@@ -483,6 +485,8 @@
     
     FindCarViewController * searchCarVC = [[FindCarViewController alloc] init];
     
+    FindViewController *find = [[FindViewController alloc]init];
+    
     self.perSonalVC = [[PersonalViewController alloc] init];
     
     
@@ -492,7 +496,9 @@
     
     UINavigationController * navc3 = [[UINavigationController alloc] initWithRootViewController:searchCarVC];
     
-    UINavigationController * navc4 = [[UINavigationController alloc] initWithRootViewController:_perSonalVC];
+    UINavigationController * navc4 = [[UINavigationController alloc] initWithRootViewController:find];
+    
+    UINavigationController * navc5 = [[UINavigationController alloc] initWithRootViewController:_perSonalVC];
     
     
     rootVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"车源" image:[UIImage imageNamed:@"cheyuan_down46_46"] tag:0];
@@ -501,14 +507,16 @@
     
     searchCarVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"求购" image:[UIImage imageNamed:@"xunche_down46_46"] tag:2];
     
-    _perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:3];
+    find.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"发现" image:[UIImage imageNamed:@"xunche_down46_46"] tag:3];
+    
+    _perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:4];
     
     UITabBarController * tabbar = [[UITabBarController alloc] init];
     tabbar.delegate = self;
     tabbar.tabBar.backgroundImage=[UIImage imageNamed:@"testV.png"];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:232.0/255.0f green:128/255.0f blue:24/255.0f alpha:1]];
     
-    tabbar.viewControllers = [NSArray arrayWithObjects:navc1,navc2,navc3,navc4,nil];
+    tabbar.viewControllers = [NSArray arrayWithObjects:navc1,navc2,navc3,navc4,navc5,nil];
     
     //将状态栏设置成自定义颜色
     

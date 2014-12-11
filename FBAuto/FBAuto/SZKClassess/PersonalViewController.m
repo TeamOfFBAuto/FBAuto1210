@@ -157,6 +157,10 @@
     [self.view addSubview:_tableView];
     
     
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+    view.backgroundColor = [UIColor whiteColor];
+    _tableView.tableFooterView = view;
+    
     
     
     //小红点
@@ -358,7 +362,7 @@
     UIView *xiatiao = [[UIView alloc]initWithFrame:CGRectMake(10.5, 43, 299, 1)];
     xiatiao.backgroundColor = [UIColor whiteColor];
     [cell.contentView addSubview:xiatiao];
-    if ((indexPath.row == 3 && indexPath.section == 0)||(indexPath.row ==3 && indexPath.section == 1)) {
+    if ((indexPath.row == 3 && indexPath.section == 0)||(indexPath.row ==4 && indexPath.section == 1)) {
         xiatiao.hidden = YES;
     }
     
