@@ -65,6 +65,11 @@
     LSearchView *searchView;
     UIButton *editButton;
     UIButton *cancelButton;
+    
+    
+    CGFloat currentOffsetY;
+    CGFloat oldTableHeight;//table初始高度
+    UIView *statesBarView;//灰色状态栏
 }
 
 @end
@@ -112,7 +117,9 @@
     
     //数据展示table
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, 320, self.view.height -searchView.height - menuBgView.height - 49 - 15 - 20)];
+    oldTableHeight = self.view.height - 44 - menuBgView.height - 49 - 20;
+    
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, 320, oldTableHeight)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -123,6 +130,10 @@
     [_table showRefreshHeader:YES];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateAllParams:) name:UPDATE_FINDCAR_PARAMS object:nil];
+    
+    statesBarView = [[UIView alloc]initWithFrame:CGRectMake(0, -20, self.view.width, 20)];
+    statesBarView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    [self.view addSubview:statesBarView];
     
 }
 
@@ -556,6 +567,8 @@
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
     
+    [self updateViewFrameForShow:YES duration:0.0];
+    
 }
 
 #pragma - mark 点击选项
@@ -710,7 +723,71 @@
     
 }
 
+#pragma mark 列表滑动更新视图
+
+//滑动列表时更新 navigationBar  tabbar 等视图 frame
+
+- (void)updateViewFrameForShow:(BOOL)show duration:(CGFloat)seconds
+{
+    __weak typeof(menuBgView)weakMenu = menuBgView;
+    
+    __weak typeof(_table)weakTable = _table;
+    
+    __weak typeof(statesBarView)weakstatesBarView = statesBarView;
+    
+    
+    [UIView animateWithDuration:seconds animations:^{
+        
+        CGFloat aY = show ? 20 : -44;
+        
+        self.navigationController.navigationBar.top = aY;
+        
+        weakMenu.top = show ? 0 : -weakMenu.height - 64;
+        
+        weakTable.top = weakMenu.bottom;
+        
+        weakTable.height = show ? oldTableHeight : self.view.height + 64 + 49;
+        
+        self.tabBarController.tabBar.top = show ? self.view.height + 64 + 49 - 49 :  self.view.height + 64 + 49;
+        
+        weakstatesBarView.top = show ? -20 : -64;
+        
+    }];
+    
+}
+
+
 #pragma - mark RefreshDelegate <NSObject>
+
+
+- (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offset = scrollView.contentOffset.y;
+    
+    NSLog(@"offset %f",offset);
+    
+    if (offset > 20) {
+        
+        //消失
+        
+        [self updateViewFrameForShow:NO duration:0.5];
+        
+    }
+    
+    if (offset > 0 && offset < currentOffsetY) {
+        
+        [self updateViewFrameForShow:YES duration:0.5];
+    }
+    
+    currentOffsetY = scrollView.contentOffset.y;
+}
+
+- (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"refreshScrollViewDidEndDecelerating");
+    
+    currentOffsetY = scrollView.contentOffset.y;
+}
 
 - (void)loadNewData
 {

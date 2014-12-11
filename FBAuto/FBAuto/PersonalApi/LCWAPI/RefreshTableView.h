@@ -18,6 +18,9 @@
 - (void)loadMoreData;
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath;
+- (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView;
+
+- (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 
 @end
 

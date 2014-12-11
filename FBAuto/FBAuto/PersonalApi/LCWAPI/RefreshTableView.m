@@ -210,6 +210,20 @@
     if (_refreshHeaderView) {
         [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     }
+    
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshScrollViewDidScroll:)]) {
+        [_refreshDelegate refreshScrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"scrollViewDidEndDecelerating");
+    
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshScrollViewDidEndDecelerating:)]) {
+        [_refreshDelegate refreshScrollViewDidEndDecelerating:scrollView];
+    }
+    
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
