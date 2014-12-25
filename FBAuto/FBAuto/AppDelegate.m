@@ -507,7 +507,7 @@
     
     searchCarVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"求购" image:[UIImage imageNamed:@"xunche_down46_46"] tag:2];
     
-    find.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"发现" image:[UIImage imageNamed:@"xunche_down46_46"] tag:3];
+    find.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"吐槽" image:[UIImage imageNamed:@"xunche_down46_46"] tag:3];
     
     _perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:4];
     

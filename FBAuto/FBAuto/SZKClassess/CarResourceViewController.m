@@ -955,18 +955,16 @@
     
     __weak typeof(statesBarView)weakstatesBarView = statesBarView;
     
+    weakTable.top = show ? weakMenu.height : -64;
+    weakTable.height = show ? oldTableHeight : self.view.height + 64 + 49;
+    weakMenu.top = show ? 0 : -weakMenu.height - 64;
     
     [UIView animateWithDuration:seconds animations:^{
+        
         
         CGFloat aY = show ? 20 : -44;
         
         self.navigationController.navigationBar.top = aY;
-        
-        weakMenu.top = show ? 0 : -weakMenu.height - 64;
-        
-        weakTable.top = weakMenu.bottom;
-        
-        weakTable.height = show ? oldTableHeight : self.view.height + 64 + 49;
         
         self.tabBarController.tabBar.top = show ? self.view.height + 64 + 49 - 49 :  self.view.height + 64 + 49;
         
@@ -996,24 +994,21 @@
     
     if (offset > 0 && offset < currentOffsetY) {
         
-        [self updateViewFrameForShow:YES duration:0.5];
+        [self updateViewFrameForShow:YES duration:0];
     }
     
-    
-    if(scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height-40)))
-    {
+    if (scrollView.contentOffset.y <= ((scrollView.contentSize.height - scrollView.frame.size.height-40))) {
         
-        
+        currentOffsetY = scrollView.contentOffset.y;
     }
     
-    currentOffsetY = scrollView.contentOffset.y;
 }
 
 - (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSLog(@"refreshScrollViewDidEndDecelerating");
     
-    currentOffsetY = scrollView.contentOffset.y;
+//    currentOffsetY = scrollView.contentOffset.y;
 }
 
 - (void)loadNewData
