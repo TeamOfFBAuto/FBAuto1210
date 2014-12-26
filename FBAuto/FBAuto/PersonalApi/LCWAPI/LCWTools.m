@@ -255,6 +255,52 @@
     return headImageUrlStr;
 }
 
++ (UIColor *)colorForColorId:(int)colorId
+{
+    switch (colorId) {
+        case 1:
+        {
+            return [UIColor orangeColor];
+        }
+            break;
+        case 2:
+        {
+            return [UIColor redColor];
+        }
+            break;
+        case 3:
+        {
+            return [UIColor yellowColor];
+        }
+            break;
+        case 4:
+        {
+           return [UIColor greenColor];
+        }
+            break;
+        case 5:
+        {
+           return [UIColor brownColor];
+        }
+            break;
+        case 6:
+        {
+           return [UIColor blueColor];
+        }
+            break;
+        case 7:
+        {
+            return [UIColor purpleColor];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    return [UIColor redColor];
+}
+
 #pragma - mark 切图
 
 +(UIImage *)scaleToSizeWithImage:(UIImage *)img size:(CGSize)size{
@@ -452,24 +498,48 @@
     return confromTimespStr;
 }
 
-//- (NSString *)convertDateToCurrLocalWithFormat:(NSString *)_format
-//{
-//	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-//	[inputFormatter setDateFormat:_format];
-//    [inputFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Europe/Copenhagen"]];//设置源时间时区
-//	NSDate *formatterDate = [inputFormatter dateFromString:self];//因为是用category实现，self就是源时间string
-//    
-//	
-//	NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-//    [outputFormatter setTimeZone:[NSTimeZone localTimeZone]];
-//    [outputFormatter setDateStyle:NSDateFormatterShortStyle];
-//    [outputFormatter setTimeStyle:NSDateFormatterShortStyle];
-//	[outputFormatter setDateFormat:_format];
-//	NSString *result = [outputFormatter stringFromDate:formatterDate];
-//
-//    
-//    return result;
-//}
++(NSString*)timestamp:(NSString*)myTime{
+    
+    NSString *timestamp;
+    time_t now;
+    time(&now);
+    
+    int distance = (int)difftime(now,  [myTime integerValue]);
+    if (distance < 0) distance = 0;
+    
+    if (distance < 60) {
+        timestamp = [NSString stringWithFormat:@"%d%@", distance, @"秒钟前"];
+    }
+    else if (distance < 60 * 60) {
+        distance = distance / 60;
+        timestamp = [NSString stringWithFormat:@"%d%@", distance, @"分钟前"];
+    }
+    else if (distance < 60 * 60 * 24) {
+        distance = distance / 60 / 60;
+        timestamp = [NSString stringWithFormat:@"%d%@", distance,@"小时前"];
+    }
+    else if (distance < 60 * 60 * 24 * 7) {
+        distance = distance / 60 / 60 / 24;
+        timestamp = [NSString stringWithFormat:@"%d%@", distance,@"天前"];
+    }
+    else if (distance < 60 * 60 * 24 * 7 * 4) {
+        distance = distance / 60 / 60 / 24 / 7;
+        timestamp = [NSString stringWithFormat:@"%d%@", distance, @"周前"];
+    }else
+    {
+        static NSDateFormatter *dateFormatter = nil;
+        if (dateFormatter == nil) {
+            dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        }
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970: [myTime integerValue]];
+        
+        timestamp = [dateFormatter stringFromDate:date];
+    }
+    
+    return timestamp;
+}
+
 
 + (NSString *)currentTime
 {

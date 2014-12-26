@@ -25,6 +25,8 @@
 		133DF6A3197CE7F9006BF9ED /* FBFindCarDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */; };
 		1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */; };
 		1351C5CC197A704F000F7391 /* FindCarPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5CB197A704F000F7391 /* FindCarPublishController.m */; };
+		135922571A4D6B0B0091E320 /* TucaoPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 135922551A4D6B0B0091E320 /* TucaoPublishController.m */; };
+		135922581A4D6B0B0091E320 /* TucaoPublishController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135922561A4D6B0B0091E320 /* TucaoPublishController.xib */; };
 		135EC58C1A009BAE00A040F1 /* garea.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 135EC58B1A009BAE00A040F1 /* garea.sqlite */; };
 		135EC58F1A009D2F00A040F1 /* CarUpdateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */; };
 		135EC5911A00E9D400A040F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5901A00E9D400A040F1 /* Default-568h@2x.png */; };
@@ -32,6 +34,11 @@
 		135EC5951A00EC0800A040F1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5931A00EC0800A040F1 /* Default@2x.png */; };
 		135EC5991A01043400A040F1 /* fabu92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5971A01043400A040F1 /* fabu92_58@2x.png */; };
 		135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */; };
+		136787151A4D026000192276 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787141A4D026000192276 /* BaseModel.m */; };
+		136787181A4D027700192276 /* TucaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787171A4D027700192276 /* TucaoModel.m */; };
+		1367871C1A4D0FF200192276 /* FBPublishTucaoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */; };
+		1367871D1A4D0FF200192276 /* FBPublishTucaoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */; };
+		136787201A4D160800192276 /* CustomImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367871F1A4D160800192276 /* CustomImagePickerController.m */; };
 		136CAD5719C97C7C00E05A2F /* biankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CAD5619C97C7C00E05A2F /* biankuang.png */; };
 		13737C8E1965420000941746 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13737C8D1965420000941746 /* PersonalViewController.m */; };
 		137708C119B6C859007609E8 /* detail_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 137708C019B6C859007609E8 /* detail_test.jpg */; };
@@ -360,6 +367,8 @@
 		13D5E1131965115200804835 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D5E1111965115200804835 /* DetailCell.xib */; };
 		13D5E117196513AF00804835 /* FBDetail2Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D5E115196513AF00804835 /* FBDetail2Controller.m */; };
 		13D5E118196513AF00804835 /* FBDetail2Controller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D5E116196513AF00804835 /* FBDetail2Controller.xib */; };
+		13FB9F691A4BFA21000088F6 /* TucaoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13FB9F671A4BFA21000088F6 /* TucaoViewCell.m */; };
+		13FB9F6A1A4BFA21000088F6 /* TucaoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13FB9F681A4BFA21000088F6 /* TucaoViewCell.xib */; };
 		190BFD3F195AA0FB0098E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190BFD3E195AA0FB0098E0F4 /* Foundation.framework */; };
 		190BFD41195AA0FB0098E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190BFD40195AA0FB0098E0F4 /* CoreGraphics.framework */; };
 		190BFD43195AA0FB0098E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190BFD42195AA0FB0098E0F4 /* UIKit.framework */; };
@@ -483,6 +492,9 @@
 		1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchResultController.m; sourceTree = "<group>"; };
 		1351C5CA197A704F000F7391 /* FindCarPublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCarPublishController.h; sourceTree = "<group>"; };
 		1351C5CB197A704F000F7391 /* FindCarPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCarPublishController.m; sourceTree = "<group>"; };
+		135922541A4D6B0B0091E320 /* TucaoPublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoPublishController.h; sourceTree = "<group>"; };
+		135922551A4D6B0B0091E320 /* TucaoPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoPublishController.m; sourceTree = "<group>"; };
+		135922561A4D6B0B0091E320 /* TucaoPublishController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TucaoPublishController.xib; sourceTree = "<group>"; };
 		135EC58B1A009BAE00A040F1 /* garea.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = garea.sqlite; sourceTree = "<group>"; };
 		135EC58D1A009D2F00A040F1 /* CarUpdateClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarUpdateClass.h; sourceTree = "<group>"; };
 		135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarUpdateClass.m; sourceTree = "<group>"; };
@@ -491,6 +503,15 @@
 		135EC5931A00EC0800A040F1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		135EC5971A01043400A040F1 /* fabu92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fabu92_58@2x.png"; sourceTree = "<group>"; };
 		135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiahaoyou 92_58@2x.png"; sourceTree = "<group>"; };
+		136787131A4D026000192276 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		136787141A4D026000192276 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		136787161A4D027700192276 /* TucaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoModel.h; sourceTree = "<group>"; };
+		136787171A4D027700192276 /* TucaoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoModel.m; sourceTree = "<group>"; };
+		136787191A4D0FF200192276 /* FBPublishTucaoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPublishTucaoController.h; sourceTree = "<group>"; };
+		1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPublishTucaoController.m; sourceTree = "<group>"; };
+		1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBPublishTucaoController.xib; sourceTree = "<group>"; };
+		1367871E1A4D160800192276 /* CustomImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImagePickerController.h; sourceTree = "<group>"; };
+		1367871F1A4D160800192276 /* CustomImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImagePickerController.m; sourceTree = "<group>"; };
 		136CAD5619C97C7C00E05A2F /* biankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biankuang.png; sourceTree = "<group>"; };
 		13737C8C1965420000941746 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		13737C8D1965420000941746 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
@@ -917,6 +938,9 @@
 		13D5E114196513AF00804835 /* FBDetail2Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDetail2Controller.h; sourceTree = "<group>"; };
 		13D5E115196513AF00804835 /* FBDetail2Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDetail2Controller.m; sourceTree = "<group>"; };
 		13D5E116196513AF00804835 /* FBDetail2Controller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBDetail2Controller.xib; sourceTree = "<group>"; };
+		13FB9F661A4BFA21000088F6 /* TucaoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoViewCell.h; sourceTree = "<group>"; };
+		13FB9F671A4BFA21000088F6 /* TucaoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoViewCell.m; sourceTree = "<group>"; };
+		13FB9F681A4BFA21000088F6 /* TucaoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TucaoViewCell.xib; sourceTree = "<group>"; };
 		190BFD3B195AA0FB0098E0F4 /* FBAuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBAuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		190BFD3E195AA0FB0098E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		190BFD40195AA0FB0098E0F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1210,6 +1234,17 @@
 				135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */,
 			);
 			path = Image_new;
+			sourceTree = "<group>";
+		};
+		136787121A4D020500192276 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				136787131A4D026000192276 /* BaseModel.h */,
+				136787141A4D026000192276 /* BaseModel.m */,
+				136787161A4D027700192276 /* TucaoModel.h */,
+				136787171A4D027700192276 /* TucaoModel.m */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		13737C821965380900941746 /* 商圈好友 */ = {
@@ -1560,6 +1595,7 @@
 		13D5DF6919612C9800804835 /* LCWClasses */ = {
 			isa = PBXGroup;
 			children = (
+				13FB9F631A4BF9D1000088F6 /* 吐槽 */,
 				13D5E07C1962BD5800804835 /* FBBaseViewController.h */,
 				13D5E07D1962BD5800804835 /* FBBaseViewController.m */,
 				1351C5C7197A4F8E000F7391 /* FBSearchResultController.h */,
@@ -2021,6 +2057,41 @@
 			path = ZoomScrollView;
 			sourceTree = "<group>";
 		};
+		13FB9F631A4BF9D1000088F6 /* 吐槽 */ = {
+			isa = PBXGroup;
+			children = (
+				136787121A4D020500192276 /* models */,
+				13FB9F641A4BF9FF000088F6 /* viewControllers */,
+				13FB9F651A4BF9FF000088F6 /* views */,
+			);
+			path = "吐槽";
+			sourceTree = "<group>";
+		};
+		13FB9F641A4BF9FF000088F6 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				136787191A4D0FF200192276 /* FBPublishTucaoController.h */,
+				1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */,
+				1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */,
+				135922541A4D6B0B0091E320 /* TucaoPublishController.h */,
+				135922551A4D6B0B0091E320 /* TucaoPublishController.m */,
+				135922561A4D6B0B0091E320 /* TucaoPublishController.xib */,
+				1367871E1A4D160800192276 /* CustomImagePickerController.h */,
+				1367871F1A4D160800192276 /* CustomImagePickerController.m */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		13FB9F651A4BF9FF000088F6 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				13FB9F661A4BFA21000088F6 /* TucaoViewCell.h */,
+				13FB9F671A4BFA21000088F6 /* TucaoViewCell.m */,
+				13FB9F681A4BFA21000088F6 /* TucaoViewCell.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		190BFD32195AA0FB0098E0F4 = {
 			isa = PBXGroup;
 			children = (
@@ -2475,6 +2546,7 @@
 				13D5DFDD1961758E00804835 /* diandian_up16_16@2x.png in Resources */,
 				13D5DFEA1961758E00804835 /* sousuo_icon26_26@2x.png in Resources */,
 				138B4AE01966A4BD00B974A5 /* face7.png in Resources */,
+				13FB9F6A1A4BFA21000088F6 /* TucaoViewCell.xib in Resources */,
 				138B4ABA1966A4BD00B974A5 /* face35.png in Resources */,
 				138B4AC91966A4BD00B974A5 /* face49.png in Resources */,
 				13D5E0EF1963E1ED00804835 /* duihao-up-46_46@2x.png in Resources */,
@@ -2512,6 +2584,7 @@
 				13D5E118196513AF00804835 /* FBDetail2Controller.xib in Resources */,
 				13D5E0C41963DB0300804835 /* QBImagePickerController.bundle in Resources */,
 				138B4AA41966A4BD00B974A5 /* face15.png in Resources */,
+				135922581A4D6B0B0091E320 /* TucaoPublishController.xib in Resources */,
 				138B4ABB1966A4BD00B974A5 /* face36.png in Resources */,
 				137708C119B6C859007609E8 /* detail_test.jpg in Resources */,
 				13D5E1131965115200804835 /* DetailCell.xib in Resources */,
@@ -2569,6 +2642,7 @@
 				13D5DFE51961758E00804835 /* fabu_up46_46@2x.png in Resources */,
 				13D5E0131961758E00804835 /* zhaoxiangji180_180@2x.png in Resources */,
 				138B4AFC1966A4BD00B974A5 /* face95.gif in Resources */,
+				1367871D1A4D0FF200192276 /* FBPublishTucaoController.xib in Resources */,
 				13D5E01B1961758E00804835 /* pengyouquan72_7222x.png in Resources */,
 				138B4AA91966A4BD00B974A5 /* face2.png in Resources */,
 				138B4AFB1966A4BD00B974A5 /* face94.png in Resources */,
@@ -2729,6 +2803,7 @@
 				1351C5CC197A704F000F7391 /* FindCarPublishController.m in Sources */,
 				137FEB091974D48100CDBD89 /* CarBrand.m in Sources */,
 				E33ECB08196D230A00DDD72D /* GptzTableViewCell.m in Sources */,
+				135922571A4D6B0B0091E320 /* TucaoPublishController.m in Sources */,
 				137926FB1987776900377ED5 /* GChangePwViewController.m in Sources */,
 				137926FD1987776900377ED5 /* GfindPasswViewController.m in Sources */,
 				1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */,
@@ -2760,6 +2835,7 @@
 				E3611459197BA8E000F9234E /* DXAlertView.m in Sources */,
 				190BFE21195C362F0098E0F4 /* SzkLoadData.m in Sources */,
 				1336BC24196B91F70011B4D9 /* NSString+Emoji.m in Sources */,
+				136787181A4D027700192276 /* TucaoModel.m in Sources */,
 				13737C8E1965420000941746 /* PersonalViewController.m in Sources */,
 				1391EF1D1977FC6D00FDC52A /* CarClass.m in Sources */,
 				13D5E0611962A14E00804835 /* MenuModel.m in Sources */,
@@ -2772,8 +2848,10 @@
 				E359273F1988D0C800A3F1B0 /* GtzDetailViewController.m in Sources */,
 				1391EF0A1977A1FF00FDC52A /* GloadingView.m in Sources */,
 				138B4B141966A65E00B974A5 /* MarkupParser.m in Sources */,
+				1367871C1A4D0FF200192276 /* FBPublishTucaoController.m in Sources */,
 				137926FE1987776900377ED5 /* GjjxxViewController.m in Sources */,
 				13D5E0C51963DB0300804835 /* QBImagePickerController.m in Sources */,
+				13FB9F691A4BFA21000088F6 /* TucaoViewCell.m in Sources */,
 				13D5E0641962A14E00804835 /* Menu_Button.m in Sources */,
 				138B4B1A1966AC7F00B974A5 /* FBHelper.m in Sources */,
 				13D5E0C31963DB0300804835 /* QBImagePickerAssetView.m in Sources */,
@@ -2792,6 +2870,7 @@
 				13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */,
 				1336BC23196B91F70011B4D9 /* CWInputView.m in Sources */,
 				1391EF1A1977A4CC00FDC52A /* RefreshTableView.m in Sources */,
+				136787201A4D160800192276 /* CustomImagePickerController.m in Sources */,
 				E34B74A1196E341A00451C65 /* GperInfoTableViewCell.m in Sources */,
 				133DF6A2197CE7F9006BF9ED /* FBFindCarDetailController.m in Sources */,
 				13D5E1061964F2E700804835 /* AutoDetail.m in Sources */,
@@ -2820,6 +2899,7 @@
 				190BFD7F195AAD480098E0F4 /* CarResourceViewController.m in Sources */,
 				13D5E0C61963DB0300804835 /* QBImagePickerFooterView.m in Sources */,
 				E351A0C3196F943800C78CFE /* GyhzyTableViewCell.m in Sources */,
+				136787151A4D026000192276 /* BaseModel.m in Sources */,
 				137927071987776900377ED5 /* GzhuceViewController.m in Sources */,
 				E380B4981980FC4400A86F12 /* GxiaoxiTableViewCell.m in Sources */,
 				E337AC6F19B9922C00869214 /* GcustomActionSheet.m in Sources */,

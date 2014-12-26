@@ -705,6 +705,8 @@
     imagePickerController.delegate = self;
     imagePickerController.allowsMultipleSelection = YES;
     imagePickerController.assters = photosArray;
+    imagePickerController.limitsMaximumNumberOfSelection = YES;
+    imagePickerController.maximumNumberOfSelection = 9;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
     

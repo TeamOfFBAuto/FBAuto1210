@@ -53,4 +53,5 @@ typedef enum {
 @property (nonatomic, assign) NSUInteger maximumNumberOfSelection;
 @property(nonatomic,strong)NSMutableArray * assters;
 
+
 @end

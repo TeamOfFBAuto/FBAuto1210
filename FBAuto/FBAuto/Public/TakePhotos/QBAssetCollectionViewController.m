@@ -682,10 +682,10 @@
     {
         if(selected)
         {
-            if (self.selectedAssets.count >= 9-self.selectedArray.count)
+            if (self.selectedAssets.count >= self.maximumNumberOfSelection -self.selectedArray.count)
             {
                 asset1111.selected = NO;
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"最多选择%d张图片",9-(int)self.selectedArray.count] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"最多选择%d张图片",self.maximumNumberOfSelection-(int)self.selectedArray.count] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alertView show];
                 
                 currentPage++;
@@ -740,6 +740,8 @@
     QBShowImageV.selectedAssets = self.selectedAssets;
     
     QBShowImageV.AllImagesArray = self.assets;
+    
+    QBShowImageV.maxSelectedNum = self.maximumNumberOfSelection;//最大数
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:assetCell];
     

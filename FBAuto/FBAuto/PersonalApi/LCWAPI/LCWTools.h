@@ -63,6 +63,8 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 +(UIImage *)scaleToSizeWithImage:(UIImage *)img size:(CGSize)size;
 
++ (UIColor *)colorForColorId:(int)colorId;
+
 
 #pragma - mark 分享
 
@@ -92,6 +94,8 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 +(NSString *)timechange2:(NSString *)placetime;
 +(NSString *)timechange3:(NSString *)placetime;
 +(NSString *)timechangeToDateline;
+
++(NSString*)timestamp:(NSString*)myTime;
 
 + (NSString *)currentTime;//当前时间 yyyy-mm-dd
 

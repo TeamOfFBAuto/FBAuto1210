@@ -57,13 +57,25 @@
 -(void)PreviewChooseTap:(UIButton *)sender
 {
     
-    if (self.selectedAssets.count + self.SelectedCount == 9) {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"最多只能选择9张照片" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
+//    if (self.selectedAssets.count + self.SelectedCount == 9) {
+//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"最多只能选择9张照片" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
+//        
+//        [alertView show];
+//        
+//        return;
+//    }
+    
+    if (self.selectedAssets.count + self.SelectedCount == self.maxSelectedNum) {
+        
+        NSString *mes = [NSString stringWithFormat:@"最多只能选择%d张照片",self.maxSelectedNum];
+        
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:mes delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
         
         [alertView show];
         
         return;
     }
+
     
     
     BOOL isContains = [self.selectedAssets containsObject:[self.AllImagesArray objectAtIndex:_currentPage]];

@@ -49,6 +49,8 @@
 
 @property(nonatomic,assign)int SelectedCount;
 
+@property(nonatomic,assign)int maxSelectedNum;//最大选择数
+
 
 
 @end
