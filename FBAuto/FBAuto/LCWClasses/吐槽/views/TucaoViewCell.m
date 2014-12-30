@@ -21,6 +21,16 @@
     // Configure the view for the selected state
 }
 
+//判断是否有图
+- (BOOL)haveImage:(NSArray *)imageArr
+{
+    if (imageArr.count > 0 && ((NSString *)imageArr[0][@"link"]).length > 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 -(void)setCellWithModel:(TucaoModel *)aModel
 {
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[LCWTools headImageForUserId:aModel.uid]] placeholderImage:DEFAULT_HEAD_IMAGE];
@@ -29,7 +39,8 @@
     
     self.centerImageView.backgroundColor = [LCWTools colorForColorId:[aModel.color intValue]];
     
-    if (aModel.image.count > 0) {
+    if ([self haveImage:aModel.image]) {
+        
         NSString *imageUrl = aModel.image[0][@"link"];
         [self.centerImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
         

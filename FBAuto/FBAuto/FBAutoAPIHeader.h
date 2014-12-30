@@ -233,9 +233,18 @@ alpha:(a)]
 
 // 吐槽 ================
 
-#define FBATUO_TUCAO_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getarticle&page=%d&ps=%d"//吐槽列表
+#define FBATUO_TUCAO_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getarticle&page=%d&ps=%d&authkey=%@"//吐槽列表
 
+#define FBATUO_TUCAO_DETAIL @"http://fbautotest.fblife.com/index.php?c=interface&a=articledetail&artid=%@&ps=%d"//吐槽详情
 
+#define FBAUTO_TUCAO_UPLOAD_IMAGE @"http://fbautotest.fblife.com/index.php?c=interface&a=addarticlepic"//吐槽发布图片
 
+#define FBAUTO_TUCAO_PUBLISH @"http://fbautotest.fblife.com/index.php?c=interface&a=addarticle&authkey=%@&content=%@&color=%d&photo=%@"//吐槽发布
+
+#define FBATUO_TUCAO_CommentList @"http://fbautotest.fblife.com/index.php?c=interface&a=getcomment&art_uid=%@&ctype=%@&page=%d&ps=%d"//吐槽详情 评论列表
+
+#define FBAUTO_TUCAO_ZAN @"http://fbautotest.fblife.com/index.php?c=interface&a=dianzan&authkey=%@&artid=%@"//点赞
+
+#define FBAUTO_TUCAO_Comment @"http://fbautotest.fblife.com/index.php?c=interface&a=addcomment&authkey=%@&content=%@&art_uid=%@&ctype=%@"//发布评论
 
 #endif

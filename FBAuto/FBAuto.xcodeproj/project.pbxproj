@@ -36,9 +36,6 @@
 		135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */; };
 		136787151A4D026000192276 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787141A4D026000192276 /* BaseModel.m */; };
 		136787181A4D027700192276 /* TucaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787171A4D027700192276 /* TucaoModel.m */; };
-		1367871C1A4D0FF200192276 /* FBPublishTucaoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */; };
-		1367871D1A4D0FF200192276 /* FBPublishTucaoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */; };
-		136787201A4D160800192276 /* CustomImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367871F1A4D160800192276 /* CustomImagePickerController.m */; };
 		136CAD5719C97C7C00E05A2F /* biankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CAD5619C97C7C00E05A2F /* biankuang.png */; };
 		13737C8E1965420000941746 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13737C8D1965420000941746 /* PersonalViewController.m */; };
 		137708C119B6C859007609E8 /* detail_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 137708C019B6C859007609E8 /* detail_test.jpg */; };
@@ -223,6 +220,7 @@
 		13A8E8AA19E669CA004E7DB1 /* FBChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8E8A919E669CA004E7DB1 /* FBChatListController.m */; };
 		13AB60DB1A1F43E9002C5543 /* baocun92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */; };
 		13B626D219CC04DB008FB162 /* defaultFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B626D119CC04DB008FB162 /* defaultFace.png */; };
+		13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BBD0A41A52834700212CB1 /* TucaoDetailController.m */; };
 		13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C4D8741986573E00281521 /* XMPPMessageModel.m */; };
 		13C7173619824C18008F7B42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173519824C18008F7B42 /* QuartzCore.framework */; };
 		13C7173819824C24008F7B42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173719824C24008F7B42 /* SystemConfiguration.framework */; };
@@ -507,11 +505,6 @@
 		136787141A4D026000192276 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		136787161A4D027700192276 /* TucaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoModel.h; sourceTree = "<group>"; };
 		136787171A4D027700192276 /* TucaoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoModel.m; sourceTree = "<group>"; };
-		136787191A4D0FF200192276 /* FBPublishTucaoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPublishTucaoController.h; sourceTree = "<group>"; };
-		1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPublishTucaoController.m; sourceTree = "<group>"; };
-		1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBPublishTucaoController.xib; sourceTree = "<group>"; };
-		1367871E1A4D160800192276 /* CustomImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImagePickerController.h; sourceTree = "<group>"; };
-		1367871F1A4D160800192276 /* CustomImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImagePickerController.m; sourceTree = "<group>"; };
 		136CAD5619C97C7C00E05A2F /* biankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biankuang.png; sourceTree = "<group>"; };
 		13737C8C1965420000941746 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		13737C8D1965420000941746 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
@@ -749,6 +742,8 @@
 		13A8E8A919E669CA004E7DB1 /* FBChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBChatListController.m; sourceTree = "<group>"; };
 		13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baocun92_58@2x.png"; sourceTree = "<group>"; };
 		13B626D119CC04DB008FB162 /* defaultFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultFace.png; sourceTree = "<group>"; };
+		13BBD0A31A52834700212CB1 /* TucaoDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoDetailController.h; sourceTree = "<group>"; };
+		13BBD0A41A52834700212CB1 /* TucaoDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoDetailController.m; sourceTree = "<group>"; };
 		13C4D8731986573E00281521 /* XMPPMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageModel.h; sourceTree = "<group>"; };
 		13C4D8741986573E00281521 /* XMPPMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageModel.m; sourceTree = "<group>"; };
 		13C7173519824C18008F7B42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1595,11 +1590,11 @@
 		13D5DF6919612C9800804835 /* LCWClasses */ = {
 			isa = PBXGroup;
 			children = (
-				13FB9F631A4BF9D1000088F6 /* 吐槽 */,
 				13D5E07C1962BD5800804835 /* FBBaseViewController.h */,
 				13D5E07D1962BD5800804835 /* FBBaseViewController.m */,
 				1351C5C7197A4F8E000F7391 /* FBSearchResultController.h */,
 				1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */,
+				13FB9F631A4BF9D1000088F6 /* 吐槽 */,
 				13155373197923D90044C010 /* 寻车 */,
 				13D5E0451962A14E00804835 /* 车源 */,
 				13D5E05C1962A14E00804835 /* 发布参数 */,
@@ -2070,14 +2065,11 @@
 		13FB9F641A4BF9FF000088F6 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				136787191A4D0FF200192276 /* FBPublishTucaoController.h */,
-				1367871A1A4D0FF200192276 /* FBPublishTucaoController.m */,
-				1367871B1A4D0FF200192276 /* FBPublishTucaoController.xib */,
 				135922541A4D6B0B0091E320 /* TucaoPublishController.h */,
 				135922551A4D6B0B0091E320 /* TucaoPublishController.m */,
 				135922561A4D6B0B0091E320 /* TucaoPublishController.xib */,
-				1367871E1A4D160800192276 /* CustomImagePickerController.h */,
-				1367871F1A4D160800192276 /* CustomImagePickerController.m */,
+				13BBD0A31A52834700212CB1 /* TucaoDetailController.h */,
+				13BBD0A41A52834700212CB1 /* TucaoDetailController.m */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -2642,7 +2634,6 @@
 				13D5DFE51961758E00804835 /* fabu_up46_46@2x.png in Resources */,
 				13D5E0131961758E00804835 /* zhaoxiangji180_180@2x.png in Resources */,
 				138B4AFC1966A4BD00B974A5 /* face95.gif in Resources */,
-				1367871D1A4D0FF200192276 /* FBPublishTucaoController.xib in Resources */,
 				13D5E01B1961758E00804835 /* pengyouquan72_7222x.png in Resources */,
 				138B4AA91966A4BD00B974A5 /* face2.png in Resources */,
 				138B4AFB1966A4BD00B974A5 /* face94.png in Resources */,
@@ -2835,6 +2826,7 @@
 				E3611459197BA8E000F9234E /* DXAlertView.m in Sources */,
 				190BFE21195C362F0098E0F4 /* SzkLoadData.m in Sources */,
 				1336BC24196B91F70011B4D9 /* NSString+Emoji.m in Sources */,
+				13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */,
 				136787181A4D027700192276 /* TucaoModel.m in Sources */,
 				13737C8E1965420000941746 /* PersonalViewController.m in Sources */,
 				1391EF1D1977FC6D00FDC52A /* CarClass.m in Sources */,
@@ -2848,7 +2840,6 @@
 				E359273F1988D0C800A3F1B0 /* GtzDetailViewController.m in Sources */,
 				1391EF0A1977A1FF00FDC52A /* GloadingView.m in Sources */,
 				138B4B141966A65E00B974A5 /* MarkupParser.m in Sources */,
-				1367871C1A4D0FF200192276 /* FBPublishTucaoController.m in Sources */,
 				137926FE1987776900377ED5 /* GjjxxViewController.m in Sources */,
 				13D5E0C51963DB0300804835 /* QBImagePickerController.m in Sources */,
 				13FB9F691A4BFA21000088F6 /* TucaoViewCell.m in Sources */,
@@ -2870,7 +2861,6 @@
 				13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */,
 				1336BC23196B91F70011B4D9 /* CWInputView.m in Sources */,
 				1391EF1A1977A4CC00FDC52A /* RefreshTableView.m in Sources */,
-				136787201A4D160800192276 /* CustomImagePickerController.m in Sources */,
 				E34B74A1196E341A00451C65 /* GperInfoTableViewCell.m in Sources */,
 				133DF6A2197CE7F9006BF9ED /* FBFindCarDetailController.m in Sources */,
 				13D5E1061964F2E700804835 /* AutoDetail.m in Sources */,

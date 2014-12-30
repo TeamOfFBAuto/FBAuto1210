@@ -54,7 +54,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YIN-iM-87l">
-                        <rect key="frame" x="38" y="284" width="42" height="21"/>
+                        <rect key="frame" x="39" y="284" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -87,7 +87,7 @@
                 <outlet property="likeLabel" destination="YIN-iM-87l" id="CgZ-EA-F4M"/>
                 <outlet property="nameLabel" destination="368-Qh-I7U" id="Jtz-oq-pNH"/>
             </connections>
-            <point key="canvasLocation" x="-429" y="295"/>
+            <point key="canvasLocation" x="-581" y="289"/>
         </tableViewCell>
     </objects>
     <resources>

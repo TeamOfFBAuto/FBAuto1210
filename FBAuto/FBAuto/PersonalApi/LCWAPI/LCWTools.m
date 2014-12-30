@@ -677,7 +677,7 @@
         {
             //微信好友
             
-            if (![WXApi isWXAppInstalled] || [WXApi isWXAppSupportApi]) {
+            if (![WXApi isWXAppInstalled] || ![WXApi isWXAppSupportApi]) {
                 
                 [self showDXAlertViewWithText:@"您的设备没有安装微信客户端"];
                 

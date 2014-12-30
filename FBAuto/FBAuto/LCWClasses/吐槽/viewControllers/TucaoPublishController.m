@@ -9,9 +9,9 @@
 #import "TucaoPublishController.h"
 #import "FBActionSheet.h"
 
-#import "CustomImagePickerController.h"
-
 #import "QBImagePickerController.h"
+
+#import "ASIFormDataRequest.h"
 
 @interface TucaoPublishController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
@@ -20,6 +20,9 @@
     CGPoint imageCenter;//imageView中心点
     
     CGFloat current_KeyBoard_Y;//键盘当前y
+    
+    MBProgressHUD *loadingHub;
+    
 }
 
 
@@ -37,6 +40,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     imageCenter = self.imageView.center;
+    
+    loadingHub = [LCWTools MBProgressWithText:@"发布中..." addToView:self.view];
+    
+    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
+    [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton setTitle:@"发布" forState:UIControlStateNormal];
+    UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
+    
+    self.navigationItem.rightBarButtonItems = @[save_item];
+}
+
+- (void)test
+{
+    [self postImages:self.imageView.image];;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,16 +61,127 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - 网络请求
 
+
+/**
+ *  发布吐槽
+ */
+- (void)publishTucaoImageId:(NSString *)imageId
+{
+    int colorId = 1;
+    NSString *content = self.inputView.text;
+    NSString *url  = [NSString stringWithFormat:FBAUTO_TUCAO_PUBLISH,[GMAPI getAuthkey],content,colorId,imageId];
+    
+    __weak typeof(self)weakSelf = self;
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"result %@",result);
+        
+        [loadingHub hide:YES];
+        
+        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
+        
+        [weakSelf performSelector:@selector(clickToBack:) withObject:nil afterDelay:1.5];
+        
+        
+    } failBlock:^(NSDictionary *result, NSError *erro) {
+        
+        [LCWTools showDXAlertViewWithText:result[@"errinfo"]];
+        
+        [loadingHub hide:YES];
+    }];
+    
+}
+
+/**
+ *  图片上传
+ */
+- (void)postImages:(UIImage *)eImage
+{
+    [self tapToHiddenKeyboard:nil];
+    
+    //都为空 就别发布了
+    if (!eImage && self.inputView.text.length == 0) {
+
+        NSLog(@"请上传有效图片 或者 填写内容");
+        return;
+    }
+    
+    //图片为空,当有文字,直接发布
+    if (!eImage && self.inputView.text.length > 0) {
+        
+        [self publishTucaoImageId:nil];
+        
+        return;
+    }
+    
+    //有图片,不管是否有文字，
+    
+    [loadingHub show:YES];
+    
+    NSString* url = [NSString stringWithFormat:FBAUTO_TUCAO_UPLOAD_IMAGE];
+    
+    ASIFormDataRequest *uploadImageRequest= [ ASIFormDataRequest requestWithURL : [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [uploadImageRequest setStringEncoding:NSUTF8StringEncoding];
+    
+    [uploadImageRequest setRequestMethod:@"POST"];
+    
+    [uploadImageRequest setResponseEncoding:NSUTF8StringEncoding];
+    
+    [uploadImageRequest setPostValue:[GMAPI getAuthkey] forKey:@"authkey"];
+    
+    [uploadImageRequest setPostFormat:ASIMultipartFormDataPostFormat];
+    
+    UIImage * newImage = [SzkAPI scaleToSizeWithImage:eImage size:CGSizeMake(eImage.size.width>1024?1024:eImage.size.width,eImage.size.width>1024?eImage.size.height*1024/eImage.size.width:eImage.size.height)];
+    
+    NSData *imageData=UIImageJPEGRepresentation(newImage,0.5);
+    
+    [uploadImageRequest addData:imageData withFileName:@"tucao.png" andContentType:@"image/png" forKey:@"photo[]"];
+    
+    NSLog(@"--- ddxx %u",imageData.length);
+    
+    [uploadImageRequest setDelegate : self ];
+    
+    [uploadImageRequest startAsynchronous];
+    
+    __weak typeof(ASIFormDataRequest *)weakRequst = uploadImageRequest;
+    //完成
+    [uploadImageRequest setCompletionBlock:^{
+        
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:weakRequst.responseData options:0 error:nil];
+        
+        NSLog(@"result--> %@",result);
+        
+        NSArray *datainfo = result[@"datainfo"];
+        
+        if (datainfo.count > 0) {
+            
+            NSDictionary *dic = [datainfo lastObject];
+            
+             [self publishTucaoImageId:dic[@"imageid"]];
+        }
+        
+//        [LCWTools showDXAlertViewWithText:result[@"errinfo"]];
+        
+    }];
+    
+    //失败
+    [uploadImageRequest setFailedBlock:^{
+        
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:weakRequst.responseData options:0 error:nil];
+        
+        NSLog(@"uploadFail %@  ss %@",weakRequst.responseString,result);
+        
+        [loadingHub hide:YES];
+        
+        [LCWTools showDXAlertViewWithText:@"上传失败，重新发布"];
+        
+    }];
+    
+}
 
 
 #pragma mark 事件处理

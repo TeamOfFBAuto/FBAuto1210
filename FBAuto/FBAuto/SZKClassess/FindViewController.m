@@ -14,6 +14,8 @@
 
 #import "TucaoPublishController.h"
 
+#import "TucaoDetailController.h"
+
 @interface FindViewController ()<RefreshDelegate,UITableViewDataSource>
 {
     RefreshTableView *_table;
@@ -69,7 +71,7 @@
 - (void)getTucaoList
 {
     
-    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_LIST,_table.pageNum,KPageSize];
+    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_LIST,_table.pageNum,KPageSize,[GMAPI getAuthkey]];
     
     //    __weak typeof(FindCarViewController *)weakSelf = self;
     
@@ -88,10 +90,6 @@
         for (NSDictionary *aDic in data) {
             
              TucaoModel *aModel = [[TucaoModel alloc]initWithDictionary:aDic];
-            
-            if ([aModel.id intValue] == 709 || [aModel.id intValue] == 710 || [aModel.id intValue] == 707) {
-                aModel.image = nil;
-            }
             
             [arr_ addObject:aModel];
         }
@@ -150,7 +148,10 @@
 
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    TucaoDetailController *detail = [[TucaoDetailController alloc]init];
+    detail.tucaoModel = _table.dataArray[indexPath.row];
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath
@@ -181,6 +182,8 @@
     {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"TucaoViewCell" owner:self options:nil]objectAtIndex:0];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
     [cell setCellWithModel:aModel];
