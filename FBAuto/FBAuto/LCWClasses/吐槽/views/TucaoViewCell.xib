@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g2b-EH-lT6">
-                                <rect key="frame" x="138" y="7" width="42" height="21"/>
+                                <rect key="frame" x="129" y="7" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -80,7 +80,7 @@
                                 <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E74-zL-gnh">
-                                <rect key="frame" x="107" y="7" width="23" height="22"/>
+                                <rect key="frame" x="98" y="7" width="23" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="tucao_pinglun.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,7 +104,7 @@
                 <outlet property="nameLabel" destination="368-Qh-I7U" id="Jtz-oq-pNH"/>
                 <outlet property="toolsView" destination="N1S-Ee-N0T" id="ZEj-Nm-boa"/>
             </connections>
-            <point key="canvasLocation" x="-1209" y="645"/>
+            <point key="canvasLocation" x="-1284" y="660"/>
         </tableViewCell>
     </objects>
     <resources>

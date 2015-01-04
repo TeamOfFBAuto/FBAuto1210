@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *inputView;
 @property (strong, nonatomic) IBOutlet UIButton *photoButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *placeHolder;
 
 - (IBAction)clickToPhoto:(id)sender;
 

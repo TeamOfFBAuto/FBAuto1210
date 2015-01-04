@@ -33,7 +33,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleLabel.text = @"吐糟详情";
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 49 - 64)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 64)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -76,6 +76,8 @@
         // 吐槽详情
         
         tucaoDetail = [[TucaoModel alloc]initWithDictionary:article];
+        
+        tucaoDetail.image = [NSArray arrayWithArray:tucaoDetail.data[@"image"]];
         
         //吐槽评论
 
@@ -252,11 +254,32 @@
     
 }
 
+//判断是否有图
+- (BOOL)haveImage:(NSArray *)imageArr
+{
+    if (imageArr.count > 0 && ((NSString *)imageArr[0][@"link"]).length > 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath
 {
     
     if (indexPath.row == 0) {
-        return 316;
+        
+        
+        //有图片有文字
+        
+        if ([self haveImage:tucaoDetail.image] && tucaoDetail.content.length > 0 ) {
+            
+            CGFloat aHeight = [LCWTools heightForText:tucaoDetail.content width:300 font:17];
+            
+            return 400 - 20 + aHeight;
+        }
+        
+        return 400 - 40;
     }
     return 40;
 }
@@ -288,6 +311,8 @@
         }
         
         [cell_detail setCellWithModel:tucaoDetail];
+        
+        cell_detail.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell_detail.likeButton addTarget:self action:@selector(clickToZan:) forControlEvents:UIControlEventTouchUpInside];
         [cell_detail.commentButton addTarget:self action:@selector(clickToComment:) forControlEvents:UIControlEventTouchUpInside];

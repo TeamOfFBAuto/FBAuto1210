@@ -26,6 +26,8 @@
 @property(nonatomic,retain)NSString *uptime;
 @property(nonatomic,retain)NSArray *image;//图片数组
 
+@property(nonatomic,retain)NSDictionary *data;//存图片的一个数组
+
 @property(nonatomic,retain)NSString *neirong;
 
 @property(nonatomic,assign)int dianzan_status;//点赞状态

@@ -24,7 +24,7 @@
 //判断是否有图
 - (BOOL)haveImage:(NSArray *)imageArr
 {
-    if (imageArr.count > 0 && ((NSString *)imageArr[0][@"link"]).length > 0) {
+    if (imageArr.count > 0 && ((NSString *)imageArr[0][@"link"]).length > 0 && ![(NSString *)imageArr[0][@"imgid"]isEqualToString:@"(null)"]) {
         return YES;
     }
     
@@ -47,7 +47,7 @@
         //内容描述 图片底部
         
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        self.contentLabel.top = self.centerImageView.bottom + 13;
+        self.contentLabel.top = self.centerImageView.bottom + 10 - 5;
         self.contentLabel.width = _centerImageView.width;
         _contentLabel.height = [LCWTools heightForText:aModel.content width:_centerImageView.width font:17];
         
@@ -66,12 +66,14 @@
     //有图片但是没有文字
     if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
         
-        self.toolsView.top = self.centerImageView.bottom + 40;
+        self.toolsView.top = self.contentLabel.bottom + 5;
         
     }else
     {
         self.toolsView.top = self.centerImageView.bottom + 2.5;
     }
+    
+    self.lineOne.top = self.toolsView.top - 0.5;
     
     self.contentLabel.text = aModel.content;
     self.likeLabel.text = aModel.zan_num;

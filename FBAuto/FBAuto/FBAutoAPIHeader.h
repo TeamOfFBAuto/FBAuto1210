@@ -66,6 +66,8 @@
 
 #define NOTICE_NEW_COUNT @"NOTICE_COUNT"//通知个数
 
+#define NOTIFICATION_PUBLISHTUCAO_SUCCESS @"PUBLISHTUCAO_SUCCESS"//发布吐槽成功
+
 //颜色
 
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]

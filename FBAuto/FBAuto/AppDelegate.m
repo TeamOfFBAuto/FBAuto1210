@@ -929,7 +929,7 @@
     NSString *str = [NSString stringWithFormat: @"Error: %@", error];
     NSLog(@"erro  %@",str);
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册失败" message:str delegate:Nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-    [alert show];
+//    [alert show];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo

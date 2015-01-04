@@ -42,12 +42,20 @@
     
     [_table showRefreshHeader:NO];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateTucaoList:) name:NOTIFICATION_PUBLISHTUCAO_SUCCESS object:nil];
     
     UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
     [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
     
     [self.view addSubview:saveButton];
+}
+
+#pragma mark 事件处理
+
+- (void)updateTucaoList:(NSNotification *)notification
+{
+    [_table showRefreshHeader:NO];
 }
 
 - (void)test
@@ -157,10 +165,12 @@
 {
     TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
     
-    //有图片但是没有文字
+    //有图片有文字
     if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
         
-        return 400;
+        CGFloat aHeight = [LCWTools heightForText:aModel.content width:300 font:17];
+        
+        return 400 - 20 + aHeight;
     }
     
     return 400 - 40;

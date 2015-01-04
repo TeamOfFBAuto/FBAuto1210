@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.titleLabel.text = @"发布吐槽";
+    self.titleLabel.text = @"写吐槽";
     
     //注册键盘通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -43,9 +43,14 @@
     
     loadingHub = [LCWTools MBProgressWithText:@"发布中..." addToView:self.view];
     
-    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
+    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,22,44)];
+//    saveButton.backgroundColor = [UIColor orangeColor];
     [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setTitle:@"发布" forState:UIControlStateNormal];
+    saveButton.titleLabel.font = [UIFont systemFontOfSize:10];
+    [saveButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 5, 0)];
+    [saveButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -22 - 2, -22 - 9, 0)];
+    [saveButton setImage:[UIImage imageNamed:@"fabu44_44"] forState:UIControlStateNormal];
     UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
     
     self.navigationItem.rightBarButtonItems = @[save_item];
@@ -81,6 +86,8 @@
         
         [loadingHub hide:YES];
         
+        [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_PUBLISHTUCAO_SUCCESS object:nil];
+        
         [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
         
         [weakSelf performSelector:@selector(clickToBack:) withObject:nil afterDelay:1.5];
@@ -88,7 +95,7 @@
         
     } failBlock:^(NSDictionary *result, NSError *erro) {
         
-        [LCWTools showDXAlertViewWithText:result[@"errinfo"]];
+        [LCWTools showDXAlertViewWithText:result[ERROR_INFO]];
         
         [loadingHub hide:YES];
     }];
@@ -106,8 +113,13 @@
     if (!eImage && self.inputView.text.length == 0) {
 
         NSLog(@"请上传有效图片 或者 填写内容");
+        
+        [LCWTools showMBProgressWithText:@"没有发布内容" addToView:self.view];
+        
         return;
     }
+    
+    [loadingHub show:YES];
     
     //图片为空,当有文字,直接发布
     if (!eImage && self.inputView.text.length > 0) {
@@ -118,8 +130,6 @@
     }
     
     //有图片,不管是否有文字，
-    
-    [loadingHub show:YES];
     
     NSString* url = [NSString stringWithFormat:FBAUTO_TUCAO_UPLOAD_IMAGE];
     
@@ -355,6 +365,13 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    if (textView.text.length > 0) {
+        
+        self.placeHolder.hidden = YES;
+    }else
+    {
+        self.placeHolder.hidden = NO;
+    }
     //限高 120
     
     if (textView.height <= 120 && textView.contentSize.height <= 120) {
