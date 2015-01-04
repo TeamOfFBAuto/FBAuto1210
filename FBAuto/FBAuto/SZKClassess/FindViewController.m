@@ -37,18 +37,17 @@
     _table.refreshDelegate = self;
     _table.dataSource = self;
     
-    _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _table.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_table];
     
     [_table showRefreshHeader:NO];
     
     
-    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
+    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
     [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-    [saveButton setImage:[UIImage imageNamed:@"shoucang_46_44"] forState:UIControlStateNormal];
-    UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
+    [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
     
-    self.navigationItem.rightBarButtonItems = @[save_item];
+    [self.view addSubview:saveButton];
 }
 
 - (void)test
@@ -156,7 +155,25 @@
 
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath
 {
-    return 316;
+    TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
+    
+    //有图片但是没有文字
+    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
+        
+        return 400;
+    }
+    
+    return 400 - 40;
+}
+
+//判断是否有图
+- (BOOL)haveImage:(NSArray *)imageArr
+{
+    if (imageArr.count > 0 && ((NSString *)imageArr[0][@"link"]).length > 0) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark - UITableViewDelegate

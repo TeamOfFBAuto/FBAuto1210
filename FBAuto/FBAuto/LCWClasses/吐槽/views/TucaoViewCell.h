@@ -19,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *likeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;//评论
 @property (strong, nonatomic) IBOutlet UILabel *commentLable;
+@property (strong, nonatomic) IBOutlet UIView *lineOne;
+@property (strong, nonatomic) IBOutlet UIView *lineTwo;
+@property (strong, nonatomic) IBOutlet UIView *toolsView;
 
 - (void)setCellWithModel:(id)aModel;
 

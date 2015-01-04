@@ -47,7 +47,7 @@
         //内容描述 图片底部
         
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        self.contentLabel.top = self.centerImageView.bottom + 5;
+        self.contentLabel.top = self.centerImageView.bottom + 13;
         self.contentLabel.width = _centerImageView.width;
         _contentLabel.height = [LCWTools heightForText:aModel.content width:_centerImageView.width font:17];
         
@@ -62,6 +62,17 @@
         self.contentLabel.height = [LCWTools heightForText:aModel.content width:200 font:17];
         self.contentLabel.center = _centerImageView.center;
     }
+    
+    //有图片但是没有文字
+    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
+        
+        self.toolsView.top = self.centerImageView.bottom + 40;
+        
+    }else
+    {
+        self.toolsView.top = self.centerImageView.bottom + 2.5;
+    }
+    
     self.contentLabel.text = aModel.content;
     self.likeLabel.text = aModel.zan_num;
     self.commentLable.text = aModel.comemt_num;
