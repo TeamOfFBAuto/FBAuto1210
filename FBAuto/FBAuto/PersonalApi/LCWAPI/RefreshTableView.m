@@ -15,6 +15,24 @@
 
 @implementation RefreshTableView
 
+-(id)initWithFrame:(CGRect)frame showLoadMore:(BOOL)show
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        
+        self.pageNum = 1;
+        self.dataArray = [NSMutableArray array];
+        self.delegate = self;
+        [self createHeaderView];
+        if (show) {
+            
+            [self createFooterView];
+        }
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

@@ -148,7 +148,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"daohanglan_bg_640_88"] forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
     
     [self createNavigationView];
     

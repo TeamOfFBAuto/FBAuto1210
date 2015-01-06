@@ -115,6 +115,8 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 + (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;
 + (CGFloat)heightForText:(NSString *)text width:(CGFloat)width font:(CGFloat)size;
 
++ (BOOL) isEmpty:(NSString *) str;
+
 /**
  *  验证 邮箱、电话等
  */

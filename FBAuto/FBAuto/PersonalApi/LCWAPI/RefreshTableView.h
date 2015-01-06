@@ -42,6 +42,8 @@
 @property (nonatomic,assign)int pageNum;//页数
 @property (nonatomic,retain)NSMutableArray *dataArray;//数据源
 
+-(id)initWithFrame:(CGRect)frame showLoadMore:(BOOL)show;//是否需要显示加载更多
+
 -(void)createHeaderView;
 -(void)removeHeaderView;
 

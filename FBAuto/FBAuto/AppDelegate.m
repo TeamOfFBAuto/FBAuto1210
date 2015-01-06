@@ -160,7 +160,7 @@
     }];
     
     //车型数据更新
-    [self getCarUpdateState];
+//    [self getCarUpdateState];
     
     //提示 好评推荐
     
@@ -507,14 +507,14 @@
     
     searchCarVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"求购" image:[UIImage imageNamed:@"xunche_down46_46"] tag:2];
     
-    find.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"吐槽" image:[UIImage imageNamed:@"xunche_down46_46"] tag:3];
+    find.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"吐槽" image:[UIImage imageNamed:@"b_tucao_down50_44"] tag:3];
     
     _perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:4];
     
     UITabBarController * tabbar = [[UITabBarController alloc] init];
     tabbar.delegate = self;
     tabbar.tabBar.backgroundImage=[UIImage imageNamed:@"testV.png"];
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:232.0/255.0f green:128/255.0f blue:24/255.0f alpha:1]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:222.0/255.0f green:38/255.0f blue:33/255.0f alpha:1]];
     
     tabbar.viewControllers = [NSArray arrayWithObjects:navc1,navc2,navc3,navc4,navc5,nil];
     
@@ -535,7 +535,7 @@
 {
     CGFloat aHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     self.statusBarBack = [[UIWindow alloc]initWithFrame:CGRectMake(200, 0, 80, aHeight)];
-    _statusBarBack.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"daohanglan_bg_640_88"]];
+    _statusBarBack.backgroundColor = [UIColor colorWithPatternImage:FBAUTO_NAVIGATION_IMAGE];
     [_statusBarBack setWindowLevel:UIWindowLevelStatusBar];
     [_statusBarBack makeKeyAndVisible];
     

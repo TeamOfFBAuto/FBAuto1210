@@ -12,7 +12,13 @@
 #import "TucaoViewCell.h"
 #import "TucaoModel.h"
 
+#import "TucaoCommentCell.h"
+
 #import "TucaoPublishController.h"
+
+#import "CommentBottomView.h"
+
+#import "LInputView.h"
 
 @interface TucaoDetailController ()<RefreshDelegate,UITableViewDataSource>
 {
@@ -20,6 +26,8 @@
     TucaoModel *tucaoDetail;
     
     TucaoViewCell *cell_detail;
+    
+    LInputView *inputView;
     
 }
 @end
@@ -33,26 +41,157 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleLabel.text = @"吐糟详情";
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 64)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 64) showLoadMore:NO];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
     
-    _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _table.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.view addSubview:_table];
     
+    [self createBottomCommentView];
+    
+    _table.tableFooterView = [self footerViewForTable];
 
     tucaoDetail = self.tucaoModel;
     [self getTucaoDetail];
 }
 
+/**
+ *  底部评论
+ */
+- (void)createBottomCommentView
+{
+//    UIView *comment_view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.height - 62 - 64, 320, 62)];
+//    comment_view.backgroundColor = [UIColor orangeColor];
+//    [self.view addSubview:comment_view];
+    
+    CommentBottomView *bottomView = [[CommentBottomView alloc] init];
+//    bottomView.hidden = YES;
+    [self.view addSubview:bottomView];
+    
+    __weak typeof(self)weakSelf = self;
+    
+    [bottomView setMyBlock:^(CommentTapType aType) {
+        NSLog(@"bottom tap : %d",aType);
+        
+        if (aType == CommentTypeLogIn) {
+            
+            
+            
+        }else if (aType == CommentTypeComent){
+        
+            NSLog(@"弹出评论框");
+            
+            [inputView.textView becomeFirstResponder];
+        }
+        
+    }];
+    
+    inputView = [[LInputView alloc]initWithFrame:CGRectMake(0, self.view.height, 320, 0) inView:self.view inputText:^(NSString *inputText) {
+        
+        NSLog(@"评论内容 %@",inputText);
+        
+        //添加评论
+        //
+        
+        [self addTucaoComment:inputText];
+        
+    }];
+    
+    inputView.clearInputWhenSend = NO;;
+    inputView.resignFirstResponderWhenSend = YES;
+    
+    [self.view addSubview:inputView];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 事件处理
+
+//- (void)addLocalComment:(NSString *)text
+//{
+//    TucaoModel *commentModel = [[TucaoModel alloc]initWithDictionary:aDic];
+//    _table.dataArray insertObject:<#(id)#> atIndex:<#(NSUInteger)#>
+//}
+
+#pragma mark - 创建视图
+- (UIView *)footerViewForTable
+{
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 62)];
+    
+//    //框
+//    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 13, 320 - 10*2, 75)];
+//    kuang.layer.borderWidth = 0.5f;
+//    kuang.layer.borderColor = [UIColor colorWithHexString:@"a0a0a0"].CGColor;
+//    [footer addSubview:kuang];
+//    
+//    //文字
+//    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 6, 45, 18)];
+//    title.font = [UIFont systemFontOfSize:18];
+//    title.textColor = [UIColor colorWithHexString:@"222222"];
+//    title.textAlignment = NSTextAlignmentRight;
+//    title.text = @"评论:";
+//    [kuang addSubview:title];
+//    
+//    
+//    UIButton *publish_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    publish_btn.frame = CGRectMake(22, kuang.bottom +15, 320 - 22 * 2, 50);
+//    [publish_btn setBackgroundImage:[UIImage imageNamed:@"fabu550_100"] forState:UIControlStateNormal];
+//    [publish_btn setTitle:@"发布" forState:UIControlStateNormal];
+//    [footer addSubview:publish_btn];
+    
+    return footer;
+}
+
+
+
 #pragma mark - 网络请求
+
+/**
+ *  获取吐槽列表
+ */
+- (void)addTucaoComment:(NSString *)text
+{
+    if ([LCWTools isEmpty:text]) {
+        
+        [LCWTools showMBProgressWithText:@"评论内容不能为空" addToView:self.view];
+        
+        return;
+    }
+    
+    NSString *url = [NSString stringWithFormat:FBAUTO_TUCAO_Comment,[GMAPI getAuthkey],text,self.tucaoModel.id,@"1"];
+    
+    __weak typeof(_table)weakTable = _table;
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"erro%@",[result objectForKey:@"errinfo"]);
+        
+        //成功之后 评论 + 1
+        
+        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
+        
+        [weakTable showRefreshHeader:YES];
+        
+        [inputView clearContent];
+        
+        
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        NSLog(@"failDic %@",failDic);
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+    }];
+}
+
 
 /**
  *  获取吐槽列表
@@ -60,7 +199,7 @@
 - (void)getTucaoDetail
 {
     
-    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_DETAIL,self.tucaoModel.id,KPageSize];
+    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_DETAIL,self.tucaoModel.id,10000];
     
         __weak typeof(_table)weakTable = _table;
     
@@ -77,7 +216,7 @@
         
         tucaoDetail = [[TucaoModel alloc]initWithDictionary:article];
         
-        tucaoDetail.image = [NSArray arrayWithArray:tucaoDetail.data[@"image"]];
+//        tucaoDetail.image = [NSArray arrayWithArray:tucaoDetail.data[@"image"]];
         
         //吐槽评论
 
@@ -225,12 +364,12 @@
 {
     CGFloat offset = scrollView.contentOffset.y;
     
-    NSLog(@"offset %f",offset);
+//    NSLog(@"offset %f",offset);
 }
 
 - (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"refreshScrollViewDidEndDecelerating");
+//    NSLog(@"refreshScrollViewDidEndDecelerating");
     
     //    currentOffsetY = scrollView.contentOffset.y;
 }
@@ -281,7 +420,10 @@
         
         return 400 - 40;
     }
-    return 40;
+    
+    TucaoModel *aModel = _table.dataArray[indexPath.row - 1];
+    
+    return 76 - 18 + [LCWTools heightForText:aModel.content width:235 font:15];
 }
 
 #pragma mark - UITableViewDelegate
@@ -320,11 +462,17 @@
         return cell_detail;
     }
     
-    static NSString *identifier = @"comment";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    static NSString *identifier1 = @"TucaoCommentCell";
+    TucaoCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier1];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"TucaoCommentCell" owner:self options:nil]lastObject];
     }
+    
+    [cell setCellWithModel:_table.dataArray[indexPath.row - 1]];
+    cell.bottomLine.top = cell.bottom - 0.5;
+    cell.bottomLine.height = 0.5f;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
     

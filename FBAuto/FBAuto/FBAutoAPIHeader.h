@@ -68,6 +68,12 @@
 
 #define NOTIFICATION_PUBLISHTUCAO_SUCCESS @"PUBLISHTUCAO_SUCCESS"//发布吐槽成功
 
+///屏幕宽度
+#define DEVICE_WIDTH  [UIScreen mainScreen].bounds.size.width
+#pragma mark - 屏幕高度
+///屏幕高度
+#define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 //颜色
 
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
@@ -79,7 +85,7 @@ alpha:(a)]
 //判断iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
-#define FBAUTO_NAVIGATION_IMAGE [UIImage imageNamed:@"daohanglan_bg_640_88"] //导航栏背景
+#define FBAUTO_NAVIGATION_IMAGE [UIImage imageNamed:@"daohanglan"] //导航栏背景
 
 #define FBAUTO_BACK_IMAGE [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
 

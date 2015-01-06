@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.text = @"吐糟";
+    self.titleLabel.text = @"吐糟故事";
     self.button_back.hidden = YES;
     
     _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 49 - 64)];
