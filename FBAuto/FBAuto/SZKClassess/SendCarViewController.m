@@ -617,7 +617,11 @@
     publish = [UIButton buttonWithType:UIButtonTypeCustom];
     publish.frame = CGRectMake(10, secondBgView.bottom + 16, 300, 50);
     [publish setTitle:@"发布" forState:UIControlStateNormal];
-    [publish setBackgroundImage:[UIImage imageNamed:@"huquyanzhengma_kedianji600_100"] forState:UIControlStateNormal];
+//    [publish setBackgroundImage:[UIImage imageNamed:@"huquyanzhengma_kedianji600_100"] forState:UIControlStateNormal];
+    
+    publish.backgroundColor = COLOR_NORMAL;
+    publish.layer.cornerRadius = 3.f;
+    
     [publish addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
     [bigBgScroll addSubview:publish];
     

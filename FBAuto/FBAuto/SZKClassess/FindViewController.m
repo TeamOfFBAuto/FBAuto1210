@@ -72,6 +72,64 @@
 
 #pragma mark - 网络请求
 
+//赞
+
+- (void)clickToZan:(UIButton *)sender
+{
+    int index = sender.tag - 1000;
+    
+    TucaoModel *aModel = (TucaoModel *)_table.dataArray[index];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    TucaoViewCell *aCell = (TucaoViewCell *)[_table cellForRowAtIndexPath:indexPath];
+    
+    if (sender.selected) {
+        
+        return;
+        
+    }else
+    {
+        sender.selected = YES;
+        
+        aCell.likeLabel.text = [NSString stringWithFormat:@"%d",[aCell.likeLabel.text intValue] + 1];
+        
+        aModel.zan_num = aCell.likeLabel.text;
+        
+        aCell.likeButton.selected = YES;
+        
+        aModel.dianzan_status = 1;
+
+    }
+    
+    
+    NSString *url = [NSString stringWithFormat:FBAUTO_TUCAO_ZAN,[GMAPI getAuthkey],aModel.id];
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
+        
+//        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
+        
+//        aCell.likeLabel.text = [NSString stringWithFormat:@"%d",[aCell.likeLabel.text intValue] + 1];
+//        
+//        aModel.zan_num = aCell.likeLabel.text;
+//       
+//        aCell.likeButton.selected = YES;
+//       
+//        aModel.dianzan_status = 1;
+        
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        NSLog(@"failDic %@",failDic);
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+        
+    }];
+    
+}
+
 /**
  *  获取吐槽列表
  */
@@ -85,7 +143,7 @@
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
-        NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
+        NSLog(@"吐槽列表erro%@",[result objectForKey:@"errinfo"]);
         
         NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
         int total = [[dataInfo objectForKey:@"total"]intValue];
@@ -155,8 +213,15 @@
 
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    TucaoViewCell *cell = (TucaoViewCell *)[_table cellForRowAtIndexPath:indexPath];
+    
     TucaoDetailController *detail = [[TucaoDetailController alloc]init];
     detail.tucaoModel = _table.dataArray[indexPath.row];
+    
+    detail.commentLabe = cell.commentLable;
+    detail.likeLabel = cell.likeLabel;
+    detail.zanButton = cell.likeButton;
+    
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
@@ -214,6 +279,9 @@
     
     TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
     [cell setCellWithModel:aModel];
+    
+    cell.likeButton.tag = 1000 + indexPath.row;
+    [cell.likeButton addTarget:self action:@selector(clickToZan:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
     

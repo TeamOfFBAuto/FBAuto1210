@@ -341,7 +341,7 @@
 - (void)createMenu
 {
     menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    menuBgView.backgroundColor = [UIColor colorWithHexString:@"ff9c00"];
+    menuBgView.backgroundColor = COLOR_NORMAL;
     [self.view addSubview:menuBgView];
     
     NSArray *items = @[@"车型",@"版本",@"来源",@"库存",@"更多"];
@@ -363,7 +363,7 @@
         
         
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(menuBtn.right, 0, 0.5, 40)];
-        line.backgroundColor = [UIColor colorWithHexString:@"ffb14d"];
+        line.backgroundColor = [UIColor grayColor];
         [menuBgView addSubview:line];
     }
     
@@ -966,7 +966,9 @@
         
         self.navigationController.navigationBar.top = aY;
         
-        self.tabBarController.tabBar.top = show ? self.view.height + 64 + 49 - 49 :  self.view.height + 64 + 49;
+        self.tabBarController.tabBar.top = show ? DEVICE_HEIGHT - 49 : DEVICE_HEIGHT;
+        
+        NSLog(@"----tabbar %f",self.tabBarController.tabBar.top);
         
         weakstatesBarView.top = show ? -20 : -64;
         
@@ -984,7 +986,7 @@
     
     NSLog(@"offset %f",offset);
     
-    if (offset > 20) {
+    if (offset > 20 && offset > currentOffsetY) {
         
         //消失
         

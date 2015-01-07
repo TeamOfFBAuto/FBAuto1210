@@ -80,7 +80,7 @@
     
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.backgroundColor = [UIColor orangeColor];
+    btn.backgroundColor = COLOR_NORMAL;
     [btn setTitle:@"修改" forState:UIControlStateNormal];
     btn.titleLabel.textColor = [UIColor whiteColor];
     btn.frame = CGRectMake(10, 160, 300, 50);

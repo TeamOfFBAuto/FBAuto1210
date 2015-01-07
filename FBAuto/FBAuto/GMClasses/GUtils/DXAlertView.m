@@ -85,8 +85,8 @@
             self.rightBtn.frame = rightBtnFrame;
         }
         
-        [self.rightBtn setBackgroundColor:[UIColor orangeColor]];
-        [self.leftBtn setBackgroundColor:[UIColor orangeColor]];
+        [self.rightBtn setBackgroundColor:COLOR_NORMAL];
+        [self.leftBtn setBackgroundColor:COLOR_NORMAL];
         [self.rightBtn setTitle:rigthTitle forState:UIControlStateNormal];
         [self.leftBtn setTitle:leftTitle forState:UIControlStateNormal];
         self.leftBtn.titleLabel.font = self.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];

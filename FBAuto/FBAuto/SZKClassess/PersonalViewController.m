@@ -131,7 +131,7 @@
         
         //frame
         btn.frame = CGRectMake(9+i*105, CGRectGetMaxY(self.userFaceImv.frame)+14, 91, 30);
-        btn.backgroundColor = [UIColor orangeColor];
+        btn.backgroundColor = COLOR_NORMAL;
         btn.layer.cornerRadius = 4;
         btn.tag = 50+i;
         [btn addTarget:self action:@selector(clickToDetail:) forControlEvents:UIControlEventTouchUpInside];

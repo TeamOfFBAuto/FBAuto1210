@@ -55,12 +55,14 @@
         [self addSubview:backControl];
         
         //背景图
-        UIImageView *backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"denglu_bg640_1096.png"]];
-        backGroundImageView.frame = CGRectMake(0, 0, 320, 568);
-        [self addSubview:backGroundImageView];
+//        UIImageView *backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"denglu_bg640_1096.png"]];
+//        backGroundImageView.frame = CGRectMake(0, 0, 320, 568);
+//        [self addSubview:backGroundImageView];
+    
+        self.backgroundColor = COLOR_NORMAL;
         
         //logo图
-        UIImageView *logoImv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"elogo440_120.png"] highlightedImage:nil];
+        UIImageView *logoImv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dl_logo382_148"] highlightedImage:nil];
 //        logoImv.frame = CGRectMake(53, 118, 220, 60);
         
         logoImv.frame = CGRectMake(0, 118, 320, 70);
@@ -72,25 +74,40 @@
         
         //账号 密码 登录 底层view
         self.Row3backView = [[UIView alloc]initWithFrame:_Frame_row3Down];
+        
+//        _Row3backView.backgroundColor = [UIColor whiteColor];
+        
         [self addSubview:self.Row3backView];
         //self.Row3backView.backgroundColor = [UIColor purpleColor];
         
         
         //账号和密码输入框
         //输入框
-        _zhanghaoBackView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 275, 45)];
-        [_zhanghaoBackView setImage:[UIImage imageNamed:@"denglu_shurukuang550_90.png"]];
-        _passWordBackView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 60, 275, 45)];
-        [_passWordBackView setImage:[UIImage imageNamed:@"denglu_shurukuang550_90.png"]];
+        _zhanghaoBackView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 19, 45)];
+        [_zhanghaoBackView setImage:[UIImage imageNamed:@"yonghu38_38"]];
+        _zhanghaoBackView.contentMode = UIViewContentModeCenter;
+        
+        UIView *user_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _zhanghaoBackView.bottom - 5, 275 + 4, 0.5)];
+        user_line.backgroundColor = RGBCOLOR(245, 210, 209);
+        [_Row3backView addSubview:user_line];
         
         
+        _passWordBackView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 60, 19, 45)];
+        [_passWordBackView setImage:[UIImage imageNamed:@"mima38_38"]];
+        _passWordBackView.contentMode = UIViewContentModeCenter;
+        
+        UIView *pass_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _passWordBackView.bottom - 5, 275 + 4, 0.5)];
+        pass_line.backgroundColor = RGBCOLOR(245, 210, 209);
+        [_Row3backView addSubview:pass_line];
         
         UIColor *a_color = RGBCOLOR(164, 164, 164);
         
         //输入textField
         //用户名
-        self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15, 0,275, 45)];
+        self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 0,275, 45)];
         self.userTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        
+//        _userTf.backgroundColor = [UIColor orangeColor];
 
         self.userTf.keyboardType = UIKeyboardTypeNumberPad;
         self.userTf.textColor = RGBCOLOR(164, 164, 164);
@@ -107,7 +124,7 @@
         self.userTf.attributedPlaceholder = user_placeholder;
         
         //密码
-        self.passWordTf = [[UITextField alloc]initWithFrame:CGRectMake(15, 60, 275, 45)];
+        self.passWordTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 60, 275, 45)];
         self.passWordTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.passWordTf.secureTextEntry = YES;
         self.passWordTf.textColor = a_color;
@@ -145,7 +162,9 @@
         UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [loginBtn setBackgroundImage:[UIImage imageNamed:@"denglu_botton550_100.png"] forState:UIControlStateNormal];
         [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        loginBtn.titleLabel.textColor = [UIColor whiteColor];
+        
+        [loginBtn setTitleColor:COLOR_NORMAL forState:UIControlStateNormal];
+        
         loginBtn.frame = CGRectMake(0, 130, 275, 50);
         [loginBtn addTarget:self action:@selector(denglu) forControlEvents:UIControlEventTouchUpInside];
         [self.Row3backView addSubview:loginBtn];

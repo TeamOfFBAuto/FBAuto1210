@@ -80,12 +80,17 @@
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f \
 alpha:(a)]
 
+//通用 红色
+#define COLOR_NORMAL RGBCOLOR(220, 23, 19)
+
 //判断系统版本
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
 //判断iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
-#define FBAUTO_NAVIGATION_IMAGE [UIImage imageNamed:@"daohanglan"] //导航栏背景
+#define FBAUTO_NAVIGATION_IMAGE1 [UIImage imageNamed:@"daohanglan"] //导航栏背景 红色
+
+#define FBAUTO_NAVIGATION_IMAGE [UIImage imageNamed:@"daohanglan_bg_640_88@2x"] //黑色
 
 #define FBAUTO_BACK_IMAGE [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
 

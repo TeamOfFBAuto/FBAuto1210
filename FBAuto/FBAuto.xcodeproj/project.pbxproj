@@ -74,6 +74,7 @@
 		138427F1198A31EF001DAA8D /* LMessageBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 138427F0198A31EF001DAA8D /* LMessageBadge.m */; };
 		138472121A5B916C00EA017F /* CommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 138472111A5B916C00EA017F /* CommentBottomView.m */; };
 		138472181A5BBB6200EA017F /* LInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 138472171A5BBB6200EA017F /* LInputView.m */; };
+		1384721A1A5BD3E800EA017F /* tucao_xin_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 138472191A5BD3E800EA017F /* tucao_xin_red@2x.png */; };
 		13896BFF19E521E4008BB77C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896BFE19E521E4008BB77C /* AudioToolbox.framework */; };
 		13896C0119E521F2008BB77C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C0019E521F2008BB77C /* AVFoundation.framework */; };
 		13896C0319E52201008BB77C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C0219E52201008BB77C /* CFNetwork.framework */; };
@@ -599,6 +600,7 @@
 		138472111A5B916C00EA017F /* CommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentBottomView.m; sourceTree = "<group>"; };
 		138472161A5BBB6200EA017F /* LInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LInputView.h; sourceTree = "<group>"; };
 		138472171A5BBB6200EA017F /* LInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LInputView.m; sourceTree = "<group>"; };
+		138472191A5BD3E800EA017F /* tucao_xin_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tucao_xin_red@2x.png"; sourceTree = "<group>"; };
 		13896BFE19E521E4008BB77C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		13896C0019E521F2008BB77C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		13896C0219E52201008BB77C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1555,6 +1557,7 @@
 		13B259A71A591F9100F359CD /* Tucao_images */ = {
 			isa = PBXGroup;
 			children = (
+				138472191A5BD3E800EA017F /* tucao_xin_red@2x.png */,
 				137BD5ED1A5A2FE50057A784 /* daohanglan@2x.png */,
 				13B259A81A591F9100F359CD /* b_cheyuan44_44@2x.png */,
 				13B259A91A591F9100F359CD /* b_cheyuan46_46@2x.png */,
@@ -2712,6 +2715,7 @@
 				138B4AD11966A4BD00B974A5 /* face56.png in Resources */,
 				138B4AC21966A4BD00B974A5 /* face42.png in Resources */,
 				13B259CB1A591F9100F359CD /* dl_logo382_148@2x.png in Resources */,
+				1384721A1A5BD3E800EA017F /* tucao_xin_red@2x.png in Resources */,
 				13D5E0101961758E00804835 /* tianjia44_44@2x.png in Resources */,
 				E37D2C9C1974CFA500EBA627 /* shanchu_button_600_100@2x.png in Resources */,
 				138B4AFA1966A4BD00B974A5 /* face93.png in Resources */,

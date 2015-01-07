@@ -59,6 +59,7 @@
                                 <state key="normal" image="tucao_xin.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="tucao_xin_red.png"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YIN-iM-87l">
                                 <rect key="frame" x="35" y="7" width="42" height="21"/>
@@ -104,7 +105,7 @@
                 <outlet property="nameLabel" destination="368-Qh-I7U" id="Jtz-oq-pNH"/>
                 <outlet property="toolsView" destination="N1S-Ee-N0T" id="ZEj-Nm-boa"/>
             </connections>
-            <point key="canvasLocation" x="-1284" y="660"/>
+            <point key="canvasLocation" x="-1506" y="660"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -112,6 +113,7 @@
         <image name="ditu572_440.png" width="286" height="220"/>
         <image name="tucao_pinglun.png" width="16" height="15"/>
         <image name="tucao_xin.png" width="17" height="15"/>
+        <image name="tucao_xin_red.png" width="17" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

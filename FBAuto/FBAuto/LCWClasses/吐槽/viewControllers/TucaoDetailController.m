@@ -176,9 +176,31 @@
         
         //成功之后 评论 + 1
         
-        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
+//        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
         
-        [weakTable showRefreshHeader:YES];
+        TucaoModel *aModel = [[TucaoModel alloc]init];
+        aModel.uid = [GMAPI getUid];
+        aModel.username = [GMAPI getUsername];
+        aModel.content = text;
+        
+        [weakTable.dataArray insertObject:aModel atIndex:0];
+        
+        int num = [cell_detail.commentLable.text intValue];
+        
+        NSLog(@"---comment num %d",num);
+        
+        cell_detail.commentLable.text = [NSString stringWithFormat:@"%d",num + 1];
+        
+        tucaoDetail.comemt_num = [NSString stringWithFormat:@"%d",num + 1];
+        
+        self.tucaoModel.comemt_num = tucaoDetail.comemt_num;
+        
+        [weakTable reloadData];
+
+        
+        NSLog(@"---commentLable num %@",cell_detail.commentLable.text);
+        
+        self.commentLabe.text = cell_detail.commentLable.text;//更新列表
         
         [inputView clearContent];
         
@@ -305,27 +327,7 @@
 {
     //弹出评论框
     
-//    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_CommentList,self.tucaoModel.id,@"1",_table.pageNum,KPageSize];
-//    
-//    __weak typeof(_table)weakTable = _table;
-//    
-//    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-//    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
-//        
-//        NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
-//        
-//        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
-//        
-//        
-//        
-//    }failBlock:^(NSDictionary *failDic, NSError *erro) {
-//        
-//        NSLog(@"failDic %@",failDic);
-//        
-//        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
-//        
-//        
-//    }];
+    [inputView.textView becomeFirstResponder];
 }
 
 
@@ -333,18 +335,59 @@
 
 - (void)clickToZan:(UIButton *)sender
 {
+    
+    if (sender.selected) {
+        
+        return;
+    }else
+    {
+        sender.selected = YES;
+        
+        
+        cell_detail.likeLabel.text = [NSString stringWithFormat:@"%d",[cell_detail.likeLabel.text intValue] + 1];
+        
+        tucaoDetail.zan_num = self.likeLabel.text;
+        
+        cell_detail.likeButton.selected = YES;
+        
+        //更新上一页列表数据
+        
+        self.likeLabel.text = cell_detail.likeLabel.text;
+        
+        self.zanButton.selected = YES;
+        
+        self.tucaoModel.zan_num = tucaoDetail.zan_num;
+        
+        self.tucaoModel.dianzan_status = 1;
+    }
+    
+    
     NSString *url = [NSString stringWithFormat:FBAUTO_TUCAO_ZAN,[GMAPI getAuthkey],self.tucaoModel.id];
     
-    __weak typeof(_table)weakTable = _table;
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
         NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
         
-        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+//        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
         
-       
+        
+//        cell_detail.likeLabel.text = [NSString stringWithFormat:@"%d",[cell_detail.likeLabel.text intValue] + 1];
+//       
+//        tucaoDetail.zan_num = self.likeLabel.text;
+//        
+//        cell_detail.likeButton.selected = YES;
+//        
+//        //更新上一页列表数据
+//        
+//        self.likeLabel.text = cell_detail.likeLabel.text;
+//        
+//        self.zanButton.selected = YES;
+//        
+//        self.tucaoModel.zan_num = tucaoDetail.zan_num;
+//        
+//        self.tucaoModel.dianzan_status = 1;
         
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         

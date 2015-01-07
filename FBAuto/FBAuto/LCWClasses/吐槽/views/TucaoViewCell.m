@@ -78,11 +78,9 @@
     self.contentLabel.text = aModel.content;
     self.likeLabel.text = aModel.zan_num;
     self.commentLable.text = aModel.comemt_num;
-//    
-//    @property (strong, nonatomic) IBOutlet UIButton *likeButton;
-//    @property (strong, nonatomic) IBOutlet UILabel *likeLabel;
-//    @property (strong, nonatomic) IBOutlet UIButton *commentButton;
-//    @property (strong, nonatomic) IBOutlet UILabel *commentLable;
+    
+    self.likeButton.selected = aModel.dianzan_status == 1 ? YES : NO;
+
 }
 
 @end

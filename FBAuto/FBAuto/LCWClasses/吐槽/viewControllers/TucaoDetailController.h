@@ -16,4 +16,8 @@
 
 @property(nonatomic,retain)TucaoModel *tucaoModel;
 
+@property(nonatomic,assign)UILabel *likeLabel;
+@property(nonatomic,assign)UILabel *commentLabe;
+@property(nonatomic,assign)UIButton *zanButton;
+
 @end
