@@ -14,6 +14,10 @@
 #import "MBProgressHUD.h"
 #import "DXAlertView.h"
 
+//新版注册页面
+
+#import "UserRegisterController.h"
+
 @interface GloginViewController ()
 {
     UIActivityIndicatorView *j;
@@ -259,8 +263,11 @@
 
 #pragma mark - 跳转到注册界面
 -(void)pushToZhuceVC{
-    GzhuceViewController *gzhuceVc = [[GzhuceViewController alloc]init];
-    [self.navigationController pushViewController:gzhuceVc animated:YES];
+//    GzhuceViewController *gzhuceVc = [[GzhuceViewController alloc]init];
+//    [self.navigationController pushViewController:gzhuceVc animated:YES];
+    
+    UserRegisterController *register_vc = [[UserRegisterController alloc]init];
+    [self.navigationController pushViewController:register_vc animated:YES];
 }
 
 #pragma mark - 跳转找回密码界面
