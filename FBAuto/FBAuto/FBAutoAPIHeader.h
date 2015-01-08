@@ -25,6 +25,8 @@
 #import "RCIM.h"//融云
 #import "FBChatTool.h"
 
+#import "ColorModel.h"
+
 //默认配置
 
 #define DEFAULT_HEAD_IMAGE [UIImage imageNamed:@"defaultFace"] //默认头像

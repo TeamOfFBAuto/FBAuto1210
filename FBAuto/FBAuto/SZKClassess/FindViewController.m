@@ -123,7 +123,7 @@
         
         NSLog(@"failDic %@",failDic);
         
-        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+//        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
         
         
     }];

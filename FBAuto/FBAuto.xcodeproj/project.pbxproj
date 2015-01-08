@@ -266,6 +266,7 @@
 		13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BBD0A41A52834700212CB1 /* TucaoDetailController.m */; };
 		13C0B3211A5E1F7100E8328F /* tabbar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */; };
 		13C0B3241A5E697100E8328F /* LSecurityCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C0B3231A5E697100E8328F /* LSecurityCode.m */; };
+		13C0B3271A5E8DB900E8328F /* ColorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C0B3261A5E8DB900E8328F /* ColorModel.m */; };
 		13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C4D8741986573E00281521 /* XMPPMessageModel.m */; };
 		13C7173619824C18008F7B42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173519824C18008F7B42 /* QuartzCore.framework */; };
 		13C7173819824C24008F7B42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173719824C24008F7B42 /* SystemConfiguration.framework */; };
@@ -841,6 +842,8 @@
 		13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_bg@2x.png"; sourceTree = "<group>"; };
 		13C0B3221A5E697100E8328F /* LSecurityCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSecurityCode.h; sourceTree = "<group>"; };
 		13C0B3231A5E697100E8328F /* LSecurityCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSecurityCode.m; sourceTree = "<group>"; };
+		13C0B3251A5E8DB900E8328F /* ColorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorModel.h; sourceTree = "<group>"; };
+		13C0B3261A5E8DB900E8328F /* ColorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorModel.m; sourceTree = "<group>"; };
 		13C4D8731986573E00281521 /* XMPPMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageModel.h; sourceTree = "<group>"; };
 		13C4D8741986573E00281521 /* XMPPMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageModel.m; sourceTree = "<group>"; };
 		13C7173519824C18008F7B42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2231,6 +2234,8 @@
 				136787121A4D020500192276 /* models */,
 				13FB9F641A4BF9FF000088F6 /* viewControllers */,
 				13FB9F651A4BF9FF000088F6 /* views */,
+				13C0B3251A5E8DB900E8328F /* ColorModel.h */,
+				13C0B3261A5E8DB900E8328F /* ColorModel.m */,
 			);
 			path = "吐槽";
 			sourceTree = "<group>";
@@ -3089,6 +3094,7 @@
 				132A81E019AEC2DD0035D0CE /* LDatePicker.m in Sources */,
 				13D5E0DA1963DB9800804835 /* AsyncImageView.m in Sources */,
 				138B49F0196552F500B974A5 /* FBFriendCell.m in Sources */,
+				13C0B3271A5E8DB900E8328F /* ColorModel.m in Sources */,
 				136CE5651A5D140F007D78A7 /* UserRegisterController.m in Sources */,
 				13A1A9451980ADB100E09666 /* LImageButton.m in Sources */,
 				13D5E0C81963DB0300804835 /* QBImagePickerVideoInfoView.m in Sources */,
