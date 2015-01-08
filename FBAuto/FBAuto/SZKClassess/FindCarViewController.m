@@ -355,7 +355,7 @@
 - (void)createMenu
 {
     menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    menuBgView.backgroundColor = COLOR_NORMAL;
+    menuBgView.backgroundColor = FBAUTO_COLOR_MEBU;
     [self.view addSubview:menuBgView];
     
     NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"更多"];
@@ -374,6 +374,7 @@
         menuBtn.tag = 1000 + i;
         menuBtn.backgroundColor = [UIColor clearColor];
         [menuBgView addSubview:menuBtn];
+        menuBtn.titleLabel.textColor = FBAUTO_COLOR_MEBU_TEXT;
         
         if (i == items.count - 1) {
 //            menuBtn.arrowImageView.image = [UIImage imageNamed:@"jiantou_bai10_18"];
@@ -388,7 +389,8 @@
         
         
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(menuBtn.right, 0, 0.5, 40)];
-        line.backgroundColor = [UIColor grayColor];
+//        line.backgroundColor = [UIColor grayColor];
+        line.backgroundColor = FBAUTO_COLOR_MEBU;
         [menuBgView addSubview:line];
     }
     

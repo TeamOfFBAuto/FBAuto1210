@@ -107,7 +107,7 @@
     
     UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,64)];
     
-    daohangView.image = FBAUTO_NAVIGATION_IMAGE;
+    daohangView.image = FBAUTO_IMAGE_NAVIGATION;
     
     daohangView.userInteractionEnabled = YES;
     
@@ -120,7 +120,7 @@
     
     //    [button_back setBackgroundImage:[UIImage imageNamed:@"FBQuanBackImage.png"] forState:UIControlStateNormal];
     
-    [button_back setImage:FBAUTO_BACK_IMAGE forState:UIControlStateNormal];
+    [button_back setImage:FBAUTO_IMAGE_BACK forState:UIControlStateNormal];
     
     button_back.center = CGPointMake(16,42);
     

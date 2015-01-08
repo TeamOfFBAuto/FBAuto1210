@@ -513,10 +513,15 @@
     
     UITabBarController * tabbar = [[UITabBarController alloc] init];
     tabbar.delegate = self;
-    tabbar.tabBar.backgroundImage=[UIImage imageNamed:@"testV.png"];
+//    tabbar.tabBar.backgroundImage=[UIImage imageNamed:@"testV.png"];
+    
+    
+    tabbar.tabBar.backgroundImage = FBAUTO_IMAGE_TABBAR;
+    
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:222.0/255.0f green:38/255.0f blue:33/255.0f alpha:1]];
     
     tabbar.viewControllers = [NSArray arrayWithObjects:navc1,navc2,navc3,navc4,navc5,nil];
+    
     
     //将状态栏设置成自定义颜色
     
@@ -535,7 +540,7 @@
 {
     CGFloat aHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     self.statusBarBack = [[UIWindow alloc]initWithFrame:CGRectMake(200, 0, 80, aHeight)];
-    _statusBarBack.backgroundColor = [UIColor colorWithPatternImage:FBAUTO_NAVIGATION_IMAGE];
+    _statusBarBack.backgroundColor = [UIColor colorWithPatternImage:FBAUTO_IMAGE_NAVIGATION];
     [_statusBarBack setWindowLevel:UIWindowLevelStatusBar];
     [_statusBarBack makeKeyAndVisible];
     

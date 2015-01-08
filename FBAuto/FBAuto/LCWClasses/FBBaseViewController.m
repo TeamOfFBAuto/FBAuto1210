@@ -47,14 +47,14 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
     
     UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceButton.width = -5;
     
     self.button_back=[[UIButton alloc]initWithFrame:CGRectMake(0,0,40,44)];
     [_button_back addTarget:self action:@selector(clickToBack:) forControlEvents:UIControlEventTouchUpInside];
-    [_button_back setImage:FBAUTO_BACK_IMAGE forState:UIControlStateNormal];
+    [_button_back setImage:FBAUTO_IMAGE_BACK forState:UIControlStateNormal];
     _button_back.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     UIBarButtonItem *back_item=[[UIBarButtonItem alloc]initWithCustomView:_button_back];
     self.navigationItem.leftBarButtonItems=@[spaceButton,back_item];

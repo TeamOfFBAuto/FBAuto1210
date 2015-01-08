@@ -13,4 +13,17 @@
  */
 @interface UserRegisterThreeController : UIViewController
 
+@property(nonatomic,assign)BOOL isGeren;//是否是个人
+@property(nonatomic,retain)NSString *userName;
+@property(nonatomic,retain)NSString *phone;
+@property(nonatomic,retain)NSString *password;
+
+//商家信息
+@property(nonatomic,retain)NSString *areaInfo;//地区信息
+
+@property(nonatomic,assign)NSInteger province;//省
+@property(nonatomic,assign)NSInteger city;//区
+@property(nonatomic,retain)NSString *companyInfo;//公司
+@property(nonatomic,retain)NSString *address;//详情地址
+
 @end

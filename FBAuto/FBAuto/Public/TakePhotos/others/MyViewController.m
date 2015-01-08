@@ -40,7 +40,7 @@
     [super viewWillAppear:animated];
     
     
-    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
 //    FBCircleNavBackGroundImage@2x
     
     UIColor * cc = RGBCOLOR(91,138,59);
@@ -80,7 +80,7 @@
     {
         UIButton *button_back=[[UIButton alloc]initWithFrame:CGRectMake(10,8,12,21.5)];
         [button_back addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        [button_back setImage:FBAUTO_BACK_IMAGE forState:UIControlStateNormal];
+        [button_back setImage:FBAUTO_IMAGE_BACK forState:UIControlStateNormal];
         UIBarButtonItem *back_item=[[UIBarButtonItem alloc]initWithCustomView:button_back];
         self.navigationItem.leftBarButtonItems=@[spaceButton,back_item];
     }else if (theType == MyViewControllerLeftbuttonTypelogo)

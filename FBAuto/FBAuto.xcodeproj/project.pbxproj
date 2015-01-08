@@ -264,6 +264,8 @@
 		13B259D51A591F9100F359CD /* yonghu38_38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B259BE1A591F9100F359CD /* yonghu38_38@2x.png */; };
 		13B626D219CC04DB008FB162 /* defaultFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B626D119CC04DB008FB162 /* defaultFace.png */; };
 		13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BBD0A41A52834700212CB1 /* TucaoDetailController.m */; };
+		13C0B3211A5E1F7100E8328F /* tabbar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */; };
+		13C0B3241A5E697100E8328F /* LSecurityCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C0B3231A5E697100E8328F /* LSecurityCode.m */; };
 		13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C4D8741986573E00281521 /* XMPPMessageModel.m */; };
 		13C7173619824C18008F7B42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173519824C18008F7B42 /* QuartzCore.framework */; };
 		13C7173819824C24008F7B42 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7173719824C24008F7B42 /* SystemConfiguration.framework */; };
@@ -836,6 +838,9 @@
 		13B626D119CC04DB008FB162 /* defaultFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultFace.png; sourceTree = "<group>"; };
 		13BBD0A31A52834700212CB1 /* TucaoDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoDetailController.h; sourceTree = "<group>"; };
 		13BBD0A41A52834700212CB1 /* TucaoDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoDetailController.m; sourceTree = "<group>"; };
+		13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_bg@2x.png"; sourceTree = "<group>"; };
+		13C0B3221A5E697100E8328F /* LSecurityCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSecurityCode.h; sourceTree = "<group>"; };
+		13C0B3231A5E697100E8328F /* LSecurityCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSecurityCode.m; sourceTree = "<group>"; };
 		13C4D8731986573E00281521 /* XMPPMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageModel.h; sourceTree = "<group>"; };
 		13C4D8741986573E00281521 /* XMPPMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageModel.m; sourceTree = "<group>"; };
 		13C7173519824C18008F7B42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1351,6 +1356,8 @@
 				136CE57E1A5D356D007D78A7 /* UserRegisterTwoController.m */,
 				136CE5801A5D35A3007D78A7 /* UserRegisterThreeController.h */,
 				136CE5811A5D35A3007D78A7 /* UserRegisterThreeController.m */,
+				13C0B3221A5E697100E8328F /* LSecurityCode.h */,
+				13C0B3231A5E697100E8328F /* LSecurityCode.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -1630,6 +1637,7 @@
 				136CE5661A5D1B1B007D78A7 /* 注册界面切图 */,
 				138472191A5BD3E800EA017F /* tucao_xin_red@2x.png */,
 				137BD5ED1A5A2FE50057A784 /* daohanglan@2x.png */,
+				13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */,
 				13B259A81A591F9100F359CD /* b_cheyuan44_44@2x.png */,
 				13B259A91A591F9100F359CD /* b_cheyuan46_46@2x.png */,
 				13B259AA1A591F9100F359CD /* b_cheyuan_down44_44@2x.png */,
@@ -2707,6 +2715,7 @@
 				138B4B0C1966A51700B974A5 /* emotion.plist in Resources */,
 				138B4AA81966A4BD00B974A5 /* face19.png in Resources */,
 				1336BC06196A88410011B4D9 /* duihuahuang1@2x.png in Resources */,
+				13C0B3211A5E1F7100E8328F /* tabbar_bg@2x.png in Resources */,
 				13D5DFDB1961758E00804835 /* xiaoren_icon36_342@2x.png in Resources */,
 				138B4AA71966A4BD00B974A5 /* face18.png in Resources */,
 				13D5DFDD1961758E00804835 /* diandian_up16_16@2x.png in Resources */,
@@ -3053,6 +3062,7 @@
 				1391EF0A1977A1FF00FDC52A /* GloadingView.m in Sources */,
 				138B4B141966A65E00B974A5 /* MarkupParser.m in Sources */,
 				137926FE1987776900377ED5 /* GjjxxViewController.m in Sources */,
+				13C0B3241A5E697100E8328F /* LSecurityCode.m in Sources */,
 				13D5E0C51963DB0300804835 /* QBImagePickerController.m in Sources */,
 				13FB9F691A4BFA21000088F6 /* TucaoViewCell.m in Sources */,
 				13D5E0641962A14E00804835 /* Menu_Button.m in Sources */,

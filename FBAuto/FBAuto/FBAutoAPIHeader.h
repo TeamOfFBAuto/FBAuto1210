@@ -53,10 +53,7 @@
 
 #define USERPASSWORD @"userpassword"
 
-
 #define FBAUTO_APPID @"904576362" //e车 appStore appid
-
-
 
 #define KPageSize  30 //每页条数
 
@@ -88,11 +85,26 @@ alpha:(a)]
 //判断iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
-#define FBAUTO_NAVIGATION_IMAGE1 [UIImage imageNamed:@"daohanglan"] //导航栏背景 红色
 
-#define FBAUTO_NAVIGATION_IMAGE [UIImage imageNamed:@"daohanglan_bg_640_88@2x"] //黑色
+#pragma mark - 风格设置
 
-#define FBAUTO_BACK_IMAGE [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
+
+#define FBAUTO_IMAGE_NAVIGATION [UIImage imageNamed:@"daohanglan"] //导航栏背景 红色
+
+#define FBAUTO_IMAGE_NAVIGATION1 [UIImage imageNamed:@"daohanglan_bg_640_88@2x"] //导航栏背景 黑色
+
+#define FBAUTO_IMAGE_BACK [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
+
+#define FBAUTO_COLOR_MEBU [UIColor colorWithHexString:@"f4f4f4"] //menu背景颜色
+
+#define FBAUTO_COLOR_MEBU_TEXT [UIColor blackColor] //menu text 颜色
+
+#define FBAUTO_IMAGE_TABBAR [UIImage imageNamed:@"tabbar_bg"] //tabbar背景图
+
+
+
+#pragma mark - 接口地址
+
 
 #define FBAUTO_APPSTORE_URL @"https://itunes.apple.com/us/app/e-zu-qi-che/id904576362?l=zh&ls=1&mt=8"//APPStore下载地址
 
@@ -104,14 +116,14 @@ alpha:(a)]
 
 #define FBAUTO_HOST @"http://fbautotest.fblife.com"
 
-//获取手机验证码
+//获取手机验证码  1：注册时获取验证码；2：重置密码时候获取验证码
 #define FBAUTO_GET_VERIFICATION_CODE @"http://fbautotest.fblife.com/index.php?c=interface&a=phonecode&phone=%@&optype=%d"
 
 ////验证手机验证码
 //#define FBAUTO_YANZHENG_VERIFICATION_CODE @"http://fbautotest.fblife.com/index.php?c=interface&a=checkphonecode&phone=%@&code=%@"
 
 //用户注册
-#define FBAUTO_REGISTERED @"http://fbautotest.fblife.com/index.php?c=interface&a=register&phone=%@&password=%@&name=%@&province=%ld&city=%ld&usertype=%d&code=%@&token=%@&fullname=%@"
+#define FBAUTO_REGISTERED @"http://fbautotest.fblife.com/index.php?c=interface&a=register&phone=%@&password=%@&name=%@&province=%d&city=%d&usertype=%d&code=%@&token=%@&fullname=%@&address=%@"
 
 //用户登录
 #define FBAUTO_LOG_IN @"http://fbautotest.fblife.com/index.php?c=interface&a=dologin&phone=%@&upass=%@&token=%@"

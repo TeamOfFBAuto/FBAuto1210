@@ -23,7 +23,7 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
     
     UIImageView *leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 60, 44)];
     leftImage.contentMode = UIViewContentModeLeft;
@@ -153,24 +153,24 @@
     {
         NSLog(@"下一步");
         
-//        UITextField *tf_name = (UITextField *)[self.view viewWithTag:100];
-//        UITextField *tf_phone = (UITextField *)[self.view viewWithTag:101];
-//        UITextField *tf_pass = (UITextField *)[self.view viewWithTag:102];
-//        if (tf_name.text.length == 0) {
-//            
-//            [LCWTools showMBProgressWithText:@"用户名不能为空" addToView:self.view];
-//            
-//            return;
-//        }else if (![LCWTools isValidateMobile:tf_phone.text]){
-//            
-//            [LCWTools showMBProgressWithText:@"请填写有效手机号" addToView:self.view];
-//            
-//            return;
-//        }else if (tf_pass.text.length < 6){
-//            
-//            [LCWTools showMBProgressWithText:@"密码不能少于6位" addToView:self.view];
-//            return;
-//        }
+        UITextField *tf_name = (UITextField *)[self.view viewWithTag:100];
+        UITextField *tf_phone = (UITextField *)[self.view viewWithTag:101];
+        UITextField *tf_pass = (UITextField *)[self.view viewWithTag:102];
+        if (tf_name.text.length == 0) {
+            
+            [LCWTools showMBProgressWithText:@"用户名不能为空" addToView:self.view];
+            
+            return;
+        }else if (![LCWTools isValidateMobile:tf_phone.text]){
+            
+            [LCWTools showMBProgressWithText:@"请填写有效手机号" addToView:self.view];
+            
+            return;
+        }else if (tf_pass.text.length < 6){
+            
+            [LCWTools showMBProgressWithText:@"密码不能少于6位" addToView:self.view];
+            return;
+        }
 
         
         UIButton *gren_btn = (UIButton *)[self.view viewWithTag:1000];
@@ -181,12 +181,20 @@
             NSLog(@"个人注册");
             
             UserRegisterThreeController *regis = [[UserRegisterThreeController alloc]init];
+            regis.isGeren = YES;
+            regis.userName = [self textFieldForTag:100].text;
+            regis.phone = [self textFieldForTag:101].text;
+            regis.password = [self textFieldForTag:102].text;
+            
             [self.navigationController pushViewController:regis animated:YES];
             
         }else if (shang_btn.selected){
             NSLog(@"商家注册");
             
             UserRegisterTwoController *regis = [[UserRegisterTwoController alloc]init];
+            regis.userName = [self textFieldForTag:100].text;
+            regis.phone = [self textFieldForTag:101].text;
+            regis.password = [self textFieldForTag:102].text;
             [self.navigationController pushViewController:regis animated:YES];
             
         }else
@@ -195,6 +203,11 @@
         }
         
     }
+}
+
+- (UITextField *)textFieldForTag:(int)tag
+{
+    return (UITextField *)[self.view viewWithTag:tag];
 }
 
 
@@ -262,7 +275,7 @@
     [name_bg addSubview:name_tf];
     name_tf.tag = tag;
     name_tf.secureTextEntry = isPass;
-    
+    name_tf.font = [UIFont systemFontOfSize:14];
     name_tf.placeholder = placeHolder;
     
     return name_bg;

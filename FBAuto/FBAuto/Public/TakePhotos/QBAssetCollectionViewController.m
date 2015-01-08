@@ -71,7 +71,7 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
     
     UIBarButtonItem * spaceBar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
@@ -82,7 +82,7 @@
     
     [button_back addTarget:self action:@selector(backH) forControlEvents:UIControlEventTouchUpInside];
     
-    [button_back setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forState:UIControlStateNormal];
+    [button_back setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forState:UIControlStateNormal];
     
     UIBarButtonItem *back_item=[[UIBarButtonItem alloc]initWithCustomView:button_back];
     

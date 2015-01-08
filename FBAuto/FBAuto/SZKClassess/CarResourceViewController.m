@@ -148,7 +148,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_NAVIGATION_IMAGE forBarMetrics: UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
     
     [self createNavigationView];
     
@@ -341,7 +341,7 @@
 - (void)createMenu
 {
     menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    menuBgView.backgroundColor = COLOR_NORMAL;
+    menuBgView.backgroundColor = FBAUTO_COLOR_MEBU;
     [self.view addSubview:menuBgView];
     
     NSArray *items = @[@"车型",@"版本",@"来源",@"库存",@"更多"];
@@ -361,9 +361,11 @@
         menuBtn.backgroundColor = [UIColor clearColor];
         [menuBgView addSubview:menuBtn];
         
+        menuBtn.titleLabel.textColor = FBAUTO_COLOR_MEBU_TEXT;
         
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(menuBtn.right, 0, 0.5, 40)];
-        line.backgroundColor = [UIColor grayColor];
+//        line.backgroundColor = [UIColor grayColor];
+        line.backgroundColor = FBAUTO_COLOR_MEBU;
         [menuBgView addSubview:line];
     }
     
