@@ -23,6 +23,8 @@
     
     MBProgressHUD *loadingHub;
     
+    int colorid;//背景颜色
+    
 }
 
 
@@ -40,6 +42,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     imageCenter = self.imageView.center;
+    
+    //随机一个背景颜色
+    
+    colorid = arc4random() % 5 + 1;
+    
+    self.imageView.backgroundColor = [ColorModel colorForTucao:colorid];
+    
+    NSLog(@"随机颜色id %d",colorid);
     
     loadingHub = [LCWTools MBProgressWithText:@"发布中..." addToView:self.view];
     
@@ -74,9 +84,8 @@
  */
 - (void)publishTucaoImageId:(NSString *)imageId
 {
-    int colorId = 1;
     NSString *content = self.inputView.text;
-    NSString *url  = [NSString stringWithFormat:FBAUTO_TUCAO_PUBLISH,[GMAPI getAuthkey],content,colorId,imageId];
+    NSString *url  = [NSString stringWithFormat:FBAUTO_TUCAO_PUBLISH,[GMAPI getAuthkey],content,colorid,imageId];
     
     __weak typeof(self)weakSelf = self;
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];

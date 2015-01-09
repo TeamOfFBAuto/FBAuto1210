@@ -95,7 +95,9 @@ alpha:(a)]
 
 #define FBAUTO_IMAGE_NAVIGATION1 [UIImage imageNamed:@"daohanglan_bg_640_88@2x"] //导航栏背景 黑色
 
-#define FBAUTO_IMAGE_BACK [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
+#define FBAUTO_IMAGE_BACK1 [UIImage imageNamed:@"fanhui_24_42"] //返回按钮
+
+#define FBAUTO_IMAGE_BACK [UIImage imageNamed:@"fanhui24_40"] //返回按钮 2.0
 
 #define FBAUTO_COLOR_MEBU [UIColor colorWithHexString:@"f4f4f4"] //menu背景颜色
 

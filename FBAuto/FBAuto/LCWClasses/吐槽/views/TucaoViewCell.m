@@ -37,7 +37,7 @@
     self.nameLabel.text = aModel.username;
     self.dateLine.text = [LCWTools timestamp:aModel.dateline];
     
-    self.centerImageView.backgroundColor = [LCWTools colorForColorId:[aModel.color intValue]];
+    self.centerImageView.backgroundColor = [ColorModel colorForTucao:[aModel.color intValue]];
     
     if ([self haveImage:aModel.image]) {
         

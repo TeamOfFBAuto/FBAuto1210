@@ -205,7 +205,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger num = 0;
     if (section == 0) {
-        num = 1;
+        num = 2;
     }else if (section == 1){
         num = 5;
     }

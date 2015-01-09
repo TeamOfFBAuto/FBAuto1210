@@ -15,6 +15,7 @@ typedef void (^kuangBlock)(NSInteger index);
 
 @interface GPersonTableViewCell : UITableViewCell
 
+@property(nonatomic,strong)UIImageView *iconImageView;//图标
 @property(nonatomic,strong)UILabel *titileLabel;//标题
 @property(nonatomic,strong)UIView *kuang;//框
 
