@@ -157,8 +157,18 @@
     [self.view addSubview:_tableView];
     
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
     view.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *logout_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [logout_btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    logout_btn.frame = CGRectMake(10, 15, DEVICE_WIDTH - 20, 40);
+    [logout_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    logout_btn.backgroundColor = [UIColor colorWithHexString:@"e62f17"];
+    [logout_btn addTarget:self action:@selector(clickToLogout:) forControlEvents:UIControlEventTouchUpInside];
+    logout_btn.layer.cornerRadius = 3.f;
+    [view addSubview:logout_btn];
+    
     _tableView.tableFooterView = view;
     
     
@@ -214,6 +224,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma - mark 创建视图
+
+- (void)createLogoutButton:(UIButton *)sender
+{
+    
 }
 
 #pragma - mark 更新未读消息
@@ -305,7 +322,7 @@
     if (section == 0) {
         num = 4;
     }else if (section == 1){
-        num = 5;
+        num = 4;
     }
     
     return num;
@@ -362,7 +379,7 @@
     UIView *xiatiao = [[UIView alloc]initWithFrame:CGRectMake(10.5, 43, 299, 1)];
     xiatiao.backgroundColor = [UIColor whiteColor];
     [cell.contentView addSubview:xiatiao];
-    if ((indexPath.row == 3 && indexPath.section == 0)||(indexPath.row ==4 && indexPath.section == 1)) {
+    if ((indexPath.row == 3 && indexPath.section == 0)||(indexPath.row == 3  && indexPath.section == 1)) {
         xiatiao.hidden = YES;
     }
     
@@ -440,8 +457,6 @@
     return cell;
 }
 
-
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 1) {
@@ -449,8 +464,13 @@
     }
 }
 
+#pragma - mark clickAction
 
-
+- (void)clickToLogout:(UIButton *)sender
+{
+    UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [al show];
+}
 
 - (void)clickToDetail:(UIButton *)sender
 {

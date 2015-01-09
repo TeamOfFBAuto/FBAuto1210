@@ -47,6 +47,7 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gdoTap:)];
     [self.kuang addGestureRecognizer:tap];
     
+    //图标
     self.iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 44, 44)];
     _iconImageView.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:_iconImageView];
