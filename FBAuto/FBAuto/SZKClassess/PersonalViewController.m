@@ -28,6 +28,9 @@
 #import "GuserZyViewController.h"
 #import "FBChatListController.h"
 
+//新版个人主页
+#import "UserHomeController.h"
+
 //退出登录
 #import "CarResourceViewController.h"
 #import "FBCityData.h"
@@ -272,11 +275,18 @@
 
 - (void)clickToUserHome:(UIButton *)sender
 {
-    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+    UserHomeController *personal = [[UserHomeController alloc]init];
     personal.title = self.nameLabel.text;
     personal.userId = [GMAPI getUid];
     personal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:personal animated:YES];
+    
+//    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+//    personal.title = self.nameLabel.text;
+//    personal.userId = [GMAPI getUid];
+//    personal.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:personal animated:YES];
+    
 }
 
 
@@ -521,7 +531,7 @@
     //清除沙盒里的数据
     
     //上传标志位
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"gIsUpFace"];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:UPLOAD_HEAD_IAMGE];
     
     //document路径
     NSString *documentPathStr = [GlocalUserImage documentFolder];

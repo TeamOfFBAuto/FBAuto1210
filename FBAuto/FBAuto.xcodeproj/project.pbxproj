@@ -275,6 +275,7 @@
 		13BB426B1A5F7F3100B8E78E /* tongzhi182_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB42681A5F7F3100B8E78E /* tongzhi182_58@2x.png */; };
 		13BB426C1A5F7F3100B8E78E /* xiaoxi182_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB42691A5F7F3100B8E78E /* xiaoxi182_58@2x.png */; };
 		13BB426E1A5F808200B8E78E /* gengxin_46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB426D1A5F808200B8E78E /* gengxin_46@2x.png */; };
+		13BB42751A5FD4CB00B8E78E /* UserHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BB42741A5FD4CB00B8E78E /* UserHomeController.m */; };
 		13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BBD0A41A52834700212CB1 /* TucaoDetailController.m */; };
 		13C0B3211A5E1F7100E8328F /* tabbar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */; };
 		13C0B3241A5E697100E8328F /* LSecurityCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C0B3231A5E697100E8328F /* LSecurityCode.m */; };
@@ -858,6 +859,8 @@
 		13BB42681A5F7F3100B8E78E /* tongzhi182_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tongzhi182_58@2x.png"; sourceTree = "<group>"; };
 		13BB42691A5F7F3100B8E78E /* xiaoxi182_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiaoxi182_58@2x.png"; sourceTree = "<group>"; };
 		13BB426D1A5F808200B8E78E /* gengxin_46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gengxin_46@2x.png"; sourceTree = "<group>"; };
+		13BB42731A5FD4CB00B8E78E /* UserHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHomeController.h; sourceTree = "<group>"; };
+		13BB42741A5FD4CB00B8E78E /* UserHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHomeController.m; sourceTree = "<group>"; };
 		13BBD0A31A52834700212CB1 /* TucaoDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoDetailController.h; sourceTree = "<group>"; };
 		13BBD0A41A52834700212CB1 /* TucaoDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoDetailController.m; sourceTree = "<group>"; };
 		13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_bg@2x.png"; sourceTree = "<group>"; };
@@ -1696,6 +1699,23 @@
 			path = 2.0images;
 			sourceTree = "<group>";
 		};
+		13BB42711A5FD4AF00B8E78E /* 个人主页 */ = {
+			isa = PBXGroup;
+			children = (
+				13BB42721A5FD4AF00B8E78E /* viewControllers */,
+			);
+			path = "个人主页";
+			sourceTree = "<group>";
+		};
+		13BB42721A5FD4AF00B8E78E /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				13BB42731A5FD4CB00B8E78E /* UserHomeController.h */,
+				13BB42741A5FD4CB00B8E78E /* UserHomeController.m */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
 		13C4D872198656DE00281521 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1793,6 +1813,7 @@
 		13D5DF6919612C9800804835 /* LCWClasses */ = {
 			isa = PBXGroup;
 			children = (
+				13BB42711A5FD4AF00B8E78E /* 个人主页 */,
 				136CE5611A5D13B0007D78A7 /* 注册 */,
 				13D5E07C1962BD5800804835 /* FBBaseViewController.h */,
 				13D5E07D1962BD5800804835 /* FBBaseViewController.m */,
@@ -3073,6 +3094,7 @@
 				13D5DF7E19615A3500804835 /* NSString+PinYin.m in Sources */,
 				13C7E53619ADBAA700685DD1 /* FBFriendModel.m in Sources */,
 				138074FB196E317700AD3D03 /* SzkAPI.m in Sources */,
+				13BB42751A5FD4CB00B8E78E /* UserHomeController.m in Sources */,
 				13D5E0771962B2B000804835 /* UIColor+ConvertColor.m in Sources */,
 				13D5E0601962A14E00804835 /* City.m in Sources */,
 				138B4B111966A51700B974A5 /* SCGIFImageView.m in Sources */,

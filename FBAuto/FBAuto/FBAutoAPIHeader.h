@@ -39,6 +39,11 @@
 #define LOGIN_PHONE @"LOGIN_PHONE"//登录手机号
 #define LOGIN_PASS @"LOGIN_PASS"//登录密码
 
+//上传图片
+
+#define UPLOAD_HEAD_IAMGE @"gIsUpFace"//上传头像
+#define UPLOAD_BANNER_IMAGE @"uploadBanner"//banner 背景图
+
 #define FIRST_LAUNCH @"firstLaunch" //第一次启动
 
 //保存用户信息
@@ -156,6 +161,9 @@ alpha:(a)]
 
 //修改个人信息-用户头像
 #define FBAUTO_MODIFY_HEADER_IMAGE @"http://fbautotest.fblife.com/index.php?c=interface&a=edituser&op=headimg&authkey=%@"
+
+//修改个人信息-背景图
+#define FBAUTO_MODIFY_BANNER_IMAGE @"http://fbautotest.fblife.com/index.php?c=interface&a=adduserbg&authkey=%@"
 
 //找回密码
 #define FBAUTO_MODIFY_FIND_PASSWORD @"http://fbautotest.fblife.com/index.php?c=interface&a=resetpass&phone=%@&code=%@&password=%@"

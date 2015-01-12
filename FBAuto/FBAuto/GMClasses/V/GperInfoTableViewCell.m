@@ -56,48 +56,70 @@
     
     
     
-    if (theIndexPath.section == 0) {//头像
+    if (theIndexPath.section == 0) {//头像 背景
         
-        height = 95;
+        height = 44 + 15;
         
         //框
-        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 15, 300, 64)];
+        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 44)];
         kuang.layer.borderWidth = 0.5;
         kuang.layer.borderColor = [RGBCOLOR(220, 220, 220)CGColor];
         [kuang addTarget:self action:@selector(gtouxiang) forControlEvents:UIControlEventTouchUpInside];
-        
+
         
         //title
-        UILabel *titielLabel = [[UILabel alloc]initWithFrame:CGRectMake(22, 40, 30, 15)];
+        UILabel *titielLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 70, 44)];
         titielLabel.font = [UIFont systemFontOfSize:15];
-        titielLabel.text = @"头像";
+        
         
         //头像imageview
-        UIImageView *touxiangImv = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titielLabel.frame)+187, 25, 45, 45)];
+        UIImageView *touxiangImv = [[UIImageView alloc]initWithFrame:CGRectMake(kuang.width - 30 - 22, 7, 30, 30)];
         touxiangImv.backgroundColor = RGBCOLOR(180, 180, 180);
         
-        if ([GlocalUserImage getUserFaceImage]) {
-            touxiangImv.image = [GlocalUserImage getUserFaceImage];
-        }else{
-            [touxiangImv sd_setImageWithURL:[NSURL URLWithString:self.delegate.headimage] placeholderImage:[UIImage imageNamed:@"defaultFace"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                NSData *data = UIImageJPEGRepresentation(image, 0.5);
-                [GlocalUserImage setUserFaceImageWithData:data];
-            }];
+        
+        if (theIndexPath.row == 0) {
+            
+            kuang.top = 15;
+            titielLabel.text = @"头像";
+            
+            if ([GlocalUserImage getUserFaceImage]) {
+                touxiangImv.image = [GlocalUserImage getUserFaceImage];
+            }else{
+                [touxiangImv sd_setImageWithURL:[NSURL URLWithString:self.delegate.headimage] placeholderImage:DEFAULT_HEAD_IMAGE completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+                    [GlocalUserImage setUserFaceImageWithData:data];
+                }];
+            }
+            
+        }else if (theIndexPath.row == 1){
+            
+            kuang.top = 0;
+            titielLabel.text = @"主页背景";
+            
+            if ([GlocalUserImage getUserFaceImage]) {
+                touxiangImv.image = [GlocalUserImage getUserBannerImage];
+            }else{
+                [touxiangImv sd_setImageWithURL:[NSURL URLWithString:self.delegate.headimage] placeholderImage:[UIImage imageNamed:@"defaultFace"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+                    [GlocalUserImage setUserBannerImageWithData:data];
+                }];
+            }
         }
         
         
         //箭头
         UIImageView *jiantou = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"jiantou_hui10_18.png"] highlightedImage:nil];
-        jiantou.frame = CGRectMake(CGRectGetMaxX(touxiangImv.frame)+10, 42, 5, 8);
+        jiantou.frame = CGRectMake(CGRectGetMaxX(touxiangImv.frame)+10, 0, 5, 44);
+        jiantou.contentMode = UIViewContentModeCenter;
         
         
         
         
         //添加视图
         [self.contentView addSubview:kuang];
-        [self.contentView addSubview:titielLabel];
-        [self.contentView addSubview:touxiangImv];
-        [self.contentView addSubview:jiantou];
+        [kuang addSubview:titielLabel];
+        [kuang addSubview:touxiangImv];
+        [kuang addSubview:jiantou];
         
         
     }else if (theIndexPath.section == 1){//详细信息

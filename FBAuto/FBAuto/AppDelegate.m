@@ -872,15 +872,30 @@
         
         if ([[dic objectForKey:@"errcode"]intValue] == 0) {
             NSString *str = @"no";
-            [[NSUserDefaults standardUserDefaults]setObject:str forKey:@"gIsUpFace"];
+            [[NSUserDefaults standardUserDefaults]setObject:str forKey:UPLOAD_HEAD_IAMGE];
             
         }else{
             NSString *str = @"yes";
-            [[NSUserDefaults standardUserDefaults]setObject:str forKey:@"gIsUpFace"];
+            [[NSUserDefaults standardUserDefaults]setObject:str forKey:UPLOAD_HEAD_IAMGE];
         }
         //发通知
         [[NSNotificationCenter defaultCenter]postNotificationName:@"chagePersonalInformation" object:nil];
         
+    }else if (request.tag == 125){
+        
+        NSDictionary * dic = [[NSDictionary alloc] initWithDictionary:[request.responseData objectFromJSONData]];
+        NSLog(@"背景图上传完成==%@",dic);
+        
+        if ([[dic objectForKey:@"errcode"]intValue] == 0) {
+            NSString *str = @"no";
+            [[NSUserDefaults standardUserDefaults]setObject:str forKey:UPLOAD_BANNER_IMAGE];
+            
+        }else{
+            NSString *str = @"yes";
+            [[NSUserDefaults standardUserDefaults]setObject:str forKey:UPLOAD_BANNER_IMAGE];
+        }
+        //发通知
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"chagePersonalInformation" object:nil];
     }
     
 }

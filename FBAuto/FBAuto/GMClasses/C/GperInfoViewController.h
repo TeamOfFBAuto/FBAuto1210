@@ -40,6 +40,7 @@
 @property(nonatomic,strong)NSString *address;//地址
 @property(nonatomic,strong)NSString *jianjie;//简介
 @property(nonatomic,strong)NSString *headimage;//头像urlstr;
+@property(nonatomic,strong)NSString *bannerimage;//背景图;
 
 //头像相关
 @property(nonatomic,strong)UIImage *userUpFaceImage;//用户需要上传的头像image

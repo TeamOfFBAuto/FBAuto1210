@@ -299,6 +299,23 @@
     return 0.01f;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshTableView:heightForHeaderInSection:)]) {
+        return [_refreshDelegate refreshTableView:tableView heightForHeaderInSection:section];
+    }
+    return 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshTableView:viewForHeaderInSection:)]) {
+        return [_refreshDelegate refreshTableView:tableView viewForHeaderInSection:section];
+    }
+    
+    return [UIView new];
+}
+
 #pragma mark -
 #pragma mark overide UITableViewDataSource methods
 

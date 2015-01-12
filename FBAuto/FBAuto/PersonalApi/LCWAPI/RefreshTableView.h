@@ -19,6 +19,8 @@
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath;
 - (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView;
+- (UIView *)refreshTableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+- (CGFloat)refreshTableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 
 - (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 

@@ -14,16 +14,14 @@
 
 #import "GlocalUserImage.h"//缓存沙盒类
 
-
 #import "FBCityData.h"//地区转换
-
-
-
 
 
 @interface GperInfoViewController ()
 {
     MBProgressHUD *_hud;
+    
+    BOOL isHeadIcon;//选择头像
 }
 @end
 
@@ -33,11 +31,6 @@
 {
     NSLog(@"%s",__FUNCTION__);
 }
-
-
-
-
-
 
 - (void)viewDidLoad
 {
@@ -52,7 +45,7 @@
     NSLog(@"%s",__FUNCTION__);
     
     //主tableview
-    _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 315) style:UITableViewStylePlain];
+    _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DEVICE_HEIGHT - 64 - 49) style:UITableViewStylePlain];
     _tableview.delegate = self;
     _tableview.dataSource = self;
     _tableview.scrollEnabled = NO;
@@ -186,9 +179,18 @@
     [cell loadViewWithIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 1)) {
         __weak typeof (self)bself = self;
         [cell setUserFaceBlock:^{
+            
+            if (indexPath.row == 0) {
+                
+                isHeadIcon = YES;
+            }else
+            {
+                isHeadIcon = NO;
+            }
+            
             [bself guserFace];
         }];
     }
@@ -301,10 +303,6 @@
         picker.navigationBar.hidden = YES;
         [picker pushViewController:imageCrop animated:YES];
         
-        
-        
-        
-        
     }
     
     
@@ -352,14 +350,26 @@
     self.userUpFaceImagedata = UIImagePNGRepresentation(self.userUpFaceImage);
     
     
-    //缓存到本地
-    [GlocalUserImage setUserFaceImageWithData:self.userUpFaceImagedata];
     NSString *str = @"yes";
-    [[NSUserDefaults standardUserDefaults]setObject:str forKey:@"gIsUpFace"];
+    if (isHeadIcon) {
+        
+        //缓存到本地
+        [GlocalUserImage setUserFaceImageWithData:self.userUpFaceImagedata];
+        [[NSUserDefaults standardUserDefaults]setObject:str forKey:UPLOAD_HEAD_IAMGE];
+        
+        //ASI上传
+        [self test];
+        
+    }else
+    {
+        [GlocalUserImage setUserBannerImageWithData:self.userUpFaceImagedata];
+        [LCWTools cache:str ForKey:UPLOAD_BANNER_IMAGE];
+        
+        //ASI上传
+        [self testBanner];
+    }
     
     
-    //ASI上传
-    [self test];
     
     [_tableview reloadData];
     
@@ -391,6 +401,43 @@
         [request__ addRequestHeader:@"uphead" value:[NSString stringWithFormat:@"%lu", (unsigned long)[myRequestData length]]];
         //设置http body
         [request__ addData:data withFileName:[NSString stringWithFormat:@"boris.png"] andContentType:@"image/PNG" forKey:[NSString stringWithFormat:@"headimg"]];
+        
+        [request__ setRequestMethod:@"POST"];
+        request__.cachePolicy = TT_CACHE_EXPIRATION_AGE_NEVER;
+        request__.cacheStoragePolicy = ASICacheForSessionDurationCacheStoragePolicy;
+        [request__ startAsynchronous];
+        
+    });
+    
+    
+}
+
+/**
+ *  上传banner
+ */
+-(void)testBanner{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSString* fullURL = [NSString stringWithFormat:FBAUTO_MODIFY_BANNER_IMAGE,[GMAPI getAuthkey]];
+        
+        NSLog(@"上传背景图 图片请求的地址===%@",fullURL);
+        
+        request__ = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:fullURL]];
+        AppDelegate *_appDelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+        request__.delegate = _appDelegate;
+        request__.tag = 125;
+        
+        //得到图片的data
+        NSData* data;
+        //获取图片质量
+        NSMutableData *myRequestData=[NSMutableData data];
+        [request__ setPostFormat:ASIMultipartFormDataPostFormat];
+        data = UIImageJPEGRepresentation(self.userUpFaceImage,0.5);
+        NSLog(@"xxxx===%@",data);
+        [request__ addRequestHeader:@"uphead" value:[NSString stringWithFormat:@"%lu", (unsigned long)[myRequestData length]]];
+        //设置http body
+        [request__ addData:data withFileName:[NSString stringWithFormat:@"boris.png"] andContentType:@"image/PNG" forKey:[NSString stringWithFormat:@"bgimg"]];
         
         [request__ setRequestMethod:@"POST"];
         request__.cachePolicy = TT_CACHE_EXPIRATION_AGE_NEVER;

@@ -116,6 +116,14 @@
             return ;
         }
         
+        //当是字典的时候
+        if ([dataInfo isKindOfClass:[NSDictionary class]]) {
+            
+            dataInfo = [(NSDictionary *)dataInfo allValues];
+            
+        }
+        //当是数组的时候
+        
         NSDictionary *dic = [dataInfo objectAtIndex:0];
         
         //判断是否收藏
