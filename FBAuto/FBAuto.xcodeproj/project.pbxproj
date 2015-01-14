@@ -51,6 +51,10 @@
 		136CE57C1A5D2AD3007D78A7 /* diand_up20_20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CE57A1A5D2AD3007D78A7 /* diand_up20_20@2x.png */; };
 		136CE57F1A5D356D007D78A7 /* UserRegisterTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 136CE57E1A5D356D007D78A7 /* UserRegisterTwoController.m */; };
 		136CE5821A5D35A3007D78A7 /* UserRegisterThreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 136CE5811A5D35A3007D78A7 /* UserRegisterThreeController.m */; };
+		136DF4461A6655370080C046 /* LiuyanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 136DF4441A6655370080C046 /* LiuyanCell.m */; };
+		136DF4471A6655370080C046 /* LiuyanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136DF4451A6655370080C046 /* LiuyanCell.xib */; };
+		136DF44A1A6658030080C046 /* LiuyanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136DF4491A6658030080C046 /* LiuyanModel.m */; };
+		136DF44D1A666C470080C046 /* LiuyanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 136DF44C1A666C470080C046 /* LiuyanViewController.m */; };
 		13737C8E1965420000941746 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13737C8D1965420000941746 /* PersonalViewController.m */; };
 		137708C119B6C859007609E8 /* detail_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 137708C019B6C859007609E8 /* detail_test.jpg */; };
 		137926FB1987776900377ED5 /* GChangePwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926E21987776900377ED5 /* GChangePwViewController.m */; };
@@ -579,6 +583,13 @@
 		136CE57E1A5D356D007D78A7 /* UserRegisterTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRegisterTwoController.m; sourceTree = "<group>"; };
 		136CE5801A5D35A3007D78A7 /* UserRegisterThreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRegisterThreeController.h; sourceTree = "<group>"; };
 		136CE5811A5D35A3007D78A7 /* UserRegisterThreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRegisterThreeController.m; sourceTree = "<group>"; };
+		136DF4431A6655370080C046 /* LiuyanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuyanCell.h; sourceTree = "<group>"; };
+		136DF4441A6655370080C046 /* LiuyanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuyanCell.m; sourceTree = "<group>"; };
+		136DF4451A6655370080C046 /* LiuyanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiuyanCell.xib; sourceTree = "<group>"; };
+		136DF4481A6658030080C046 /* LiuyanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuyanModel.h; sourceTree = "<group>"; };
+		136DF4491A6658030080C046 /* LiuyanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuyanModel.m; sourceTree = "<group>"; };
+		136DF44B1A666C470080C046 /* LiuyanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuyanViewController.h; sourceTree = "<group>"; };
+		136DF44C1A666C470080C046 /* LiuyanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuyanViewController.m; sourceTree = "<group>"; };
 		13737C8C1965420000941746 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		13737C8D1965420000941746 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
 		137708C019B6C859007609E8 /* detail_test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = detail_test.jpg; sourceTree = "<group>"; };
@@ -1702,6 +1713,8 @@
 		13BB42711A5FD4AF00B8E78E /* 个人主页 */ = {
 			isa = PBXGroup;
 			children = (
+				13C0DDF91A65145100CDB10B /* Models */,
+				13C0DDFA1A65145100CDB10B /* Views */,
 				13BB42721A5FD4AF00B8E78E /* viewControllers */,
 			);
 			path = "个人主页";
@@ -1712,8 +1725,29 @@
 			children = (
 				13BB42731A5FD4CB00B8E78E /* UserHomeController.h */,
 				13BB42741A5FD4CB00B8E78E /* UserHomeController.m */,
+				136DF44B1A666C470080C046 /* LiuyanViewController.h */,
+				136DF44C1A666C470080C046 /* LiuyanViewController.m */,
 			);
 			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		13C0DDF91A65145100CDB10B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				136DF4481A6658030080C046 /* LiuyanModel.h */,
+				136DF4491A6658030080C046 /* LiuyanModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		13C0DDFA1A65145100CDB10B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				136DF4431A6655370080C046 /* LiuyanCell.h */,
+				136DF4441A6655370080C046 /* LiuyanCell.m */,
+				136DF4451A6655370080C046 /* LiuyanCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		13C4D872198656DE00281521 /* model */ = {
@@ -2790,6 +2824,7 @@
 				138B4AE01966A4BD00B974A5 /* face7.png in Resources */,
 				13FB9F6A1A4BFA21000088F6 /* TucaoViewCell.xib in Resources */,
 				138B4ABA1966A4BD00B974A5 /* face35.png in Resources */,
+				136DF4471A6655370080C046 /* LiuyanCell.xib in Resources */,
 				138B4AC91966A4BD00B974A5 /* face49.png in Resources */,
 				13D5E0EF1963E1ED00804835 /* duihao-up-46_46@2x.png in Resources */,
 				13D5E05E1962A14E00804835 /* MenuCell.xib in Resources */,
@@ -3086,6 +3121,7 @@
 				135922571A4D6B0B0091E320 /* TucaoPublishController.m in Sources */,
 				137926FB1987776900377ED5 /* GChangePwViewController.m in Sources */,
 				137926FD1987776900377ED5 /* GfindPasswViewController.m in Sources */,
+				136DF44A1A6658030080C046 /* LiuyanModel.m in Sources */,
 				1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */,
 				138B4A0A19664EC100B974A5 /* Section_Button.m in Sources */,
 				138B4A1319664ED500B974A5 /* FBSearchFriendsController.m in Sources */,
@@ -3207,6 +3243,7 @@
 				137927001987776900377ED5 /* GlxwmViewController.m in Sources */,
 				137926FC1987776900377ED5 /* GfindCarViewController.m in Sources */,
 				13D5E0DB1963DB9800804835 /* FullyLoaded.m in Sources */,
+				136DF4461A6655370080C046 /* LiuyanCell.m in Sources */,
 				138B4A30196698AE00B974A5 /* ZSNApi.m in Sources */,
 				190BFD85195AAD800098E0F4 /* FindCarViewController.m in Sources */,
 				1336BC09196A8CE70011B4D9 /* FBAreaFriensController.m in Sources */,
@@ -3217,6 +3254,7 @@
 				138B4B0E1966A51700B974A5 /* NSAttributedString+Attributes.m in Sources */,
 				190BFD82195AAD6A0098E0F4 /* SendCarViewController.m in Sources */,
 				1391EF171977A4AF00FDC52A /* LCWTools.m in Sources */,
+				136DF44D1A666C470080C046 /* LiuyanViewController.m in Sources */,
 				137FEB061974D48100CDBD89 /* CarStyle.m in Sources */,
 				13D5E0DE1963DBA400804835 /* MyViewController.m in Sources */,
 				1315537B1979243B0044C010 /* FindCarCell.m in Sources */,
@@ -3353,8 +3391,8 @@
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FBAuto/ShareSDK/Connection",
@@ -3400,7 +3438,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
+				PROVISIONING_PROFILE = "96c93639-ff5c-44ac-ad74-809c23c1de89";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3413,8 +3451,8 @@
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FBAuto/ShareSDK/Connection",
@@ -3460,7 +3498,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
+				PROVISIONING_PROFILE = "96c93639-ff5c-44ac-ad74-809c23c1de89";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

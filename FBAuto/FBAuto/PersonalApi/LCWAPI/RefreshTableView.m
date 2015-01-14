@@ -33,6 +33,28 @@
     return self;
 }
 
+-(id)initWithFrame:(CGRect)frame headerShow:(BOOL)headerShow footerShow:(BOOL)footerShow
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        
+        self.pageNum = 1;
+        self.dataArray = [NSMutableArray array];
+        self.delegate = self;
+        
+        if (headerShow) {
+            [self createHeaderView];
+        }
+        
+        if (footerShow) {
+            
+            [self createFooterView];
+        }
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -274,6 +296,11 @@
     if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(heightForRowIndexPath:)]) {
         aHeight = [_refreshDelegate heightForRowIndexPath:indexPath];
     }
+    
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshTableView:heightForHeaderInSection:)]) {
+        return [_refreshDelegate refreshTableView:tableView heightForRowIndexPath:indexPath];
+    }
+    
     return aHeight;
 }
 
@@ -286,6 +313,10 @@
 {
     if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(didSelectRowAtIndexPath:)]) {
         [_refreshDelegate didSelectRowAtIndexPath:indexPath];
+    }
+    
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+        return [_refreshDelegate refreshTableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
 
@@ -304,6 +335,7 @@
     if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshTableView:heightForHeaderInSection:)]) {
         return [_refreshDelegate refreshTableView:tableView heightForHeaderInSection:section];
     }
+    
     return 0.f;
 }
 

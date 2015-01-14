@@ -17,7 +17,13 @@
 - (void)loadNewData;
 - (void)loadMoreData;
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)refreshTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)refreshTableView:(UITableView *)tableView heightForRowIndexPath:(NSIndexPath *)indexPath;
+
 - (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView;
 - (UIView *)refreshTableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 - (CGFloat)refreshTableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
@@ -45,6 +51,7 @@
 @property (nonatomic,retain)NSMutableArray *dataArray;//数据源
 
 -(id)initWithFrame:(CGRect)frame showLoadMore:(BOOL)show;//是否需要显示加载更多
+-(id)initWithFrame:(CGRect)frame headerShow:(BOOL)headerShow footerShow:(BOOL)footerShow;//可选显示下拉或者上拉view
 
 -(void)createHeaderView;
 -(void)removeHeaderView;

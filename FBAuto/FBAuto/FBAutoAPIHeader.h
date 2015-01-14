@@ -31,6 +31,8 @@
 
 #define DEFAULT_HEAD_IMAGE [UIImage imageNamed:@"defaultFace"] //默认头像
 
+#define DEFAULT_CAR_IAMGE [UIImage imageNamed:@"detail_test.jpg"] //默认汽车图片
+
 #define RONG_SERVICE_ID @"KEFU1413164724086" //客服号
 #define RONGCLOUD_TOKEN @"RONGCLOUD_TOKEN" //用户对应的融云token
 
@@ -146,6 +148,9 @@ alpha:(a)]
 
 //获取个人信息
 #define FBAUTO_GET_USER_INFORMATION @"http://fbautotest.fblife.com/index.php?c=interface&a=getuser&uid=%@"
+
+//获取个人信息 -- 加用户关系 2.0
+#define FBAUTO_GET_USER_INFORMATION_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=getuser&uid=%@&authkey=%@"
 
 //修改用户密码
 #define  FBAUTO_MODIFY_PASSWORD @"http://fbautotest.fblife.com/index.php?c=interface&a=edituser&authkey=%@&password=%@&op=pass&phone=%@"
@@ -283,5 +288,12 @@ alpha:(a)]
 #define FBAUTO_TUCAO_ZAN @"http://fbautotest.fblife.com/index.php?c=interface&a=dianzan&authkey=%@&artid=%@"//点赞
 
 #define FBAUTO_TUCAO_Comment @"http://fbautotest.fblife.com/index.php?c=interface&a=addcomment&authkey=%@&content=%@&art_uid=%@&ctype=%@"//发布评论
+
+//留言列表
+
+#define FBAUTO_LIUYAN_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getcomment&art_uid=%@&ctype=%d&page=%d&ps=%d"//art_uid:吐槽信息或者商家的id ctype:被评论信息的类型( 1:吐槽信息   2:商家 )
+//发布留言
+
+#define FBAUTO_LIUYAN_ADD @"http://fbautotest.fblife.com/index.php?c=interface&a=addcomment&authkey=%@&content=%@&art_uid=%@&ctype=%d" //ctype:被评论信息的类型(1:吐槽信息 2:商家)
 
 #endif

@@ -20,6 +20,9 @@
 @property(nonatomic,strong)NSString *city;//市
 @property(nonatomic,strong)NSString *intro;//用户简介
 @property(nonatomic,strong)NSString *headimage;//头像
+
+@property(nonatomic,strong)NSString *backgroundimage;//背景图片
+
 @property(nonatomic,strong)NSString *address;//地址
 @property(nonatomic,strong)NSString *usertype;//(1:个人；2:商家)
 @property(nonatomic,strong)NSString *msg_visible;//(是否接收消息提示1：接收；2：不接受)
