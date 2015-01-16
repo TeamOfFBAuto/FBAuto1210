@@ -10,4 +10,6 @@
 
 @interface LiuyanViewController : FBBaseViewController
 
+@property(nonatomic,retain)NSString *art_uid;//评论id
+
 @end

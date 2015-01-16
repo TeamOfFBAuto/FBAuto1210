@@ -14,7 +14,7 @@
 #import "FBFriendModel.h"
 #import "DXAlertView.h"
 
-#import "GuserZyViewController.h"
+#import "UserHomeController.h"
 
 #import "FBCityData.h"
 #import "FBChatViewController.h"
@@ -311,7 +311,7 @@
     {
         NSArray *arr = [friendsDic objectForKey:[firstLetterArr objectAtIndex:indexPath.section]];
         FBFriendModel *aModel = [arr objectAtIndex:indexPath.row];
-        GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+        UserHomeController *personal = [[UserHomeController alloc]init];
         personal.title = aModel.buddyname;
         personal.userId = aModel.buddyid;
         [self.navigationController pushViewController:personal animated:YES];

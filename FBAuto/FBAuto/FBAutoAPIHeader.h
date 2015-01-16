@@ -74,6 +74,8 @@
 
 #define NOTIFICATION_PUBLISHTUCAO_SUCCESS @"PUBLISHTUCAO_SUCCESS"//发布吐槽成功
 
+#define NOTIFICATION_PUBLISH_LIYYAN_SUCCESS @"LIYAN_SUCCESS"//发布留言成功
+
 ///屏幕宽度
 #define DEVICE_WIDTH  [UIScreen mainScreen].bounds.size.width
 #pragma mark - 屏幕高度

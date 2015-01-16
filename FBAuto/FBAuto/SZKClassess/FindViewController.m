@@ -19,6 +19,10 @@
 @interface FindViewController ()<RefreshDelegate,UITableViewDataSource>
 {
     RefreshTableView *_table;
+    
+    CGFloat currentOffsetY;
+    CGFloat oldTableHeight;//table初始高度
+    UIView *statesBarView;//灰色状态栏
 }
 
 @end
@@ -31,6 +35,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleLabel.text = @"吐糟故事";
     self.button_back.hidden = YES;
+    
+    oldTableHeight = self.view.height - 49 - 64;
     
     _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 49 - 64)];
     
@@ -49,6 +55,10 @@
     [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
     
     [self.view addSubview:saveButton];
+    
+    statesBarView = [[UIView alloc]initWithFrame:CGRectMake(0, -20, self.view.width, 20)];
+    statesBarView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    [self.view addSubview:statesBarView];
 }
 
 #pragma mark 事件处理
@@ -179,6 +189,37 @@
     }];
 }
 
+#pragma mark 列表滑动更新视图
+
+//滑动列表时更新 navigationBar  tabbar 等视图 frame
+
+- (void)updateViewFrameForShow:(BOOL)show duration:(CGFloat)seconds
+{
+    __weak typeof(_table)weakTable = _table;
+    
+    __weak typeof(statesBarView)weakstatesBarView = statesBarView;
+    
+    weakTable.top = show ? 0 : -44;
+    
+    weakTable.height = show ? oldTableHeight : self.view.height + 64 + 49;
+    
+    [UIView animateWithDuration:seconds animations:^{
+        
+        
+        CGFloat aY = show ? 20 : -44;
+        
+        self.navigationController.navigationBar.top = aY;
+        
+        self.tabBarController.tabBar.top = show ? DEVICE_HEIGHT - 49 : DEVICE_HEIGHT;
+        
+        NSLog(@"----tabbar %f",self.tabBarController.tabBar.top);
+        
+        weakstatesBarView.top = show ? -20 : -64;
+        
+    }];
+    
+}
+
 
 #pragma - mark RefreshDelegate <NSObject>
 
@@ -188,7 +229,31 @@
     CGFloat offset = scrollView.contentOffset.y;
     
     NSLog(@"offset %f",offset);
+    
+    if (offset > 20 && offset > currentOffsetY) {
+        
+        //消失
+        
+        [self updateViewFrameForShow:NO duration:0.5];
+        
+    }
+    
+    if (offset > 0 && offset < currentOffsetY) {
+        
+        [self updateViewFrameForShow:YES duration:0];
+    }
+    
+    if (scrollView.contentOffset.y <= ((scrollView.contentSize.height - scrollView.frame.size.height-40))) {
+        
+        currentOffsetY = scrollView.contentOffset.y;
+    }
+    
 }
+
+
+
+#pragma - mark RefreshDelegate <NSObject>
+
 
 - (void)refreshScrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -224,6 +289,8 @@
     
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
+    
+    [self updateViewFrameForShow:YES duration:0.0];
 }
 
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath

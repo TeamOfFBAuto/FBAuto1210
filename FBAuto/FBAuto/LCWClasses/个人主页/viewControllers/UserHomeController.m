@@ -55,6 +55,8 @@
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_table];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshLiuyan:) name:NOTIFICATION_PUBLISH_LIYYAN_SUCCESS object:nil];
+    
     //搜索遮罩
 //    [_table showRefreshHeader:YES];
     
@@ -74,11 +76,19 @@
 }
 
 #pragma - mark 事件处理
+/**
+ *  刷新留言列表
+ */
+- (void)refreshLiuyan:(NSNotification *)notification
+{
+    [self getLiuyan];
+}
 
 - (void)clickToLiuyan:(UIButton *)sender
 {
     NSLog(@"留言页面");
     LiuyanViewController *liuyan = [[LiuyanViewController alloc]init];
+    liuyan.art_uid = self.userId;
     [self.navigationController pushViewController:liuyan animated:YES];
 }
 
@@ -331,7 +341,7 @@
         }
         
         
-        [rightTable.dataArray addObjectsFromArray:arr];
+        rightTable.dataArray = arr;
         
         [rightTable reloadData];
         
@@ -450,7 +460,7 @@
         
         LiuyanModel *aCar = [rightTable.dataArray objectAtIndex:indexPath.row];
         
-        [LiuyanCell heightWithContent:aCar.content];
+        return [LiuyanCell heightWithContent:aCar.content];
     }
     
     return 44;
@@ -463,6 +473,9 @@
         UIView *section_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
         section_view.backgroundColor = [UIColor colorWithHexString:@"f1f1f1"];
         
+        NSArray *items_images_normal = @[@"zs_cheyuan_normal",@"x_liuyan_normal"];
+        NSArray *items_images_selected = @[@"zs_cheyuan_selected",@"x_liuyan_selected"];
+        
         NSArray *items_names = @[@"在售车源",@"留言"];
         for (int i = 0; i < 2; i ++) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -473,6 +486,9 @@
             [btn setTitleColor:[UIColor colorWithHexString:@"888888"] forState:UIControlStateNormal];
             
             btn.tag = 70 + i;
+            
+            [btn setImage:[UIImage imageNamed:items_images_normal[i]] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:items_images_selected[i]] forState:UIControlStateSelected];
             
             [btn addTarget:self action:@selector(clickToSwap:) forControlEvents:UIControlEventTouchUpInside];
             

@@ -11,6 +11,8 @@
 #import "GuserZyViewController.h"
 #import "DXAlertView.h"
 
+#import "UserHomeController.h"
+
 @interface FBChatViewController ()
 
 @end
@@ -114,7 +116,7 @@
 - (void)clickToHome:(UIButton *)btn
 {
     //    [self.navigationController popToRootViewControllerAnimated:YES];
-    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+    UserHomeController *personal = [[UserHomeController alloc]init];
     personal.title = self.currentTargetName;
     personal.userId = self.currentTarget;
     [self.navigationController pushViewController:personal animated:YES];

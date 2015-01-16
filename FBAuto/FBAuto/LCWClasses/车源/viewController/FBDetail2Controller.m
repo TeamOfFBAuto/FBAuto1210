@@ -11,7 +11,7 @@
 #import "DDPageControl.h"
 #import "ClickImageView.h"
 #import "LShareSheetView.h"
-#import "GuserZyViewController.h"
+#import "UserHomeController.h"
 #import "FBFriendsController.h"
 #import "DXAlertView.h"
 
@@ -413,7 +413,7 @@
 
 - (IBAction)clickToPersonal:(id)sender {
     
-    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
+    UserHomeController *personal = [[UserHomeController alloc]init];
     personal.title = self.nameLabel.text;
     personal.userId = userId;
     [self.navigationController pushViewController:personal animated:YES];
