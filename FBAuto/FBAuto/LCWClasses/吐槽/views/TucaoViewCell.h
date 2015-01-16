@@ -25,4 +25,6 @@
 
 - (void)setCellWithModel:(id)aModel;
 
++ (CGFloat)heightForCellWithModel:(id)aModel;
+
 @end

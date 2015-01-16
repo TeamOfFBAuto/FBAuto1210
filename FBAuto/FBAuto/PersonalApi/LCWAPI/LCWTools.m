@@ -326,7 +326,7 @@ static int seconds = 60;//计时60s
 + (CGFloat)heightForText:(NSString *)text width:(CGFloat)width font:(CGFloat)size
 {
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size]};
-    CGSize aSize = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:Nil].size;
+    CGSize aSize = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:Nil].size;
     return aSize.height;
 }
 

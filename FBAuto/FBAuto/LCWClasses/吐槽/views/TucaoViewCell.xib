@@ -44,15 +44,15 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <view contentMode="scaleToFill" id="nhJ-sY-y3Y">
-                        <rect key="frame" x="10" y="364" width="300" height="0.5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
                     <view contentMode="scaleToFill" id="N1S-Ee-N0T">
                         <rect key="frame" x="0.0" y="362" width="320" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="nhJ-sY-y3Y">
+                                <rect key="frame" x="10" y="0.0" width="300" height="0.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6xp-Ee-UpX">
                                 <rect key="frame" x="10" y="7" width="17" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -105,7 +105,7 @@
                 <outlet property="nameLabel" destination="368-Qh-I7U" id="Jtz-oq-pNH"/>
                 <outlet property="toolsView" destination="N1S-Ee-N0T" id="ZEj-Nm-boa"/>
             </connections>
-            <point key="canvasLocation" x="-1506" y="660"/>
+            <point key="canvasLocation" x="-1859" y="642"/>
         </tableViewCell>
     </objects>
     <resources>

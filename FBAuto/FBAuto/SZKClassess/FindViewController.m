@@ -297,15 +297,17 @@
 {
     TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
     
-    //有图片有文字
-    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
-        
-        CGFloat aHeight = [LCWTools heightForText:aModel.content width:300 font:17];
-        
-        return 400 - 20 + aHeight;
-    }
+//    //有图片有文字
+//    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
+//        
+//        CGFloat aHeight = [LCWTools heightForText:aModel.content width:300 font:17];
+//        
+//        return 400 - 20 + aHeight;
+//    }
+//    
+//    return 400 - 40;
     
-    return 400 - 40;
+    return [TucaoViewCell heightForCellWithModel:aModel];
 }
 
 //判断是否有图
@@ -349,6 +351,7 @@
     
     cell.likeButton.tag = 1000 + indexPath.row;
     [cell.likeButton addTarget:self action:@selector(clickToZan:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     return cell;
     
