@@ -73,6 +73,9 @@
     TucaoPublishController *publishTucao = [[TucaoPublishController alloc]init];
     
     [self PushToViewController:publishTucao animated:YES];
+    
+    [self updateViewFrameForShow:YES duration:0.0];
+
 }
 
 - (void)didReceiveMemoryWarning {

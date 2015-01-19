@@ -30,7 +30,7 @@
     CGFloat aHeight = [LCWTools heightForText:aModel.content width:aWidth font:15];
     self.contenLabel.height = aHeight;
     
-    self.bottomLine.top = [LiuyanCell heightWithContent:aModel.content] - 0.5f;
+//    self.bottomLine.top = [LiuyanCell heightWithContent:aModel.content] - 0.5f;
 }
 
 + (CGFloat)heightWithContent:(NSString *)content

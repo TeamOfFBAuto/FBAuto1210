@@ -298,4 +298,8 @@ alpha:(a)]
 
 #define FBAUTO_LIUYAN_ADD @"http://fbautotest.fblife.com/index.php?c=interface&a=addcomment&authkey=%@&content=%@&art_uid=%@&ctype=%d" //ctype:被评论信息的类型(1:吐槽信息 2:商家)
 
+//加关注
+
+#define FBAUTO_ADD_CONCERN @"http://fbautotest.fblife.com/index.php?c=interface&a=addfocus&authkey=%@&buddyid=%@"
+
 #endif

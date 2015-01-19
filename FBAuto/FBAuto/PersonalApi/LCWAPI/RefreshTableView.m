@@ -25,10 +25,35 @@
         self.dataArray = [NSMutableArray array];
         self.delegate = self;
         [self createHeaderView];
+        
+        self.showMore = show;
+        
         if (show) {
             
             [self createFooterView];
         }
+    }
+    return self;
+}
+
+
+-(id)initWithFrame:(CGRect)frame needShowLoadMore:(BOOL)show
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        
+        self.pageNum = 1;
+        self.dataArray = [NSMutableArray array];
+        self.delegate = self;
+        [self createHeaderView];
+        
+        self.showMore = show;
+        
+//        if (show) {
+//            
+//            [self createFooterView];
+//        }
     }
     return self;
 }
@@ -163,6 +188,21 @@
     // overide, the actual loading data operation is done in the subclass
 }
 
+//成功加载
+- (void)reloadData:(NSArray *)data haveMore:(BOOL)haveMore
+{
+    
+    self.isHaveMoreData = haveMore;
+    
+    if (self.isReloadData) {
+        
+        [self.dataArray removeAllObjects];
+        
+    }
+    [self.dataArray addObjectsFromArray:data];
+    
+    [self performSelector:@selector(finishReloadigData) withObject:nil afterDelay:0.1];
+}
 
 //成功加载
 - (void)reloadData:(NSArray *)data total:(int)totalPage
@@ -182,7 +222,7 @@
     }
     [self.dataArray addObjectsFromArray:data];
     
-    [self performSelector:@selector(finishReloadigData) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(finishReloadigData) withObject:nil afterDelay:0.1];
 }
 
 //请求数据失败
@@ -221,6 +261,13 @@
     }
     @finally {
         
+    }
+    
+    if (self.showMore) {
+        
+        if (self.tableFooterView == nil) {
+            [self createFooterView];
+        }
     }
     
     //如果有更多数据，重新设置footerview  frame
@@ -289,6 +336,26 @@
 
 #pragma mark -
 #pragma mark overide UITableViewDelegate methods
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    //按照作者最后的意思还要加上下面这一段
+    
+    if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]){
+        
+        [cell setPreservesSuperviewLayoutMargins:NO];
+        
+    }
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

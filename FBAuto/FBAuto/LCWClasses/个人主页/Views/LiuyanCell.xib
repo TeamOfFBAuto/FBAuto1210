@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" id="MLB-9U-uw5">
-                        <rect key="frame" x="0.0" y="105.5" width="320" height="0.5"/>
+                        <rect key="frame" x="0.0" y="74" width="320" height="0.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -45,7 +45,7 @@
                 <outlet property="iconImageView" destination="Vak-6U-dRI" id="ltT-YW-qhr"/>
                 <outlet property="nameLabel" destination="ctx-jl-aKl" id="IZx-o0-EG9"/>
             </connections>
-            <point key="canvasLocation" x="70" y="160.5"/>
+            <point key="canvasLocation" x="-301" y="162.5"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

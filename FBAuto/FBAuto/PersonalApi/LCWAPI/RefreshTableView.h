@@ -43,6 +43,8 @@
 @property (nonatomic,assign)BOOL                        isLoadMoreData;    //是否是载入更多
 @property (nonatomic,assign)BOOL                        isHaveMoreData;    //是否还有更多数据,决定是否有更多view
 
+@property (nonatomic,assign)BOOL showMore;//是否显示更多加载view
+
 @property(nonatomic,retain)UIActivityIndicatorView *loadingIndicator;
 @property(nonatomic,retain)UILabel *normalLabel;
 @property(nonatomic,retain)UILabel *loadingLabel;
@@ -53,6 +55,8 @@
 -(id)initWithFrame:(CGRect)frame showLoadMore:(BOOL)show;//是否需要显示加载更多
 -(id)initWithFrame:(CGRect)frame headerShow:(BOOL)headerShow footerShow:(BOOL)footerShow;//可选显示下拉或者上拉view
 
+-(id)initWithFrame:(CGRect)frame needShowLoadMore:(BOOL)show;//刚开始不显示更多加载view,请求过数据之后再显示
+
 -(void)createHeaderView;
 -(void)removeHeaderView;
 
@@ -61,6 +65,8 @@
 - (void)finishReloadigData;
 
 - (void)reloadData:(NSArray *)data total:(int)totalPage;//更新数据
+- (void)reloadData:(NSArray *)data haveMore:(BOOL)haveMore;//更新数据,是否有更多
+
 - (void)loadFail;//请求数据失败
 
 @end

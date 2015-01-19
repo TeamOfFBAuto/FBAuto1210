@@ -18,6 +18,8 @@
 
 #import "LiuyanCell.h"
 
+#import "DXAlertView.h"
+
 @interface UserHomeController ()<UIScrollViewDelegate,RefreshDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UIScrollView *scroll_bg;
@@ -33,6 +35,25 @@
     UIView *line_right;
     
     UIView *view_liuyan;//留言按钮背景view
+    
+    BOOL isCarsource;//当前是否是 车源列表
+    
+    NSMutableArray *arr_carsource;//车源数据源
+    NSMutableArray *arr_liuyan;
+    
+    int page_carsource;//车源 页数
+    int page_liuyan;
+    int total_carsource;//车源总页数
+    int total_liuyan;
+    
+    int friend_status;//用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
+    UIButton *rightButton2;
+    
+    NSArray *titles;
+    
+    MBProgressHUD *loading;
+    
+    BOOL firstLoadData;//第一次加载数据
 }
 
 @end
@@ -42,31 +63,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-//    scroll_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
-//    scroll_bg.delegate = self;
-//    [self.view addSubview:scroll_bg];
+
     
     self.titleLabel.text = self.title;
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64) showLoadMore:NO];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64) needShowLoadMore:YES];
     _table.refreshDelegate = self;
     _table.dataSource = self;
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_table];
     
+    _table.contentSize = CGSizeMake(DEVICE_WIDTH, (DEVICE_HEIGHT - 64) * 2);
+    
+    isCarsource = YES;//默认是车源
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshLiuyan:) name:NOTIFICATION_PUBLISH_LIYYAN_SUCCESS object:nil];
     
+    firstLoadData = YES;
+    
     //搜索遮罩
-//    [_table showRefreshHeader:YES];
+    [_table showRefreshHeader:YES];
+    
+    arr_carsource = [NSMutableArray array];
+    arr_liuyan = [NSMutableArray array];
     
     [self prepareUeserInfo];//用户信息
     
-    [self prepareUserCarSource];//车源
+//    [self getCarSourceIsReload:YES page:1];//车源
+//    
+//    [self getLiuyanIsReload:YES page:1];//留言
     
-    [self getLiuyan];//留言
     
-    [self liuyan];//留言view
+    view_liuyan = [self liuyanVeiw];//留言view
+    view_liuyan.hidden = YES;
+    [self.view addSubview:view_liuyan];
     
 }
 
@@ -76,12 +106,105 @@
 }
 
 #pragma - mark 事件处理
+
+- (void)clickToAddFriend:(UIButton *)sender
+{
+    NSString *name = userModel.name ? userModel.name : userModel.fullname;
+    
+    NSString *message = [NSString stringWithFormat:@"是否添加%@为好友",name];
+    
+    //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
+    
+    BOOL isConcern = YES;
+    if (friend_status == -1) {
+        
+        NSLog(@"加好友");
+        message = [NSString stringWithFormat:@"是否添加%@为好友",name];
+        isConcern = NO;
+        
+    }else if (friend_status == 0 || friend_status == 1 || friend_status == 2){
+        message = [NSString stringWithFormat:@"是否关注%@",name];
+        isConcern = YES;
+    }
+    
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:message contentText:nil leftButtonTitle:@"添加" rightButtonTitle:@"取消" isInput:NO];
+    [alert show];
+    
+    __weak typeof(self)weakSelf = self;
+    alert.leftBlock = ^(){
+        NSLog(@"确定");
+        [weakSelf addFriend:userModel.uid isConcern:isConcern];
+    };
+    alert.rightBlock = ^(){
+        NSLog(@"取消");
+        
+    };
+}
+
+- (UITableViewCell *)cellForTableView:(UITableView *)tableView
+                            indexPath:(NSIndexPath *)indexPath
+                          IsCarSource:(BOOL)isCar
+{
+    if (isCar) {
+        
+        static NSString * identifier = @"CarSourceCell";
+        
+        CarSourceCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"CarSourceCell" owner:self options:nil]objectAtIndex:0];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.row % 2 == 0) {
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+        }else
+        {
+            cell.contentView.backgroundColor = [UIColor whiteColor];
+        }
+        
+        if (_table.dataArray.count > indexPath.row) {
+            CarSourceClass *aCar = [_table.dataArray objectAtIndex:indexPath.row];
+            [cell setCellDataWithModel:aCar];
+        }
+        
+        return cell;
+        
+    }
+        
+    static NSString * identifier = @"LiuyanCell";
+    
+    LiuyanCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"LiuyanCell" owner:self options:nil]objectAtIndex:0];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
+    if (_table.dataArray.count > indexPath.row)
+    {
+        LiuyanModel *aCar = [_table.dataArray objectAtIndex:indexPath.row];
+        [cell setCellWithModel:aCar];
+
+    }
+    
+    cell.bottomLine.top = cell.height - 0.5f;
+    cell.bottomLine.height = 0.5f;
+    
+    return cell;
+}
+
+
 /**
  *  刷新留言列表
  */
 - (void)refreshLiuyan:(NSNotification *)notification
 {
-    [self getLiuyan];
+    [self getLiuyanIsReload:YES page:1];
 }
 
 - (void)clickToLiuyan:(UIButton *)sender
@@ -96,6 +219,7 @@
 {
     sender.selected = YES;
     
+    [_table.dataArray removeAllObjects];
     if (sender.tag == 70) {
         
         //left
@@ -104,10 +228,19 @@
         line_right.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
         [self buttonForTag:71].selected = NO;
         
-        leftTable.hidden = NO;
-        rightTable.hidden = YES;
+//        leftTable.hidden = NO;
+//        rightTable.hidden = YES;
         
-//        view_liuyan.hidden = YES;
+        isCarsource = YES;
+        
+//        [_table reloadData:arr_carsource total:total_carsource];
+        
+        [_table reloadData:arr_carsource haveMore:(page_carsource < total_carsource ? YES : NO)];
+        
+        view_liuyan.hidden = YES;
+        _table.height = DEVICE_HEIGHT - 64;
+        
+        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }else if (sender.tag == 71){
         //right
@@ -116,10 +249,34 @@
         line_left.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
         [self buttonForTag:70].selected = NO;
         
-        rightTable.hidden = NO;
-        leftTable.hidden = YES;
+//        rightTable.hidden = NO;
+//        leftTable.hidden = YES;
         
-//        view_liuyan.hidden = NO;
+        isCarsource = NO;
+        
+//        [_table reloadData:arr_liuyan total:total_liuyan];
+        
+        [_table reloadData:arr_liuyan haveMore:(page_liuyan < total_liuyan ? YES : NO)];
+        
+        view_liuyan.hidden = NO;
+        _table.height = DEVICE_HEIGHT - 64 - 85;
+        
+        _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    
+}
+
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    if ([_table respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_table setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([_table respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_table setLayoutMargins:UIEdgeInsetsZero];
     }
 }
 
@@ -130,6 +287,80 @@
 
 
 #pragma - mark 创建视图
+
+/**
+ *  右上角添加或者关注按钮
+ */
+- (void)createRightButton
+{
+    if ([self.userId isEqualToString:[GMAPI getUid]]) {
+        //说明是自己
+        
+    }else
+    {
+        if (rightButton2 == nil) {
+            rightButton2 =[[UIButton alloc]initWithFrame:CGRectMake(0,8,70,29)];
+            [rightButton2 addTarget:self action:@selector(clickToAddFriend:) forControlEvents:UIControlEventTouchUpInside];
+            [rightButton2 setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            //        [rightButton2 setImage:[UIImage imageNamed:@"jiahaoyou 92_58"] forState:UIControlStateNormal];
+            UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
+            rightButton2.titleLabel.font = [UIFont systemFontOfSize:14];
+            self.navigationItem.rightBarButtonItems = @[save_item2];
+        }
+
+        //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
+        
+        switch (friend_status) {
+            case -1:
+            case 1:
+            case 2:
+            {
+                NSLog(@"-1:不是好友关系 1:添加中 2:接到邀请");
+                
+                [rightButton2 setTitle:@"加好友" forState:UIControlStateNormal];
+                [rightButton2 setTitle:@"关注" forState:UIControlStateSelected];
+            }
+                break;
+            case 0:
+            {
+                NSLog(@"好友");
+                [rightButton2 setTitle:@"关注" forState:UIControlStateNormal];
+                [rightButton2 setTitle:@"已关注" forState:UIControlStateSelected];
+            }
+                break;
+                
+            case 3:
+            {
+               NSLog(@"特别关注");
+                [rightButton2 setTitle:@"已关注" forState:UIControlStateNormal];
+                rightButton2.userInteractionEnabled = NO;
+            }
+                break;
+
+
+                
+            default:
+                break;
+        }
+        
+    }
+}
+
+- (UIView *)liuyanVeiw
+{
+    UIView * liuyan = [[UIView alloc]initWithFrame:CGRectMake(0, DEVICE_HEIGHT - 85 - 64, DEVICE_WIDTH, 85)];
+    liuyan.backgroundColor = [UIColor whiteColor];
+    UIButton *btn_liuyan = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn_liuyan setTitle:@"留言" forState:UIControlStateNormal];
+    btn_liuyan.frame = CGRectMake(25, 20, DEVICE_WIDTH - 50, 50);
+    btn_liuyan.layer.cornerRadius = 3.f;
+    btn_liuyan.backgroundColor = [UIColor colorWithHexString:@"222222"];
+    [liuyan addSubview:btn_liuyan];
+    
+    [btn_liuyan addTarget:self action:@selector(clickToLiuyan:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return liuyan;
+}
 
 - (UIView *)liuyan
 {
@@ -154,6 +385,7 @@
 
 - (UIView *)createHeaderView
 {
+    
     UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 0)];
     
     //背景图
@@ -215,6 +447,8 @@
     
     NSLog(@"获取用户信息 api === %@",api);
     
+    __weak typeof (self)weakSelf = self;
+    
     LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
@@ -230,7 +464,13 @@
         
         userModel = guserModel;
         
-        _table.tableHeaderView = [self createHeaderView];
+        friend_status = status;
+        
+        [weakSelf createRightButton];//右上角按钮
+        
+        titles = @[@"公司",@"地址",@"电话",@"个人简介"];
+        
+        _table.tableHeaderView = [weakSelf createHeaderView];
         
         [_table reloadData];
 
@@ -243,12 +483,12 @@
 }
 
 //获取用户车源信息
--(void)prepareUserCarSource{
+-(void)getCarSourceIsReload:(BOOL)isReload page:(int)page{
     //获取用户车源信息
-    NSString *api = [NSString stringWithFormat:FBAUTO_CARSOURCE_MYSELF,self.userId,1,10000];
+    NSString *api = [NSString stringWithFormat:FBAUTO_CARSOURCE_MYSELF,self.userId,page,20];
     
     NSLog(@"用户车源信息接口:%@",api);
-    __weak typeof (self)weakSelf = self;
+    
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -257,14 +497,7 @@
         
         NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
         int total = [[dataInfo objectForKey:@"total"]intValue];
-        
-//        if (_page < total) {
-//            
-//            _tableView.isHaveMoreData = YES;
-//        }else
-//        {
-//            _tableView.isHaveMoreData = NO;
-//        }
+
         
         NSArray *data = [dataInfo objectForKey:@"data"];
         
@@ -278,13 +511,26 @@
             [arr addObject:aCar];
         }
         
+        NSLog(@"车源page %d total %d",page_carsource,total_carsource);
+        
+        page_carsource = page;
+        total_carsource = total;
+        
+        if (isReload) {
+            
+            [arr_carsource removeAllObjects];
+        }
+        
+        [arr_carsource addObjectsFromArray:arr];
+        
+        if (isCarsource) {
+            
+            [_table.dataArray removeAllObjects];
+//            [_table reloadData:arr_carsource total:total];
+            
+            [_table reloadData:arr_carsource haveMore:(page_carsource < total_carsource ? YES : NO)];
+        }
 
-        [leftTable.dataArray addObjectsFromArray:arr];
-        
-        [leftTable reloadData];
-        
-//        [leftTable reloadData];
-//        [weakSelf reloadData:arr isReload:_tableView.isReloadData];
         
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         
@@ -297,13 +543,7 @@
             [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
         }
         
-        
-//        if (_tableView.isReloadData) {
-//            
-//            _page --;
-//            
-//            [_tableView performSelector:@selector(finishReloadigData) withObject:nil afterDelay:1.0];
-//        }
+        [_table loadFail];
         
     }];
 }
@@ -311,12 +551,12 @@
 /**
  *  获取商家留言
  */
-- (void)getLiuyan
+- (void)getLiuyanIsReload:(BOOL)isReload page:(int)page
 {
 //    getcomment&art_uid=%@&ctype=%d&page=%d&ps=%d
     
     //获取用户车源信息
-    NSString *api = [NSString stringWithFormat:FBAUTO_LIUYAN_LIST,self.userId,2,1,10000];
+    NSString *api = [NSString stringWithFormat:FBAUTO_LIUYAN_LIST,self.userId,2,page,20];
     
     NSLog(@"留言接口:%@",api);
     __weak typeof (self)weakSelf = self;
@@ -340,15 +580,34 @@
             [arr addObject:aCar];
         }
         
+        NSLog(@"留言page %d total %d",page_liuyan,total_liuyan);
         
-        rightTable.dataArray = arr;
+        page_liuyan = page;
+        total_liuyan = total;
         
-        [rightTable reloadData];
+        if (isReload) {
+            [arr_liuyan removeAllObjects];
+        }
+        [arr_liuyan addObjectsFromArray:arr];
+        
+        if (isCarsource == NO) {
+            
+            [_table.dataArray removeAllObjects];
+//            [_table reloadData:arr_liuyan total:total];
+            
+            [_table reloadData:arr_liuyan haveMore:(page_liuyan < total_liuyan ? YES : NO)];
+        }
+        
+//        rightTable.dataArray = arr;
+//        
+//        [rightTable reloadData];
         
         
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         
         NSLog(@"failDic %@",failDic);
+        
+        [_table loadFail];
         
     }];
 
@@ -357,42 +616,44 @@
 /**
  *  添加好友
  *
- *  @param friendId userId
+ *  @param isConcern 是否加关注
  */
-- (void)addFriend:(NSString *)friendId
+- (void)addFriend:(NSString *)friendId isConcern:(BOOL)isConcern
 {
     NSLog(@"provinceId %@",friendId);
     
-    LCWTools *tools = [[LCWTools alloc]initWithUrl:[NSString stringWithFormat:FBAUTO_FRIEND_ADD,[GMAPI getAuthkey],friendId]isPost:NO postData:nil];
+    NSString *api;
+    
+    if (isConcern) {
+        api = [NSString stringWithFormat:FBAUTO_ADD_CONCERN,[GMAPI getAuthkey],friendId];
+    }else
+    {
+        api = [NSString stringWithFormat:FBAUTO_FRIEND_ADD,[GMAPI getAuthkey],friendId];
+    }
+    
+    __weak typeof(self)weakSelf = self;
+    
+    LCWTools *tools = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
     
     [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
         NSLog(@"result %@ erro %@",result,[result objectForKey:@"errinfo"]);
         
         if ([result isKindOfClass:[NSDictionary class]]) {
             
-            //            int erroCode = [[result objectForKey:@"errcode"]intValue];
-            NSString *erroInfo = [result objectForKey:@"errinfo"];
+//            rightButton2.selected = YES;
+            friend_status = isConcern ? 3 : 0;//已是好友0 关注 3
             
-//            DXAlertView *alert = [[DXAlertView alloc]initWithTitle:erroInfo contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定" isInput:NO];
-//            [alert show];
-//            
-//            alert.leftBlock = ^(){
-//                NSLog(@"确定");
-//            };
-//            alert.rightBlock = ^(){
-//                NSLog(@"取消");
-//                
-//            };
+            [weakSelf createRightButton];
+            
+            [LCWTools showMBProgressWithText:[result objectForKey:@"errinfo"] addToView:self.view];
             
         }
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSLog(@"failDic %@",failDic);
-        //        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
         
         [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
     }];
 }
-
 
 #pragma - mark UIScrollViewDelegate
 
@@ -405,11 +666,33 @@
 
 - (void)loadNewData
 {
+    if (firstLoadData) {
+        
+        [self getCarSourceIsReload:YES page:1];
+        [self getLiuyanIsReload:YES page:1];
+        
+        firstLoadData = NO;
+        return;
+    }
     
+    if (isCarsource) {
+        
+        [self getCarSourceIsReload:YES page:1];
+    }else
+    {
+        [self getLiuyanIsReload:YES page:1];
+    }
 }
 - (void)loadMoreData
 {
-    
+    if (isCarsource) {
+        page_carsource ++;
+        [self getCarSourceIsReload:NO page:page_carsource];
+    }else
+    {
+        page_liuyan ++;
+        [self getLiuyanIsReload:NO page:page_liuyan];
+    }
 }
 - (void)refreshTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -448,20 +731,29 @@
             return 44;
         }else if (indexPath.section == 1){
             
-            return DEVICE_HEIGHT - 64 - 44;
+            if (isCarsource) {
+                
+                return 75;
+            }
+            
+            LiuyanModel *aCar = [_table.dataArray objectAtIndex:indexPath.row];
+            
+            return [LiuyanCell heightWithContent:aCar.content];
+
+//            return DEVICE_HEIGHT - 64 - 44;
         }
     }
     
-    if (tableView == leftTable) {
-        return 75;
-    }
-    
-    if (tableView == rightTable) {
-        
-        LiuyanModel *aCar = [rightTable.dataArray objectAtIndex:indexPath.row];
-        
-        return [LiuyanCell heightWithContent:aCar.content];
-    }
+//    if (tableView == leftTable) {
+//        return 75;
+//    }
+//    
+//    if (tableView == rightTable) {
+//        
+//        LiuyanModel *aCar = [rightTable.dataArray objectAtIndex:indexPath.row];
+//        
+//        return [LiuyanCell heightWithContent:aCar.content];
+//    }
     
     return 44;
 }
@@ -495,15 +787,38 @@
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH/2.f * i, 41, DEVICE_WIDTH/2.f, 3)];
             [section_view addSubview:line];
             
-            if (i == 0) {
-                line.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
-                line_left = line;
-                btn.selected = YES;
+            if (isCarsource) {
+                if (i == 0) {
+                    line.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
+                    line_left = line;
+                    btn.selected = YES;
+                }else
+                {
+                    line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+                    line_right = line;
+                }
             }else
             {
-                line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
-                line_right = line;
+                if (i == 1) {
+                    line.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
+                    line_left = line;
+                    btn.selected = YES;
+                }else
+                {
+                    line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+                    line_right = line;
+                }
             }
+            
+//            if (i == 0) {
+//                line.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
+//                line_left = line;
+//                btn.selected = YES;
+//            }else
+//            {
+//                line.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+//                line_right = line;
+//            }
             
         }
         
@@ -530,19 +845,19 @@
 - (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSLog(@"scrollView %f",scrollView.contentOffset.y);
-    if (scrollView == leftTable || scrollView == rightTable) {
-        
-        if (scrollView.contentOffset.y <= -50)
-        {
-            
-            // 输出改变后的值
-            [_table setContentOffset:CGPointMake(0,0) animated:YES];
-            
-        }else if(scrollView.contentOffset.y > 50)
-        {
-            [_table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        }
-    }
+//    if (scrollView == leftTable || scrollView == rightTable) {
+//        
+//        if (scrollView.contentOffset.y <= -50)
+//        {
+//            
+//            // 输出改变后的值
+//            [_table setContentOffset:CGPointMake(0,0) animated:YES];
+//            
+//        }else if(scrollView.contentOffset.y > 50)
+//        {
+//            [_table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        }
+//    }
 
 }
 
@@ -566,20 +881,11 @@
     if (tableView == _table) {
         
         if (section == 0) {
-            return 4;
+            
+            return titles.count;
         }
         
-        return 1;
-    }
-    
-    if (tableView == leftTable) {
-        
-        return leftTable.dataArray.count;
-    }
-    
-    if (tableView == rightTable) {
-        
-        return rightTable.dataArray.count;
+        return _table.dataArray.count;
     }
     
     return 0;
@@ -615,8 +921,6 @@
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 0.5)];
             line.backgroundColor = [UIColor colorWithHexString:@"d9d9d9"];
             [cell.contentView addSubview:line];
-            
-            NSArray *titles = @[@"公司",@"地址",@"电话",@"个人简介"];
             
             UILabel *label = (UILabel *)[cell viewWithTag:100 + indexPath.row];
             label.frame = CGRectMake(10, 0, 70, 44);
@@ -660,87 +964,11 @@
             
         }else if (indexPath.section == 1){
             
-            static NSString * identifier = @"sourceCell";
-            
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            
-            if (cell == nil)
-            {
-                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-                
-                rightTable = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 44) headerShow:NO footerShow:NO];
-                
-                leftTable = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 44) headerShow:NO footerShow:NO];
-            }
-            
-            rightTable.dataSource = self;
-            rightTable.refreshDelegate = self;
-            rightTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-            [cell.contentView addSubview:rightTable];
-            
-            rightTable.tableFooterView = [self liuyan];
-            
-            leftTable.dataSource = self;
-            leftTable.refreshDelegate = self;
-            leftTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.contentView addSubview:leftTable];
-            
-            return cell;
+            return [self cellForTableView:tableView indexPath:indexPath IsCarSource:isCarsource];
             
         }
         
     }
-    
-    if (tableView == leftTable) {
-        
-        static NSString * identifier = @"CarSourceCell";
-        
-        CarSourceCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
-        if (cell == nil)
-        {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"CarSourceCell" owner:self options:nil]objectAtIndex:0];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        if (indexPath.row % 2 == 0) {
-            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
-        }else
-        {
-            cell.contentView.backgroundColor = [UIColor whiteColor];
-        }
-        
-        CarSourceClass *aCar = [leftTable.dataArray objectAtIndex:indexPath.row];
-        [cell setCellDataWithModel:aCar];
-        
-        return cell;
-
-    }
-    
-    if (tableView == rightTable) {
-        
-        static NSString * identifier = @"LiuyanCell";
-        
-        LiuyanCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
-        if (cell == nil)
-        {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"LiuyanCell" owner:self options:nil]objectAtIndex:0];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        LiuyanModel *aCar = [rightTable.dataArray objectAtIndex:indexPath.row];
-        [cell setCellWithModel:aCar];
-        
-        return cell;
-        
-    }
-    
-//    if (tableView == leftTable) {
     
         static NSString * identifier = @"leftCell";
         
@@ -755,9 +983,6 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%d",(int)indexPath.row];
         
         return cell;
-//    }
-    
-    
     
 }
 
