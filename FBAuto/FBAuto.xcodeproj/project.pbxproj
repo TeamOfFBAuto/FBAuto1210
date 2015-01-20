@@ -235,6 +235,8 @@
 		1391EF171977A4AF00FDC52A /* LCWTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1391EF161977A4AF00FDC52A /* LCWTools.m */; };
 		1391EF1A1977A4CC00FDC52A /* RefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1391EF191977A4CC00FDC52A /* RefreshTableView.m */; };
 		1391EF1D1977FC6D00FDC52A /* CarClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1391EF1C1977FC6D00FDC52A /* CarClass.m */; };
+		1394D8FA1A6E02F300A79D27 /* JubaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1394D8F91A6E02F300A79D27 /* JubaoViewController.m */; };
+		1394D8FD1A6E2DEE00A79D27 /* LTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1394D8FC1A6E2DEE00A79D27 /* LTextView.m */; };
 		139ED56B19BEB01D00C931D6 /* elogo440_120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 139ED56A19BEB01D00C931D6 /* elogo440_120@2x.png */; };
 		13A1A9421980AC7A00E09666 /* LShareSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9411980AC7A00E09666 /* LShareSheetView.m */; };
 		13A1A9451980ADB100E09666 /* LImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9441980ADB100E09666 /* LImageButton.m */; };
@@ -825,6 +827,10 @@
 		1391EF191977A4CC00FDC52A /* RefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableView.m; sourceTree = "<group>"; };
 		1391EF1B1977FC6D00FDC52A /* CarClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarClass.h; sourceTree = "<group>"; };
 		1391EF1C1977FC6D00FDC52A /* CarClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarClass.m; sourceTree = "<group>"; };
+		1394D8F81A6E02F300A79D27 /* JubaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JubaoViewController.h; sourceTree = "<group>"; };
+		1394D8F91A6E02F300A79D27 /* JubaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JubaoViewController.m; sourceTree = "<group>"; };
+		1394D8FB1A6E2DEE00A79D27 /* LTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTextView.h; sourceTree = "<group>"; };
+		1394D8FC1A6E2DEE00A79D27 /* LTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTextView.m; sourceTree = "<group>"; };
 		139ED56A19BEB01D00C931D6 /* elogo440_120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elogo440_120@2x.png"; sourceTree = "<group>"; };
 		13A1A9401980AC7A00E09666 /* LShareSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LShareSheetView.h; sourceTree = "<group>"; };
 		13A1A9411980AC7A00E09666 /* LShareSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LShareSheetView.m; sourceTree = "<group>"; };
@@ -1739,6 +1745,8 @@
 				13BB42741A5FD4CB00B8E78E /* UserHomeController.m */,
 				136DF44B1A666C470080C046 /* LiuyanViewController.h */,
 				136DF44C1A666C470080C046 /* LiuyanViewController.m */,
+				1394D8F81A6E02F300A79D27 /* JubaoViewController.h */,
+				1394D8F91A6E02F300A79D27 /* JubaoViewController.m */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -1758,6 +1766,8 @@
 				136DF4431A6655370080C046 /* LiuyanCell.h */,
 				136DF4441A6655370080C046 /* LiuyanCell.m */,
 				136DF4451A6655370080C046 /* LiuyanCell.xib */,
+				1394D8FB1A6E2DEE00A79D27 /* LTextView.h */,
+				1394D8FC1A6E2DEE00A79D27 /* LTextView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3140,6 +3150,7 @@
 				136DF44A1A6658030080C046 /* LiuyanModel.m in Sources */,
 				1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */,
 				138B4A0A19664EC100B974A5 /* Section_Button.m in Sources */,
+				1394D8FD1A6E2DEE00A79D27 /* LTextView.m in Sources */,
 				138B4A1319664ED500B974A5 /* FBSearchFriendsController.m in Sources */,
 				E37126CF19878DD100CB69CA /* GuserZyViewController.m in Sources */,
 				190BFD51195AA0FB0098E0F4 /* AppDelegate.m in Sources */,
@@ -3240,6 +3251,7 @@
 				E351A0C3196F943800C78CFE /* GyhzyTableViewCell.m in Sources */,
 				136787151A4D026000192276 /* BaseModel.m in Sources */,
 				137927071987776900377ED5 /* GzhuceViewController.m in Sources */,
+				1394D8FA1A6E02F300A79D27 /* JubaoViewController.m in Sources */,
 				E380B4981980FC4400A86F12 /* GxiaoxiTableViewCell.m in Sources */,
 				E337AC6F19B9922C00869214 /* GcustomActionSheet.m in Sources */,
 				E362358019657588003B23CC /* GuserZhuce.m in Sources */,

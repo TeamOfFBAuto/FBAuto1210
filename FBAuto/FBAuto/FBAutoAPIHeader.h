@@ -302,4 +302,8 @@ alpha:(a)]
 
 #define FBAUTO_ADD_CONCERN @"http://fbautotest.fblife.com/index.php?c=interface&a=addfocus&authkey=%@&buddyid=%@"
 
+//发布举报
+
+#define FBAUTO_ADD_JUBAO @"http://fbautotest.fblife.com/index.php?c=interface&a=addjubao&authkey=%@&cid=%@&type=%@&describe=%@&phone=%@"
+
 #endif

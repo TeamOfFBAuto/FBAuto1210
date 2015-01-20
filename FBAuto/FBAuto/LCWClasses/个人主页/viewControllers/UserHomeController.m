@@ -20,6 +20,8 @@
 
 #import "DXAlertView.h"
 
+#import "JubaoViewController.h"
+
 @interface UserHomeController ()<UIScrollViewDelegate,RefreshDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UIScrollView *scroll_bg;
@@ -107,6 +109,13 @@
 
 #pragma - mark 事件处理
 
+- (void)clickToJubao:(UIButton *)sender
+{
+    JubaoViewController *jubao = [[JubaoViewController alloc]init];
+    jubao.cid = @"232";//test jubao
+    [self.navigationController pushViewController:jubao animated:YES];
+}
+
 - (void)clickToAddFriend:(UIButton *)sender
 {
     NSString *name = userModel.name ? userModel.name : userModel.fullname;
@@ -192,8 +201,10 @@
 
     }
     
-    cell.bottomLine.top = cell.height - 0.5f;
-    cell.bottomLine.height = 0.5f;
+//    cell.bottomLine.top = cell.height - 0.5f;
+//    cell.bottomLine.height = 0.5f;
+    
+    cell.bottomLine.hidden = YES;
     
     return cell;
 }
@@ -305,7 +316,16 @@
             //        [rightButton2 setImage:[UIImage imageNamed:@"jiahaoyou 92_58"] forState:UIControlStateNormal];
             UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
             rightButton2.titleLabel.font = [UIFont systemFontOfSize:14];
-            self.navigationItem.rightBarButtonItems = @[save_item2];
+            
+            
+            UIButton *jubao_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [jubao_btn setTitle:@"举报" forState:UIControlStateNormal];
+            jubao_btn.frame = CGRectMake(0, 0, 70, 29);
+            jubao_btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [jubao_btn addTarget:self action:@selector(clickToJubao:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *jubao_item = [[UIBarButtonItem alloc]initWithCustomView:jubao_btn];
+            
+            self.navigationItem.rightBarButtonItems = @[jubao_item,save_item2];
         }
 
         //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
