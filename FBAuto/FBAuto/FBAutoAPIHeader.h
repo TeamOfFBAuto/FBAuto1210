@@ -68,6 +68,8 @@
 
 #define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-车型数据更新时间(更新成功之后与服务器时间更新一致)
 
+#define CAR_UPDATE_CONFIG_DATE_LOCAL @"carConfigUpdateDateline"//车型配置数据更新时间
+
 #define NOTICE_UPDATE_DATE_LOCAL @"NOTICE_UPDATE_DATE_LOCAL" //本地-通知数据更新时间(更新成功之后与服务器时间更新一致)
 
 #define NOTICE_NEW_COUNT @"NOTICE_COUNT"//通知个数
@@ -305,5 +307,15 @@ alpha:(a)]
 //发布举报
 
 #define FBAUTO_ADD_JUBAO @"http://fbautotest.fblife.com/index.php?c=interface&a=addjubao&authkey=%@&cid=%@&type=%@&describe=%@&phone=%@"
+
+//获取初始配置数据
+
+#define FBAUTO_GET_INIT_PEIZHI @"http://fbautotest.fblife.com/index.php?c=interface&a=getinipz&uptime="//初始数据的更新时间为空
+
+//配置更新时间
+#define FBAUTO_GET_PEIZHI_UPDATE_DATELINE @"http://fbautotest.fblife.com/index.php?c=interface&a=getupdate&upfrom=peizhidata"
+
+//配置数据增量更新
+#define FBAUTO_GET_PEIZHI_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=getpeizhi&fromtime=%@&endtime=%@"
 
 #endif

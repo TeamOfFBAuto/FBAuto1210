@@ -65,4 +65,33 @@
 
 + (NSArray *)queryAllNewestMessageForUser:(NSString *)currentUser;//查询历史数据,只有最新一条
 
+
+#pragma mark - 车型配置
+
++ (BOOL)insertCarConfigId:(NSString *)sid
+                      pid:(NSString *)pid
+                 nodename:(NSString *)nodename
+                 dateline:(NSString *)dateline
+                   uptime:(NSString *)uptime
+                    isdel:(NSString *)isdel;
+
+#pragma mark - 配置数据查询
+//未标记删除的数据
++ (NSArray *)queryAllConfig;
+
+//查询配置
++ (NSArray *)queryConfigWithPid:(NSString *)pid;
+
+//是否存在配置
++ (BOOL)existCarPeizhiId:(NSString *)peizhiId;
+
+//更新配置数据
+
++ (BOOL)updateCarConfigId:(NSString *)sid
+                      pid:(NSString *)pid
+                 nodename:(NSString *)nodename
+                 dateline:(NSString *)dateline
+                   uptime:(NSString *)uptime
+                    isdel:(NSString *)isdel;
+
 @end

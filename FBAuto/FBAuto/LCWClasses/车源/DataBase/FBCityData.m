@@ -10,6 +10,8 @@
 #import "DataBase.h"
 #import "FBCity.h"
 
+#import "PeizhiModel.h"
+
 #import "CarClass.h"
 #import "XMPPMessageModel.h"
 
@@ -659,6 +661,183 @@
     sqlite3_finalize(stmt);
     
     return resultArr;
+}
+
+#pragma mark 车源配置保存
+
++ (BOOL)insertCarConfigId:(NSString *)sid
+                      pid:(NSString *)pid
+              nodename:(NSString *)nodename
+                 dateline:(NSString *)dateline
+                   uptime:(NSString *)uptime
+                    isdel:(NSString *)isdel
+{
+    
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    
+    int result = sqlite3_prepare(db, "insert into carConfig(id,pid,nodename,dateline,uptime,isdel) values(?,?,?,?,?,?)", -1, &stmt, nil);//?相当于%@格式
+    
+    sqlite3_bind_int(stmt, 1, [sid intValue]);
+    sqlite3_bind_int(stmt, 2, [pid intValue]);
+    sqlite3_bind_text(stmt, 3, [nodename.length > 0 ? nodename : @" " UTF8String], -1, NULL);
+    sqlite3_bind_text(stmt, 4, [dateline.length > 0 ? dateline : @" " UTF8String], -1, NULL);
+    sqlite3_bind_text(stmt, 5, [uptime.length > 0 ? uptime : @" " UTF8String], -1, NULL);
+    sqlite3_bind_int(stmt, 6,[isdel intValue]);
+    result = sqlite3_step(stmt);
+    
+    NSLog(@"save carConfig %@ result:%d",nodename,result);
+    
+    sqlite3_finalize(stmt);
+    
+    if (result == SQLITE_DONE) {
+        
+        return YES;
+    }
+    
+    return NO;
+
+}
+
+#pragma - mark 车型配置数据查询
+
+//未标记删除的数据
++ (NSArray *)queryAllConfig
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    //执行SQL语句
+    int result = sqlite3_prepare_v2(db, "select * from carConfig where isdel = 0", -1, &stmt, nil);
+    NSLog(@"All carConfig result = %d",result);
+    NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:1];
+    if (result == SQLITE_OK) {
+        //id,pid,nodename,dateline,uptime,isdel
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            int cid = sqlite3_column_int(stmt, 0);
+            int pid = sqlite3_column_int(stmt, 1);
+            const unsigned char *nodename = sqlite3_column_text(stmt, 3);
+            const unsigned char *dateline = sqlite3_column_text(stmt, 4);
+            const unsigned char *uptime = sqlite3_column_text(stmt, 5);
+            
+            PeizhiModel *aModel = [[PeizhiModel alloc]init];
+            aModel.id = [NSString stringWithFormat:@"%d",cid];
+            aModel.pid = [NSString stringWithFormat:@"%d",pid];
+            aModel.nodename = [NSString stringWithUTF8String:(const char *)nodename];
+            aModel.dateline = [NSString stringWithUTF8String:(const char *)dateline];
+            aModel.uptime = [NSString stringWithUTF8String:(const char *)uptime];
+            aModel.isdel = @"0";
+            [resultArray addObject:aModel];
+        }
+    }
+    sqlite3_finalize(stmt);
+    return resultArray;
+}
+
+/**
+ *  根据pid获取配置数据
+ *
+ *  @param pid 上级id
+ */
+
++ (NSArray *)queryConfigWithPid:(NSString *)pid
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    //执行SQL语句
+    int result = sqlite3_prepare_v2(db, "select * from carConfig where pid = ? and isdel = 0", -1, &stmt, nil);
+    NSLog(@"All carConfig result = %d",result);
+    NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:1];
+    
+    if (result == SQLITE_OK) {
+        //id,pid,nodename,dateline,uptime,isdel
+        
+        sqlite3_bind_int(stmt, 1, [pid intValue]);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            int cid = sqlite3_column_int(stmt, 0);
+            int pid = sqlite3_column_int(stmt, 1);
+            const unsigned char *nodename = sqlite3_column_text(stmt, 2);
+            const unsigned char *dateline = sqlite3_column_text(stmt, 3);
+            const unsigned char *uptime = sqlite3_column_text(stmt, 4);
+            
+            PeizhiModel *aModel = [[PeizhiModel alloc]init];
+            aModel.id = [NSString stringWithFormat:@"%d",cid];
+            aModel.pid = [NSString stringWithFormat:@"%d",pid];
+            aModel.nodename = [NSString stringWithUTF8String:(const char *)nodename];
+            aModel.dateline = [NSString stringWithUTF8String:(const char *)dateline];
+            aModel.uptime = [NSString stringWithUTF8String:(const char *)uptime];
+            aModel.isdel = @"0";
+            [resultArray addObject:aModel];
+        }
+    }
+    sqlite3_finalize(stmt);
+    return resultArray;
+}
+
+//是否存在
++ (BOOL)existCarPeizhiId:(NSString *)peizhiId//配置是否已存在
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    int result = sqlite3_prepare_v2(db, "select count(*) from carConfig where id = ?", -1, &stmt, nil);
+    
+    NSLog(@"existCarPeizhiId %d %@",result,peizhiId);
+    
+    if (result == SQLITE_OK) {
+        
+        sqlite3_bind_text(stmt, 1, [peizhiId UTF8String], -1, nil);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            
+            int count = sqlite3_column_int(stmt, 0);
+            
+            if (count > 0) {
+                return YES;
+            }
+        }
+    }
+    sqlite3_finalize(stmt);
+    return NO;
+}
+
+//更新配置数据
+
++ (BOOL)updateCarConfigId:(NSString *)sid
+                      pid:(NSString *)pid
+                 nodename:(NSString *)nodename
+                 dateline:(NSString *)dateline
+                   uptime:(NSString *)uptime
+                    isdel:(NSString *)isdel
+{
+    if (sid == nil || nodename.length == 0) {
+        return NO;
+    }
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    
+    int result = sqlite3_prepare(db, "update carConfig set pid = ?,nodename = ?,dateline = ?,uptime = ?,isdel = ? where id = ?", -1, &stmt, nil);
+    
+    sqlite3_bind_int(stmt, 6, [sid intValue]);
+    sqlite3_bind_int(stmt, 1, [pid intValue]);
+    sqlite3_bind_text(stmt, 2, [nodename.length > 0 ? nodename : @" " UTF8String], -1, NULL);
+    sqlite3_bind_text(stmt, 3, [dateline.length > 0 ? dateline : @" " UTF8String], -1, NULL);
+    sqlite3_bind_text(stmt, 4, [uptime.length > 0 ? uptime : @" " UTF8String], -1, NULL);
+    sqlite3_bind_int(stmt, 5,[isdel intValue]);
+    
+    if (result == SQLITE_OK) {
+        
+        result = sqlite3_step(stmt);
+        
+    }
+    sqlite3_finalize(stmt);
+    
+    if (result == SQLITE_DONE) {
+        NSLog(@"updateCarConfigId %@ success name %@",sid,nodename);
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

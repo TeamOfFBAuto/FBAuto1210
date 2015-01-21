@@ -160,7 +160,7 @@
     }];
     
     //车型数据更新
-//    [self getCarUpdateState];
+//    [self getCarUpdateState];//暂时
     
     //提示 好评推荐
     

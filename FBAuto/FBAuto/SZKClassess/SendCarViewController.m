@@ -33,6 +33,8 @@
 
 #import "LDatePicker.h"
 
+#import "PeizhiViewController.h"
+
 #define KFistSectionHeight 110 //上部分高度
 
 @interface SendCarViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UITextFieldDelegate>
@@ -598,15 +600,26 @@
     
     [secondBgView addSubview:[self createLabelFrame:CGRectMake(300 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"c7c7cc"]]];
     
-    //车源描述，需要输入
+    //车源配置
     
     UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1), 300, 1)];
     line2.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [secondBgView addSubview:line2];
     
-    [secondBgView addSubview:[self createLabelFrame:CGRectMake(10, 45 * (titles.count + 1), 100, 45.f) text:@"车源描述:" alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]]];
+    Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(0, priceTF.bottom, secondBgView.width, 45) title:@"配置" target:self action:@selector(clickToParams:) sectionStyle:Section_Normal image:nil];
+    btn.tag = 100 + 5;
+    [secondBgView addSubview:btn];
     
-    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * (titles.count + 1) + 5, 200 + 10 + 10, 45 * 2 - 10)];
+    
+    //车源描述，需要输入
+    
+    UIView *line3 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1 + 1), 300, 0.5)];
+    line3.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
+    [secondBgView addSubview:line3];
+    
+    [secondBgView addSubview:[self createLabelFrame:CGRectMake(10, 45 * (titles.count + 1 + 1), 100, 45.f) text:@"车源描述:" alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]]];
+    
+    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * (titles.count + 1 + 1) + 5, 200 + 10 + 10, 45 * 2 - 10)];
     descriptionTF.delegate = self;
     descriptionTF.font = [UIFont systemFontOfSize:16];
     [secondBgView addSubview:descriptionTF];
@@ -786,8 +799,17 @@
 
         case 105:
         {
-            aStyle = Data_Price;
-            title = @"价格";
+//            aStyle = Data_Price;
+//            title = @"价格";
+            
+            NSLog(@"配置");
+            
+            PeizhiViewController *peizhi = [[PeizhiViewController alloc]init];
+            peizhi.aLabel = btn.contentLabel;
+            peizhi.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:peizhi animated:YES];
+            
+            return;
         }
             break;
         case 104:
