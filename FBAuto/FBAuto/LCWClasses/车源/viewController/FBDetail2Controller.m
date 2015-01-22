@@ -126,8 +126,15 @@
         
         NSDictionary *dic = [dataInfo objectAtIndex:0];
         
+        //配置数据
+        NSArray *peizhi_arr;
+        if (dataInfo.count >= 2) {
+            peizhi_arr = [dataInfo objectAtIndex:1];
+        }
+        
+        
         //判断是否收藏
-
+        
         int is_shoucang = [[dic objectForKey:@"is_shoucang"]integerValue];
         weakSelf.collectButton.selected = is_shoucang > 0 ? YES : NO;
         
@@ -152,12 +159,15 @@
         //        //参数
         
         
-        for (int i = 1; i < 10; i ++) {
+        for (int i = 0; i < 10; i ++) {
             UILabel *label = (UILabel *)[weakSelf.view viewWithTag:120 + i];
             label.top += dis;
             
             UILabel *label2 = (UILabel *)[weakSelf.view viewWithTag:100 + i];
             label2.top += dis;
+            
+            label.hidden = NO;
+            label2.hidden = NO;
         }
         
         nameLabel.text = carName;
@@ -177,9 +187,57 @@
         weakSelf.car_standard_label.text = [dic objectForKey:@"carfrom"];
         weakSelf.car_time_label.text = [LCWTools timechange2:[dic objectForKey:@"dateline"]];
         
+        
+        //车辆配置
+        
+        NSString *peizhi_select;
+        
+        NSArray *peizhi = peizhi_arr;
+        NSMutableArray *arr = [NSMutableArray array];
+        if ([peizhi isKindOfClass:[NSArray class]]) {
+            
+            for (NSDictionary *aDic in peizhi) {
+                [arr addObject:[LCWTools NSStringRemoveSpace:[aDic objectForKey:@"nodename"]]];
+            }
+        }
+        
+        NSString *peizhi_cumtom = [dic objectForKey:@"custom_peizhi"];
+        
+        if ([LCWTools NSStringRemoveSpace:peizhi_cumtom].length > 0) {
+            [arr addObject:peizhi_cumtom];
+        }
+        
+        peizhi_select = [arr componentsJoinedByString:@","];
+        
+        weakSelf.peizhiLabel.text = peizhi_select;
+        
+        weakSelf.peizhiLabel.height = [LCWTools heightForText:peizhi_select width:200 font:14];
+        
+        
+        
+        //车辆详情
+        
+        if (weakSelf.peizhiTitleLabel.height > weakSelf.peizhiLabel.height) {
+            weakSelf.car_detail_label.top = weakSelf.peizhiTitleLabel.bottom + 8;
+            weakSelf.detailTitleLabel.top = weakSelf.peizhiTitleLabel.bottom + 8;
+            
+            weakSelf.peizhiLabel.center = CGPointMake(weakSelf.peizhiLabel.center.x, weakSelf.peizhiTitleLabel.center.y);
+            
+        }else
+        {
+            weakSelf.car_detail_label.top = weakSelf.peizhiLabel.bottom + 8;
+            weakSelf.detailTitleLabel.top = weakSelf.peizhiLabel.bottom + 8;
+        }
+        
+        
         NSString *detail = [dic objectForKey:@"cardiscrib"];
         
-        detail = [NSString stringWithFormat:@"%@  联系请说是在e车看到的信息，谢谢!",detail];
+        if (detail.length > 0) {
+            detail = [NSString stringWithFormat:@"%@  联系请说是在e车看到的信息，谢谢!",detail];
+        }else
+        {
+            detail = [NSString stringWithFormat:@"联系请说是在e车看到的信息，谢谢!"];
+        }
         
         weakSelf.car_detail_label.text = detail;
         
@@ -187,7 +245,7 @@
         
         weakSelf.build_time_label.text = [LCWTools NSStringNotNull:[dic objectForKey:@"build_time"]];
         //商家信息
-
+        
         //调整商家名字显示长度
         
         NSString *saleName = [dic objectForKey:@"username"];
@@ -199,7 +257,7 @@
         
         weakSelf.nameLabel.text = saleName;
         weakSelf.saleTypeBtn.left = weakSelf.nameLabel.right + 5;
-
+        
         
         weakSelf.saleTypeBtn.titleLabel.text = [dic objectForKey:@"usertype"];//商家类型
         weakSelf.phoneNumLabel.text = [LCWTools NSStringNotNull:[dic objectForKey:@"phone"]];
@@ -223,6 +281,7 @@
         userId = [dic objectForKey:@"uid"];//用户id
         
         //保存name 对应id
+        
         [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
         [FBChatTool cacheUserHeadImage:headImage1 forUserId:userId];
         
@@ -230,7 +289,7 @@
         
         NSArray *image = [dic objectForKey:@"image"];
         NSMutableArray *imageUrls = [NSMutableArray arrayWithCapacity:image.count];
-
+        
         for (NSDictionary *aImageDic in image) {
             
             NSString *url = [aImageDic objectForKey:@"link"];
@@ -255,6 +314,220 @@
         };
     }];
 }
+
+
+//- (void)getSingleCarInfoWithId:(NSString *)carId
+//{
+//    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_SINGLE_SOURE,carId,[GMAPI getUid]];
+//    
+//    NSLog(@"单个车源信息 %@",url);
+//    
+//    __weak typeof(self) weakSelf = self;
+//    
+//    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+//    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+//        
+//        NSLog(@"单个车源发布 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
+//        
+//        NSArray *dataInfo = [result objectForKey:@"datainfo"];
+//        
+//        if (dataInfo.count == 0) {
+//            return ;
+//        }
+//        
+//        //当是字典的时候
+//        if ([dataInfo isKindOfClass:[NSDictionary class]]) {
+//            
+//            dataInfo = [(NSDictionary *)dataInfo allValues];
+//            
+//        }
+//        //当是数组的时候
+//        
+//        NSDictionary *dic = [dataInfo objectAtIndex:0];
+//        
+//        //配置数据
+//        NSArray *peizhi_arr;
+//        if (dataInfo.count >= 2) {
+//            peizhi_arr = [dataInfo objectAtIndex:1];
+//        }
+//        
+//        
+//        //判断是否收藏
+//
+//        int is_shoucang = [[dic objectForKey:@"is_shoucang"]integerValue];
+//        weakSelf.collectButton.selected = is_shoucang > 0 ? YES : NO;
+//        
+//        
+//        NSString *carName = [dic objectForKey:@"car_name"];
+//        
+//        carName = [LCWTools NSStringRemoveLineAndSpace:carName];
+//        
+//        UILabel *nameLabel = weakSelf.car_modle_label;
+//        nameLabel.numberOfLines = 0;
+//        nameLabel.lineBreakMode = NSLineBreakByCharWrapping;
+//        
+//        CGFloat newHeight = [LCWTools heightForText:carName width:200 font:14];
+//        
+//        CGRect oldFrame = nameLabel.frame;
+//        
+//        CGFloat dis = newHeight - oldFrame.size.height;
+//        
+//        oldFrame.size.height = newHeight;
+//        nameLabel.frame = oldFrame;
+//        
+//        //        //参数
+//        
+//        
+//        for (int i = 1; i < 10; i ++) {
+//            UILabel *label = (UILabel *)[weakSelf.view viewWithTag:120 + i];
+//            label.top += dis;
+//            
+//            UILabel *label2 = (UILabel *)[weakSelf.view viewWithTag:100 + i];
+//            label2.top += dis;
+//        }
+//        
+//        nameLabel.text = carName;
+//        
+//        //参数
+//        weakSelf.car_modle_label.text = carName;
+//        
+//        NSString *price = [dic objectForKey:@"price"];
+//        if (price.length == 0) {
+//            price = @"0";
+//        }
+//        
+//        weakSelf.car_realPrice_label.text = [NSString stringWithFormat:@"%@万元",price];
+//        weakSelf.car_timelimit_label.text = [dic objectForKey:@"spot_future"];
+//        weakSelf.car_outColor_Label.text = [dic objectForKey:@"color_out"];
+//        weakSelf.car_inColor_label.text = [dic objectForKey:@"color_in"];
+//        weakSelf.car_standard_label.text = [dic objectForKey:@"carfrom"];
+//        weakSelf.car_time_label.text = [LCWTools timechange2:[dic objectForKey:@"dateline"]];
+//        
+//        
+//        //车辆配置
+//        
+//        NSString *peizhi_select;
+//        
+//        NSArray *peizhi = peizhi_arr;
+//        NSMutableArray *arr = [NSMutableArray array];
+//        if ([peizhi isKindOfClass:[NSArray class]]) {
+//            
+//            for (NSDictionary *aDic in peizhi) {
+//                [arr addObject:[LCWTools NSStringRemoveSpace:[aDic objectForKey:@"nodename"]]];
+//            }
+//        }
+//        
+//        NSString *peizhi_cumtom = [dic objectForKey:@"custom_peizhi"];
+//        
+//        if ([LCWTools NSStringRemoveSpace:peizhi_cumtom].length > 0) {
+//          [arr addObject:peizhi_cumtom];
+//        }
+//        
+//        peizhi_select = [arr componentsJoinedByString:@","];
+//        
+//        weakSelf.peizhiLabel.text = peizhi_select;
+//        
+//        weakSelf.peizhiLabel.height = [LCWTools heightForText:peizhi_select width:199 font:14];
+//        
+//        
+//        
+//        //车辆详情
+//        
+//        if (peizhi_select.length > 0) {
+//            
+//            if (weakSelf.peizhiTitleLabel.height > weakSelf.peizhiLabel.height) {
+//                weakSelf.car_detail_label.top = weakSelf.peizhiTitleLabel.bottom + 8;
+//                weakSelf.detailTitleLabel.top = weakSelf.peizhiTitleLabel.bottom + 8;
+//                
+//                weakSelf.peizhiLabel.center = CGPointMake(weakSelf.peizhiLabel.center.x, weakSelf.peizhiTitleLabel.center.y);
+//                
+//            }else
+//            {
+//                weakSelf.car_detail_label.top = weakSelf.peizhiLabel.bottom + 8;
+//                weakSelf.detailTitleLabel.top = weakSelf.peizhiLabel.bottom + 8;
+//            }
+//            
+//        }
+//        
+//        
+//        NSString *detail = [dic objectForKey:@"cardiscrib"];
+//        
+//        detail = [NSString stringWithFormat:@"%@  联系请说是在e车看到的信息，谢谢!",detail];
+//        
+//        weakSelf.car_detail_label.text = detail;
+//        
+//        weakSelf.car_detail_label.height = [LCWTools heightForText:detail width:199 font:14];
+//        
+//        weakSelf.build_time_label.text = [LCWTools NSStringNotNull:[dic objectForKey:@"build_time"]];
+//        //商家信息
+//
+//        //调整商家名字显示长度
+//        
+//        NSString *saleName = [dic objectForKey:@"username"];
+//        
+//        CGFloat nameWidth = [LCWTools widthForText:saleName font:12];
+//        
+//        nameWidth = (nameWidth <= 110) ? nameWidth : 110;
+//        weakSelf.nameLabel.width = nameWidth;
+//        
+//        weakSelf.nameLabel.text = saleName;
+//        weakSelf.saleTypeBtn.left = weakSelf.nameLabel.right + 5;
+//
+//        
+//        weakSelf.saleTypeBtn.titleLabel.text = [dic objectForKey:@"usertype"];//商家类型
+//        weakSelf.phoneNumLabel.text = [LCWTools NSStringNotNull:[dic objectForKey:@"phone"]];
+//        
+//        //调整地址显示长度
+//        
+//        NSString *address = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"]];
+//        CGFloat aWidth = [LCWTools widthForText:address font:10];
+//        
+//        aWidth = (aWidth <= 140)?aWidth : 140;
+//        
+//        weakSelf.addressLabel.width = aWidth;
+//        
+//        weakSelf.addressLabel.text = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"]];
+//        
+//        
+//        NSString *headImage1 = [LCWTools NSStringNotNull:[dic objectForKey:@"headimage"]];
+//        
+//        [weakSelf.headImage sd_setImageWithURL:[NSURL URLWithString:headImage1] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
+//        
+//        userId = [dic objectForKey:@"uid"];//用户id
+//        
+//        //保存name 对应id
+//        [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
+//        [FBChatTool cacheUserHeadImage:headImage1 forUserId:userId];
+//        
+//        //车辆图片
+//        
+//        NSArray *image = [dic objectForKey:@"image"];
+//        NSMutableArray *imageUrls = [NSMutableArray arrayWithCapacity:image.count];
+//
+//        for (NSDictionary *aImageDic in image) {
+//            
+//            NSString *url = [aImageDic objectForKey:@"link"];
+//            [imageUrls addObject:url];
+//        }
+//        
+//        [weakSelf createFirstSectionWithImageUrls:imageUrls];
+//        
+//    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+//        NSLog(@"failDic %@",failDic);
+//        
+//        DXAlertView *alert = [[DXAlertView alloc]initWithTitle:[failDic objectForKey:ERROR_INFO] contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定"];
+//        [alert show];
+//        
+//        alert.leftBlock = ^(){
+//            NSLog(@"确定");
+//            
+//        };
+//        alert.rightBlock = ^(){
+//            NSLog(@"取消");
+//            
+//        };
+//    }];
+//}
 
 #pragma - mark 图片部分
 

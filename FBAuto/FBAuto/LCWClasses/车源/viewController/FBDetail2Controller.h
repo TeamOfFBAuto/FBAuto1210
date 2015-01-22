@@ -26,6 +26,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *car_detail_label;
 @property (strong, nonatomic) IBOutlet UILabel *build_time_label;
 
+@property (strong, nonatomic) IBOutlet UILabel *peizhiLabel;
+@property (strong, nonatomic) IBOutlet UILabel *peizhiTitleLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *detailTitleLabel;//车辆详情标题
+
 //商家信息
 @property (strong, nonatomic) IBOutlet UIImageView *headImage;
 

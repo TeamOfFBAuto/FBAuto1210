@@ -27,6 +27,7 @@ typedef void(^ CellToShare) (NSString *friendInfo);
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 @property (strong, nonatomic) IBOutlet UIView *chatToolBgView;
+@property (strong, nonatomic) IBOutlet UIImageView *hotPointView;
 
 
 - (IBAction)clickToShare:(id)sender;

@@ -63,6 +63,12 @@
         [self.saleTypeLabel setTitle:@"商家" forState:UIControlStateNormal];
     }
     
+    if ([aModel.hot_point intValue] == 1) {
+        self.hotPointView.hidden = NO;
+    }else
+    {
+        self.hotPointView.hidden = YES;
+    }
     
     
     [self.iconImage sd_setImageWithURL:[NSURL URLWithString:[LCWTools headImageForUserId:aModel.buddyid]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];

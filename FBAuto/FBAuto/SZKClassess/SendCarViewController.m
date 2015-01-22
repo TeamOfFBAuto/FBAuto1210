@@ -190,7 +190,7 @@
 //        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
        
         //添加自定义颜色
-        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom];
+        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@&&peizhi=%@&custom_peizhi=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom,_ids_string,_custom_string];
         
         NSLog(@"发布车源 %@",url);
         
@@ -1066,6 +1066,9 @@
     
     priceTF.text = @"";
     descriptionTF.text = @"";
+    
+    _ids_string = @"";//发布成功 清空 配置数据
+    _custom_string = @"";
     
     for (int i = 0; i < 6; i ++) {
         Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:100 + i];
