@@ -82,6 +82,9 @@
 //查询配置
 + (NSArray *)queryConfigWithPid:(NSString *)pid;
 
+//查询配置name
++ (NSString *)queryConfigNameWithid:(int)cid;
+
 //是否存在配置
 + (BOOL)existCarPeizhiId:(NSString *)peizhiId;
 

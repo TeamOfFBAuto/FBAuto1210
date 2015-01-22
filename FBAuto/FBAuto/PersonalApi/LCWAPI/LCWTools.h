@@ -33,6 +33,7 @@
 
 #define SHARE_TYPE_KEY @"shareType" //分享key
 
+
 typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 @interface LCWTools : NSObject<NSURLConnectionDelegate,NSURLConnectionDataDelegate>

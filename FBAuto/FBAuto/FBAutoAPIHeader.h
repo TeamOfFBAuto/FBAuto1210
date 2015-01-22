@@ -98,6 +98,11 @@ alpha:(a)]
 //判断iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
+//int 转 string
+
+#define NSStringFromFloat(float) [NSString stringWithFormat:@"%f",(float)]
+#define NSStringFromInt(int) [NSString stringWithFormat:@"%d",(int)]
+
 
 #pragma mark - 风格设置
 

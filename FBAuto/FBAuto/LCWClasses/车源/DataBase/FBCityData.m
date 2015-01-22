@@ -774,6 +774,30 @@
     return resultArray;
 }
 
+//查询配置name
++ (NSString *)queryConfigNameWithid:(int)cid
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    //执行SQL语句
+    int result = sqlite3_prepare_v2(db, "select * from carConfig where id = ?", -1, &stmt, nil);
+    NSLog(@"carConfig name result = %d",result);
+    if (result == SQLITE_OK) {
+        //id,pid,nodename,dateline,uptime,isdel
+        
+        sqlite3_bind_int(stmt, 1, cid);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+
+            const unsigned char *nodename = sqlite3_column_text(stmt, 2);
+            
+            return [NSString stringWithUTF8String:(const char *)nodename];
+        }
+    }
+    sqlite3_finalize(stmt);
+    return @"未知配置";
+}
+
 //是否存在
 + (BOOL)existCarPeizhiId:(NSString *)peizhiId//配置是否已存在
 {

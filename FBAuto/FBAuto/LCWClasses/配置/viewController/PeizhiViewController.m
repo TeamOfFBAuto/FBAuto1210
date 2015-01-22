@@ -9,14 +9,21 @@
 #import "PeizhiViewController.h"
 #import "PeizhiModel.h"
 #import "FBCityData.h"
+#import "LTextView.h"
 
-@interface PeizhiViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "PeizhiMoreViewController.h"
+
+@interface PeizhiViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 {
     MBProgressHUD *loading;
     NSArray *arr_peizhi_one;//一级分类
     NSArray *arr_peizhi_two;
     
     UITableView *_tableView;
+    
+    NSMutableArray *ids_array;//已选择id数组
+    
+    LTextView *_textView;
 }
 @end
 
@@ -31,6 +38,8 @@
     loading = [LCWTools MBProgressWithText:@"数据加载..." addToView:self.view];
     
     [self createViews];//创建tableView
+    
+    ids_array = [NSMutableArray array];
     
     NSLog(@"--->|%@|",[LCWTools cacheForKey:CAR_UPDATE_CONFIG_DATE_LOCAL]);
     //判断是否需要初始化 配置数据
@@ -64,6 +73,53 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tableView];
+    
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 203)];
+    _tableView.tableFooterView = footer;
+    
+    _textView = [[LTextView alloc]initWithFrame:CGRectMake(10, 25, DEVICE_WIDTH - 20, 75) placeHolder:@"自定义:" fontSize:16];
+    _textView.layer.borderWidth = 0.5f;
+    _textView.layer.borderColor = [UIColor colorWithHexString:@"a0a0a0"].CGColor;
+    
+    __weak typeof(_tableView)weakTable = _tableView;
+    [_textView setBlock:^(LTextView *textView, ActionStyle actionStyle) {
+       
+        if (actionStyle == textViewDidBeginEditing) {
+            
+            [weakTable setContentOffset:CGPointMake(0, weakTable.contentSize.height - 203)];
+            
+            weakTable.scrollEnabled = NO;
+            
+        }else if (actionStyle == textViewDidEndEditing){
+            
+            [weakTable setContentOffset:CGPointMake(0, 0)];
+            
+            weakTable.scrollEnabled = YES;
+        }
+        
+    }];
+    [footer addSubview:_textView];
+    
+    UIButton *send_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    send_btn.frame = CGRectMake(45/2.f, _textView.bottom + 20, DEVICE_WIDTH - 45, 50);
+    send_btn.backgroundColor = [UIColor colorWithHexString:@"222222"];
+    send_btn.layer.cornerRadius = 3.f;
+    [send_btn setTitle:@"确定" forState:UIControlStateNormal];
+    send_btn.titleLabel.font = [UIFont systemFontOfSize:17];
+    [send_btn addTarget:self action:@selector(clickToSend:) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:send_btn];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
+    [self.navigationController.view addGestureRecognizer:tap];
+}
+
+//数据更新
+- (void)reloadTableViewData
+{
+    arr_peizhi_one = [FBCityData queryConfigWithPid:@"0"];
+    [_tableView reloadData];
+    
+    _tableView.contentSize = CGSizeMake(DEVICE_WIDTH, _tableView.contentSize.height + DEVICE_HEIGHT - 203 - 64);
 }
 
 #pragma mark - 网络请求
@@ -124,6 +180,9 @@
 {
     [loading show:YES];
     NSString *url = [NSString stringWithFormat:FBAUTO_GET_INIT_PEIZHI];
+    
+    __weak typeof(self)weakSelf = self;
+    
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
@@ -148,6 +207,8 @@
                 NSLog(@"配置数据保存完成");
                 
                 [LCWTools cache:[LCWTools timechangeToDateline] ForKey:CAR_UPDATE_CONFIG_DATE_LOCAL];
+                
+                [weakSelf reloadTableViewData];
             }
             
         }
@@ -166,6 +227,8 @@
 - (void)getPeizhiListFromTime:(NSString *)fromTime endTime:(NSString *)endTime
 {
     [loading show:YES];
+    
+    __weak typeof(self)weakSelf = self;
     NSString *url = [NSString stringWithFormat:FBAUTO_GET_PEIZHI_NEW,fromTime,endTime];
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -201,6 +264,8 @@
                 NSLog(@"配置数据保存完成");
                 
                 [LCWTools cache:[LCWTools timechangeToDateline] ForKey:CAR_UPDATE_CONFIG_DATE_LOCAL];
+                
+                [weakSelf reloadTableViewData];
             }
             
         }
@@ -217,14 +282,45 @@
 
 #pragma mark - 事件处理
 
+- (void)clickToSend:(UIButton *)sender
+{
+    
+}
+
+- (void)hiddenKeyboard
+{
+    [_textView resignFirstResponder];
+}
+
 - (void)clickToSelect:(UIButton *)sender
 {
     sender.selected = !sender.selected;
+    
+    int tag = sender.tag - 100;
+    
+    if (sender.selected) {
+        [ids_array addObject:NSStringFromInt(tag)];
+    }else
+    {
+        [ids_array removeObject:NSStringFromInt(tag)];
+    }
 }
 
 - (void)clickToMore:(UIButton *)sender
 {
-    
+    PeizhiMoreViewController *more = [[PeizhiMoreViewController alloc]init];
+    more.pid = sender.tag - 1000;
+    more.idsArray = ids_array;
+    [self.navigationController pushViewController:more animated:YES];
+    self.navigationController.delegate = self;
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (viewController == self) {
+        
+        [_tableView reloadData];
+    }
 }
 
 #pragma mark - UITableViewDataSource<NSObject>
@@ -253,6 +349,8 @@
     for (UIView *aView in cell.contentView.subviews) {
         [aView removeFromSuperview];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     PeizhiModel *aModel = arr_peizhi_one[indexPath.row];
     
@@ -288,15 +386,27 @@
                 btn.layer.borderColor = [UIColor colorWithHexString:@"e52f17"].CGColor;
                 [btn setTitle:object.nodename forState:UIControlStateNormal];
                 
+                btn.tag = 100 + [object.id intValue];
+                
                 [btn addTarget:self action:@selector(clickToSelect:) forControlEvents:UIControlEventTouchUpInside];
+                
+                if ([ids_array containsObject:object.id]) {
+                    btn.selected = YES;
+                }else
+                {
+                    btn.selected = NO;
+                }
                 
             }else
             {
                 btn.layer.borderColor = [UIColor colorWithHexString:@"9d9d9d"].CGColor;
                 [btn setTitleColor:[UIColor colorWithHexString:@"8a8a8a"] forState:UIControlStateNormal];
                 [btn setTitle:@"更多" forState:UIControlStateNormal];
+                
+                btn.tag = 1000 + [aModel.id intValue];
                 [btn addTarget:self action:@selector(clickToMore:) forControlEvents:UIControlEventTouchUpInside];
             }
+            
             
         }
     }else
@@ -319,7 +429,16 @@
             btn.layer.borderColor = [UIColor colorWithHexString:@"e52f17"].CGColor;
             [btn setTitle:object.nodename forState:UIControlStateNormal];
             
+            btn.tag = 100 + [object.id intValue];
+            
             [btn addTarget:self action:@selector(clickToSelect:) forControlEvents:UIControlEventTouchUpInside];
+            
+            if ([ids_array containsObject:object.id]) {
+                btn.selected = YES;
+            }else
+            {
+                btn.selected = NO;
+            }
         }
     }
     
