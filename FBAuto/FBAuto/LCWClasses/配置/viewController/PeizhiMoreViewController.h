@@ -10,9 +10,16 @@
 /**
  *  更多配置
  */
+
+
+
 @interface PeizhiMoreViewController : FBBaseViewController
+{
+    
+}
 
 @property(nonatomic,assign)int pid;//父级id
 @property(nonatomic,assign)NSMutableArray *idsArray;
+
 
 @end

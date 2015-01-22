@@ -75,7 +75,6 @@
 
 #pragma mark - 事件处理
 
-
 - (void)clickToSelect:(UIButton *)sender
 {
     sender.selected = !sender.selected;

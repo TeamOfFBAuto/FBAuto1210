@@ -76,8 +76,11 @@
     NSString *_color_in_custom;//自定义内饰颜色
     
     NSString *_color_out_custom;//自定义外观颜色
-
     
+    NSString *_ids_string;//选择配置id string
+    
+    NSString *_custom_string;//配置自定义
+
     MBProgressHUD *loadingHub;
     
     LDatePicker *datePicker;
@@ -805,7 +808,24 @@
             NSLog(@"配置");
             
             PeizhiViewController *peizhi = [[PeizhiViewController alloc]init];
+            
+            [peizhi setPeizhiBlcock:^(NSString *ids_string, NSString *customString) {
+                
+                _ids_string = ids_string;
+                _custom_string = customString;
+                
+                if (ids_string.length > 0) {
+                    
+                    btn.contentLabel.text = @"已选";
+                }else
+                {
+                    btn.contentLabel.text = @"";
+                }
+                NSLog(@"配置-->%@ %@",_ids_string,_custom_string);
+                
+            }];
             peizhi.aLabel = btn.contentLabel;
+            peizhi.idstring = _ids_string;
             peizhi.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:peizhi animated:YES];
             

@@ -29,6 +29,16 @@
 
 @implementation PeizhiViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (_tableView) {
+        
+        [_tableView reloadData];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -39,7 +49,10 @@
     
     [self createViews];//创建tableView
     
-    ids_array = [NSMutableArray array];
+    //初始化 选择 ids
+    NSArray *ids_arr = [self.idstring componentsSeparatedByString:@","];
+    
+    ids_array = [NSMutableArray arrayWithArray:ids_arr];
     
     NSLog(@"--->|%@|",[LCWTools cacheForKey:CAR_UPDATE_CONFIG_DATE_LOCAL]);
     //判断是否需要初始化 配置数据
@@ -55,6 +68,15 @@
         [self getPeizhiUpdateTime];
     }
     
+}
+
+- (void)dealloc
+{
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
+    _tableView = nil;
+    _textView.delegate = nil;
+    _textView = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -282,9 +304,25 @@
 
 #pragma mark - 事件处理
 
+
+- (void)setPeizhiBlcock:(PeizhiBlock)aBlock
+{
+    peizhiBlock = aBlock;
+}
+
+- (IBAction)clickToBack:(id)sender {
+    
+    if (peizhiBlock) {
+        
+        NSString *idstring = [ids_array componentsJoinedByString:@","];
+        peizhiBlock(idstring,_textView.text);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)clickToSend:(UIButton *)sender
 {
-    
+    [self clickToBack:sender];
 }
 
 - (void)hiddenKeyboard
@@ -312,16 +350,16 @@
     more.pid = sender.tag - 1000;
     more.idsArray = ids_array;
     [self.navigationController pushViewController:more animated:YES];
-    self.navigationController.delegate = self;
+//    self.navigationController.delegate = self;
 }
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (viewController == self) {
-        
-        [_tableView reloadData];
-    }
-}
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    if (viewController == self) {
+//        
+//        [_tableView reloadData];
+//    }
+//}
 
 #pragma mark - UITableViewDataSource<NSObject>
 
