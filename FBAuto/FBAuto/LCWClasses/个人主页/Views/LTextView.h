@@ -23,6 +23,7 @@ typedef void(^LTextViewBlock)(LTextView *textView,ActionStyle actionStyle);
     LTextViewBlock _textViewBlock;
 }
 
+@property(nonatomic,retain)UILabel *hintLabel;
 -(instancetype)initWithFrame:(CGRect)frame
                  placeHolder:(NSString *)placeHolder
                     fontSize:(CGFloat)fontSize;

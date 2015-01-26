@@ -198,7 +198,7 @@
     {
 //        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
         
-        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom];
+        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@&peizhi=%@&custom_peizhi=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom,_ids_string,_custom_string];
         
         NSLog(@"修改车源 %@",url);
     }
@@ -275,13 +275,20 @@
         
         NSLog(@"单个车源发布 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
         
-        NSArray *dataInfo = [result objectForKey:@"datainfo"];
+//        NSArray *dataInfo = [result objectForKey:@"datainfo"];
+//        
+//        if (dataInfo.count == 0) {
+//            return ;
+//        }
+//        
+//        NSDictionary *dic = [dataInfo objectAtIndex:0];
         
-        if (dataInfo.count == 0) {
+        NSDictionary *dic = [result objectForKey:@"datainfo"];
+        
+        if ([dic isKindOfClass:[NSDictionary class]] == NO) {
+            NSLog(@"数据格式有问题");
             return ;
         }
-        
-        NSDictionary *dic = [dataInfo objectAtIndex:0];
         
         //车辆图片
         
@@ -309,6 +316,15 @@
         
         [weakSelf labelWithTag:104].text = [dic objectForKey:@"build_time"];
         
+        
+        _custom_string = [dic objectForKey:@"custom_peizhi"];//配置自定义
+        
+        _ids_string = [dic objectForKey:@"peizhi"];//选择配置id string
+        
+        if (_custom_string.length > 0 || _ids_string.length > 0) {
+            
+            [weakSelf labelWithTag:105].text = @"已选";
+        }
         
         //外观 内饰 合为一 之前
         
@@ -826,6 +842,7 @@
             }];
             peizhi.aLabel = btn.contentLabel;
             peizhi.idstring = _ids_string;
+            peizhi.customString = _custom_string;
             peizhi.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:peizhi animated:YES];
             

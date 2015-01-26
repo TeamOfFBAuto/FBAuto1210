@@ -24,6 +24,8 @@
     NSMutableArray *ids_array;//已选择id数组
     
     LTextView *_textView;
+    
+    UITapGestureRecognizer *tap;//点击手势
 }
 @end
 
@@ -54,6 +56,12 @@
     
     ids_array = [NSMutableArray arrayWithArray:ids_arr];
     
+    if (self.customString.length > 0) {
+        
+        _textView.text = self.customString;
+        _textView.hintLabel.hidden = YES;
+    }
+    
     NSLog(@"--->|%@|",[LCWTools cacheForKey:CAR_UPDATE_CONFIG_DATE_LOCAL]);
     //判断是否需要初始化 配置数据
     if ([LCWTools cacheForKey:CAR_UPDATE_CONFIG_DATE_LOCAL] == nil) {
@@ -77,6 +85,9 @@
     _tableView = nil;
     _textView.delegate = nil;
     _textView = nil;
+    [tap removeTarget:self action:@selector(hiddenKeyboard)];
+    [self.navigationController.view removeGestureRecognizer:tap];
+    tap = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,7 +142,7 @@
     [send_btn addTarget:self action:@selector(clickToSend:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:send_btn];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
+    tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
     [self.navigationController.view addGestureRecognizer:tap];
 }
 

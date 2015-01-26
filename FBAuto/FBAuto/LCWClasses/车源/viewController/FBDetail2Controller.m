@@ -110,27 +110,26 @@
         
         NSLog(@"单个车源发布 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
         
-        NSArray *dataInfo = [result objectForKey:@"datainfo"];
+//        NSArray *dataInfo = [result objectForKey:@"datainfo"];
+//        
+//        if (dataInfo.count == 0) {
+//            return ;
+//        }
+//        
+//        //当是字典的时候
+//        if ([dataInfo isKindOfClass:[NSDictionary class]]) {
+//            
+//            dataInfo = [(NSDictionary *)dataInfo allValues];
+//            
+//        }
+//        //当是数组的时候
+//        
+//        NSDictionary *dic = [dataInfo objectAtIndex:0];
         
-        if (dataInfo.count == 0) {
-            return ;
-        }
-        
-        //当是字典的时候
-        if ([dataInfo isKindOfClass:[NSDictionary class]]) {
-            
-            dataInfo = [(NSDictionary *)dataInfo allValues];
-            
-        }
-        //当是数组的时候
-        
-        NSDictionary *dic = [dataInfo objectAtIndex:0];
+        NSDictionary *dic = [result objectForKey:@"datainfo"];
         
         //配置数据
-        NSArray *peizhi_arr;
-        if (dataInfo.count >= 2) {
-            peizhi_arr = [dataInfo objectAtIndex:1];
-        }
+        NSArray *peizhi_arr = [dic objectForKey:@"peizhi_info"];
         
         
         //判断是否收藏
@@ -158,8 +157,9 @@
         
         //        //参数
         
+        [self labelWithTag:100].hidden = NO;
         
-        for (int i = 0; i < 10; i ++) {
+        for (int i = 1; i < 10; i ++) {
             UILabel *label = (UILabel *)[weakSelf.view viewWithTag:120 + i];
             label.top += dis;
             
@@ -245,6 +245,12 @@
         
         weakSelf.build_time_label.text = [LCWTools NSStringNotNull:[dic objectForKey:@"build_time"]];
         //商家信息
+        
+        weakSelf.thirdBgView.hidden = NO;
+        
+        // 线
+        
+        weakSelf.lineView.hidden = NO;
         
         //调整商家名字显示长度
         
@@ -594,6 +600,12 @@
     
     [pageControl setNumberOfPages:sum];
 	[pageControl setCurrentPage: 0];
+}
+
+
+- (UILabel *)labelWithTag:(int)aTag
+{
+    return (UILabel *)[self.view viewWithTag:aTag];
 }
 
 #pragma - mark click 事件

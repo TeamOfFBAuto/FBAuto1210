@@ -31,7 +31,8 @@
 
 #define DEFAULT_HEAD_IMAGE [UIImage imageNamed:@"defaultFace"] //默认头像
 
-#define DEFAULT_CAR_IAMGE [UIImage imageNamed:@"detail_test.jpg"] //默认汽车图片
+#define DEFAULT_CAR_IAMGE [UIImage imageNamed:@"default_backgroud"] //默认汽车图片
+
 
 #define RONG_SERVICE_ID @"KEFU1413164724086" //客服号
 #define RONGCLOUD_TOKEN @"RONGCLOUD_TOKEN" //用户对应的融云token
@@ -308,6 +309,10 @@ alpha:(a)]
 //加关注
 
 #define FBAUTO_ADD_CONCERN @"http://fbautotest.fblife.com/index.php?c=interface&a=addfocus&authkey=%@&buddyid=%@"
+
+//取消关注
+
+#define FBAUTO_CANCEL_CONCERN @"http://fbautotest.fblife.com/index.php?c=interface&a=cancelfocus&authkey=%@&buddyid=%@"
 
 //发布举报
 

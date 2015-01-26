@@ -38,6 +38,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *saleTypeBtn;//商家类型
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel;
+@property (strong, nonatomic) IBOutlet UIView *lineView;
 
 @property (nonatomic,retain)NSString *infoId;//车源信息id
 @property (nonatomic,retain)NSString *carId;//车源信息id(如:006005002)

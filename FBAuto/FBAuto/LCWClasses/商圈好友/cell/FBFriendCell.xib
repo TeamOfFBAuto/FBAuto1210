@@ -56,8 +56,8 @@
                                     <action selector="clickToShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JB6-i0-HcD"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvJ-XN-iVd">
-                                <rect key="frame" x="32" y="10" width="28" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="new22_30.png" translatesAutoresizingMaskIntoConstraints="NO" id="gvJ-XN-iVd">
+                                <rect key="frame" x="46" y="10" width="11" height="15"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CoN-qL-49t">
@@ -109,7 +109,7 @@
                 <outlet property="phoneNumLabel" destination="9nO-o6-sML" id="8j2-Zf-mk5"/>
                 <outlet property="saleTypeLabel" destination="GF8-Yi-28d" id="OXD-cK-qQP"/>
             </connections>
-            <point key="canvasLocation" x="292" y="214.5"/>
+            <point key="canvasLocation" x="82" y="242.5"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -118,6 +118,7 @@
         <image name="geren _bg50_28.png" width="25" height="14"/>
         <image name="haoyou_dianhua40_46.png" width="20" height="23"/>
         <image name="haoyou_liaotian46_46.png" width="23" height="23"/>
+        <image name="new22_30.png" width="11" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

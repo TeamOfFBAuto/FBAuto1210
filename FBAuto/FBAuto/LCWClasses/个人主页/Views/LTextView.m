@@ -23,6 +23,8 @@
         hint_label.font = [UIFont systemFontOfSize:fontSize];
         hint_label.text = placeHolder;
         [self addSubview:hint_label];
+        
+        self.hintLabel = hint_label;
     }
     return self;
 }

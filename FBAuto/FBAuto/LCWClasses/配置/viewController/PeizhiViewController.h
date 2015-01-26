@@ -17,6 +17,7 @@ typedef void(^PeizhiBlock)(NSString *ids_string,NSString *customString);
 }
 @property(nonatomic,retain)UILabel *aLabel;
 @property(nonatomic,retain)NSString *idstring;//选择id string
+@property(nonatomic,retain)NSString *customString;//自定义部分
 
 - (void)setPeizhiBlcock:(PeizhiBlock)aBlock;
 

@@ -21,6 +21,7 @@
                 <outlet property="detailTitleLabel" destination="Tv0-lr-0Gx" id="rKc-rJ-ozH"/>
                 <outlet property="firstBgView" destination="KqK-jp-xOd" id="2Pz-zJ-Ixn"/>
                 <outlet property="headImage" destination="XBN-61-CZI" id="xPk-Qv-0kW"/>
+                <outlet property="lineView" destination="7QE-sW-wdX" id="7X0-MH-UIT"/>
                 <outlet property="nameLabel" destination="gMn-wo-i3h" id="lWn-AG-nGW"/>
                 <outlet property="peizhiLabel" destination="0VR-bC-b7t" id="ev1-BF-TWE"/>
                 <outlet property="peizhiTitleLabel" destination="Img-YH-Yb1" id="yJe-fr-npf"/>
@@ -40,7 +41,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="540"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="7QE-sW-wdX">
+                        <view hidden="YES" contentMode="scaleToFill" id="7QE-sW-wdX">
                             <rect key="frame" x="0.0" y="124" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -193,7 +194,7 @@
                         </label>
                     </subviews>
                 </scrollView>
-                <view contentMode="scaleToFill" id="nP5-zS-6oT">
+                <view hidden="YES" contentMode="scaleToFill" id="nP5-zS-6oT">
                     <rect key="frame" x="0.0" y="493" width="320" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
@@ -280,7 +281,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="100" y="132"/>
+            <point key="canvasLocation" x="-217" y="113"/>
         </view>
     </objects>
     <resources>

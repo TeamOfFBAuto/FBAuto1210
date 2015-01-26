@@ -22,6 +22,12 @@
 
 #import "JubaoViewController.h"
 
+typedef enum {
+    Action_Add_Friend = 1, //添加好友
+    Action_Add_concern,//添加关注
+    Action_Cancel_concern//取消关注
+}Action_Style;
+
 @interface UserHomeController ()<UIScrollViewDelegate,RefreshDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UIScrollView *scroll_bg;
@@ -124,25 +130,34 @@
     
     //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
     
+    Action_Style style;
     BOOL isConcern = YES;
     if (friend_status == -1) {
         
         NSLog(@"加好友");
         message = [NSString stringWithFormat:@"是否添加%@为好友",name];
-        isConcern = NO;
+//        isConcern = NO;
+        style = Action_Add_Friend;
         
     }else if (friend_status == 0 || friend_status == 1 || friend_status == 2){
         message = [NSString stringWithFormat:@"是否关注%@",name];
-        isConcern = YES;
+//        isConcern = YES;
+        
+        style = Action_Add_concern;
+        
+    }else if (friend_status == 3){
+        
+        message = [NSString stringWithFormat:@"是否取消关注%@",name];
+        style = Action_Cancel_concern;
     }
     
-    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:message contentText:nil leftButtonTitle:@"添加" rightButtonTitle:@"取消" isInput:NO];
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:message contentText:nil leftButtonTitle:@"确定" rightButtonTitle:@"取消" isInput:NO];
     [alert show];
     
     __weak typeof(self)weakSelf = self;
     alert.leftBlock = ^(){
         NSLog(@"确定");
-        [weakSelf addFriend:userModel.uid isConcern:isConcern];
+        [weakSelf addFriend:userModel.uid actionStyle:style];
     };
     alert.rightBlock = ^(){
         NSLog(@"取消");
@@ -318,14 +333,14 @@
             rightButton2.titleLabel.font = [UIFont systemFontOfSize:14];
             
             
-            UIButton *jubao_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [jubao_btn setTitle:@"举报" forState:UIControlStateNormal];
-            jubao_btn.frame = CGRectMake(0, 0, 70, 29);
-            jubao_btn.titleLabel.font = [UIFont systemFontOfSize:14];
-            [jubao_btn addTarget:self action:@selector(clickToJubao:) forControlEvents:UIControlEventTouchUpInside];
-            UIBarButtonItem *jubao_item = [[UIBarButtonItem alloc]initWithCustomView:jubao_btn];
+//            UIButton *jubao_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            [jubao_btn setTitle:@"举报" forState:UIControlStateNormal];
+//            jubao_btn.frame = CGRectMake(0, 0, 70, 29);
+//            jubao_btn.titleLabel.font = [UIFont systemFontOfSize:14];
+//            [jubao_btn addTarget:self action:@selector(clickToJubao:) forControlEvents:UIControlEventTouchUpInside];
+//            UIBarButtonItem *jubao_item = [[UIBarButtonItem alloc]initWithCustomView:jubao_btn];
             
-            self.navigationItem.rightBarButtonItems = @[jubao_item,save_item2];
+            self.navigationItem.rightBarButtonItems = @[save_item2];
         }
 
         //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
@@ -337,23 +352,33 @@
             {
                 NSLog(@"-1:不是好友关系 1:添加中 2:接到邀请");
                 
-                [rightButton2 setTitle:@"加好友" forState:UIControlStateNormal];
-                [rightButton2 setTitle:@"关注" forState:UIControlStateSelected];
+//                [rightButton2 setTitle:@"加好友" forState:UIControlStateNormal];
+//                [rightButton2 setTitle:@"关注" forState:UIControlStateSelected];
+                
+                [rightButton2 setImage:[UIImage imageNamed:@"tjhy42_44"] forState:UIControlStateNormal];
+                [rightButton2 setImage:[UIImage imageNamed:@"guanzhu56_34"] forState:UIControlStateSelected];
             }
                 break;
             case 0:
             {
                 NSLog(@"好友");
-                [rightButton2 setTitle:@"关注" forState:UIControlStateNormal];
-                [rightButton2 setTitle:@"已关注" forState:UIControlStateSelected];
+//                [rightButton2 setTitle:@"关注" forState:UIControlStateNormal];
+//                [rightButton2 setTitle:@"已关注" forState:UIControlStateSelected];
+                
+                [rightButton2 setImage:[UIImage imageNamed:@"guanzhu56_34"] forState:UIControlStateNormal];
+                [rightButton2 setImage:[UIImage imageNamed:@"yiguanzhu60_34"] forState:UIControlStateSelected];
+
             }
                 break;
                 
             case 3:
             {
                NSLog(@"特别关注");
-                [rightButton2 setTitle:@"已关注" forState:UIControlStateNormal];
-                rightButton2.userInteractionEnabled = NO;
+//                [rightButton2 setTitle:@"已关注" forState:UIControlStateNormal];
+//                rightButton2.userInteractionEnabled = NO;
+                
+                [rightButton2 setImage:[UIImage imageNamed:@"yiguanzhu60_34"] forState:UIControlStateNormal];
+                [rightButton2 setImage:[UIImage imageNamed:@"guanzhu56_34"] forState:UIControlStateSelected];
             }
                 break;
 
@@ -410,7 +435,7 @@
     
     //背景图
     UIImageView *image_bg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 256)];
-    image_bg.backgroundColor = [UIColor orangeColor];
+    image_bg.backgroundColor = [UIColor lightGrayColor];
     [header addSubview:image_bg];
     
     [image_bg sd_setImageWithURL:[NSURL URLWithString:userModel.backgroundimage] placeholderImage:DEFAULT_CAR_IAMGE];
@@ -638,17 +663,22 @@
  *
  *  @param isConcern 是否加关注
  */
-- (void)addFriend:(NSString *)friendId isConcern:(BOOL)isConcern
+- (void)addFriend:(NSString *)friendId actionStyle:(Action_Style)style
 {
     NSLog(@"provinceId %@",friendId);
     
+    [loading show:YES];
+    
     NSString *api;
     
-    if (isConcern) {
+    if (style == Action_Add_concern) {
         api = [NSString stringWithFormat:FBAUTO_ADD_CONCERN,[GMAPI getAuthkey],friendId];
-    }else
+    }else if(style == Action_Add_Friend)
     {
         api = [NSString stringWithFormat:FBAUTO_FRIEND_ADD,[GMAPI getAuthkey],friendId];
+    }else if (style == Action_Cancel_concern){
+        
+        api = [NSString stringWithFormat:FBAUTO_CANCEL_CONCERN,[GMAPI getAuthkey],friendId];
     }
     
     __weak typeof(self)weakSelf = self;
@@ -658,10 +688,25 @@
     [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
         NSLog(@"result %@ erro %@",result,[result objectForKey:@"errinfo"]);
         
+        [loading hide:YES];
+        
         if ([result isKindOfClass:[NSDictionary class]]) {
             
 //            rightButton2.selected = YES;
-            friend_status = isConcern ? 3 : 0;//已是好友0 关注 3
+//            friend_status = isConcern ? 3 : 0;//已是好友0 关注 3
+            
+            if (style == Action_Add_concern) {
+                
+                friend_status = 3;
+                
+            }else if(style == Action_Add_Friend)
+            {
+                friend_status = 0;
+                
+            }else if (style == Action_Cancel_concern){
+            
+                friend_status = 0;
+            }
             
             [weakSelf createRightButton];
             
@@ -670,6 +715,8 @@
         }
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSLog(@"failDic %@",failDic);
+        
+        [loading hide:YES];
         
         [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
     }];
