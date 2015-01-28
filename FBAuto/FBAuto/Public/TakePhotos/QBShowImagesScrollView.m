@@ -248,6 +248,8 @@
     
     _locationImageView = nil;
     
+    [super dealloc];
+    
 }
 
 

@@ -493,7 +493,8 @@
         FBChatListController *temp = [[FBChatListController alloc]init];
         
         [self.navigationController pushViewController:temp animated:YES];
-        temp.portraitStyle = UIPortraitViewRound;
+        temp.portraitStyle = RCUserAvatarCycle;
+        
         
 //        [self.navigationController pushViewController:[[GxiaoxiViewController alloc]init] animated:YES];
     }else if(sender.tag == 52){//通知

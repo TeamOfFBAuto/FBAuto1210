@@ -16,7 +16,7 @@
 @interface ZSNApi : NSObject
 
 
-+(NSArray *)exChangeFriendListByOrder:(NSMutableArray *)theArray;
+//+(NSArray *)exChangeFriendListByOrder:(NSMutableArray *)theArray;
 
 
 +(UIImage *)scaleToSizeWithImage:(UIImage *)img size:(CGSize)size;
@@ -36,7 +36,7 @@
 
 +(float)calculateheight:(NSArray *)array;
 
-+(CGPoint)LinesWidth:(NSString *)string Label:(UILabel *)label font:(UIFont *)thefont;
+//+(CGPoint)LinesWidth:(NSString *)string Label:(UILabel *)label font:(UIFont *)thefont;
 
 + (float)theHeight:(NSString *)content withHeight:(CGFloat)theheight WidthFont:(UIFont *)font;
 

@@ -25,8 +25,6 @@
 
 #import "WXApi.h"
 
-static int seconds = 60;//计时60s
-
 @implementation LCWTools
 
 + (id)shareInstance

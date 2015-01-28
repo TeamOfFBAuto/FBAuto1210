@@ -113,6 +113,13 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    _table.refreshDelegate = nil;
+    _table.dataSource = nil;
+    _table = nil;
+}
+
 #pragma - mark 事件处理
 
 //取消红点block
@@ -138,13 +145,6 @@ typedef enum {
     
 }
 
-- (void)clickToJubao:(UIButton *)sender
-{
-    JubaoViewController *jubao = [[JubaoViewController alloc]init];
-    jubao.cid = @"232";//test jubao
-    [self.navigationController pushViewController:jubao animated:YES];
-}
-
 - (void)clickToAddFriend:(UIButton *)sender
 {
     NSString *name = userModel.name ? userModel.name : userModel.fullname;
@@ -154,7 +154,6 @@ typedef enum {
     //用户关系  -1:不是好友关系 0:好友 1:添加中 2:接到邀请 3:特别关注
     
     Action_Style style;
-    BOOL isConcern = YES;
     if (friend_status == -1) {
         
         NSLog(@"加好友");
@@ -627,7 +626,7 @@ typedef enum {
     NSString *api = [NSString stringWithFormat:FBAUTO_LIUYAN_LIST,self.userId,2,page,20];
     
     NSLog(@"留言接口:%@",api);
-    __weak typeof (self)weakSelf = self;
+//    __weak typeof (self)weakSelf = self;
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -786,13 +785,10 @@ typedef enum {
 }
 - (void)refreshTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _table) {
-        
-        
-    }else if (tableView == leftTable){
+    if (isCarsource) {
         
         FBDetail2Controller *fbdetailvc = [[FBDetail2Controller alloc]init];
-        CarSourceClass *car = leftTable.dataArray[indexPath.row];
+        CarSourceClass *car = _table.dataArray[indexPath.row];
         fbdetailvc.infoId = car.id;
         fbdetailvc.isHiddenUeserInfo = YES;
         fbdetailvc.style = Navigation_Special;
@@ -801,6 +797,8 @@ typedef enum {
         [self.navigationController pushViewController:fbdetailvc animated:YES];
         
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)refreshTableView:(UITableView *)tableView heightForRowIndexPath:(NSIndexPath *)indexPath

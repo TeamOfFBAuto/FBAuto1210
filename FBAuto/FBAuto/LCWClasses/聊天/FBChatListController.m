@@ -68,13 +68,16 @@
     RCSelectPersonViewController *temp = [[RCSelectPersonViewController alloc]init];
     //控制多选
     temp.isMultiSelect = YES;
-    temp.portaitStyle = UIPortraitViewRound;
+    temp.portaitStyle = RCUserAvatarCycle;
     UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:temp];
     //导航和的配色保持一直
     UIImage *image= [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault];
     [nav.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     temp.delegate = self;
-    [self presentModalViewController:nav animated:YES];
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 -(void)didSelectedPersons:(NSArray*)selectedArray viewController:(RCSelectPersonViewController *)viewController
@@ -111,7 +114,7 @@
     FBChatViewController* chat = [self getChatController:userInfo.userId conversationType:ConversationType_PRIVATE];
     if (nil == chat) {
         chat =[[FBChatViewController alloc]init];
-        chat.portraitStyle = UIPortraitViewRound;
+        chat.portraitStyle = RCUserAvatarCycle;
         [self addChatController:chat];
     }
     
@@ -189,7 +192,7 @@
     FBChatViewController* chat = [self getChatController:conversation.targetId conversationType:conversation.conversationType];
     if (nil == chat) {
         chat =[[FBChatViewController alloc]init];
-        chat.portraitStyle = UIPortraitViewRound;
+        chat.portraitStyle = RCUserAvatarCycle;
         [self addChatController:chat];
     }
     chat.currentTarget = conversation.targetId;
@@ -224,7 +227,7 @@
             for (NSDictionary *aDic in dataInfo) {
                 FBFriendModel *aFriend = [[FBFriendModel alloc]initWithDictionary:aDic];
                 
-                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
+//                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
                 //保存name 对应id
 //                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
 //                [FBChatTool cacheUserHeadImage:[LCWTools headImageForUserId:aFriend.buddyid] forUserId:aFriend.buddyid];

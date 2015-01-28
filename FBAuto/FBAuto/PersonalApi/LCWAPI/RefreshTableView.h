@@ -14,6 +14,8 @@
 
 @protocol RefreshDelegate <NSObject>
 
+@optional
+
 - (void)loadNewData;
 - (void)loadMoreData;
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;

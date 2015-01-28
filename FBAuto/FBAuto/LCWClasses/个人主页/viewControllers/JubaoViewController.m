@@ -14,6 +14,7 @@
     UIScrollView *bigScroll;
     LTextView *_lTextView;
     MBProgressHUD *loading;
+    UITapGestureRecognizer *tap;
 }
 
 @end
@@ -87,8 +88,14 @@
     
     loading = [LCWTools MBProgressWithText:@"" addToView:self.view];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
+    tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
     [self.navigationController.view addGestureRecognizer:tap];
+}
+
+- (void)dealloc
+{
+    [self.navigationController.view removeGestureRecognizer:tap];
+    tap = nil;
 }
 
 - (void)didReceiveMemoryWarning {

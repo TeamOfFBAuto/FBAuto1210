@@ -37,11 +37,25 @@
     
     [super viewWillAppear:animated];
     
-    [self getPersonalInfo:self.currentTarget];
+//    [self getPersonalInfo:self.currentTarget];
 }
 -(void)dealloc
 {
 //    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_UPDATE_USERINFO object:nil];
+}
+
+-(void)sendDebugRichMessage {
+    
+    RCRichContentMessage *message = [[RCRichContentMessage alloc] init];
+    message.title = @"Yosemite崩溃的修复方法";
+    message.digest = @"在新的优胜美地";
+//    message.imageURL = @"http://images.macx.cn/forum/201410/18/051336drp3zwrrh35w5p4e.jpg#id=11";
+    message.extra = @"11";
+    
+    [[RCIM sharedRCIM] sendMessage:self.conversationType
+                          targetId:self.currentTarget
+                           content:message
+                          delegate:self];
 }
 
 - (void)updateUserInfo:(NSNotification *)notification
@@ -67,7 +81,7 @@
     UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
     self.navigationItem.rightBarButtonItems = @[save_item,save_item2];
     
-    self.enableVOIP = YES;
+    self.enablePOI = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -163,71 +177,6 @@
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSLog(@"failDic %@",failDic);
         [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
-    }];
-}
-
-#pragma mark - RCIMUserInfoFetcherDelegagte <NSObject>
-
-/**
- *  获取用户信息。
- *
- *  @param userId 用户 Id。
- *
- *  @return 用户信息。
- */
--(RCUserInfo*)getUserInfoWithUserId:(NSString*)userId
-{
-    NSLog(@"userId %@",userId);
-    
-    if ([userId isEqualToString:[GMAPI getUid]]) {
-        
-        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
-        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[GMAPI getUsername] portrait:headImage];
-        
-        NSLog(@"user image %@",[LCWTools headImageForUserId:@"2"]);
-        
-        return user;
-    }
-    
-    
-    return nil;
-}
-
-//获取个人信息
--(void)getPersonalInfo:(NSString *)userId
-{
-    
-//    __weak typeof(self)weakSelf = self;
-    //请求地址str
-    NSString *str = [NSString stringWithFormat:FBAUTO_GET_USER_INFORMATION,userId];
-    
-    NSLog(@"请求用户信息接口 %@",str);
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:str isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
-        
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            
-            NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
-            if ([dataInfo isKindOfClass:[NSDictionary class]])
-            {
-                NSString *name = [dataInfo objectForKey:@"name"];
-                
-                NSString *headImage = [dataInfo objectForKey:@"headimage"];
-                
-                [FBChatTool cacheUserName:name forUserId:userId];
-                [FBChatTool cacheUserHeadImage:headImage forUserId:userId];
-                
-//                [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_UPDATE_USERINFO object:nil];
-                
-                [self performSelectorOnMainThread:@selector(updateUserInfo:) withObject:nil waitUntilDone:YES];
-                
-//                [weakSelf.chatListTableView reloadData];
-            }
-        }
-        
-        
-    } failBlock:^(NSDictionary *failDic, NSError *erro) {
-        ;
     }];
 }
 

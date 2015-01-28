@@ -19,6 +19,8 @@
 
 #import "FBChatViewController.h"
 
+#import "JubaoViewController.h"
+
 @interface FBDetail2Controller ()
 {
     DDPageControl *pageControl;
@@ -702,6 +704,14 @@
     personal.title = self.nameLabel.text;
     personal.userId = userId;
     [self.navigationController pushViewController:personal animated:YES];
+}
+
+//举报
+- (void)clickToJubao:(UIButton *)sender
+{
+    JubaoViewController *jubao = [[JubaoViewController alloc]init];
+    jubao.cid = self.infoId;//test jubao
+    [self.navigationController pushViewController:jubao animated:YES];
 }
 
 //收藏

@@ -20,7 +20,7 @@
 //    userId = [NSString stringWithFormat:@"%@@fbauto",userId];//加标识
     
     FBChatViewController *chat =[[FBChatViewController alloc]init];
-    chat.portraitStyle = UIPortraitViewRound;
+    chat.portraitStyle = RCUserAvatarCycle;
     chat.currentTarget = userId;
     chat.currentTargetName = userName;
     chat.conversationType = ConversationType_PRIVATE;

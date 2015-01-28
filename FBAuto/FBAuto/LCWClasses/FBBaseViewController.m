@@ -73,6 +73,13 @@
         
     }else
     {
+        
+        UIButton *jubao_Button =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
+        [jubao_Button addTarget:self action:@selector(clickToJubao:) forControlEvents:UIControlEventTouchUpInside];
+        [jubao_Button setImage:[UIImage imageNamed:@"jubao40_36"] forState:UIControlStateNormal];
+        UIBarButtonItem *jubao_item=[[UIBarButtonItem alloc]initWithCustomView:jubao_Button];
+
+        
         UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
         [saveButton addTarget:self action:@selector(clickToCollect:) forControlEvents:UIControlEventTouchUpInside];
         [saveButton setImage:[UIImage imageNamed:@"shoucang_46_44"] forState:UIControlStateNormal];
@@ -85,7 +92,7 @@
         [share_Button addTarget:self action:@selector(clickToShare:) forControlEvents:UIControlEventTouchUpInside];
         [share_Button setImage:[UIImage imageNamed:@"fenxiang42_42"] forState:UIControlStateNormal];
         UIBarButtonItem *share_item=[[UIBarButtonItem alloc]initWithCustomView:share_Button];
-        self.navigationItem.rightBarButtonItems = @[share_item,save_item];
+        self.navigationItem.rightBarButtonItems = @[share_item,save_item,jubao_item];
     }
 }
 
@@ -121,6 +128,12 @@
 
 //分享
 - (void)clickToShare:(UIButton *)sender
+{
+    
+}
+
+//举报
+- (void)clickToJubao:(UIButton *)sender
 {
     
 }

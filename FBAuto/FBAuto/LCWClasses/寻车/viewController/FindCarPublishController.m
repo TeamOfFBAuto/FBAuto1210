@@ -531,7 +531,7 @@
 
 - (void)getSingleCarInfoWithId:(NSString *)carId
 {
-    NSString *url = [NSString stringWithFormat:FBAUTO_FINDCAR_SINGLE,carId];
+    NSString *url = [NSString stringWithFormat:FBAUTO_FINDCAR_SINGLE,carId,[GMAPI getUid]];
     
     NSLog(@"单个寻车信息 %@",url);
     

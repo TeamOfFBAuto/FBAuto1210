@@ -71,7 +71,7 @@
 //    bottomView.hidden = YES;
     [self.view addSubview:bottomView];
     
-    __weak typeof(self)weakSelf = self;
+//    __weak typeof(self)weakSelf = self;
     
     [bottomView setMyBlock:^(CommentTapType aType) {
         NSLog(@"bottom tap : %d",aType);
@@ -405,7 +405,7 @@
 
 - (void)refreshScrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offset = scrollView.contentOffset.y;
+//    CGFloat offset = scrollView.contentOffset.y;
     
 //    NSLog(@"offset %f",offset);
 }

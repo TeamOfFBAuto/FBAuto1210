@@ -213,36 +213,36 @@
                 
             }else
             {
-                UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,300,50)];
-                CGPoint point = [self LinesWidth:string Label:label font:[UIFont systemFontOfSize:16]];
-                
-                height += point.y;
+//                UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,300,50)];
+//                CGPoint point = [self LinesWidth:string Label:label font:[UIFont systemFontOfSize:16]];
+//                
+//                height += point.y;
             }
         }
     }
     return height;
 }
 
-
-+(CGPoint)LinesWidth:(NSString *)string Label:(UILabel *)label font:(UIFont *)thefont
-{
-    CGSize titleSize = [string sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-    CGPoint lastPoint;
-    
-    CGSize sz = [string sizeWithFont:thefont constrainedToSize:CGSizeMake(MAXFLOAT,40)];
-    
-    CGSize linesSz = [string sizeWithFont:thefont constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
-    
-    if(sz.width <= linesSz.width) //判断是否折行
-    {
-        lastPoint = CGPointMake(label.frame.origin.x + sz.width,titleSize.height + 2);
-    }else
-    {
-        lastPoint = CGPointMake(label.frame.origin.x + (int)sz.width % (int)linesSz.width,titleSize.height);
-    }
-    
-    return lastPoint;
-}
+//
+//+(CGPoint)LinesWidth:(NSString *)string Label:(UILabel *)label font:(UIFont *)thefont
+//{
+//    CGSize titleSize = [string sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+//    CGPoint lastPoint;
+//    
+//    CGSize sz = [string sizeWithFont:thefont constrainedToSize:CGSizeMake(MAXFLOAT,40)];
+//    
+//    CGSize linesSz = [string sizeWithFont:thefont constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+//    
+//    if(sz.width <= linesSz.width) //判断是否折行
+//    {
+//        lastPoint = CGPointMake(label.frame.origin.x + sz.width,titleSize.height + 2);
+//    }else
+//    {
+//        lastPoint = CGPointMake(label.frame.origin.x + (int)sz.width % (int)linesSz.width,titleSize.height);
+//    }
+//    
+//    return lastPoint;
+//}
 
 + (float)theHeight:(NSString *)content withHeight:(CGFloat)theheight WidthFont:(UIFont *)font
 {

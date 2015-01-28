@@ -623,7 +623,7 @@
             _hud = [GMAPI showMBProgressWithText:@"正在提交" addToView:self.contentView];
             _hud.delegate = self;
             
-            NSString *str = [NSString stringWithFormat:FBAUTO_REGISTERED,userzc.phone,userzc.password,userzc.name,(long)userzc.province,(long)userzc.city,2,userzc.code,userzc.token,userzc.fullname];
+            NSString *str = [NSString stringWithFormat:FBAUTO_REGISTERED,userzc.phone,userzc.password,userzc.name,(int)userzc.province,(int)userzc.city,2,userzc.code,userzc.token,userzc.fullname];
             NSString *str1 = [NSString stringWithFormat:@"%@&address=%@",str,userzc.address];
             NSString *api = [str1 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             

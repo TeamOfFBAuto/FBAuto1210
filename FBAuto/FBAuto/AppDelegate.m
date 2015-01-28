@@ -112,10 +112,6 @@
     //网络监控
     
     [self observeNetwork];
-
-    //注册远程通知
-    
-    [RCIM initWithAppKey:RCIM_APPKEY deviceToken:nil];
     
 #ifdef __IPHONE_8_0
     // 在 iOS 8 下注册苹果推送，申请推送权限。
@@ -142,8 +138,11 @@
         
         self.pushUserInfo = infoDic;
     }
+    //注册远程通知
     
+    [RCIM initWithAppKey:RCIM_APPKEY deviceToken:nil];
     [self rongCloud]; //融云即时通讯
+    
     
     [ShareSDK registerApp:Appkey]; //ShareSDK 分享
     [self initSharePlat];
@@ -948,7 +947,7 @@
 {
     NSString *str = [NSString stringWithFormat: @"Error: %@", error];
     NSLog(@"erro  %@",str);
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册失败" message:str delegate:Nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册失败" message:str delegate:Nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
 //    [alert show];
 }
 
@@ -999,7 +998,7 @@
     NSDictionary *aps = [userInfo objectForKey:@"aps"];
     NSString *headimg = [aps objectForKey:@"headimg"];
     NSString *fromphone = [aps objectForKey:@"fromphone"];
-    NSString *fromId = [aps objectForKey:@"fromuid"];
+//    NSString *fromId = [aps objectForKey:@"fromuid"];
     NSString *type = [aps objectForKey:@"type"];
     
     
@@ -1014,6 +1013,9 @@
 }
 
 #pragma mark - RCIM接受消息代理
+
+#pragma mark - RCIMReceiveMessageDelegate
+
 
 -(void)didReceivedMessage:(RCMessage *)message left:(int)nLeft
 {
@@ -1030,6 +1032,8 @@
             
         });
     }
+    [[RCIM sharedRCIM] invokeVoIPCall:self.window.rootViewController message:message];
+
 }
 
 #pragma mark - RCIM监控连接状态
@@ -1037,11 +1041,11 @@
 -(void)responseConnectionStatus:(RCConnectionStatus)status{
     if (ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT == status) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"" message:@"您已下线，重新连接？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
-            alert.tag = 2000;
-            [alert show];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"" message:@"您已下线，重新连接？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+//            alert.tag = 2000;
+//            [alert show];
+//        });
         
         
     }
@@ -1084,43 +1088,42 @@
 
 #pragma mark - RCIMUserInfoFetcherDelegagte <NSObject>
 
-/**
- *  获取用户信息。
- *
- *  @param userId 用户 Id。
- *
- *  @return 用户信息。
- */
--(RCUserInfo*)getUserInfoWithUserId:(NSString*)userId
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void(^)(RCUserInfo* userInfo))completion
 {
-    NSLog(@"userId %@",userId);
-    
+    NSString *userName = [FBChatTool getUserNameForUserId:userId];
+    NSString *headImage = [FBChatTool getUserHeadImageForUserId:userId];;
     if ([userId isEqualToString:[GMAPI getUid]]) {
         
-        NSString *headImage = [FBChatTool getUserHeadImageForUserId:userId];
-        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[GMAPI getUsername] portrait:headImage];
-        
-        NSLog(@"user image %@",headImage);
-        
-        return user;
-    }else
-    {
-       
-        
-        NSString *userName = [FBChatTool getUserNameForUserId:userId];
-        if (userName == nil || userName.length == 0) {
-            
-            [self getPersonalInfo:userId];//获取个人信息
-        }
-        
-        NSString *headImage = [FBChatTool getUserHeadImageForUserId:userId];
-        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:userName portrait:headImage];
-        
-        return user;
+        userName = [GMAPI getUsername];
     }
     
+    if ([userName isKindOfClass:[NSString class]] && userName.length == 0) {
+        
+        NSString *url = [NSString stringWithFormat:FBAUTO_GET_USER_INFORMATION,userId];
+        LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+        [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+            
+            NSDictionary *dic = [result objectForKey:@"datainfo"];
+            
+            NSString *name = dic[@"username"];
+            
+            if ([name isKindOfClass:[NSString class]] && name.length > 0) {
+                
+                [FBChatTool cacheUserName:name forUserId:userId];
+            }
+            
+            RCUserInfo *userInfo = [[RCUserInfo alloc]initWithUserId:userId name:name portrait:headImage];
+            
+            return completion(userInfo);
+            
+        } failBlock:^(NSDictionary *failDic, NSError *erro) {
+            
+        }];
+    }
     
-    return nil;
+    RCUserInfo *userInfo = [[RCUserInfo alloc]initWithUserId:userId name:userName portrait:headImage];
+    
+    return completion(userInfo);
 }
 
 /**
