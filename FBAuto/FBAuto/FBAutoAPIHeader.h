@@ -328,4 +328,8 @@ alpha:(a)]
 //配置数据增量更新
 #define FBAUTO_GET_PEIZHI_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=getpeizhi&fromtime=%@&endtime=%@"
 
+//取消更新车源红点
+#define FBAUTO_CANCEL_HOTPOINT @"http://fbautotest.fblife.com/index.php?c=interface&a=Cancelhotpoint&authkey=%@&buddyid=%@"
+
+
 #endif

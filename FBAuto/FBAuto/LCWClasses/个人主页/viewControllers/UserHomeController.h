@@ -10,9 +10,20 @@
 /**
  *  个人主页
  */
+
+typedef void(^CancelPointBlock)(id aModel,NSString *user_Id,BOOL success);
+
 @interface UserHomeController : FBBaseViewController
+{
+    CancelPointBlock _cancelBlock;
+}
 
 @property(nonatomic,retain)NSString *title;
 @property(nonatomic,retain)NSString *userId;
+@property(nonatomic,assign)id friendModel;
+
+@property(nonatomic,assign)BOOL cancel_hotPoint;//是否取消红点
+
+- (void)setBlock:(CancelPointBlock)aBlock;
 
 @end

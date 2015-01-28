@@ -318,6 +318,19 @@
         UserHomeController *personal = [[UserHomeController alloc]init];
         personal.title = aModel.buddyname;
         personal.userId = aModel.buddyid;
+        personal.friendModel = aModel;
+        __weak typeof(_table)weakTable = _table;
+        [personal setBlock:^(id aModel, NSString *user_Id, BOOL success) {
+            NSLog(@"user_id11 %@",user_Id);
+            if (success) {
+                
+                NSLog(@"user_id22 %@",user_Id);
+                FBFriendModel *bModel = (FBFriendModel *)aModel;
+                bModel.hot_point = @"0";
+                [weakTable reloadData];
+            }
+            
+        }];
         [self.navigationController pushViewController:personal animated:YES];
     }
     

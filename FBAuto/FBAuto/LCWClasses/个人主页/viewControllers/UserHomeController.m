@@ -115,6 +115,29 @@ typedef enum {
 
 #pragma - mark 事件处理
 
+//取消红点block
+
+- (void)setBlock:(CancelPointBlock)aBlock
+{
+    
+    NSString *api = [NSString stringWithFormat:FBAUTO_CANCEL_HOTPOINT,[GMAPI getAuthkey],self.userId];
+    
+    NSLog(@"获取用户信息 api === %@",api);
+    
+    __weak typeof (self)weakSelf = self;
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        return aBlock(weakSelf.friendModel,weakSelf.userId,YES);
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        NSString *str = [failDic objectForKey:ERROR_INFO];
+        NSLog(@"取消红点 %@",str);
+    }];
+    
+}
+
 - (void)clickToJubao:(UIButton *)sender
 {
     JubaoViewController *jubao = [[JubaoViewController alloc]init];
