@@ -38,7 +38,7 @@
     
     oldTableHeight = self.view.height - 49 - 64;
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 49 - 64)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 49 - 64)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -50,7 +50,7 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateTucaoList:) name:NOTIFICATION_PUBLISHTUCAO_SUCCESS object:nil];
     
-    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
+    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
     [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
     
@@ -299,16 +299,6 @@
 - (CGFloat)heightForRowIndexPath:(NSIndexPath *)indexPath
 {
     TucaoModel *aModel = (TucaoModel *)_table.dataArray[indexPath.row];
-    
-//    //有图片有文字
-//    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
-//        
-//        CGFloat aHeight = [LCWTools heightForText:aModel.content width:300 font:17];
-//        
-//        return 400 - 20 + aHeight;
-//    }
-//    
-//    return 400 - 40;
     
     return [TucaoViewCell heightForCellWithModel:aModel];
 }

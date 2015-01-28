@@ -28,8 +28,8 @@
         UIImageView *logoImageV =[[UIImageView alloc]initWithImage:logoImage];
         logoImageV.frame = CGRectMake(5, (self.height - logoImage.size.height)/2.0 , logoImage.size.width, logoImage.size.height);
         [self addSubview:logoImageV];
-        
-        self.searchField = [[UITextField alloc]initWithFrame:CGRectMake(logoImageV.right + 5, 0, 240, self.height)];
+                
+        self.searchField = [[UITextField alloc]initWithFrame:CGRectMake(logoImageV.right + 5, 0, DEVICE_WIDTH - 80, self.height)];
         _searchField.delegate = self;
         _searchField.returnKeyType = UIReturnKeySearch;
         _searchField.placeholder = placeholder;

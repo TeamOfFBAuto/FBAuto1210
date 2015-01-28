@@ -47,7 +47,7 @@
     NSArray *titles = @[@"手机号/姓名",@"可能认识的人"];
     NSArray *images = @[[UIImage imageNamed:@"fangdajing_icon36_36"],[UIImage imageNamed:@"xiaoren_icon36_342"]];
     for (int i = 0; i < 2; i ++) {
-        Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(10, 10 + (10 + 60) * i, 300, 60) title:[titles objectAtIndex:i] target:self action:@selector(clickToDoSomething:) sectionStyle:Section_Image image:[images objectAtIndex:i]];
+        Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(10, 10 + (10 + 60) * i, DEVICE_WIDTH - 20, 60) title:[titles objectAtIndex:i] target:self action:@selector(clickToDoSomething:) sectionStyle:Section_Image image:[images objectAtIndex:i]];
         btn.tag = 100 + i;
         [self.view addSubview:btn];
     }

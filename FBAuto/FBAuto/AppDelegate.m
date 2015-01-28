@@ -1033,7 +1033,6 @@
         });
     }
     [[RCIM sharedRCIM] invokeVoIPCall:self.window.rootViewController message:message];
-
 }
 
 #pragma mark - RCIM监控连接状态

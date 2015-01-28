@@ -129,7 +129,7 @@
         [self getSingleCarInfoWithId:self.infoId];//获取单个车源信息
     }
     
-    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 49 - 44 - 20)];
+    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 49 - 44 - 20)];
 //    bigBgScroll.backgroundColor = [UIColor clearColor];
     bigBgScroll.showsHorizontalScrollIndicator = NO;
     bigBgScroll.showsVerticalScrollIndicator = NO;
@@ -560,11 +560,11 @@
  */
 - (void)createFirstSection
 {
-    firstBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, KFistSectionHeight)];
+    firstBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, KFistSectionHeight)];
 //    firstBgView.backgroundColor = [UIColor clearColor];
     [bigBgScroll addSubview:firstBgView];
     
-    photosScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(100, 10, 210, 90)];//和图片一样高
+    photosScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(100, 10, DEVICE_WIDTH - 110, 90)];//和图片一样高
 //    photosScroll.backgroundColor = [UIColor clearColor];
     photosScroll.showsHorizontalScrollIndicator = NO;
     photosScroll.pagingEnabled = YES;
@@ -588,7 +588,7 @@
 
 - (void)createSecondSection
 {
-    secondBgView = [[UIView alloc]initWithFrame:CGRectMake(10, firstBgView.bottom, 320 - 20, 45 * 7 + 45 * 2)];
+    secondBgView = [[UIView alloc]initWithFrame:CGRectMake(10, firstBgView.bottom, DEVICE_WIDTH - 20, 45 * 7 + 45 * 2)];
 //    secondBgView.backgroundColor = [UIColor clearColor];
     secondBgView.layer.borderWidth = 1.0;
     secondBgView.layer.borderColor = [UIColor colorWithHexString:@"b4b4b4"].CGColor;
@@ -605,7 +605,7 @@
     
     //价格特殊处理，需要输入
     
-    UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * titles.count, 300, 0.5)];
+    UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * titles.count, DEVICE_WIDTH - 20, 0.5)];
     line1.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [secondBgView addSubview:line1];
     
@@ -617,11 +617,11 @@
     priceTF.textAlignment = NSTextAlignmentRight;
     [secondBgView addSubview:priceTF];
     
-    [secondBgView addSubview:[self createLabelFrame:CGRectMake(300 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"c7c7cc"]]];
+    [secondBgView addSubview:[self createLabelFrame:CGRectMake(DEVICE_WIDTH - 20 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"c7c7cc"]]];
     
     //车源配置
     
-    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1), 300, 1)];
+    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1), DEVICE_WIDTH -20, 1)];
     line2.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [secondBgView addSubview:line2];
     
@@ -632,7 +632,7 @@
     
     //车源描述，需要输入
     
-    UIView *line3 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1 + 1), 300, 0.5)];
+    UIView *line3 = [[UIView alloc]initWithFrame:CGRectMake(0, 45 * (titles.count + 1 + 1), DEVICE_WIDTH - 20, 0.5)];
     line3.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [secondBgView addSubview:line3];
     
@@ -647,7 +647,7 @@
     //发布按钮
     
     publish = [UIButton buttonWithType:UIButtonTypeCustom];
-    publish.frame = CGRectMake(10, secondBgView.bottom + 16, 300, 50);
+    publish.frame = CGRectMake(10, secondBgView.bottom + 16, DEVICE_WIDTH - 20, 50);
     [publish setTitle:@"发布" forState:UIControlStateNormal];
 //    [publish setBackgroundImage:[UIImage imageNamed:@"huquyanzhengma_kedianji600_100"] forState:UIControlStateNormal];
     
@@ -657,7 +657,7 @@
     [publish addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
     [bigBgScroll addSubview:publish];
     
-    bigBgScroll.contentSize = CGSizeMake(320, firstBgView.height + secondBgView.height + 16 + publish.height + 10 + 50);
+    bigBgScroll.contentSize = CGSizeMake(DEVICE_WIDTH, firstBgView.height + secondBgView.height + 16 + publish.height + 10 + 50);
 }
 
 - (UILabel *)createLabelFrame:(CGRect)aFrame text:(NSString *)text alignMent:(NSTextAlignment)align textColor:(UIColor *)color
@@ -1116,11 +1116,13 @@
 
 - (void)controlPageControlDisplay:(BOOL)isShow showPage:(NSInteger)pageNum sumPage:(NSInteger)sum
 {
-    if (sum % 2 == 0) {
-        sum = sum / 2;
+    int pageSize = (DEVICE_WIDTH - 110) / (90 + 15);
+    
+    if (sum % pageSize == 0) {
+        sum = sum / pageSize;
     }else
     {
-        sum = (sum / 2) + 1;
+        sum = (sum / pageSize) + 1;
     }
     
     pageControl.hidden = !isShow;

@@ -28,12 +28,12 @@
         
         self.alpha = 0.0;
         
-        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, 320, 208)];
+        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, DEVICE_WIDTH, 208)];
         bgView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95];
         [self addSubview:bgView];
         
         UIButton *firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        firstButton.frame = CGRectMake(KLEFT, KTOP, 320 - KLEFT * 2, 45);
+        firstButton.frame = CGRectMake(KLEFT, KTOP, DEVICE_WIDTH - KLEFT * 2, 45);
         [firstButton setTitle:@"拍照" forState:UIControlStateNormal];
         [firstButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         firstButton.layer.cornerRadius = 5;
@@ -44,7 +44,7 @@
         [bgView addSubview:firstButton];
         
         UIButton *secondButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        secondButton.frame = CGRectMake(KLEFT, firstButton.bottom + DIS_SMALL, 320 - KLEFT * 2, 45);
+        secondButton.frame = CGRectMake(KLEFT, firstButton.bottom + DIS_SMALL, DEVICE_WIDTH - KLEFT * 2, 45);
         [secondButton setTitle:@"从手机相册选择" forState:UIControlStateNormal];
         [secondButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         secondButton.layer.cornerRadius = 5;
@@ -56,7 +56,7 @@
         
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelButton.frame = CGRectMake(KLEFT, secondButton.bottom + DIS_BIG, 320 - KLEFT * 2, 45);
+        cancelButton.frame = CGRectMake(KLEFT, secondButton.bottom + DIS_BIG, DEVICE_WIDTH - KLEFT * 2, 45);
         [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         cancelButton.layer.cornerRadius = 5;

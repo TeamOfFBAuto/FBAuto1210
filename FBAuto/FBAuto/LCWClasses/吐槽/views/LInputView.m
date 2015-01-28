@@ -36,7 +36,7 @@
         [superView addGestureRecognizer:tap];
         
         self.backgroundColor = [UIColor colorWithHexString:@"f3f4f6"];
-        self.frame = CGRectMake(0, CGRectGetMinY(frame), 320, SELF_HEIGHT);
+        self.frame = CGRectMake(0, CGRectGetMinY(frame), DEVICE_WIDTH, SELF_HEIGHT);
         
 //        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 1)];
 //        line.backgroundColor = [UIColor colorWithHexString:@"919499"];
@@ -70,7 +70,7 @@
 //_originalFrame的set方法  因为会调用setFrame  所以就不在此做赋值；
 - (void)setOriginalFrame:(CGRect)originalFrame
 {
-    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), 320, CGRectGetHeight(originalFrame));
+    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), DEVICE_WIDTH, CGRectGetHeight(originalFrame));
 }
 
 -(void)dealloc
@@ -95,7 +95,7 @@
 - (UITextView *)textView
 {
     if (!_textView) {
-        _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, KTOP, 320 - 60, TEXT_HEIGHT)];
+        _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, KTOP, DEVICE_WIDTH - 60, TEXT_HEIGHT)];
         _textView.backgroundColor = [UIColor whiteColor];
         _textView.returnKeyType = UIReturnKeySend;
 //        _textView.layer.cornerRadius = 5.0;

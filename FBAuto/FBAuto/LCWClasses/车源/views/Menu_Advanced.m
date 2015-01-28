@@ -196,10 +196,10 @@
 //    arrowImage.bottom
     
     CGFloat aWidth = 243.f;
-    CGFloat aLeft = 320.f;
+    CGFloat aLeft = DEVICE_WIDTH;
     
     if (contentStyle == Content_Area) {
-        aWidth = 300;
+        aWidth = DEVICE_WIDTH - 20;
         aLeft = 10.0;
     }
     
@@ -232,7 +232,7 @@
     
     if (thirdTable == nil) {
         
-        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(320, arrowImage.bottom, 158, sumHeight) style:UITableViewStylePlain];
+        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH, arrowImage.bottom, 158, sumHeight) style:UITableViewStylePlain];
         thirdTable.delegate = self;
         thirdTable.dataSource = self;
         [self addSubview:thirdTable];
@@ -273,7 +273,7 @@
 {
     if (colorTable == nil) {
         
-        colorTable = [[UITableView alloc]initWithFrame:CGRectMake(320, table.top, 243, sumHeight) style:UITableViewStylePlain];
+        colorTable = [[UITableView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH, table.top, 243, sumHeight) style:UITableViewStylePlain];
         colorTable.delegate = self;
         colorTable.dataSource = self;
         [self addSubview:colorTable];
@@ -349,9 +349,9 @@
         }
         
         NSString *letter = [firstLetterArray objectAtIndex:section - 1];
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
         
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 20)];
         [aView addSubview:titleLabel];
         titleLabel.backgroundColor = [UIColor colorWithHexString:@"dcdcdc"];
         //        titleLabel.te

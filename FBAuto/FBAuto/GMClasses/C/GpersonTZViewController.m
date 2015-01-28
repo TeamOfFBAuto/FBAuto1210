@@ -42,7 +42,7 @@
     self.titleLabel.text = @"通知";
     
     self.view.backgroundColor = [UIColor whiteColor];
-    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?455:365)];
+    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 49)];
     _tableView.refreshDelegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];

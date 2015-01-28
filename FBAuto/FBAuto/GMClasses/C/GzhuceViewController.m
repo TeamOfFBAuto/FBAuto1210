@@ -87,14 +87,14 @@
     
     
     //个人注册
-    _gerenTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, 320, iPhone5?Iphone5TableViewHeight:Iphone4TableViewHeight) style:UITableViewStylePlain];
+    _gerenTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, DEVICE_WIDTH, iPhone5?Iphone5TableViewHeight:Iphone4TableViewHeight) style:UITableViewStylePlain];
     _gerenTableView.delegate = self;
     _gerenTableView.dataSource = self;
     _gerenTableView.tag = 5;
     [self.view addSubview:_gerenTableView];
     
     //商家注册
-    _shangjiaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, 320, iPhone5?Iphone5TableViewHeight:Iphone4TableViewHeight) style:UITableViewStylePlain];
+    _shangjiaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 60, DEVICE_WIDTH, iPhone5?Iphone5TableViewHeight:Iphone4TableViewHeight) style:UITableViewStylePlain];
     _shangjiaTableView.delegate = self;
     _shangjiaTableView.dataSource = self;
     _shangjiaTableView.tag = 6;

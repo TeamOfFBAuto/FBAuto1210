@@ -104,7 +104,7 @@
     self.imageSize = CGSizeMake(75, 75);
     
     // Table View
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6,320,(iPhone5?568:480)-6-20-44-89/2) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6,DEVICE_WIDTH,(DEVICE_HEIGHT)-6-20-44-89/2) style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -121,7 +121,7 @@
     image_array = [[NSMutableArray alloc] init];
     
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-64-89/2,320,89/2)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,(DEVICE_HEIGHT)-64-89/2,DEVICE_WIDTH,89/2)];
     
     imageView.image = [UIImage imageNamed:@"ChoosePictureBackGroundImage.png"];
     
@@ -133,7 +133,7 @@
     
     tishi_button = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    tishi_button.frame = CGRectMake(266,11,100/2,58/2);
+    tishi_button.frame = CGRectMake(DEVICE_WIDTH - 55,11,100/2,58/2);
     
     [tishi_button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
     

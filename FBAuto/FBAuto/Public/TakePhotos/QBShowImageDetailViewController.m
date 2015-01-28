@@ -98,14 +98,14 @@
 -(void)setNavgationBar
 {
     
-    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,70)];
+    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,70)];
     
     navImageView.backgroundColor = RGBCOLOR(229,229,229);
     
     [self.view addSubview:navImageView];
     
     
-    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     
     daohangView.image = FBAUTO_IMAGE_NAVIGATION;
     
@@ -168,7 +168,7 @@
     
     
     
-    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-44,320,44)];
+    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-44,DEVICE_WIDTH,44)];
     
     bottomView.backgroundColor = RGBCOLOR(254,254,254);
     
@@ -379,7 +379,7 @@
                     
                     ALAsset *asset= bself.AllImagesArray[i];
                     
-                    [bself createShowViewWithAsset:asset WithFrame:CGRectMake(340*i,0,320,_myScrollView.frame.size.height) WithTag:(1000+i)];
+                    [bself createShowViewWithAsset:asset WithFrame:CGRectMake(340*i,0,DEVICE_WIDTH,_myScrollView.frame.size.height) WithTag:(1000+i)];
                 });
             }
         }

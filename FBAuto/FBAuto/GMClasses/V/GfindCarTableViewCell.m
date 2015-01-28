@@ -134,7 +134,7 @@
 //添加删除界面view
 -(void)addSanchuView{
     
-    _shanchuView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, 320, 60)];
+    _shanchuView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, DEVICE_WIDTH, 60)];
     
     //图片数组
     UIImage *imag1 = [UIImage imageNamed:@"lajitong44_44.png"];//删除

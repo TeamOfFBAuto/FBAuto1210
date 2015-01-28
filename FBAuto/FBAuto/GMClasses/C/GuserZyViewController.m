@@ -63,7 +63,7 @@
     
     NSLog(@"%s",__FUNCTION__);
     
-    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64-75)];
+    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 49)];
     _tableView.refreshDelegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -333,7 +333,7 @@
     
     //最后一个cell的分割线
     if (indexPath.row == _dataArray.count+3) {
-        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 84, 320, 0.5)];
+        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 84, DEVICE_WIDTH, 0.5)];
         fenView.backgroundColor = RGBCOLOR(214, 214, 214);
         [cell.contentView addSubview:fenView];
     }

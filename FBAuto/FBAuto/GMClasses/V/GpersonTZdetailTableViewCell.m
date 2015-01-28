@@ -42,7 +42,7 @@
 -(void)loadViewWithIndexPath:(NSIndexPath*)indexPath{
     
     if (indexPath.row == 0) {//时间
-        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 50)];
         self.timeLabel.font = [UIFont systemFontOfSize:13];
         self.timeLabel.textColor = RGBCOLOR(168, 168, 168);
         self.timeLabel.text = self.delegate.timeStr;
@@ -50,7 +50,7 @@
         [self.contentView addSubview:self.timeLabel];
         
         //分割线
-        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 0.5)];
+        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 50, DEVICE_WIDTH, 0.5)];
         fenView.backgroundColor = RGBCOLOR(214, 214, 214);
         [self.contentView addSubview:fenView];
         
@@ -59,12 +59,12 @@
         self.contentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         self.contentLabel.font = [UIFont systemFontOfSize:15];
         self.contentLabel.text = [LCWTools ddecodeSpecialCharactersStringWith:self.delegate.contentStr];
-        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(25, 22) width:320-22-22];
+        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(25, 22) width:DEVICE_WIDTH-22-22];
         [self.contentView addSubview:self.contentLabel];
         
         
         //分割线
-        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.contentLabel.frame)+22, 320, 0.5)];
+        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.contentLabel.frame)+22, DEVICE_WIDTH, 0.5)];
         fenView.backgroundColor = RGBCOLOR(214, 214, 214);
         [self.contentView addSubview:fenView];
         
@@ -76,7 +76,7 @@
     CGFloat height = 0;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectZero];
     label.text = self.delegate.contentStr;
-    [label setMatchedFrame4LabelWithOrigin:CGPointMake(25, 22) width:320-22-22];
+    [label setMatchedFrame4LabelWithOrigin:CGPointMake(25, 22) width:DEVICE_WIDTH-22-22];
     height = label.frame.size.height+22+22;
     return height;
 }

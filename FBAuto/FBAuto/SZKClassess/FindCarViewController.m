@@ -119,7 +119,7 @@
     
     oldTableHeight = self.view.height - 44 - menuBgView.height - 49 - 20;
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, 320, oldTableHeight)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, DEVICE_WIDTH, oldTableHeight)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -266,11 +266,11 @@
 
 - (void)createNavigationView
 {
-    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
     navigationView.backgroundColor = [UIColor clearColor];
     
     //编辑按钮
-    editButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 46 - 5,5+3,46,29)];
+    editButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 46 - 5,5+3,46,29)];
     [editButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
 //    editButton.backgroundColor = [UIColor orangeColor];
     [editButton setImage:[UIImage imageNamed:@"fabu92_58"] forState:UIControlStateNormal];
@@ -279,7 +279,7 @@
     [self.navigationController.navigationBar addSubview:navigationView];
     
     //搜索
-    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, 320 - 3 * 10 - 22 - 6 - 5 - 5, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, DEVICE_WIDTH - 3 * 10 - 22 - 6 - 5 - 5, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
         
         [self searchStyle:actionStyle searchText:searchText];
         
@@ -354,13 +354,13 @@
 
 - (void)createMenu
 {
-    menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     menuBgView.backgroundColor = FBAUTO_COLOR_MEBU;
     [self.view addSubview:menuBgView];
     
     NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"更多"];
     
-    CGFloat everyWidth = (320 - 4) / items.count;//每个需要的宽度
+    CGFloat everyWidth = (DEVICE_WIDTH - 4) / items.count;//每个需要的宽度
     CGFloat needWidth = 0.0;
     
     for (int i = 0; i < items.count; i ++) {

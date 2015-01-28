@@ -69,18 +69,18 @@
         _titielArray = @[@"姓名",@"地区",@"密码",@"重复密码",@"手机",@"验证码"];
         
         //注册界面的view
-        self.zhuceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320,  568-114)];
+        self.zhuceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH,  DEVICE_HEIGHT-114)];
         //self.zhuceView.backgroundColor = [UIColor orangeColor];
         [self.contentView addSubview:self.zhuceView];
         
         //点击回收键盘
-        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, 320, 568-114)];
+        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-114)];
         [backControl addTarget:self action:@selector(allShou) forControlEvents:UIControlEventTouchDown];
         [self.zhuceView addSubview:backControl];
         
         for (int i = 0; i<6; i++) {
             //框
-            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 5+i*55, 300, 44)];
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 5+i*55, DEVICE_WIDTH - 20, 44)];
             //view.layer.cornerRadius = 4;//设置那个圆角的有多圆
             view.layer.borderWidth = 0.5;//设置边框的宽度，当然可以不要
             view.layer.borderColor = [RGBCOLOR(180, 180, 180) CGColor];//设置边框的颜色
@@ -185,17 +185,17 @@
         _titielArray = @[@"公司全称",@"公司简称",@"地区",@"详细地址",@"密码",@"重复密码",@"手机",@"验证码"];
         
         //注册界面的view
-        self.zhuceView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-68)];
+        self.zhuceView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64)];
         [self.contentView addSubview:self.zhuceView1];
         
         //点击回收键盘
-        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, 320, 568-114)];
+        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-114)];
         [backControl addTarget:self action:@selector(allShou) forControlEvents:UIControlEventTouchDown];
         [self.zhuceView1 addSubview:backControl];
         
         for (int i = 0; i<8; i++) {
             //框
-            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 5+i*55, 300, 44)];
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 5+i*55, DEVICE_WIDTH - 20, 44)];
             //view.layer.cornerRadius = 4;//设置那个圆角的有多圆
             view.layer.borderWidth = 0.5;//设置边框的宽度，当然可以不要
             view.layer.borderColor = [RGBCOLOR(180, 180, 180) CGColor];//设置边框的颜色

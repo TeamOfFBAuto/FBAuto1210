@@ -159,7 +159,7 @@
     
     oldTableHeight = self.view.height - 44 - menuBgView.height - 49 - 20;
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, 320, oldTableHeight)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, menuBgView.bottom, DEVICE_WIDTH, oldTableHeight)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -244,7 +244,7 @@
 
 - (void)createNavigationView
 {
-    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
     navigationView.backgroundColor = [UIColor clearColor];
     [self.navigationController.navigationBar addSubview:navigationView];
     
@@ -253,7 +253,8 @@
 
     
     //搜索
-    searchView = [[LSearchView alloc]initWithFrame:CGRectMake((320 - 550 / 2.0) / 2.0, (44 - 30)/2.0, 550 / 2.0, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+    CGFloat aWidth = DEVICE_WIDTH - 45;
+    searchView = [[LSearchView alloc]initWithFrame:CGRectMake((DEVICE_WIDTH - aWidth) / 2.0, (44 - 30)/2.0, aWidth, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
         
         [self searchStyle:actionStyle searchText:searchText];
         
@@ -262,7 +263,7 @@
     [navigationView addSubview:searchView];
     
     //取消按钮
-    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 44 - 10,0,44,44)];
+    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 44 - 10,0,44,44)];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton addTarget:self action:@selector(clickToCancel:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -318,16 +319,17 @@
 {
     cancelButton.hidden = isNormal;
     
+    CGFloat aWidth = DEVICE_WIDTH - 45;
     CGRect aFrame = searchView.frame;
     if (isNormal) {
         
-        aFrame.origin.x = (320 - 550 / 2.0) / 2.0;
-        aFrame.size.width = 550 / 2.0;
+        aFrame.origin.x = (DEVICE_WIDTH - aWidth) / 2.0;
+        aFrame.size.width = aWidth;
         
     }else
     {
         aFrame.origin.x = 10.f;
-        aFrame.size.width = 320 - 3 * 10 - 44;
+        aFrame.size.width = DEVICE_WIDTH - 3 * 10 - 44;
     }
     
     [UIView animateWithDuration:0.2 animations:^{
@@ -340,13 +342,13 @@
 
 - (void)createMenu
 {
-    menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    menuBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     menuBgView.backgroundColor = FBAUTO_COLOR_MEBU;
     [self.view addSubview:menuBgView];
     
     NSArray *items = @[@"车型",@"版本",@"来源",@"库存",@"更多"];
     
-    CGFloat everyWidth = (320 - 4) / items.count;//每个需要的宽度
+    CGFloat everyWidth = (DEVICE_WIDTH - 4) / items.count;//每个需要的宽度
     CGFloat needWidth = 0.0;
     
     for (int i = 0; i < items.count; i ++) {

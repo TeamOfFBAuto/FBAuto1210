@@ -75,7 +75,7 @@
         self.assetsGroups = [NSMutableArray array];
         
         // Table View
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6,320,iPhone5?568:480) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6,DEVICE_WIDTH,DEVICE_HEIGHT) style:UITableViewStylePlain];
         tableView.dataSource = self;
         tableView.delegate = self;
         //        tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

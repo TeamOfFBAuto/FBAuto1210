@@ -26,9 +26,6 @@
 		135922581A4D6B0B0091E320 /* TucaoPublishController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135922561A4D6B0B0091E320 /* TucaoPublishController.xib */; };
 		135EC58C1A009BAE00A040F1 /* garea.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 135EC58B1A009BAE00A040F1 /* garea.sqlite */; };
 		135EC58F1A009D2F00A040F1 /* CarUpdateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */; };
-		135EC5911A00E9D400A040F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5901A00E9D400A040F1 /* Default-568h@2x.png */; };
-		135EC5941A00EC0800A040F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5921A00EC0800A040F1 /* Default.png */; };
-		135EC5951A00EC0800A040F1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5931A00EC0800A040F1 /* Default@2x.png */; };
 		135EC5991A01043400A040F1 /* fabu92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5971A01043400A040F1 /* fabu92_58@2x.png */; };
 		135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */; };
 		136787151A4D026000192276 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787141A4D026000192276 /* BaseModel.m */; };
@@ -66,9 +63,6 @@
 		137927041987776900377ED5 /* GpersonTZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926F41987776900377ED5 /* GpersonTZViewController.m */; };
 		137927051987776900377ED5 /* GxiaoxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926F61987776900377ED5 /* GxiaoxiViewController.m */; };
 		137927071987776900377ED5 /* GzhuceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926FA1987776900377ED5 /* GzhuceViewController.m */; };
-		137BD5EA1A5A2AAC0057A784 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 137BD5E71A5A2AAC0057A784 /* icon57.png */; };
-		137BD5EB1A5A2AAC0057A784 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 137BD5E81A5A2AAC0057A784 /* icon114.png */; };
-		137BD5EC1A5A2AAC0057A784 /* icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 137BD5E91A5A2AAC0057A784 /* icon120.png */; };
 		137BD5EE1A5A2FE50057A784 /* daohanglan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137BD5ED1A5A2FE50057A784 /* daohanglan@2x.png */; };
 		137BD5F21A5A315D0057A784 /* TucaoCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 137BD5F01A5A315D0057A784 /* TucaoCommentCell.m */; };
 		137BD5F31A5A315D0057A784 /* TucaoCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137BD5F11A5A315D0057A784 /* TucaoCommentCell.xib */; };
@@ -569,9 +563,6 @@
 		135EC58B1A009BAE00A040F1 /* garea.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = garea.sqlite; sourceTree = "<group>"; };
 		135EC58D1A009D2F00A040F1 /* CarUpdateClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarUpdateClass.h; sourceTree = "<group>"; };
 		135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarUpdateClass.m; sourceTree = "<group>"; };
-		135EC5901A00E9D400A040F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		135EC5921A00EC0800A040F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		135EC5931A00EC0800A040F1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		135EC5971A01043400A040F1 /* fabu92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fabu92_58@2x.png"; sourceTree = "<group>"; };
 		135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiahaoyou 92_58@2x.png"; sourceTree = "<group>"; };
 		136787131A4D026000192276 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
@@ -630,9 +621,6 @@
 		137926F61987776900377ED5 /* GxiaoxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GxiaoxiViewController.m; sourceTree = "<group>"; };
 		137926F91987776900377ED5 /* GzhuceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzhuceViewController.h; sourceTree = "<group>"; };
 		137926FA1987776900377ED5 /* GzhuceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzhuceViewController.m; sourceTree = "<group>"; };
-		137BD5E71A5A2AAC0057A784 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
-		137BD5E81A5A2AAC0057A784 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
-		137BD5E91A5A2AAC0057A784 /* icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120.png; sourceTree = "<group>"; };
 		137BD5ED1A5A2FE50057A784 /* daohanglan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daohanglan@2x.png"; sourceTree = "<group>"; };
 		137BD5EF1A5A315D0057A784 /* TucaoCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoCommentCell.h; sourceTree = "<group>"; };
 		137BD5F01A5A315D0057A784 /* TucaoCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoCommentCell.m; sourceTree = "<group>"; };
@@ -2631,12 +2619,6 @@
 		190BFD47195AA0FB0098E0F4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				137BD5E71A5A2AAC0057A784 /* icon57.png */,
-				137BD5E81A5A2AAC0057A784 /* icon114.png */,
-				137BD5E91A5A2AAC0057A784 /* icon120.png */,
-				135EC5921A00EC0800A040F1 /* Default.png */,
-				135EC5931A00EC0800A040F1 /* Default@2x.png */,
-				135EC5901A00E9D400A040F1 /* Default-568h@2x.png */,
 				190BFD48195AA0FB0098E0F4 /* FBAuto-Info.plist */,
 				190BFD49195AA0FB0098E0F4 /* InfoPlist.strings */,
 				190BFD4C195AA0FB0098E0F4 /* main.m */,
@@ -3068,7 +3050,6 @@
 				13A37C881A1DCCBD00AECDB9 /* shoucang_cancel@2x.png in Resources */,
 				13B259D01A591F9100F359CD /* mima38_38@2x.png in Resources */,
 				13B259CF1A591F9100F359CD /* icon1024_1024@2x.png in Resources */,
-				137BD5EA1A5A2AAC0057A784 /* icon57.png in Resources */,
 				138B4AF21966A4BD00B974A5 /* face86.png in Resources */,
 				13D5E01A1961758E00804835 /* haoyou90_70@2x.png in Resources */,
 				138B4ABD1966A4BD00B974A5 /* face38.png in Resources */,
@@ -3103,7 +3084,6 @@
 				13B259CD1A591F9100F359CD /* fabu550_100@2x.png in Resources */,
 				138B4ADC1966A4BD00B974A5 /* face66.png in Resources */,
 				138B4AB41966A4BD00B974A5 /* face3.png in Resources */,
-				135EC5911A00E9D400A040F1 /* Default-568h@2x.png in Resources */,
 				13D5E0071961758E00804835 /* huquyanzhengma_kedianji600_100@2x.png in Resources */,
 				136CE5781A5D1B1B007D78A7 /* zhuce_yonghu38_38@2x.png in Resources */,
 				138B4AE61966A4BD00B974A5 /* face75.png in Resources */,
@@ -3126,13 +3106,11 @@
 				138B4AAF1966A4BD00B974A5 /* face25.png in Resources */,
 				1391EF02197670E300FDC52A /* CarSourceCell.xib in Resources */,
 				13B259C41A591F9100F359CD /* b_gern_down46_46@2x.png in Resources */,
-				135EC5941A00EC0800A040F1 /* Default.png in Resources */,
 				E37126D019878DD100CB69CA /* GuserZyViewController.xib in Resources */,
 				135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */,
 				13D5DFDE1961758E00804835 /* dianhua40_46@2x.png in Resources */,
 				13D5DFEB1961758E00804835 /* xiala_sanjiao_down14_8@2x.png in Resources */,
 				138B4AE51966A4BD00B974A5 /* face74.png in Resources */,
-				137BD5EB1A5A2AAC0057A784 /* icon114.png in Resources */,
 				13B259D11A591F9100F359CD /* tianjia60_60@2x.png in Resources */,
 				13D5E0151961758E00804835 /* denglu_botton600_100@2x.png in Resources */,
 				1391EF071977925300FDC52A /* logIn_close@2x.png in Resources */,
@@ -3215,7 +3193,6 @@
 				13B259C21A591F9100F359CD /* b_cheyuan_up46_46@2x.png in Resources */,
 				138B4ADD1966A4BD00B974A5 /* face67.png in Resources */,
 				13D5DFD91961758E00804835 /* fangdajing_icon36_36@2x.png in Resources */,
-				137BD5EC1A5A2AAC0057A784 /* icon120.png in Resources */,
 				13D5E0ED1963E19300804835 /* yulan-button-kedian-100_58@2x.png in Resources */,
 				13D5DFE91961758E00804835 /* sousuo_bg548_58@2x.png in Resources */,
 				13AB60DB1A1F43E9002C5543 /* baocun92_58@2x.png in Resources */,
@@ -3235,7 +3212,6 @@
 				13B259C11A591F9100F359CD /* b_cheyuan_down44_44@2x.png in Resources */,
 				13B259C81A591F9100F359CD /* b_xunche_down46_46@2x.png in Resources */,
 				E362357F19657588003B23CC /* area.plist in Resources */,
-				135EC5951A00EC0800A040F1 /* Default@2x.png in Resources */,
 				13D5E0161961758E00804835 /* fanhui_24_42@2x.png in Resources */,
 				13B259C51A591F9100F359CD /* b_tucao50_44@2x.png in Resources */,
 				138B4AA11966A4BD00B974A5 /* face12.png in Resources */,
@@ -3639,6 +3615,8 @@
 			baseConfigurationReference = 851D3FE06E4BD2DA94EC5D61 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Kun Shi (6NH6VCUU57)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Kun Shi (6NH6VCUU57)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3675,6 +3653,8 @@
 			baseConfigurationReference = F18691168B243DEFF92DA025 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Kun Shi (6NH6VCUU57)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Kun Shi (6NH6VCUU57)";
 				FRAMEWORK_SEARCH_PATHS = (

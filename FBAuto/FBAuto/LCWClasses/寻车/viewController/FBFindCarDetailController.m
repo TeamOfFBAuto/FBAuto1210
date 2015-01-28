@@ -85,14 +85,8 @@
         
         NSLog(@"单个车源发布 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
         
-        NSArray *dataInfo = [result objectForKey:@"datainfo"];
-        
-        if (dataInfo.count == 0) {
-            return ;
-        }
-        
-        NSDictionary *dic = [dataInfo objectAtIndex:0];
-        
+        NSDictionary *dic = [result objectForKey:@"datainfo"];
+         
         
         //判断是否收藏
         

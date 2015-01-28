@@ -34,7 +34,7 @@
     viewTag++;
     
     //背景框
-    self.kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 300, 44)];
+    self.kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 44)];
     self.kuang.layer.borderWidth = 0.5;
     self.kuang.layer.borderColor = [RGBCOLOR(220, 220, 220)CGColor];
     [self.contentView addSubview:self.kuang];
@@ -59,7 +59,7 @@
     [self.contentView addSubview:self.titileLabel];
     
     //箭头
-    UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.titileLabel.frame)+210, 18, 5, 9)];
+    UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 20 - 8, 18, 5, 9)];
     [jiantou setImage:[UIImage imageNamed:@"jiantou_hui10_18.png"]];
     [self.contentView addSubview:jiantou];
 }

@@ -30,7 +30,7 @@
         
         self.alpha = 0.0;
         
-        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, 320, VIEW_HEIGHT)];
+        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, DEVICE_WIDTH, VIEW_HEIGHT)];
         bgView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95];
         [self addSubview:bgView];
         
@@ -68,7 +68,7 @@
         }
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelButton.frame = CGRectMake(KLEFT, 350/2.0, 320 - KLEFT * 2, 45);
+        cancelButton.frame = CGRectMake(KLEFT, 350/2.0, DEVICE_WIDTH - KLEFT * 2, 45);
         [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 

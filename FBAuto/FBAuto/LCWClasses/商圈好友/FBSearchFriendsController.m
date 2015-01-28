@@ -56,7 +56,7 @@
     
     [self createSearchViews];
     
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20) style:UITableViewStylePlain];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20) style:UITableViewStylePlain];
     _table.delegate = self;
     _table.dataSource = self;
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -85,7 +85,9 @@
 {
     __weak typeof(self)weakSelf  = self;
     //搜索
-    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(40, (44 - 30)/2.0, 550 / 2.0 - 4, 30) placeholder:@"请输入手机号或姓名" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+    
+    CGFloat aWidth = DEVICE_WIDTH - 45;
+    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(40, (44 - 30)/2.0, aWidth - 4, 30) placeholder:@"请输入手机号或姓名" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
         
         [weakSelf searchStyle:actionStyle searchText:searchText];
         
@@ -94,7 +96,7 @@
     [self.navigationController.navigationBar addSubview:searchView];
     
     //取消按钮
-    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(550/2.0,0,44,44)];
+    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(aWidth,0,44,44)];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton addTarget:self action:@selector(clickToCancel:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -129,17 +131,17 @@
 - (void)updateSearchViewNormal:(BOOL)isNormal
 {
 //    cancelButton.hidden = isNormal;
-    
+    CGFloat aWidth = DEVICE_WIDTH - 45;
     CGRect aFrame = searchView.frame;
     if (isNormal) {
         
         aFrame.origin.x = 40;
-        aFrame.size.width = 550 / 2.0 - 4;
+        aFrame.size.width = aWidth - 4;
         
     }else
     {
         aFrame.origin.x = 10.f;
-        aFrame.size.width = 320 - 10 - 44;
+        aFrame.size.width = DEVICE_WIDTH - 10 - 44;
     }
     
     [UIView animateWithDuration:0.2 animations:^{

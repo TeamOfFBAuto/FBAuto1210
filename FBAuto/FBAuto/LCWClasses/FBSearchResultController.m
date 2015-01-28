@@ -53,7 +53,7 @@
     
     self.titleLabel.text = @"搜索结果";
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0,0, 320, self.view.height - 20 - 44)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0,0, DEVICE_WIDTH, self.view.height - 20 - 44)];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;

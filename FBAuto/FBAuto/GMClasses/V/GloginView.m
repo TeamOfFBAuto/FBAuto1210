@@ -65,7 +65,7 @@
         UIImageView *logoImv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dl_logo382_148"] highlightedImage:nil];
 //        logoImv.frame = CGRectMake(53, 118, 220, 60);
         
-        logoImv.frame = CGRectMake(0, 118, 320, 70);
+        logoImv.frame = CGRectMake(0, 118, DEVICE_WIDTH, 70);
         logoImv.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:logoImv];
         self.logoImv = logoImv;

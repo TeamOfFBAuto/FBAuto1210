@@ -101,14 +101,14 @@
     
     if (thirdTable == nil) {
         
-        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(320, 0, 320 - 270/2.0 + 20, self.view.height) style:UITableViewStylePlain];
+        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH, 0, DEVICE_WIDTH - 270/2.0 + 20, self.view.height) style:UITableViewStylePlain];
         thirdTable.delegate = self;
         thirdTable.dataSource = self;
         [self.view addSubview:thirdTable];
         
         [UIView animateWithDuration:0.2 animations:^{
             CGRect aFrame = thirdTable.frame;
-            aFrame.origin.x -= (320 - 270/2.0);
+            aFrame.origin.x -= (DEVICE_WIDTH - 270/2.0);
             thirdTable.frame = aFrame;
         }];
         
@@ -153,7 +153,7 @@
         }
         
         NSString *letter = [firstLetterArray objectAtIndex:section - 1];
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
         [aView addSubview:titleLabel];

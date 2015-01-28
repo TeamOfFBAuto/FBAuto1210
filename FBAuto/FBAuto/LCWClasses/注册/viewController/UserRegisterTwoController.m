@@ -87,7 +87,7 @@
     //地区选择 ===================
     
     //地区pickview
-    pickeView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 20, 320, 216)];
+    pickeView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 20, DEVICE_WIDTH, 216)];
     pickeView.delegate = self;
     pickeView.dataSource = self;
     [self.view addSubview:pickeView];
@@ -190,7 +190,7 @@
     NSLog(@"_backPickView");
     __weak typeof (self)bself = self;
     [UIView animateWithDuration:0.3 animations:^{
-        bself.backPickView.frame = CGRectMake(0,DEVICE_HEIGHT - 216 - 64, 320, 216);
+        bself.backPickView.frame = CGRectMake(0,DEVICE_HEIGHT - 216 - 64, DEVICE_WIDTH, 216);
     }];
     
     
@@ -200,7 +200,7 @@
     NSLog(@"_backPickView");
     __weak typeof (self)bself = self;
     [UIView animateWithDuration:0.3 animations:^{
-        bself.backPickView.frame = CGRectMake(0,DEVICE_HEIGHT, 320, 216);
+        bself.backPickView.frame = CGRectMake(0,DEVICE_HEIGHT, DEVICE_WIDTH, 216);
     }];
     
     [self showSelectedAreaInfo];

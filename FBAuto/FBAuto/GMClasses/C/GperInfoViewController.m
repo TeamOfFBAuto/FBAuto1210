@@ -45,7 +45,7 @@
     NSLog(@"%s",__FUNCTION__);
     
     //主tableview
-    _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, DEVICE_HEIGHT - 64 - 49) style:UITableViewStylePlain];
+    _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 49) style:UITableViewStylePlain];
     _tableview.delegate = self;
     _tableview.dataSource = self;
     _tableview.scrollEnabled = NO;
@@ -78,12 +78,7 @@
     [hud removeFromSuperview];
     hud.delegate = nil;
     hud = nil;
-//    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 , 320, iPhone5?568:480) style:UITableViewStylePlain];
-//    _tableView.delegate = self;
-//    _tableView.dataSource = self;
-//    _tableView.scrollEnabled = NO;
-//    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    [self.view addSubview:_tableView];
+
     [_tableview reloadData];
 }
 

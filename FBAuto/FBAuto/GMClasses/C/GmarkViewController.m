@@ -79,14 +79,14 @@
     
     self.delClicked = NO;
     
-    _tableview = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:415)];
+    _tableview = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64)];
     _tableview.refreshDelegate = self;
     _tableview.dataSource = self;
     _tableview.separatorColor = [UIColor whiteColor];
     [self.view addSubview:_tableview];
     
     //底部删除view
-    _dview = [[UIView alloc]initWithFrame:CGRectMake(0, iPhone5?568-64:415, 320, 80)];
+    _dview = [[UIView alloc]initWithFrame:CGRectMake(0, DEVICE_HEIGHT - 64, DEVICE_WIDTH, 80)];
     _dview.backgroundColor = [UIColor whiteColor];
     _dview.userInteractionEnabled = YES;
     
@@ -288,14 +288,14 @@
         [weakSelf.indexes removeAllObjects];
         weakSelf.numLabel.text =  @"(  )";
         [UIView animateWithDuration:0.1 animations:^{
-            weakView.frame = CGRectMake(0, iPhone5?568-64-80:415-80, 320, 80);
+            weakView.frame = CGRectMake(0, DEVICE_HEIGHT-64-80, DEVICE_WIDTH, 80);
         } completion:^(BOOL finished) {
             [weakTable reloadData];
         }];
     }else{//正常界面
         weakSelf.delType = 2;
         [UIView animateWithDuration:0.1 animations:^{
-            weakView.frame = CGRectMake(0, iPhone5?568-64:415, 320, 80);
+            weakView.frame = CGRectMake(0, DEVICE_HEIGHT-64-80, DEVICE_WIDTH, 80);
         } completion:^(BOOL finished) {
             [weakTable reloadData];
         }];

@@ -44,7 +44,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithRed:20/255. green:20/255. blue:20/255. alpha:1];
-        self.frame = CGRectMake(0, CGRectGetMinY(frame), 320, SELF_HEIGHT);
+        self.frame = CGRectMake(0, CGRectGetMinY(frame), DEVICE_WIDTH, SELF_HEIGHT);
         self.layer.borderWidth = 1;
 //        self.layer.borderColor = [UIColor colorWithRed:200/255.0 green:203/255.0 blue:206/255.0 alpha:1].CGColor;
         [self textView];
@@ -68,7 +68,7 @@
 //_originalFrame的set方法  因为会调用setFrame  所以就不在此做赋值；
 - (void)setOriginalFrame:(CGRect)originalFrame
 {
-    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), 320, CGRectGetHeight(originalFrame));
+    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), DEVICE_WIDTH, CGRectGetHeight(originalFrame));
 }
 
 -(void)dealloc

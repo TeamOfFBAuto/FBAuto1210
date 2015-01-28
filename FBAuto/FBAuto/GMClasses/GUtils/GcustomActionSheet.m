@@ -98,7 +98,7 @@
         }
         content_height += 74;
         
-        _content_view.frame = CGRectMake(0,(iPhone5?568:480),320,content_height);
+        _content_view.frame = CGRectMake(0,DEVICE_HEIGHT,DEVICE_WIDTH,content_height);
     }
     
     return self;
@@ -184,7 +184,7 @@
         }
         content_height += 74;
         
-        _content_view.frame = CGRectMake(0,(iPhone5?568:480),320,content_height);
+        _content_view.frame = CGRectMake(0,DEVICE_HEIGHT,DEVICE_WIDTH,content_height);
     }
     
     return self;

@@ -60,7 +60,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];
+    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];
     bigBgScroll.backgroundColor = [UIColor whiteColor];
     bigBgScroll.showsHorizontalScrollIndicator = NO;
     bigBgScroll.showsVerticalScrollIndicator = NO;
@@ -113,7 +113,7 @@
     UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, 300, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:firstLabel];
     
-    UIView *firstBgView = [[UIView alloc]initWithFrame:CGRectMake(10, firstLabel.bottom, 320 - 20, 45 * titles1.count)];
+    UIView *firstBgView = [[UIView alloc]initWithFrame:CGRectMake(10, firstLabel.bottom, DEVICE_WIDTH - 20, 45 * titles1.count)];
     firstBgView.backgroundColor = [UIColor clearColor];
     firstBgView.layer.borderWidth = 1.0;
     firstBgView.layer.borderColor = [UIColor colorWithHexString:@"b4b4b4"].CGColor;
@@ -122,7 +122,7 @@
     UILabel *secondLabel = [self createLabelFrame:CGRectMake(10, firstBgView.bottom, 300, 45) text:@"选填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:secondLabel];
     
-    UIView *secondBgView = [[UIView alloc]initWithFrame:CGRectMake(10, secondLabel.bottom, 320 - 20, 45 * (titles1.count + titles2.count) + 45)];
+    UIView *secondBgView = [[UIView alloc]initWithFrame:CGRectMake(10, secondLabel.bottom, DEVICE_WIDTH - 20, 45 * (titles1.count + titles2.count) + 45)];
     secondBgView.backgroundColor = [UIColor clearColor];
     secondBgView.layer.borderWidth = 1.0;
     secondBgView.layer.borderColor = [UIColor colorWithHexString:@"b4b4b4"].CGColor;
@@ -169,7 +169,7 @@
     [publish addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
     [bigBgScroll addSubview:publish];
     
-    bigBgScroll.contentSize = CGSizeMake(320, firstBgView.height + secondBgView.height + publish.height + 400);
+    bigBgScroll.contentSize = CGSizeMake(DEVICE_WIDTH, firstBgView.height + secondBgView.height + publish.height + 400);
 }
 
 - (UILabel *)createLabelFrame:(CGRect)aFrame text:(NSString *)text alignMent:(NSTextAlignment)align textColor:(UIColor *)color

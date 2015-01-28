@@ -40,7 +40,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, 320, 568-114)];
+    UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-114)];
     [backControl addTarget:self action:@selector(allShou) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:backControl];
     

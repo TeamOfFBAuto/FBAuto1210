@@ -98,7 +98,7 @@
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     CGRect aFrame = _userFaceImv.frame;
-    aFrame.size.width = 320;
+    aFrame.size.width = DEVICE_WIDTH;
     
     headButton.frame = aFrame;
     headButton.backgroundColor = [UIColor clearColor];
@@ -133,7 +133,7 @@
         [btn setBackgroundImage:imageArray[i] forState:UIControlStateNormal];
         
         //frame
-        btn.frame = CGRectMake(9+i*105, CGRectGetMaxY(self.userFaceImv.frame)+14, 91, 30);
+        btn.frame = CGRectMake(9+i*105 * (DEVICE_WIDTH / 320), CGRectGetMaxY(self.userFaceImv.frame)+14, 91 *(DEVICE_WIDTH / 320), 30 * (DEVICE_WIDTH / 320));
         btn.backgroundColor = COLOR_NORMAL;
         btn.layer.cornerRadius = 4;
         btn.tag = 50+i;
@@ -153,14 +153,14 @@
     
     
     //展示信息的tableView
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 114, 320, iPhone5?568-64-164:250) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 114, DEVICE_WIDTH, DEVICE_HEIGHT-64-164) style:UITableViewStyleGrouped];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 100)];
     view.backgroundColor = [UIColor whiteColor];
     
     UIButton *logout_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -353,7 +353,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     view.backgroundColor = [UIColor whiteColor];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,17, 60, 13)];
@@ -386,7 +386,7 @@
     [cell loadViewWithIndexPath:indexPath];
     
     //遮挡重叠的黑线
-    UIView *xiatiao = [[UIView alloc]initWithFrame:CGRectMake(10.5, 43, 299, 1)];
+    UIView *xiatiao = [[UIView alloc]initWithFrame:CGRectMake(10.5, 43, DEVICE_WIDTH - 20 - 1, 1)];
     xiatiao.backgroundColor = [UIColor whiteColor];
     [cell.contentView addSubview:xiatiao];
     if ((indexPath.row == 3 && indexPath.section == 0)||(indexPath.row == 3  && indexPath.section == 1)) {

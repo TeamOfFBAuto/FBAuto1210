@@ -43,7 +43,7 @@
     
     
     
-    bgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];//和图片一样高
+    bgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];//和图片一样高
     bgScroll.backgroundColor = [UIColor clearColor];
     bgScroll.showsHorizontalScrollIndicator = NO;
     bgScroll.pagingEnabled = YES;
@@ -51,11 +51,11 @@
     [self.view addSubview:bgScroll];
     
     
-    bgScroll.contentSize = CGSizeMake(320 * _imagesArray.count, bgScroll.height);
+    bgScroll.contentSize = CGSizeMake(DEVICE_WIDTH * _imagesArray.count, bgScroll.height);
     
     
     for (int i = 0; i < _imagesArray.count; i ++) {
-        ZoomScrollView *aImageView = [[ZoomScrollView alloc]initWithFrame:CGRectMake(320 * i, 0, 320, bgScroll.height)];
+        ZoomScrollView *aImageView = [[ZoomScrollView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH * i, 0, DEVICE_WIDTH, bgScroll.height)];
         
         [aImageView.imageView sd_setImageWithURL:[NSURL URLWithString:[_imagesArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"detail_test.jpg"]];
         
@@ -64,7 +64,7 @@
         aImageView.tag = 100 + i;
     }
     
-    bgScroll.contentOffset = CGPointMake(320 * self.showIndex, 0);
+    bgScroll.contentOffset = CGPointMake(DEVICE_WIDTH * self.showIndex, 0);
     self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",self.showIndex + 1,(unsigned long)_imagesArray.count];
 }
 
@@ -95,7 +95,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger index = offsetX / 320 + 1;
+    NSInteger index = offsetX / DEVICE_WIDTH + 1;
     
     self.showIndex = index - 1;
     

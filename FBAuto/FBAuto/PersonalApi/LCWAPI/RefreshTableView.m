@@ -130,7 +130,7 @@
 
 - (void)createFooterView
 {
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320, 40.0f)];
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, DEVICE_WIDTH, 40.0f)];
     
     [tableFooterView addSubview:self.loadingIndicator];
     [tableFooterView addSubview:self.loadingLabel];
@@ -471,7 +471,7 @@
 - (UILabel*)loadingLabel
 {
     if (!_loadingLabel) {
-        _loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(320.f/2-80, 10, self.frame.size.width/2+30, 20)];
+        _loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEVICE_WIDTH/2-80, 10, self.frame.size.width/2+30, 20)];
         _loadingLabel.text = NSLocalizedString(@"加载中...", nil);
         _loadingLabel.backgroundColor = [UIColor clearColor];
         [_loadingLabel setFont:[UIFont systemFontOfSize:14]];

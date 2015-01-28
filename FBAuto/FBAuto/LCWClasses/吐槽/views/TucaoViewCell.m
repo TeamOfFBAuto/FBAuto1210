@@ -48,6 +48,7 @@
     self.dateLine.text = [LCWTools timestamp:aModel.dateline];
     
     self.centerImageView.backgroundColor = [ColorModel colorForTucao:[aModel.color intValue]];
+    self.centerImageView.height = DEVICE_WIDTH - 20;
     
     if ([self haveImage:aModel.image]) {
         
@@ -58,8 +59,8 @@
         
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         self.contentLabel.top = self.centerImageView.bottom + 5;
-        self.contentLabel.width = _centerImageView.width;
-        _contentLabel.height = [LCWTools heightForText:aModel.content width:_centerImageView.width font:17];
+        self.contentLabel.width = DEVICE_WIDTH - 20;
+        _contentLabel.height = [LCWTools heightForText:aModel.content width:DEVICE_WIDTH - 20 font:17];
         
     }else
     {
@@ -68,8 +69,8 @@
         //内容描述 中间
         
         _contentLabel.textAlignment = NSTextAlignmentCenter;
-        self.contentLabel.width = 200;
-        self.contentLabel.height = [LCWTools heightForText:aModel.content width:200 font:17];
+        self.contentLabel.width = DEVICE_WIDTH - 120;
+        self.contentLabel.height = [LCWTools heightForText:aModel.content width:DEVICE_WIDTH - 120 font:17];
         self.contentLabel.center = _centerImageView.center;
     }
     
@@ -94,9 +95,6 @@
     self.commentLable.text = aModel.comemt_num;
     
     self.likeButton.selected = aModel.dianzan_status == 1 ? YES : NO;
-    
-    NSLog(@"--->self.centerImageView.bottom %f",self.centerImageView.bottom);
-    NSLog(@"--->self.centerImageView.bottom %f",self.toolsView.bottom);
 
 }
 
@@ -104,21 +102,27 @@
 {
     CGFloat aHeight = 0.f;
     
-    CGFloat content_width = 200.f;
+    CGFloat content_width = DEVICE_WIDTH - 120;
     
     if ([TucaoViewCell haveImage:aModel.image]) {
         
-        content_width = 300.f;
+        content_width = DEVICE_WIDTH - 20;
     }
     
     //有图片但是没有文字
     if ([TucaoViewCell haveImage:aModel.image] && aModel.content.length > 0 ) {
         
-        aHeight = 325 + 5 + 38 + [LCWTools heightForText:aModel.content width:content_width font:17] + 5;
+        
+        aHeight = DEVICE_WIDTH - 20 + 25 + 5 + 38 + [LCWTools heightForText:aModel.content width:content_width font:17] + 5 + 40;
+
+//        aHeight = 325 + 5 + 38 + [LCWTools heightForText:aModel.content width:content_width font:17] + 5;
         
     }else
     {
-        aHeight = 325 + 5 + 38;
+//        aHeight = 325 + 5 + 38;
+        
+        aHeight = DEVICE_WIDTH - 20 + 25 + 5 + 38 + 40;
+
     }
     
     return aHeight;

@@ -58,7 +58,7 @@
     
     NSLog(@"%s",__FUNCTION__);
     
-    GloginView *gloginView = [[GloginView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568:480)];
+    GloginView *gloginView = [[GloginView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
     self.gloginView = gloginView;
     [self.view addSubview:gloginView];
     

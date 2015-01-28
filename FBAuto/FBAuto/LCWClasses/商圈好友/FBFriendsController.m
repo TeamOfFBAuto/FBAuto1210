@@ -57,7 +57,7 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateFriendlist:) name:UPDATE_FRIEND_LIST object:nil];
     
-    _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20) style:UITableViewStylePlain];
+    _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20) style:UITableViewStylePlain];
     _table.delegate = self;
     _table.dataSource = self;
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -67,7 +67,7 @@
         _table.tableHeaderView = [self tableHeaderView];
     }
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 10)];
     view.backgroundColor = [UIColor clearColor];
     _table.tableFooterView = view;
     
@@ -202,12 +202,12 @@
     
 //    NSArray *titles = @[@"添加好友",@"对话CEO"];
     for (int i = 0; i < titles.count; i ++) {
-        Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(10, 10 + (10 + 45) * i, 300, 45) title:[titles objectAtIndex:i] target:self action:@selector(clickToDoSomething:) sectionStyle:Section_Normal image:nil];
+        Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(10, 10 + (10 + 45) * i, DEVICE_WIDTH - 20, 45) title:[titles objectAtIndex:i] target:self action:@selector(clickToDoSomething:) sectionStyle:Section_Normal image:nil];
         btn.tag = 100 + i;
         [head addSubview:btn];
     }
     
-    head.frame = CGRectMake(0, 0, 320, 10 + titles.count * (45 + 10));
+    head.frame = CGRectMake(0, 0, DEVICE_WIDTH, 10 + titles.count * (45 + 10));
 
     return head;
 }

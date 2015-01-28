@@ -38,7 +38,7 @@
         
         
         //分割线
-        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, 320, 0.5)];
+        UIView *fenView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, DEVICE_WIDTH, 0.5)];
         fenView.backgroundColor = RGBCOLOR(180, 180, 180);
         [self.contentView addSubview:fenView];
         

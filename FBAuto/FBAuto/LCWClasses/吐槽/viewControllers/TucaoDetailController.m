@@ -41,7 +41,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleLabel.text = @"吐糟详情";
     
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 64) showLoadMore:NO];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 64) showLoadMore:NO];
     
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -89,7 +89,7 @@
         
     }];
     
-    inputView = [[LInputView alloc]initWithFrame:CGRectMake(0, self.view.height, 320, 0) inView:self.view inputText:^(NSString *inputText) {
+    inputView = [[LInputView alloc]initWithFrame:CGRectMake(0, self.view.height, DEVICE_WIDTH, 0) inView:self.view inputText:^(NSString *inputText) {
         
         NSLog(@"评论内容 %@",inputText);
         
@@ -123,7 +123,7 @@
 #pragma mark - 创建视图
 - (UIView *)footerViewForTable
 {
-    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 62)];
+    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 62)];
     
 //    //框
 //    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 13, 320 - 10*2, 75)];

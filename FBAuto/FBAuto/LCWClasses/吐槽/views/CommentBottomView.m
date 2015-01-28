@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.frame = CGRectMake(0,DEVICE_HEIGHT - 64 - 62,320,62);
+        self.frame = CGRectMake(0,DEVICE_HEIGHT - 64 - 62,DEVICE_WIDTH,62);
         self.backgroundColor = [UIColor whiteColor];
         [self setup];
     }
@@ -40,7 +40,7 @@
     
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(72,16,320-88,30);
+    button.frame = CGRectMake(72,16,DEVICE_WIDTH-88,30);
     button.layer.borderColor = RGBCOLOR(220,23,19).CGColor;
     button.layer.borderWidth = 0.5;
     [button setTitle:@"   发表评论" forState:UIControlStateNormal];
@@ -52,7 +52,7 @@
     [button addTarget:self action:@selector(buttonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
     
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(320-140,2,50,26)];
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-140,2,50,26)];
     label.backgroundColor = RGBCOLOR(220,23,19);
     label.text = @"发表";
     label.font = [UIFont systemFontOfSize:16];

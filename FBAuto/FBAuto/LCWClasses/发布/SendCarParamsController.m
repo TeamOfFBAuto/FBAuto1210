@@ -43,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20) style:UITableViewStylePlain];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20) style:UITableViewStylePlain];
     _table.delegate = self;
     _table.dataSource = self;
     [self.view addSubview:_table];
@@ -385,8 +385,8 @@
         
         NSString *letter = [firstLetterArray objectAtIndex:section];
         
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
         [aView addSubview:titleLabel];
         titleLabel.backgroundColor = [UIColor colorWithHexString:@"dcdcdc"];
         titleLabel.text = [NSString stringWithFormat:@"  %@",letter];
@@ -399,8 +399,8 @@
         }
         
         NSString *letter = [firstLetterArray objectAtIndex:section - 1];
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 20)];
         [aView addSubview:titleLabel];
         titleLabel.backgroundColor = [UIColor colorWithHexString:@"dcdcdc"];
         titleLabel.text = [NSString stringWithFormat:@"  %@",letter];

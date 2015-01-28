@@ -56,11 +56,11 @@
         
         [self reloadFirstTable];
         
-        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
         table.tableHeaderView = header;
         
         footerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        footerBtn.frame = CGRectMake(0, 0, 320, 40);
+        footerBtn.frame = CGRectMake(0, 0, DEVICE_WIDTH, 40);
         [footerBtn setTitleColor:[UIColor colorWithHexString:@"666666"] forState:UIControlStateNormal];
 //        footerBtn
         [footerBtn setTitle:@"不限" forState:UIControlStateNormal];
@@ -135,7 +135,7 @@
     
     if (secondTable == nil) {
         
-        secondTable = [[UITableView alloc]initWithFrame:CGRectMake(table.left, table.top, 300, sumHeight) style:UITableViewStylePlain];
+        secondTable = [[UITableView alloc]initWithFrame:CGRectMake(table.left, table.top, DEVICE_WIDTH - 20, sumHeight) style:UITableViewStylePlain];
         secondTable.delegate = self;
         secondTable.dataSource = self;
         [self addSubview:secondTable];
@@ -169,7 +169,7 @@
     
     if (thirdTable == nil) {
         
-        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(table.left, table.top, 300, sumHeight) style:UITableViewStylePlain];
+        thirdTable = [[UITableView alloc]initWithFrame:CGRectMake(table.left, table.top, DEVICE_WIDTH - 20, sumHeight) style:UITableViewStylePlain];
         thirdTable.delegate = self;
         thirdTable.dataSource = self;
         [self addSubview:thirdTable];
@@ -255,9 +255,9 @@
         
         NSString *letter = [firstLetterArray objectAtIndex:section];
         
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
         
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 20)];
         [aView addSubview:titleLabel];
         titleLabel.backgroundColor = [UIColor colorWithHexString:@"dcdcdc"];
         titleLabel.text = [NSString stringWithFormat:@"  %@",letter];
@@ -437,11 +437,11 @@
 {
     if (tableView == secondTable || tableView == thirdTable) {
         
-        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 50)];
         aView.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(50, 7, 200, 35);
+        backButton.frame = CGRectMake(50, 7, DEVICE_WIDTH - 20 - 100, 35);
         [backButton setTitle:@"返回" forState:UIControlStateNormal];
         [backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [backButton setBackgroundImage:[UIImage imageNamed:@"fanhui_button"] forState:UIControlStateNormal];

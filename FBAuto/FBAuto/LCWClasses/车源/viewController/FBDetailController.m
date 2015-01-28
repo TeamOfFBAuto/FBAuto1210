@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20 - 75)];
+    bigBgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20 - 75)];
     bigBgScroll.backgroundColor = [UIColor clearColor];
     bigBgScroll.showsHorizontalScrollIndicator = NO;
     bigBgScroll.showsVerticalScrollIndicator = NO;
@@ -61,11 +61,11 @@
 
 - (void)createFirstSection
 {
-    firstBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, KFistSectionHeight)];
+    firstBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, KFistSectionHeight)];
     firstBgView.backgroundColor = [UIColor clearColor];
     [bigBgScroll addSubview:firstBgView];
     
-    UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, firstBgView.bottom - 1, 320, 1)];
+    UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, firstBgView.bottom - 1, DEVICE_WIDTH, 1)];
     line.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [firstBgView addSubview:line];
     
@@ -254,7 +254,7 @@
 
 - (void)createThirdSection
 {
-    UIView *thirdView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.bottom - 75 - 44 - 20, 320, 75)];
+    UIView *thirdView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.bottom - 75 - 44 - 20, DEVICE_WIDTH, 75)];
     thirdView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:thirdView];
     

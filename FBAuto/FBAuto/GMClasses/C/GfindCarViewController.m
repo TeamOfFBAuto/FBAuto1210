@@ -56,7 +56,7 @@
     
     self.flagHeight = 60;
     
-    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568 - 64 - 49:415 - 49)];
+    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 49)];
     _tableView.refreshDelegate = self;
     _tableView.dataSource = self;
     

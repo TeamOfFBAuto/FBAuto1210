@@ -48,14 +48,14 @@
 //        datePicker.center = CGPointMake(self.width, datePicker.center.y);
         
         
-        UIView *toolsBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+        UIView *toolsBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
         toolsBarView.backgroundColor = [UIColor colorWithRed:223/255. green:223/255. blue:223/255. alpha:1];
         [bgView addSubview:toolsBarView];
         
         UIButton *finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [finishButton setTitle:@"确定" forState:UIControlStateNormal];
         [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        finishButton.frame = CGRectMake(320 - 50 - 10, 0, 50, 44);
+        finishButton.frame = CGRectMake(DEVICE_WIDTH - 50 - 10, 0, 50, 44);
         [finishButton addTarget:self action:@selector(clickDoneButton:) forControlEvents:UIControlEventTouchUpInside];
         finishButton.tag = 100;
         [toolsBarView addSubview:finishButton];
@@ -87,7 +87,7 @@
 //        [mask addSubview:line2];
 //        
         
-        bgView.frame = CGRectMake(0, self.height, 320, datePicker.height + toolsBarView.height);
+        bgView.frame = CGRectMake(0, self.height, DEVICE_WIDTH, datePicker.height + toolsBarView.height);
         
         
         [[UIApplication sharedApplication].keyWindow addSubview:self];
