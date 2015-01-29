@@ -457,6 +457,7 @@
 		13DB41281A78BD96003728C8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DB41271A78BD96003728C8 /* MBProgressHUD.m */; };
 		13DB412A1A78C149003728C8 /* libiOS_IMKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DB41291A78C149003728C8 /* libiOS_IMKit.a */; };
 		13DB412C1A78CDE2003728C8 /* jubao40_36@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13DB412B1A78CDE2003728C8 /* jubao40_36@2x.png */; };
+		13DB412F1A7A23B3003728C8 /* CarDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DB412E1A7A23B3003728C8 /* CarDetailModel.m */; };
 		13FB9F691A4BFA21000088F6 /* TucaoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13FB9F671A4BFA21000088F6 /* TucaoViewCell.m */; };
 		13FB9F6A1A4BFA21000088F6 /* TucaoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13FB9F681A4BFA21000088F6 /* TucaoViewCell.xib */; };
 		190BFD3F195AA0FB0098E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190BFD3E195AA0FB0098E0F4 /* Foundation.framework */; };
@@ -1140,6 +1141,8 @@
 		13DB41271A78BD96003728C8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		13DB41291A78C149003728C8 /* libiOS_IMKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiOS_IMKit.a; path = Pods/RongCloudIMKit/iOS_IMKit/libiOS_IMKit.a; sourceTree = "<group>"; };
 		13DB412B1A78CDE2003728C8 /* jubao40_36@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jubao40_36@2x.png"; sourceTree = "<group>"; };
+		13DB412D1A7A23B3003728C8 /* CarDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarDetailModel.h; sourceTree = "<group>"; };
+		13DB412E1A7A23B3003728C8 /* CarDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarDetailModel.m; sourceTree = "<group>"; };
 		13FB9F661A4BFA21000088F6 /* TucaoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoViewCell.h; sourceTree = "<group>"; };
 		13FB9F671A4BFA21000088F6 /* TucaoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoViewCell.m; sourceTree = "<group>"; };
 		13FB9F681A4BFA21000088F6 /* TucaoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TucaoViewCell.xib; sourceTree = "<group>"; };
@@ -2208,6 +2211,8 @@
 				138074F5196D3E8200AD3D03 /* FBCity.m */,
 				1391EEFB19764B4600FDC52A /* CarSourceClass.h */,
 				1391EEFC19764B4600FDC52A /* CarSourceClass.m */,
+				13DB412D1A7A23B3003728C8 /* CarDetailModel.h */,
+				13DB412E1A7A23B3003728C8 /* CarDetailModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3371,6 +3376,7 @@
 				137BD5F21A5A315D0057A784 /* TucaoCommentCell.m in Sources */,
 				1391EEFD19764B4600FDC52A /* CarSourceClass.m in Sources */,
 				E33ECB0C196D25CD00DDD72D /* GTimeSwitch.m in Sources */,
+				13DB412F1A7A23B3003728C8 /* CarDetailModel.m in Sources */,
 				13D5E05D1962A14E00804835 /* MenuCell.m in Sources */,
 				138472181A5BBB6200EA017F /* LInputView.m in Sources */,
 				137927021987776900377ED5 /* GMessageSViewController.m in Sources */,

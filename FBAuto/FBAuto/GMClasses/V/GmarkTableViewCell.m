@@ -62,10 +62,9 @@
     self.tLabel = tLabel;
     
     //车源信息
-    UILabel *cLabel = [[UILabel alloc]initWithFrame:CGRectMake(65, 12, 240, 14)];
+    UILabel *cLabel = [[UILabel alloc]initWithFrame:CGRectMake(65, 12, DEVICE_WIDTH - 65 - 20, 14)];
     cLabel.font = [UIFont systemFontOfSize:13];
     self.cLabel = cLabel;
-    
     
     //时间
     
@@ -91,8 +90,8 @@
         _noDelWhView.hidden = YES;
         _DelWhView.hidden = NO;
         tLabel.frame = CGRectMake(52, 24, 25, 13);
-        cLabel.frame = CGRectMake(105, 12, 200, 14);
-        dLable.frame = CGRectMake(cLabel.left, cLabel.bottom + 10, 200, 14);
+        cLabel.frame = CGRectMake(105, 12, DEVICE_WIDTH - 120, 14);
+        dLable.frame = CGRectMake(cLabel.left, cLabel.bottom + 10, DEVICE_WIDTH - 120, 14);
         
         //添加选择图标
         self.clickImv = [[UIImageView alloc]initWithFrame:CGRectMake(18, 20, 20, 20)];

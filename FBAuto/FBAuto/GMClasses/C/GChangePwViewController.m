@@ -49,7 +49,7 @@
     
     //框
     for (int i = 0; i<2; i++) {
-        UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 25+i*54, 300, 44)];
+        UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 25+i*54, DEVICE_WIDTH - 20, 44)];
         kuang.layer.borderColor = [RGBCOLOR(180, 180, 180)CGColor];
         kuang.layer.borderWidth = 0.5;
         [self.view addSubview:kuang];
@@ -65,7 +65,7 @@
 //        if (i ==1) {
             titleLabel.frame = CGRectMake(15, 38+i*52, 80, 18);
             
-            tf.frame = CGRectMake(CGRectGetMaxX(titleLabel.frame), 38+i*52, 200, 18);
+            tf.frame = CGRectMake(CGRectGetMaxX(titleLabel.frame), 38+i*52, DEVICE_WIDTH - 120, 18);
             
 //        }
         titleLabel.font = [UIFont systemFontOfSize:14];
@@ -83,7 +83,7 @@
     btn.backgroundColor = COLOR_NORMAL;
     [btn setTitle:@"修改" forState:UIControlStateNormal];
     btn.titleLabel.textColor = [UIColor whiteColor];
-    btn.frame = CGRectMake(10, 160, 300, 50);
+    btn.frame = CGRectMake(10, 160, DEVICE_WIDTH - 20, 50);
     [btn addTarget:self action:@selector(xiugai) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:btn];

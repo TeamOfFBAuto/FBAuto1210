@@ -61,7 +61,7 @@
         height = 44 + 15;
         
         //框
-        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 44)];
+        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 44)];
         kuang.layer.borderWidth = 0.5;
         kuang.layer.borderColor = [RGBCOLOR(220, 220, 220)CGColor];
         [kuang addTarget:self action:@selector(gtouxiang) forControlEvents:UIControlEventTouchUpInside];
@@ -127,12 +127,12 @@
         height = 44;
         
         //框
-        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, 300, 44)];
+        UIButton *kuang = [[UIButton alloc]initWithFrame:CGRectMake(10, 0,DEVICE_WIDTH - 20, 44)];
         kuang.layer.borderWidth = 0.5;
         kuang.layer.borderColor = [RGBCOLOR(220, 220, 220)CGColor];
         
         //遮挡底部边框重合的部分
-        UIView *diview = [[UIView alloc]initWithFrame:CGRectMake(10, 44, 300, 0.5)];
+        UIView *diview = [[UIView alloc]initWithFrame:CGRectMake(10, 44, DEVICE_WIDTH - 20, 0.5)];
         diview.backgroundColor = [UIColor whiteColor];
         
         //title
@@ -140,14 +140,13 @@
         titleLable.font = [UIFont systemFontOfSize:15];
         titleLable.text = titleArray[theIndexPath.row];
         
-        
         //内容label
-        UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLable.frame)+30, titleLable.frame.origin.y-3, 190, titleLable.frame.size.height+6)];
+//        UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLable.frame)+30, titleLable.frame.origin.y-3, 190, titleLable.frame.size.height+6)];
+        
+        UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 20 - 190, titleLable.frame.origin.y-3, 190, titleLable.frame.size.height+6)];
         contentLabel.textAlignment = NSTextAlignmentRight;
         contentLabel.textColor = RGBCOLOR(129, 129, 129);
         contentLabel.font = [UIFont systemFontOfSize:15];
-        
-        
         
         if (theIndexPath.row == 0) {//姓名
             contentLabel.text = self.delegate.userName;
@@ -156,13 +155,13 @@
         }else if (theIndexPath.row == 2){//电话
             contentLabel.text = self.delegate.phoneNum;
         }else if (theIndexPath.row == 3){//详细地址
-            contentLabel.frame =CGRectMake(CGRectGetMaxX(titleLable.frame)+30, titleLable.frame.origin.y-3, 175, titleLable.frame.size.height+6);
+            contentLabel.frame =CGRectMake(DEVICE_WIDTH - 20 - 175 - 15, titleLable.frame.origin.y-3, 175, titleLable.frame.size.height+6);
             UIImageView *jiantou = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"jiantou_hui10_18.png"]];
             jiantou.frame = CGRectMake(CGRectGetMaxX(contentLabel.frame)+10, 18, 5, 8);
             contentLabel.text = self.delegate.address;
             [self.contentView addSubview:jiantou];
         }else if (theIndexPath.row == 4){//简介
-            contentLabel.frame =CGRectMake(CGRectGetMaxX(titleLable.frame)+30, titleLable.frame.origin.y-3, 175, titleLable.frame.size.height+6);
+            contentLabel.frame =CGRectMake(DEVICE_WIDTH - 20 - 175 - 15, titleLable.frame.origin.y-3, 175, titleLable.frame.size.height+6);
             UIImageView *jiantou = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"jiantou_hui10_18.png"]];
             jiantou.frame = CGRectMake(CGRectGetMaxX(contentLabel.frame)+10, 18, 5, 8);
             [self.contentView addSubview:jiantou];

@@ -41,6 +41,9 @@
 
 
 @interface PersonalViewController ()
+{
+    MBProgressHUD *loading;
+}
 
 @end
 
@@ -80,6 +83,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.titleLabel.text = @"个人中心";
     self.button_back.hidden = YES;
+    
+    loading = [LCWTools MBProgressWithText:@"加载..." addToView:self.view];
     
     //头像
     self.userFaceImv = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 45, 45)];
@@ -437,10 +442,16 @@
             
         }else if (index == 6){ //版本检查
             
-            
+            [loading show:YES];
             [[LCWTools shareInstance]versionForAppid:FBAUTO_APPID Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
                 
+                [loading hide:YES];
                 NSLog(@"updateContent %@ %@",updateUrl,updateContent);
+                if (isNewVersion == NO) {
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"当前已是最新版本!" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
                 
             }];
             

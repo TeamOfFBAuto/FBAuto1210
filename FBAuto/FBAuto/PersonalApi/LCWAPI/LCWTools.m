@@ -26,6 +26,9 @@
 #import "WXApi.h"
 
 @implementation LCWTools
+{
+    NSMutableData *_data;
+}
 
 + (id)shareInstance
 {
@@ -73,6 +76,36 @@
     return self;
 }
 
+//普通请求
+- (void)requestNormalCompletion:(void(^)(NSDictionary *result,NSError *erro))completionBlock failBlock:(void(^)(NSDictionary *failDic,NSError *erro))failedBlock{
+    successBlock = completionBlock;
+    failBlock = failedBlock;
+    
+    NSString *newStr = [requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@"requestUrl %@",newStr);
+    NSURL *urlS = [NSURL URLWithString:newStr];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:urlS cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    
+    if (isPostRequest) {
+        
+        [request setHTTPMethod:@"POST"];
+        
+        [request setHTTPBody:requestData];
+    }
+    
+    connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    
+    [connection start];
+}
+
+- (void)cancelRequest
+{
+    NSLog(@"取消请求");
+    [connection cancel];
+}
+
+//block请求
 - (void)requestCompletion:(void(^)(NSDictionary *result,NSError *erro))completionBlock failBlock:(void(^)(NSDictionary *failDic,NSError *erro))failedBlock{
     successBlock = completionBlock;
     failBlock = failedBlock;
@@ -157,6 +190,80 @@
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:_downUrl]];
     }
 }
+
+#pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    _data = [NSMutableData data];
+    
+    NSLog(@"response :%@",response);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [_data appendData:data];
+}
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    
+    if (_data.length > 0) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:_data options:0 error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            
+            int erroCode = [[dic objectForKey:@"errcode"]intValue];
+            NSString *erroInfo = [dic objectForKey:@"errinfo"];
+            
+            
+            
+            if (erroCode != 0) { //0代表无错误,  && erroCode != 1 1代表无结果
+                
+                
+                NSDictionary *failDic = @{ERROR_INFO:erroInfo,@"errcode":[NSString stringWithFormat:@"%d",erroCode]};
+                failBlock(failDic,0);
+                
+                return ;
+            }else
+            {
+                successBlock(dic,0);//传递的已经是没有错误的结果
+            }
+        }
+        
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    NSLog(@"data 为空 connectionError %@",error);
+    
+    NSString *errInfo = @"网络有问题,请检查网络";
+    switch (error.code) {
+        case NSURLErrorNotConnectedToInternet:
+            
+            errInfo = @"无网络连接";
+            break;
+        case NSURLErrorTimedOut:
+            
+            errInfo = @"网络连接超时";
+            break;
+        default:
+            break;
+    }
+    
+    NSDictionary *failDic = @{ERROR_INFO: errInfo};
+    failBlock(failDic,error);
+    
+}
+
 
 #pragma mark - 版本更新信息
 

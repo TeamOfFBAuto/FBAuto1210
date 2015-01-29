@@ -8,6 +8,9 @@
 
 #import "FBBaseViewController.h"
 
+/**
+ *  吐槽列表
+ */
 @interface FindViewController : FBBaseViewController
 
 @end

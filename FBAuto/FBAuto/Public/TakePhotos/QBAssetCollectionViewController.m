@@ -94,8 +94,7 @@
     
     
     
-    self.title = @"存储的照片";
-    
+    self.titleLabel.text = @"存储的照片";
     
     /* Initialization */
     self.assets = [NSMutableArray array];

@@ -68,13 +68,13 @@
     
     
     //框
-    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 15, 300, 288)];
+    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 15, DEVICE_WIDTH - 20, 288)];
     kuang.layer.borderWidth = 0.5;
     kuang.layer.borderColor = [RGBCOLOR(220, 220, 220)CGColor];
     
     
     //输入框textview
-    _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 0, 280, 288)];
+    _textView = [[UITextView alloc]initWithFrame:CGRectMake(10, 0, DEVICE_WIDTH - 40, 288)];
     _textView.font = [UIFont systemFontOfSize:15];
     _textView.text = self.lastStr;
     [kuang addSubview:_textView];

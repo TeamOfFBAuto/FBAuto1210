@@ -611,9 +611,10 @@
     
     [secondBgView addSubview:[self createLabelFrame:CGRectMake(10, 45* titles.count, 100, 45.f) text:@"价格" alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]]];
     
-    priceTF = [[UITextField alloc]initWithFrame:CGRectMake(80 - 10, 45* titles.count, 175 + 10, 45)];
+    priceTF = [[UITextField alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 20 - 175 - 10 - 45, 45* titles.count, 175 + 10, 45)];
     priceTF.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     priceTF.delegate = self;
+//    priceTF.backgroundColor = [UIColor orangeColor];
     priceTF.textAlignment = NSTextAlignmentRight;
     [secondBgView addSubview:priceTF];
     
@@ -638,9 +639,10 @@
     
     [secondBgView addSubview:[self createLabelFrame:CGRectMake(10, 45 * (titles.count + 1 + 1), 100, 45.f) text:@"车源描述:" alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]]];
     
-    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * (titles.count + 1 + 1) + 5, 200 + 10 + 10, 45 * 2 - 10)];
+    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * (titles.count + 1 + 1) + 5, DEVICE_WIDTH - 100, 45 * 2 - 10)];
     descriptionTF.delegate = self;
     descriptionTF.font = [UIFont systemFontOfSize:16];
+//    descriptionTF.backgroundColor = [UIColor orangeColor];
     [secondBgView addSubview:descriptionTF];
     
     
@@ -1155,7 +1157,7 @@
         newHeight = KFistSectionHeight + 30.f;
     }else
     {
-        x = 160 - addPhotoBtn.width/2.0;
+        x = DEVICE_WIDTH / 2.f - addPhotoBtn.width/2.0;
         newHeight = KFistSectionHeight;
     }
     CGRect photoFrame = addPhotoBtn.frame;
@@ -1328,7 +1330,7 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        bigBgScroll.contentOffset = CGPointMake(0, iPhone5 ? 200 + 45 : 150 + 101 + 45 + 45);
+        bigBgScroll.contentOffset = CGPointMake(0, 200);
 
     }];
 }
@@ -1352,6 +1354,11 @@
 
 - (void)clickToHideKeyboard
 {
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        bigBgScroll.contentOffset = CGPointMake(0, 0);
+        
+    }];
     [priceTF resignFirstResponder];
     [descriptionTF resignFirstResponder];
 }

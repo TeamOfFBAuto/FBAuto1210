@@ -49,14 +49,8 @@
         
         /* Initialization */
         
-        //        self.view.backgroundColor = RGBCOLOR(229,229,229);
-        
-        //        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"FBCircleNavagationImage.png"] forBarMetrics: UIBarMetricsDefault];
         
         self.title = @"相册";
-        
-        
-        
         
         self.filterType = QBImagePickerFilterTypeAllPhotos;
         self.showsCancelButton = YES;
@@ -97,6 +91,7 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:FBAUTO_IMAGE_NAVIGATION forBarMetrics: UIBarMetricsDefault];
     
     void (^assetsGroupsEnumerationBlock)(ALAssetsGroup *, BOOL *) = ^(ALAssetsGroup *assetsGroup, BOOL *stop) {
         if(assetsGroup) {

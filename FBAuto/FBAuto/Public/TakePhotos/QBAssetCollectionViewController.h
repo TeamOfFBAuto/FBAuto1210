@@ -23,7 +23,7 @@
 
 
 
-@interface QBAssetCollectionViewController : MyViewController <UITableViewDataSource, UITableViewDelegate, QBImagePickerAssetCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,QBShowImageDetailViewControllerDelegate>
+@interface QBAssetCollectionViewController : FBBaseViewController <UITableViewDataSource, UITableViewDelegate, QBImagePickerAssetCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,QBShowImageDetailViewControllerDelegate>
 {
     NSMutableArray * image_array;
     int currentPage;

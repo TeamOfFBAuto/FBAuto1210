@@ -29,11 +29,23 @@
     
     LInputView *inputView;
     
+    LCWTools *tool;
+    
 }
 @end
 
 @implementation TucaoDetailController
 
+
+- (void)dealloc
+{
+    NSLog(@"dealloc %@",self);
+    [tool cancelRequest];
+    inputView = nil;
+    _table.dataSource = nil;
+    _table.refreshDelegate = nil;
+    _table = nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +67,7 @@
     _table.tableFooterView = [self footerViewForTable];
 
     tucaoDetail = self.tucaoModel;
-    [self getTucaoDetail];
+//    [self getTucaoDetail];
 }
 
 /**
@@ -63,15 +75,12 @@
  */
 - (void)createBottomCommentView
 {
-//    UIView *comment_view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.height - 62 - 64, 320, 62)];
-//    comment_view.backgroundColor = [UIColor orangeColor];
-//    [self.view addSubview:comment_view];
-    
     CommentBottomView *bottomView = [[CommentBottomView alloc] init];
-//    bottomView.hidden = YES;
     [self.view addSubview:bottomView];
     
-//    __weak typeof(self)weakSelf = self;
+    __weak typeof(self)weakSelf = self;
+    
+    __weak typeof(inputView)weakInput = inputView;
     
     [bottomView setMyBlock:^(CommentTapType aType) {
         NSLog(@"bottom tap : %d",aType);
@@ -84,7 +93,7 @@
         
             NSLog(@"弹出评论框");
             
-            [inputView.textView becomeFirstResponder];
+            [weakInput.textView becomeFirstResponder];
         }
         
     }];
@@ -96,7 +105,7 @@
         //添加评论
         //
         
-        [self addTucaoComment:inputText];
+        [weakSelf addTucaoComment:inputText];
         
     }];
     
@@ -169,8 +178,8 @@
     
     __weak typeof(_table)weakTable = _table;
     
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+    LCWTools *tool_comment = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool_comment requestCompletion:^(NSDictionary *result, NSError *erro) {
         
         NSLog(@"erro%@",[result objectForKey:@"errinfo"]);
         
@@ -223,10 +232,12 @@
     
     NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_DETAIL,self.tucaoModel.id,10000];
     
-        __weak typeof(_table)weakTable = _table;
+    __weak typeof(_table)weakTable = _table;
     
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+    __block TucaoModel *aModel = tucaoDetail;
+    
+    tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestNormalCompletion:^(NSDictionary *result, NSError *erro) {
         
         NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
         
@@ -236,9 +247,7 @@
         
         // 吐槽详情
         
-        tucaoDetail = [[TucaoModel alloc]initWithDictionary:article];
-        
-//        tucaoDetail.image = [NSArray arrayWithArray:tucaoDetail.data[@"image"]];
+//        aModel = [[TucaoModel alloc]initWithDictionary:article];
         
         //吐槽评论
 
@@ -452,16 +461,7 @@
     if (indexPath.row == 0) {
         
         
-        //有图片有文字
-        
-        if ([self haveImage:tucaoDetail.image] && tucaoDetail.content.length > 0 ) {
-            
-            CGFloat aHeight = [LCWTools heightForText:tucaoDetail.content width:300 font:17];
-            
-            return 400 - 20 + aHeight;
-        }
-        
-        return 400 - 40;
+        return [TucaoViewCell heightForCellWithModel:tucaoDetail];
     }
     
     TucaoModel *aModel = _table.dataArray[indexPath.row - 1];

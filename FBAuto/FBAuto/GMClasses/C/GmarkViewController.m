@@ -91,7 +91,7 @@
     _dview.userInteractionEnabled = YES;
     
     //红色view
-    UIView *redView = [[UIView alloc]initWithFrame:CGRectMake(65, 35, 190, 29)];
+    UIView *redView = [[UIView alloc]initWithFrame:CGRectMake(65, 35, DEVICE_WIDTH - 65 * 2, 29)];
     redView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap1)];
     [redView addGestureRecognizer:tap];
@@ -99,19 +99,26 @@
     redView.layer.cornerRadius = 4;
     [_dview addSubview:redView];
     
+    
+    UIView *delete_view = [[UIView alloc]initWithFrame:CGRectMake(54, 7, 95, 14)];
+    delete_view.backgroundColor = [UIColor clearColor];
+    [redView addSubview:delete_view];
+    delete_view.center = CGPointMake(redView.width / 2.f, delete_view.center.y);
+    
     //确定删除Label
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(54, 7, 50, 14)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 14)];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:12];
     titleLabel.text = @"确定删除";
-    [redView addSubview:titleLabel];
+    [delete_view addSubview:titleLabel];
     
     //删除状态下的计数Label
-    self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame)+5, titleLabel.frame.origin.y-1, 45, titleLabel.frame.size.height)];
+    self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel.right+5, titleLabel.frame.origin.y-1, 45, titleLabel.frame.size.height)];
     self.numLabel.font = [UIFont systemFontOfSize:12];
-    self.numLabel.text = @"(  )";
+    self.numLabel.text = @"(0)";
     self.numLabel.textColor = [UIColor whiteColor];
-    [redView addSubview:self.numLabel];
+    self.numLabel.lineBreakMode = NSTextAlignmentCenter;
+    [delete_view addSubview:self.numLabel];
     
     
     //默认为正常状态
@@ -286,7 +293,7 @@
         self.delType = 3;
         //清空数据
         [weakSelf.indexes removeAllObjects];
-        weakSelf.numLabel.text =  @"(  )";
+        weakSelf.numLabel.text =  @"( 0 )";
         [UIView animateWithDuration:0.1 animations:^{
             weakView.frame = CGRectMake(0, DEVICE_HEIGHT-64-80, DEVICE_WIDTH, 80);
         } completion:^(BOOL finished) {

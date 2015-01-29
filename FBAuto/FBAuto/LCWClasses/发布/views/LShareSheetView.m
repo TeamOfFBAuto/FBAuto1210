@@ -42,10 +42,10 @@
         items = @[@"微信",@"QQ",@"朋友圈",@"微博",@"QQ空间"];
         NSArray *images = @[@"weixin72_72",@"QQ72_72",@"pengyouquan72_7222x",@"weibo90_72",@"qqzone"];
         
-        CGFloat left = 96 / 2.f;
         CGFloat aHeight = 36.f;
         CGFloat top = 55 / 2.f;
         CGFloat aWidth = 36.0;
+        CGFloat aDis = (DEVICE_WIDTH - aWidth * 3)/4 ;
         
         int line = 0;
         for (int i = 0; i < items.count; i ++) {
@@ -53,7 +53,7 @@
             line = i / 3;
             
             UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [itemBtn setFrame:CGRectMake(left + (62 + aWidth) * (i % 3), top + (20 + aWidth + 10) * line, aWidth, aHeight)];
+            [itemBtn setFrame:CGRectMake(aDis + (aWidth + aDis) * (i % 3), top + (20 + aWidth + 10) * line, aWidth, aHeight)];
             [itemBtn setBackgroundImage:[UIImage imageNamed:[images objectAtIndex:i]] forState:UIControlStateNormal];
             [bgView addSubview:itemBtn];
             itemBtn.tag = 100 + i;

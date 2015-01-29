@@ -49,7 +49,7 @@
     
     
     //内容label
-    self.cLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(bview.frame)+20, 15, 158, 15)];
+    self.cLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(bview.frame)+20, 15, DEVICE_WIDTH - 160, 15)];
     _cLabel.backgroundColor = [UIColor clearColor];
     _cLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:_cLabel];
@@ -68,7 +68,7 @@
     self.addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.addBtn setImage:[UIImage imageNamed:@"jiantou_down18_10.png"] forState:UIControlStateNormal];
     [self.addBtn setImageEdgeInsets:UIEdgeInsetsMake(7.5, 5, 7.5, 5)];
-    self.addBtn.frame = CGRectMake(277, 10, 40, 40);
+    self.addBtn.frame = CGRectMake(DEVICE_WIDTH - 43, 10, 40, 40);
     [self.contentView addSubview:self.addBtn];
     [self.addBtn addTarget:self action:@selector(tianjia) forControlEvents:UIControlEventTouchUpInside];
     
@@ -152,8 +152,11 @@
     
     
     for (int i = 0; i<4; i++) {
+        
+        CGFloat aDis = (DEVICE_WIDTH - 320) / 4.f;
+        
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0+i*80, 0, 80, 60);
+        btn.frame = CGRectMake(0+i*(80+aDis) + aDis / 2.f, 0, 80, 60);
         [btn setTitle:titleArray[i] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:10];
         [btn setImage:imageArray[i] forState:UIControlStateNormal];
@@ -167,7 +170,7 @@
         btn.backgroundColor = [UIColor blackColor];
         [_shanchuView addSubview:btn];
     }
-    _shanchuView.backgroundColor = [UIColor redColor];
+    _shanchuView.backgroundColor = [UIColor blackColor];
     [self.contentView addSubview:_shanchuView];
 }
 

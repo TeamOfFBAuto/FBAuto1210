@@ -101,7 +101,7 @@
         nameLabel.numberOfLines = 0;
         nameLabel.lineBreakMode = NSLineBreakByCharWrapping;
         
-        CGFloat newHeight = [LCWTools heightForText:carName width:200 font:14];
+        CGFloat newHeight = [LCWTools heightForText:carName width:DEVICE_WIDTH - 92 - 10 font:14];
         
         CGRect oldFrame = nameLabel.frame;
         
@@ -135,7 +135,7 @@
         
         [self labelWithTag:116].numberOfLines = 0;
         [self labelWithTag:116].lineBreakMode = NSLineBreakByCharWrapping;
-        [self labelWithTag:116].height = [LCWTools heightForText:[self labelWithTag:116].text width:200 font:14];
+        [self labelWithTag:116].height = [LCWTools heightForText:[self labelWithTag:116].text width:DEVICE_WIDTH - 120 font:14];
 //        [self labelWithTag:114].backgroundColor = [UIColor orangeColor];
         
         for (int i = 1; i < 7; i ++) {
@@ -155,7 +155,8 @@
         
         CGFloat nameWidth = [LCWTools widthForText:saleName font:12];
         
-        nameWidth = (nameWidth <= 110) ? nameWidth : 110;
+        CGFloat aa = DEVICE_WIDTH - 210;
+        nameWidth = (nameWidth <= aa) ? nameWidth : aa;
         self.nameLabel.width = nameWidth;
         
         self.saleTypeBtn.left = self.nameLabel.right + 5;
@@ -171,7 +172,8 @@
         
         CGFloat aWidth = [LCWTools widthForText:userAddress font:10];
         
-        aWidth = (aWidth <= 140)?aWidth : 140;
+        CGFloat bb = DEVICE_WIDTH - 180;
+        aWidth = (aWidth <= bb)?aWidth : bb;
         
         self.addressLabel.width = aWidth;
         self.addressLabel.text = userAddress;
@@ -230,9 +232,8 @@
 
 - (void)createViews
 {
-    CGSize aSize = [UIScreen mainScreen].bounds.size;
     
-    bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, aSize.height - 64 - 75)];
+    bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 64 - 75)];
     
     [self.view addSubview:bgScrollView];
     
@@ -244,13 +245,13 @@
         aLabel.tag = 100 + i;
     }
     for (int i = 0; i < items.count; i ++) {
-        UILabel *aLabel = [self createLabelFrame:CGRectMake(92, 25 + (20 + 15) * i, 200, 20) text:@"" alignMent:NSTextAlignmentLeft textColor:[UIColor grayColor]];
+        UILabel *aLabel = [self createLabelFrame:CGRectMake(92, 25 + (20 + 15) * i, DEVICE_WIDTH - 92 - 10, 20) text:@"" alignMent:NSTextAlignmentLeft textColor:[UIColor grayColor]];
         [bgScrollView addSubview:aLabel];
         aLabel.tag = 110 + i;
-        NSLog(@"tag %d",aLabel.tag);
-
     }
 }
+
+
 
 - (UILabel *)labelWithTag:(int)aTag
 {

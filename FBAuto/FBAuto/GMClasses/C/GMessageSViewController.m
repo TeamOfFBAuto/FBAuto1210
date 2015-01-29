@@ -33,7 +33,7 @@
     self.titleLabel.text = @"消息设置";
     
     //框
-    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 15, 300, 45)];
+    UIView *kuang = [[UIView alloc]initWithFrame:CGRectMake(10, 15, DEVICE_WIDTH - 20, 45)];
     kuang.layer.borderWidth = 0.5;
     kuang.layer.borderColor = [RGBCOLOR(180, 180, 180)CGColor];
     [self.view addSubview:kuang];
@@ -46,8 +46,8 @@
     
     
     //开关
-    UISwitch *swi = [[UISwitch alloc]initWithFrame:CGRectMake(245, 20, 0, 0)];
-    swi.onTintColor = [UIColor orangeColor];
+    UISwitch *swi = [[UISwitch alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 75, 20, 0, 0)];
+    swi.onTintColor = [UIColor redColor];
     swi.on = YES;
     [swi addTarget:self action:@selector(onOrOff:) forControlEvents:UIControlEventValueChanged];
     

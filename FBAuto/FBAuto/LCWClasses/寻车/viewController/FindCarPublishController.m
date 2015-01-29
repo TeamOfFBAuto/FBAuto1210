@@ -110,7 +110,7 @@
     NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观、内饰"];
 
     
-    UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, 300, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
+    UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:firstLabel];
     
     UIView *firstBgView = [[UIView alloc]initWithFrame:CGRectMake(10, firstLabel.bottom, DEVICE_WIDTH - 20, 45 * titles1.count)];
@@ -119,7 +119,7 @@
     firstBgView.layer.borderColor = [UIColor colorWithHexString:@"b4b4b4"].CGColor;
     [bigBgScroll addSubview:firstBgView];
     
-    UILabel *secondLabel = [self createLabelFrame:CGRectMake(10, firstBgView.bottom, 300, 45) text:@"选填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
+    UILabel *secondLabel = [self createLabelFrame:CGRectMake(10, firstBgView.bottom, DEVICE_WIDTH - 20, 45) text:@"选填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:secondLabel];
     
     UIView *secondBgView = [[UIView alloc]initWithFrame:CGRectMake(10, secondLabel.bottom, DEVICE_WIDTH - 20, 45 * (titles1.count + titles2.count) + 45)];
@@ -145,13 +145,13 @@
     
     //车源描述，需要输入
     
-    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 45*titles2.count, 300, 0.5)];
+    UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 45*titles2.count, DEVICE_WIDTH - 20, 0.5)];
     line2.backgroundColor = [UIColor colorWithHexString:@"b4b4b4"];
     [secondBgView addSubview:line2];
     
     [secondBgView addSubview:[self createLabelFrame:CGRectMake(10, 45*titles2.count, 100, 45.f) text:@"求购描述:" alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]]];
     
-    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * titles2.count + 5, 220, 45 * 2 - 10)];
+    descriptionTF = [[UITextView alloc]initWithFrame:CGRectMake(80 - 10, 45 * titles2.count + 5, DEVICE_WIDTH - 100, 45 * 2 - 10)];
     descriptionTF.delegate = self;
     descriptionTF.backgroundColor = [UIColor clearColor];
     descriptionTF.font = [UIFont systemFontOfSize:16];
@@ -161,7 +161,7 @@
     //发布按钮
     
     publish = [UIButton buttonWithType:UIButtonTypeCustom];
-    publish.frame = CGRectMake(10, secondBgView.bottom + 16, 300, 50);
+    publish.frame = CGRectMake(10, secondBgView.bottom + 16, DEVICE_WIDTH - 20, 50);
     [publish setTitle:@"发布" forState:UIControlStateNormal];
 //    [publish setBackgroundImage:[UIImage imageNamed:@"huquyanzhengma_kedianji600_100"] forState:UIControlStateNormal];
     publish.backgroundColor = COLOR_NORMAL;
