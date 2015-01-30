@@ -86,6 +86,8 @@
     CGFloat currentOffsetY;
     CGFloat oldTableHeight;//table初始高度
     UIView *statesBarView;//灰色状态栏
+    
+    BOOL isAnimationing;//是否正在运动
 }
 
 @end
@@ -978,6 +980,22 @@
         
     }];
     
+//    [UIView animateWithDuration:0.2 delay:0 options:0  animations:^{
+//        
+//        CGFloat aY = show ? 20 : -44;
+//        
+//        self.navigationController.navigationBar.top = aY;
+//        
+//        self.tabBarController.tabBar.top = show ? DEVICE_HEIGHT - 49 : DEVICE_HEIGHT;
+//        
+//        NSLog(@"----tabbar %f",self.tabBarController.tabBar.top);
+//        
+//        weakstatesBarView.top = show ? -20 : -64;
+//        
+//    } completion:^(BOOL finished) {
+//        ;
+//    }];
+    
 }
 
 
@@ -994,13 +1012,13 @@
         
         //消失
         
-        [self updateViewFrameForShow:NO duration:0.5];
+        [self updateViewFrameForShow:NO duration:0.2];
         
     }
     
     if (offset > 0 && offset < currentOffsetY) {
         
-        [self updateViewFrameForShow:YES duration:0];
+        [self updateViewFrameForShow:YES duration:0.2];
     }
     
     if (scrollView.contentOffset.y <= ((scrollView.contentSize.height - scrollView.frame.size.height-40))) {

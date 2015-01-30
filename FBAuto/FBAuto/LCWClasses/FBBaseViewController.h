@@ -26,6 +26,8 @@ typedef enum{
 
 @property(nonatomic,retain)UIButton *collectButton;//收藏按钮
 
+@property(nonatomic,retain)UIButton *jubaoButton;//举报按钮
+
 @property (nonatomic,assign)NavigationStyle style;
 
 - (IBAction)clickToBack:(id)sender;

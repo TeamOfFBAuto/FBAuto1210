@@ -79,6 +79,7 @@
         [jubao_Button setImage:[UIImage imageNamed:@"jubao40_36"] forState:UIControlStateNormal];
         UIBarButtonItem *jubao_item=[[UIBarButtonItem alloc]initWithCustomView:jubao_Button];
 
+        self.jubaoButton = jubao_Button;
         
         UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
         [saveButton addTarget:self action:@selector(clickToCollect:) forControlEvents:UIControlEventTouchUpInside];

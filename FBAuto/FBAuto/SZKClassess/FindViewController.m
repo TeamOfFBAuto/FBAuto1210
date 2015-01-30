@@ -74,7 +74,7 @@
     
     [self PushToViewController:publishTucao animated:YES];
     
-    [self updateViewFrameForShow:YES duration:0.0];
+    [self updateViewFrameForShow:YES duration:0.2];
 
 }
 
@@ -237,13 +237,13 @@
         
         //消失
         
-        [self updateViewFrameForShow:NO duration:0.5];
+        [self updateViewFrameForShow:NO duration:0.2];
         
     }
     
     if (offset > 0 && offset < currentOffsetY) {
         
-        [self updateViewFrameForShow:YES duration:0];
+        [self updateViewFrameForShow:YES duration:0.2];
     }
     
     if (scrollView.contentOffset.y <= ((scrollView.contentSize.height - scrollView.frame.size.height-40))) {

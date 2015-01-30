@@ -155,7 +155,7 @@
         
         [LCWTools showMBProgressWithText:errinfo addToView:self.view];
         
-    }];    
+    }];
 }
 
 #pragma mark - 融云获取token

@@ -41,6 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.jubaoButton.hidden = YES;
+    
     [self createViews];
     
     [self getSingleCarInfoWithId:self.infoId];
