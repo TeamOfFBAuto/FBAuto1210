@@ -129,9 +129,9 @@
             for (NSDictionary *aDic in dataInfo) {
                 FBFriendModel *aFriend = [[FBFriendModel alloc]initWithDictionary:aDic];
                 
-                if ([aFriend.buddyid intValue] % 2 == 0) {
-                    aFriend.hot_point = @"1";
-                }
+//                if ([aFriend.buddyid intValue] % 2 == 0) {
+//                    aFriend.hot_point = @"1";
+//                }
                 
 //                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
                 //保存name 对应id

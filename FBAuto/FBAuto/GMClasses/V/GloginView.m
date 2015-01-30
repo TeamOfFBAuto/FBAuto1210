@@ -32,15 +32,15 @@
         
         
         if (iPhone5) {
-            _Frame_row3Down = CGRectMake(24, 312, 275, 210);
-            _Frame_row3Up = CGRectMake(24, 312-180, 275, 210);
+            _Frame_row3Down = CGRectMake(24, 312, DEVICE_WIDTH - 45, 210);
+            _Frame_row3Up = CGRectMake(24, 312-180, DEVICE_WIDTH - 45, 210);
             
             _Frame_logoDown = CGRectMake(53, 118, 220, 60);
             _Frame_logoUp = CGRectMake(60, 50, 320-60-60, 60);
             
         }else{
-            _Frame_row3Down = CGRectMake(24, 312-44, 275, 210);
-            _Frame_row3Up = CGRectMake(24, 312-44-190, 275, 210);
+            _Frame_row3Down = CGRectMake(24, 312-44, DEVICE_WIDTH - 45, 210);
+            _Frame_row3Up = CGRectMake(24, 312-44-190, DEVICE_WIDTH - 45, 210);
             
             
             _Frame_logoDown = CGRectMake(53, 118, 220, 60);
@@ -50,7 +50,7 @@
         
         
         //点击回收键盘
-        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, 320, 568)];
+        UIControl *backControl = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
         [backControl addTarget:self action:@selector(Gshou) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:backControl];
         
@@ -68,6 +68,7 @@
         logoImv.frame = CGRectMake(0, 118, DEVICE_WIDTH, 70);
         logoImv.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:logoImv];
+        logoImv.center = CGPointMake(DEVICE_WIDTH/2.f, logoImv.center.y);
         self.logoImv = logoImv;
         
         
@@ -87,7 +88,7 @@
         [_zhanghaoBackView setImage:[UIImage imageNamed:@"yonghu38_38"]];
         _zhanghaoBackView.contentMode = UIViewContentModeCenter;
         
-        UIView *user_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _zhanghaoBackView.bottom - 5, 275 + 4, 0.5)];
+        UIView *user_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _zhanghaoBackView.bottom - 5, DEVICE_WIDTH - 40 - 4, 0.5)];
         user_line.backgroundColor = RGBCOLOR(245, 210, 209);
         [_Row3backView addSubview:user_line];
         
@@ -96,7 +97,7 @@
         [_passWordBackView setImage:[UIImage imageNamed:@"mima38_38"]];
         _passWordBackView.contentMode = UIViewContentModeCenter;
         
-        UIView *pass_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _passWordBackView.bottom - 5, 275 + 4, 0.5)];
+        UIView *pass_line = [[UIView alloc]initWithFrame:CGRectMake(_zhanghaoBackView.left - 2, _passWordBackView.bottom - 5, DEVICE_WIDTH - 40 - 4, 0.5)];
         pass_line.backgroundColor = RGBCOLOR(245, 210, 209);
         [_Row3backView addSubview:pass_line];
         
@@ -104,7 +105,7 @@
         
         //输入textField
         //用户名
-        self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 0,275, 45)];
+        self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 0,DEVICE_WIDTH - 45, 45)];
         self.userTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
         
 //        _userTf.backgroundColor = [UIColor orangeColor];
@@ -124,7 +125,7 @@
         self.userTf.attributedPlaceholder = user_placeholder;
         
         //密码
-        self.passWordTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 60, 275, 45)];
+        self.passWordTf = [[UITextField alloc]initWithFrame:CGRectMake(15 + 20, 60, DEVICE_WIDTH - 45, 45)];
         self.passWordTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.passWordTf.secureTextEntry = YES;
         self.passWordTf.textColor = a_color;
@@ -165,7 +166,7 @@
         
         [loginBtn setTitleColor:COLOR_NORMAL forState:UIControlStateNormal];
         
-        loginBtn.frame = CGRectMake(0, 130, 275, 50);
+        loginBtn.frame = CGRectMake(0, 130, DEVICE_WIDTH - 45, 50);
         [loginBtn addTarget:self action:@selector(denglu) forControlEvents:UIControlEventTouchUpInside];
         [self.Row3backView addSubview:loginBtn];
         
@@ -183,7 +184,7 @@
         //免费注册
         UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn2 setTitle:@"免费注册" forState:UIControlStateNormal];
-        btn2.frame = CGRectMake(225, btn1.frame.origin.y, 50, 25);
+        btn2.frame = CGRectMake(DEVICE_WIDTH - 95, btn1.frame.origin.y, 50, 25);
         btn2.titleLabel.font = [UIFont systemFontOfSize:12];
         btn2.titleLabel.textColor = RGBCOLOR(123, 123, 123);
         [self.Row3backView addSubview:btn2];
@@ -218,17 +219,21 @@
     [self.passWordTf resignFirstResponder];
     
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.Row3backView.frame = _Frame_row3Down;
-    } completion:^(BOOL finished) {
+    if (DEVICE_WIDTH == 320) {
         
-    }];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.logoImv.frame = _Frame_logoDown;
-    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.Row3backView.frame = _Frame_row3Down;
+        } completion:^(BOOL finished) {
+            
+        }];
         
-    }];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.logoImv.frame = _Frame_logoDown;
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }
     
     
 }
@@ -275,17 +280,21 @@
 
 //键盘出现
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    [UIView animateWithDuration:0.3 animations:^{
-        self.Row3backView.frame = _Frame_row3Up;
-    } completion:^(BOOL finished) {
-        
-    }];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.logoImv.frame = _Frame_logoUp;
-    } completion:^(BOOL finished) {
+    if (DEVICE_WIDTH == 320) {
         
-    }];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.Row3backView.frame = _Frame_row3Up;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.logoImv.frame = _Frame_logoUp;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
     
     return YES;
 }
@@ -310,6 +319,9 @@
 
 //登录
 -(void)denglu{
+    
+    [self Gshou];//收键盘
+    
     if (self.dengluBlock) {
         self.dengluBlock(self.userTf.text,self.passWordTf.text);
     }

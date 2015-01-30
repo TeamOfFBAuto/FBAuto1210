@@ -46,7 +46,7 @@
     
     //自定义返回按钮
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftBtn setImage:[UIImage imageNamed:@"fanhui_24_42.png"] forState:UIControlStateNormal];
+    [leftBtn setImage:FBAUTO_IMAGE_BACK forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     //    leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     leftBtn.frame = CGRectMake(0, 0, 52, 21);
@@ -65,7 +65,7 @@
     //加载视图
     for (int i = 0; i<3; i++) {
         //框
-        UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(10, 25 +i*53, 300, 44)];
+        UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(10, 25 +i*53, DEVICE_WIDTH - 20, 44)];
         //view.layer.cornerRadius = 4;//设置那个圆角的有多圆
         view1.layer.borderWidth = 0.5;//设置边框的宽度，当然可以不要
         view1.layer.borderColor = [RGBCOLOR(180, 180, 180) CGColor];//设置边框的颜色
@@ -99,7 +99,7 @@
     
     //获取验证码
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(10, 180, 300, 50);
+    btn1.frame = CGRectMake(10, 180, DEVICE_WIDTH - 20, 50);
     [btn1 setTitle:@"获取验证码" forState:UIControlStateNormal];
     btn1.backgroundColor = RGBCOLOR(149, 149, 149);
     btn1.layer.cornerRadius = 4;
@@ -109,9 +109,9 @@
     
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(10, CGRectGetMaxY(btn1.frame)+5, 300, 50);
+    btn2.frame = CGRectMake(10, CGRectGetMaxY(btn1.frame)+5, DEVICE_WIDTH - 20, 50);
     [btn2 setTitle:@"重置密码" forState:UIControlStateNormal];
-    btn2.backgroundColor = [UIColor orangeColor];
+    btn2.backgroundColor = [UIColor redColor];
     btn2.layer.cornerRadius = 4;
     [btn2 addTarget:self action:@selector(zhaohui) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];

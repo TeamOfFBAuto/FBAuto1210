@@ -21,6 +21,8 @@
 @interface GloginViewController ()
 {
     UIActivityIndicatorView *j;
+    
+    UIActivityIndicatorView *loading;
 }
 
 @end
@@ -81,6 +83,11 @@
         [bself pushToFindPassWordVC];
     }];
     
+    //数据加载菊花
+    loading = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    loading.center = CGPointMake(DEVICE_WIDTH / 2.f, 235);
+    [self.view addSubview:loading];
+    
     //登录
     [gloginView setDengluBlock:^(NSString *usern, NSString *passw) {
         
@@ -106,65 +113,49 @@
 }
 
 #pragma mark - 登录
+
 -(void)dengluWithUserName:(NSString *)name pass:(NSString *)passw{
-    //菊花
-    j = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    j.center = CGPointMake(160, 235);
-    [self.view addSubview:j];
-    [j startAnimating];
+    
+    [loading startAnimating];
+    
+    //保存用户手机号
+    [LCWTools cache:name ForKey:USERPHONENUMBER];
+    [LCWTools cache:name ForKey:LOGIN_PHONE];
     
     NSString *deviceToken = [GMAPI getDeviceToken] ? [GMAPI getDeviceToken] : @"testToken";
     
     NSString *str = [NSString stringWithFormat:FBAUTO_LOG_IN,name,passw,deviceToken];
     
-    //保存用户手机号
-    [[NSUserDefaults standardUserDefaults]setObject:name forKey:USERPHONENUMBER];
-    
-    [LCWTools cache:name ForKey:LOGIN_PHONE];
-    
-    NSLog(@"登录请求接口======%@",str);
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:str isPost:NO postData:nil];
     
     __weak typeof(self)weakSelf = self;
-    
-    NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        
-        NSLog(@"error-----------%@",connectionError);
 
-        if ([data length] == 0) {
-            return;
-        }
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"%@ %@",dic,[dic objectForKey:@"errinfo"]);
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *datainfo = [result objectForKey:@"datainfo"];
+        NSString *userid = [datainfo objectForKey:@"uid"];
+        NSString *username = [datainfo objectForKey:@"name"];
+        NSString *authkey = [datainfo objectForKey:@"authkey"];
         
-        if ([[dic objectForKey:@"errcode"] intValue] == 0) {
+        [weakSelf loginRongCloudWithUserId:userid name:username headImageUrl:[LCWTools headImageForUserId:userid] pass:passw authkey:authkey];
+        
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        [loading stopAnimating];
+        NSString *errinfo = @"登录失败";
+        int errocode = [failDic[@"errocode"]intValue];
+        if (errocode == 3) {
             
-            NSDictionary *datainfo = [dic objectForKey:@"datainfo"];
-            NSString *userid = [datainfo objectForKey:@"uid"];
-            NSString *username = [datainfo objectForKey:@"name"];
-            NSString *authkey = [datainfo objectForKey:@"authkey"];
-//            NSString *open = [datainfo objectForKey:@"open"];
-            
-            [weakSelf loginRongCloudWithUserId:userid name:username headImageUrl:[LCWTools headImageForUserId:userid] pass:passw authkey:authkey];
-            
-        }else{
-            
-            [j stopAnimating];
-            
-            UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请核对用户名或密码是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [al show];
-            
-            [defaults setBool:NO forKey:LOGIN_SUCCESS];
+            errinfo = @"用户名或密码错误!";
+        }else
+        {
+            errinfo = failDic[ERROR_INFO];
         }
         
-        [defaults synchronize];
+        [LCWTools showMBProgressWithText:errinfo addToView:self.view];
         
-    }];
-    
-    
+    }];    
 }
 
 #pragma mark - 融云获取token
@@ -175,8 +166,6 @@
                             pass:(NSString *)pass
                          authkey:(NSString *)authkey
 {
-//    userId = [NSString stringWithFormat:@"%@@fbauto",userId];
-    
     NSString *url = [NSString stringWithFormat:FBAUTO_RONGCLOUD_TOKEN,userId,name,imageUrl];
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     
@@ -192,7 +181,6 @@
             NSString *userId = [result objectForKey:@"userId"];
             NSString *loginToken = [result objectForKey:@"token"];
             
-            
             [defaults setObject:userId forKey:USERID];
             [defaults setObject:name forKey:USERNAME];
             [defaults setObject:authkey forKey:USERAUTHKEY];
@@ -202,10 +190,6 @@
             
             [LCWTools cache:pass ForKey:LOGIN_PASS];
             
-            //mwnrOTV2cDrNDC3SoyiHZfLyOKy7yy366rmw6z+PnBjpWE9XUQNU2Ofso9zhZOEI5WvfXMGOZU/pD+IdsMsjqQ==
-            //6YJbgRceE4dxU5fJGoRPP/LyOKy7yy366rmw6z+PnBjpWE9XUQNU2CFs8N6Ox5PsKlHh5ZwuAuLpD+IdsMsjqQ==
-            
-            
             typeof(self) __weak weakSelf = self;
             [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
                 
@@ -213,7 +197,7 @@
                 
                 [defaults setBool:YES forKey:LOGIN_SUCCESS];
                 
-                [j stopAnimating];
+                [loading stopAnimating];
                 
                 [defaults synchronize];
                 
@@ -224,36 +208,31 @@
                 
             } error:^(RCConnectErrorCode status) {
                 
-                [j stopAnimating];
-                
+                [loading stopAnimating];
                 
                 NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
                     
                 [defaults setBool:NO forKey:LOGIN_SUCCESS];
                 
                 [defaults synchronize];
-                
+
                 
             }];
             
             
         }else
         {
-            [j stopAnimating];
+            [loading stopAnimating];
             
-            DXAlertView *alert = [[DXAlertView alloc]initWithTitle:errorMessage contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定"];
-            [alert show];
+            [LCWTools showMBProgressWithText:errorMessage addToView:self.view];
             
-            alert.rightBlock = ^(){
-                NSLog(@"取消");
-                
-            };
         }
         
     } failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSLog(@"failDic %@",failDic);
         
-        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        [loading stopAnimating];
+        [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
         
     }];
 
