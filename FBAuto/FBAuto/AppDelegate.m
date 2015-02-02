@@ -159,7 +159,7 @@
     }];
     
     //车型数据更新
-//    [self getCarUpdateState];//暂时
+    [self getCarUpdateState];//暂时
     
     //提示 好评推荐
     
@@ -267,8 +267,7 @@
             
         }
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
-        NSLog(@"failDic %@",failDic);
-        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        NSLog(@"更新车型数据 failDic %@",[failDic objectForKey:ERROR_INFO]);
         
         [loading hide:YES];
     }];
@@ -416,9 +415,9 @@
                 
                 NSString *localTimeline = [LCWTools cacheForKey:NOTICE_UPDATE_DATE_LOCAL];
                 
-                localTimeline = localTimeline.length ? localTimeline : @"0";
+                localTimeline = localTimeline.length ? localTimeline : [LCWTools timechangeToDateline];
                 
-                if (![localTimeline isEqualToString:time]) {
+                if ([localTimeline compare:time] < 0) {
                     
                     NSLog(@"新通知");
                     

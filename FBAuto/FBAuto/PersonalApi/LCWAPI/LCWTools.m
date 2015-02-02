@@ -154,6 +154,11 @@
                 {
                     successBlock(dic,connectionError);//传递的已经是没有错误的结果
                 }
+            }else
+            {
+                NSString *erroInfo = @"解析数据为空";
+                NSDictionary *failDic = @{ERROR_INFO:erroInfo,ERROR_CODE:[NSString stringWithFormat:@"%d",10000]};
+                failBlock(failDic,connectionError);
             }
             
         }else

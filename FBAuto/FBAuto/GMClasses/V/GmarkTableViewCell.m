@@ -79,7 +79,7 @@
     [self.contentView addSubview:cLabel];
     [self.contentView addSubview:dLable];
     
-    NSLog(@" delegate  ----- %d",self.delegate.delType);
+//    NSLog(@" delegate  ----- %d",self.delegate.delType);
     
     //白色竖线
     if (self.delegate.delType == 2) {//不是删除

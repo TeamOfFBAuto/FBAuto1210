@@ -10,7 +10,7 @@
 #import "UserRegisterTwoController.h"
 #import "UserRegisterThreeController.h"
 
-@interface UserRegisterController ()
+@interface UserRegisterController ()<UITextFieldDelegate>
 
 @end
 
@@ -61,6 +61,10 @@
         UIView *aView = [self viewFrameY:20 + 44 * i iconName:nameArr[i] lineColor_Bottom:color keyboardType:type tag:100 + i isPass:isPass placeHolder:placeHolders[i]];
         [self.view addSubview:aView];
     }
+    
+    [self textFieldForTag:100].returnKeyType = UIReturnKeyNext;
+    [self textFieldForTag:101].returnKeyType = UIReturnKeyNext;
+    [self textFieldForTag:102].returnKeyType = UIReturnKeyDone;
     
     UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 20 + 44 * 3 + 18, DEVICE_WIDTH - 20, 15)];
     hint.font = [UIFont systemFontOfSize:14];
@@ -129,6 +133,26 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.tag == 100) {
+      
+        [[self textFieldForTag:101]becomeFirstResponder];
+        
+    }else if (textField.tag == 101){
+        
+        [[self textFieldForTag:102]becomeFirstResponder];
+        
+    }else if (textField.tag == 102){
+        
+        [textField resignFirstResponder];
+    }
+    
+    return YES;
 }
 
 #pragma mark 事件处理
@@ -277,6 +301,7 @@
     name_tf.secureTextEntry = isPass;
     name_tf.font = [UIFont systemFontOfSize:14];
     name_tf.placeholder = placeHolder;
+    name_tf.delegate = self;
     
     return name_bg;
 }

@@ -294,6 +294,9 @@
     
     if (result == SQLITE_DONE) {
         NSLog(@"updateCarBrandId %@ success name %@",brandId,name);
+    }else
+    {
+        NSLog(@"result %d",result);
     }
     sqlite3_finalize(stmt);
 }

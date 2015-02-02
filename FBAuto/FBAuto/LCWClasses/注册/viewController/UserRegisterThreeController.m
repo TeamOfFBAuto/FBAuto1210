@@ -66,7 +66,7 @@ static int seconds = 60;//计时60s
     
     //验证码输入框
     
-    UIView *yanzheng_view = [self viewFrameY:phone_label.bottom + 15 iconName:@"yanzheng42_28" lineColor_Bottom:[UIColor colorWithHexString:@"9b9b9b"] keyboardType:UIKeyboardTypeNumberPad tag:100 isClick:NO placeHolder:@"输入接收到验证码"];
+    UIView *yanzheng_view = [self viewFrameY:phone_label.bottom + 15 iconName:@"zhuce_yanzheng42_28" lineColor_Bottom:[UIColor colorWithHexString:@"9b9b9b"] keyboardType:UIKeyboardTypeNumberPad tag:100 isClick:NO placeHolder:@"输入接收到验证码"];
     [self.view addSubview:yanzheng_view];
     
     //发送验证码

@@ -61,6 +61,10 @@
         [self.view addSubview:aView];
     }
     
+    [self textFieldForTag:100].returnKeyType = UIReturnKeyNext;
+    [self textFieldForTag:101].returnKeyType = UIReturnKeyNext;
+    [self textFieldForTag:102].returnKeyType = UIReturnKeyDone;
+    
     
     //底部 tools
     
@@ -161,10 +165,10 @@
     name_tf.tag = tag;
     name_tf.font = [UIFont systemFontOfSize:14];
 
-    if (isClick) {
-        
+//    if (isClick) {
+    
         name_tf.delegate = self;
-    }
+//    }
     
     name_tf.placeholder = placeHolder;
     
@@ -294,6 +298,22 @@
     return YES;
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.tag == 100) {
+        
+        [[self textFieldForTag:101]becomeFirstResponder];
+        
+    }else if (textField.tag == 101){
+        
+        [[self textFieldForTag:102]becomeFirstResponder];
+        
+    }else if (textField.tag == 102){
+        
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 
 #pragma mark - UIPickerViewDataSource
 
