@@ -84,6 +84,10 @@
     MBProgressHUD *loadingHub;
     
     LDatePicker *datePicker;
+    
+    UIView *mask;
+    
+    BOOL isPriceRespond;//记录是否是 价格输入框出入响应
 }
 
 @end
@@ -139,9 +143,14 @@
     [self createFirstSection];
     [self createSecondSection];
     
+    mask = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
+    mask.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
+    [self.view addSubview:mask];
+    mask.hidden = YES;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickToHideKeyboard)];
     tap.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tap];
+    [mask addGestureRecognizer:tap];
     
     loadingHub = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.navigationController.view addSubview:loadingHub];
@@ -1297,10 +1306,20 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    isPriceRespond = NO;
     
+    mask.hidden = NO;
     [UIView animateWithDuration:0.5 animations:^{
         
-        bigBgScroll.contentOffset = CGPointMake(0, iPhone5 ? 200 + 45 + 45 : 150 + 101 + 45 + 45);
+        if (DEVICE_HEIGHT == 480) {
+            
+            bigBgScroll.contentOffset = CGPointMake(0, 150 + 101 + 45 + 45 + 45);
+        }else if (DEVICE_HEIGHT == 568){
+            bigBgScroll.contentOffset = CGPointMake(0, 200 + 45 + 45);
+        }else
+        {
+            bigBgScroll.contentOffset = CGPointMake(0, 150 + 101 + 45 + 45);
+        }
     }];
 }
 
@@ -1328,6 +1347,10 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
     
+    mask.hidden = NO;
+    
+    isPriceRespond = YES;
+    
     [UIView animateWithDuration:0.5 animations:^{
         
         bigBgScroll.contentOffset = CGPointMake(0, 200);
@@ -1354,11 +1377,19 @@
 
 - (void)clickToHideKeyboard
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        bigBgScroll.contentOffset = CGPointMake(0, 0);
-        
-    }];
+    mask.hidden = YES;
+    
+    if (isPriceRespond == NO) {
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            CGFloat off = bigBgScroll.contentSize.height - bigBgScroll.height;
+            
+            bigBgScroll.contentOffset = CGPointMake(0, off);
+            
+        }];
+    }
+    
+    
     [priceTF resignFirstResponder];
     [descriptionTF resignFirstResponder];
 }

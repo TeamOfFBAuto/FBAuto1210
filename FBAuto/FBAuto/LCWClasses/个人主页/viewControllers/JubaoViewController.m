@@ -59,6 +59,7 @@
     _lTextView.layer.borderWidth = 0.5f;
     _lTextView.layer.borderColor = [UIColor colorWithHexString:@"a0a0a0"].CGColor;
     [bigScroll addSubview:_lTextView];
+    _lTextView.returnKeyType = UIReturnKeyDone;
     
     bigScroll.contentSize = CGSizeMake(DEVICE_WIDTH, bigScroll.height + _lTextView.height);
     
@@ -89,12 +90,12 @@
     loading = [LCWTools MBProgressWithText:@"" addToView:self.view];
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
-    [self.navigationController.view addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)dealloc
 {
-    [self.navigationController.view removeGestureRecognizer:tap];
+    [self.view removeGestureRecognizer:tap];
     tap = nil;
 }
 

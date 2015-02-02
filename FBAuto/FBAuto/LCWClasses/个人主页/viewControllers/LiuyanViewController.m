@@ -49,8 +49,7 @@
 - (void)dealloc
 {
     NSLog(@"%@dealloc",self);
-    [self.navigationController.view removeGestureRecognizer:tap];
-//    [tap removeTarget:self action:@selector(tapToHiddenKeyboard:)];
+    [self.view removeGestureRecognizer:tap];
     tap = nil;
     
 }

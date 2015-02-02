@@ -86,7 +86,6 @@
     _textView.delegate = nil;
     _textView = nil;
     [tap removeTarget:self action:@selector(hiddenKeyboard)];
-    [self.navigationController.view removeGestureRecognizer:tap];
     tap = nil;
 }
 
@@ -113,7 +112,7 @@
     _textView = [[LTextView alloc]initWithFrame:CGRectMake(10, 25, DEVICE_WIDTH - 20, 75) placeHolder:@"自定义:" fontSize:16];
     _textView.layer.borderWidth = 0.5f;
     _textView.layer.borderColor = [UIColor colorWithHexString:@"a0a0a0"].CGColor;
-    
+    _textView.returnKeyType = UIReturnKeyDone;
     __weak typeof(_tableView)weakTable = _tableView;
     [_textView setBlock:^(LTextView *textView, ActionStyle actionStyle) {
        
@@ -143,7 +142,7 @@
     [footer addSubview:send_btn];
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenKeyboard)];
-    [self.navigationController.view addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:tap];
 }
 
 //数据更新
