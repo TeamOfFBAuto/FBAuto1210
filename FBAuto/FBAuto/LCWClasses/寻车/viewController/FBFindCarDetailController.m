@@ -131,7 +131,7 @@
 //        [self labelWithTag:114].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
         
         
-        NSString *description = [NSString stringWithFormat:@"%@  联系请说在e车看到的信息",[dic objectForKey:@"cardiscrib"]];
+        NSString *description = [NSString stringWithFormat:@"%@  联系请说在今日车市看到的信息",[dic objectForKey:@"cardiscrib"]];
         
         [self labelWithTag:116].text  = description;
         
@@ -340,7 +340,7 @@
 //        NSArray *text =  @[@"微信",@"QQ",@"朋友圈",@"微博",@"站内好友"];
         
         ////@"发河北 寻美规 奥迪Q7 14款 豪华"
-        NSString *contentText = [NSString stringWithFormat:@"我在e车上发布了一条求购信息，有车源的朋友来看看，（%@）",[self labelWithTag:110].text];
+        NSString *contentText = [NSString stringWithFormat:@"我在今日车市上发布了一条求购信息，有车源的朋友来看看，（%@）",[self labelWithTag:110].text];
         
         NSString *shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_FIND,self.infoId];
         

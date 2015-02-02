@@ -56,8 +56,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.bigBgScroll.height = DEVICE_HEIGHT - 75;
-    
+    self.bigBgScroll.top = 0;
+    self.bigBgScroll.height = DEVICE_HEIGHT - 75 - 64;
+        
     loading = [LCWTools MBProgressWithText:@"加载中..." addToView:self.view];
     
     [self getSingleCarInfoWithId:self.infoId];
@@ -186,10 +187,10 @@
             
             NSString *detail = @"";
             if (aModel.cardiscrib.length > 0) {
-                detail = [NSString stringWithFormat:@"%@  联系请说是在e车看到的信息,谢谢!",aModel.cardiscrib];
+                detail = [NSString stringWithFormat:@"%@  联系请说是在今日车市看到的信息,谢谢!",aModel.cardiscrib];
             }else
             {
-                detail = [NSString stringWithFormat:@"联系请说是在e车看到的信息,谢谢!"];
+                detail = [NSString stringWithFormat:@"联系请说是在今日车市看到的信息,谢谢!"];
             }
             aLabel.text = detail;
             aLabel.height = [LCWTools heightForText:detail width:label_Width font:14];
@@ -259,6 +260,7 @@
     }
     
     [self createFirstSectionWithImageUrls:imageUrls];
+    
 }
 
 - (UILabel *)createLabelFrame:(CGRect)aFrame text:(NSString *)text alignMent:(NSTextAlignment)align textColor:(UIColor *)color
@@ -351,7 +353,7 @@
         photosScroll.center = CGPointMake((DEVICE_WIDTH - 20)/2.f, photosScroll.center.y);
     }
     
-    self.bigBgScroll.contentSize = CGSizeMake(self.view.width,photosScroll.bottom + self.car_detail_label.bottom + 10 + 50);
+    self.bigBgScroll.contentSize = CGSizeMake(self.view.width,[self labelWithTag:118].bottom + 10);
 
 }
 
@@ -540,7 +542,9 @@
         
 //        NSArray *text =  @[@"微信",@"QQ",@"朋友圈",@"微博",@"站内好友"];
         
-        NSString *contentText = [NSString stringWithFormat:@"我在e车上发了一辆新车，有兴趣的来看(%@）。",weakSelf.car_modle_label.text];
+        NSString *title = [self labelWithTag:110].text;
+        
+        NSString *contentText = [NSString stringWithFormat:@"我在今日车市上发了一辆新车，有兴趣的来看(%@）。",title];
         
         NSString *shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_SOURCE,weakSelf.infoId];
         NSString *contentWithUrl = [NSString stringWithFormat:@"%@%@",contentText,shareUrl];
@@ -551,31 +555,32 @@
         
         buttonIndex -= 100;
         
+        
         NSLog(@"share %d %@",buttonIndex,shareStyle);
         switch (buttonIndex) {
             case 0:
             {
                 NSLog(@"微信");
-                [LCWTools shareText:contentText title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeWeixiSession];
+                [LCWTools shareText:contentText title:title image:aImage linkUrl:shareUrl ShareType:ShareTypeWeixiSession];
             }
                 break;
             case 1:
             {
                 NSLog(@"QQ");
-                [LCWTools shareText:contentText title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeQQ];
+                [LCWTools shareText:contentText title:title image:aImage linkUrl:shareUrl ShareType:ShareTypeQQ];
             }
                 break;
             case 2:
             {
                 NSLog(@"朋友圈");
-                [LCWTools shareText:contentText title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeWeixiTimeline];
+                [LCWTools shareText:contentText title:title image:aImage linkUrl:shareUrl ShareType:ShareTypeWeixiTimeline];
             }
                 break;
             case 3:
             {
                 NSLog(@"微博");
 
-                [LCWTools shareText:contentWithUrl title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeSinaWeibo];
+                [LCWTools shareText:contentWithUrl title:title image:aImage linkUrl:shareUrl ShareType:ShareTypeSinaWeibo];
             }
                 break;
             case 100:
@@ -596,7 +601,7 @@
             {
                 NSLog(@"QQ空间");
                 
-                [LCWTools shareText:contentWithUrl title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeQQSpace];
+                [LCWTools shareText:contentWithUrl title:title image:aImage linkUrl:shareUrl ShareType:ShareTypeQQSpace];
             }
                 break;
                 

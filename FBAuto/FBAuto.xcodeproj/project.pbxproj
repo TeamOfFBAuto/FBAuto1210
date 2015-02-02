@@ -3574,7 +3574,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "fe329fcc-fb77-46ae-bbad-d41f97ae97ee";
+				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s armv64";
 			};
@@ -3609,7 +3609,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "fe329fcc-fb77-46ae-bbad-d41f97ae97ee";
+				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s armv64";
@@ -3646,7 +3646,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe329fcc-fb77-46ae-bbad-d41f97ae97ee";
+				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3684,7 +3684,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe329fcc-fb77-46ae-bbad-d41f97ae97ee";
+				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

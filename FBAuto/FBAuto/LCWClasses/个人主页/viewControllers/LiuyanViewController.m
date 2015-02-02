@@ -11,6 +11,7 @@
 @interface LiuyanViewController ()<UITextViewDelegate>
 {
     UITextView *_textView;
+    UITapGestureRecognizer *tap;
 }
 
 @end
@@ -26,8 +27,9 @@
     _textView.layer.borderColor = [UIColor colorWithHexString:@"a0a0a0"].CGColor;
     [self.view addSubview:_textView];
     _textView.delegate = self;
+    _textView.returnKeyType = UIReturnKeyDone;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHiddenKeyboard:)];
+    tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHiddenKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
     UIButton *btn_liuyan = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -42,6 +44,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    NSLog(@"%@dealloc",self);
+    [self.navigationController.view removeGestureRecognizer:tap];
+//    [tap removeTarget:self action:@selector(tapToHiddenKeyboard:)];
+    tap = nil;
+    
 }
 
 #pragma mark - 事件处理
@@ -88,5 +99,18 @@
 
 #pragma mark - UITextViewDelegate
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        
+        [self tapToHiddenKeyboard:nil];
+        
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    
+    return YES;
+}
 
 @end

@@ -46,7 +46,7 @@
     
     
     //用户名、手机号、密码
-    NSArray *nameArr = @[@"diqu38_38",@"gongsi32_38",@"dizhi26_38"];
+    NSArray *nameArr = @[@"zhuce_diqu38_38",@"zhuce_gongsi32_38",@"zhuce_dizhi26_38"];
     NSArray *placeHolders = @[@"请选择地区",@"所属公司全称",@"详细地址"];
     for (int i = 0; i < 3; i ++) {
         UIColor *color = [UIColor colorWithHexString:@"9b9b9b"];

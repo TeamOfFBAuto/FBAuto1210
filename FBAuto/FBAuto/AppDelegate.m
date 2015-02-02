@@ -73,7 +73,7 @@
 #define QQAPPID @"1101950003" //十六进制:41AE6C33; 生成方法:echo 'ibase=10;obase=16;1101950003'|bc
 #define QQAPPSECRECT @"JAtVGEGeQWk9icsK"
 
-#define WXAPPID @"wx0ad0d507a8933b9d"
+#define WXAPPID @"wx0ad0d507a8933b9d" //fbauto2014@qq.com 123abc
 
 #define RedirectUrl @"http://www.sina.com"
 

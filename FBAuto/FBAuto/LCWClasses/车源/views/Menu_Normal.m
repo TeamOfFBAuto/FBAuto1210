@@ -147,6 +147,7 @@
     
     cell.textLabel.text = [dataArray objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"666666"];
     
     return cell;
 }

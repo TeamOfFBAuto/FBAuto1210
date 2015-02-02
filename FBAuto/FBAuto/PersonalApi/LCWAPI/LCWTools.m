@@ -836,7 +836,7 @@
     //创建分享内容
     
     id<ISSContent> publishContent = [ShareSDK content:text
-                                       defaultContent:@"e车分享"
+                                       defaultContent:@"今日车市分享"
                                                 image:[ShareSDK pngImageWithImage:aImage]                                                title:title
                                                   url:linkUrl
                                           description:nil
