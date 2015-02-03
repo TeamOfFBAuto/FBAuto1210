@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextView *inputView;
 @property (strong, nonatomic) IBOutlet UIButton *photoButton;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *placeHolder;
 

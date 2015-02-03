@@ -10,8 +10,9 @@
 #import "FBActionSheet.h"
 
 #import "QBImagePickerController.h"
-
 #import "ASIFormDataRequest.h"
+#import "DXAlertView.h"
+
 
 @interface TucaoPublishController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 {
@@ -24,6 +25,8 @@
     MBProgressHUD *loadingHub;
     
     int colorid;//背景颜色
+    
+    CGFloat imageHeight;
     
 }
 
@@ -42,6 +45,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     imageCenter = CGPointMake(DEVICE_WIDTH /2.f, self.imageView.center.y);
+    imageHeight = self.imageView.height;
     
     //随机一个背景颜色
     
@@ -64,6 +68,8 @@
     UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
     
     self.navigationItem.rightBarButtonItems = @[save_item];
+    
+    [self.deleteButton addTarget:self action:@selector(clickToDeletePhoto:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)test
@@ -205,6 +211,40 @@
 
 #pragma mark 事件处理
 
+-(void)clickToBack:(id)sender
+{
+    [self.inputView resignFirstResponder];
+    
+    if (self.inputView.text.length > 0 || self.imageView.image) {
+        
+        DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"是否放弃编辑内容?" contentText:nil leftButtonTitle:@"放弃" rightButtonTitle:@"编辑" isInput:NO];
+        [alert show];
+        
+        alert.leftBlock = ^(){
+            NSLog(@"放弃");
+            
+            [super clickToBack:sender];
+            
+        };
+        alert.rightBlock = ^(){
+            NSLog(@"编辑");
+            
+        };
+
+    }else
+    {
+        [super clickToBack:sender];
+    }
+    
+}
+
+- (void)clickToDeletePhoto:(UIButton *)sender
+{
+    self.imageView.image = nil;
+    haveImage = NO;
+    [self updateViewByExsitImage:NO];
+}
+
 - (void)addPhoto:(UIImage *)aImage
 {
     self.imageView.image = aImage;
@@ -213,9 +253,34 @@
     
     //有图片了 输入框跑图片下面去
     
-    self.inputView.top = self.imageView.bottom + 10;
-    self.photoButton.top = self.inputView.bottom + 10;
+    [self updateViewByExsitImage:YES];
     
+}
+
+- (void)updateViewByExsitImage:(BOOL)isExist
+{
+    //有图
+    if (isExist) {
+        
+        self.inputView.top = self.imageView.bottom + 10;
+        self.placeHolder.center = self.inputView.center;
+        self.photoButton.top = self.inputView.bottom + 10;
+        self.placeHolder.textColor = [UIColor lightGrayColor];
+        self.deleteButton.hidden = NO;
+        self.photoButton.hidden = YES;
+        
+    }else
+    {
+        self.inputView.center = self.imageView.center;
+        self.photoButton.top = self.imageView.bottom + 10;
+        self.placeHolder.center = self.inputView.center;
+        self.placeHolder.textColor = [UIColor whiteColor];
+        self.deleteButton.hidden = YES;
+        self.photoButton.hidden = NO;
+
+    }
+    
+    self.deleteButton.bottom = self.imageView.bottom;
 }
 
 /**
@@ -314,7 +379,19 @@
             self.imageView.bottom = self.inputView.top - 20;
             
             self.photoButton.top = self.imageView.bottom + 10;
+            
+            self.placeHolder.textColor = [UIColor lightGrayColor];
+            
+        }else
+        {
+            self.imageView.top = 10;
+            self.imageView.height = DEVICE_HEIGHT - 64 - keyboardRect.size.height - 10 - 10;
+            self.inputView.center = self.imageView.center;
+
         }
+        
+        self.placeHolder.center = self.inputView.center;
+
         
     }];
     
@@ -333,20 +410,25 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          
-                         self.imageView.center = imageCenter;
+                         self.imageView.top = 10;
+                         self.imageView.height = imageHeight;
                          
                          if (haveImage) {
                              
                              //有图片了 输入框跑图片下面去
                              self.inputView.top = self.imageView.bottom + 10;
-                             self.photoButton.top = self.inputView.bottom + 10;
+                             self.placeHolder.textColor = [UIColor lightGrayColor];
                          }else
                          {
                              self.inputView.center = self.imageView.center;
-                             self.photoButton.top = self.imageView.bottom + 10;
+                             self.placeHolder.textColor = [UIColor whiteColor];
                          }
                          
-                         //                          self.backScroll.contentSize = CGSizeMake(_backScroll.width, _backScroll.height + _photoButton.bottom);
+                         self.photoButton.top = self.imageView.bottom + 10;
+                         
+                         self.placeHolder.center = self.inputView.center;
+                         
+                         
                          
                      } completion:nil];
     
@@ -369,6 +451,15 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        
+        [textView resignFirstResponder];
+        
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    
     return YES;
 }
 
@@ -388,11 +479,18 @@
         textView.height = textView.contentSize.height;
         
         if (haveImage == NO) {
-            textView.center = self.imageView.center;
+            
+//            self.inputView.bottom = current_KeyBoard_Y - 64 - 20;
+//            
+//
+//            self.imageView.center = _inputView.center;
+            
+            self.inputView.center = self.imageView.center;
+            
         }else
         {
             
-            self.inputView.bottom = current_KeyBoard_Y - 64;
+            self.inputView.bottom = current_KeyBoard_Y - 64 - 20;
             
             self.imageView.bottom = self.inputView.top - 20;
             

@@ -19,13 +19,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FBAuto/PersonalApi/LCWAPI/LCWTools.m"
-            timestampString = "444556519.890476"
+            filePath = "FBAuto/AppDelegate.m"
+            timestampString = "444563812.498462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-requestCompletion:failBlock:"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-getCarDataFromDateline:endTimeline:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FBAuto/AppDelegate.m"
+            timestampString = "444563998.794506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "-getCarDataFromDateline:endTimeline:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
