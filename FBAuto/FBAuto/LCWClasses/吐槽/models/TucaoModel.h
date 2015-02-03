@@ -26,6 +26,9 @@
 @property(nonatomic,retain)NSString *uptime;
 @property(nonatomic,retain)NSArray *image;//图片数组
 
+@property(nonatomic,retain)NSArray *image_tub;//缩略图
+@property(nonatomic,retain)NSArray *image_ori;//原图
+
 @property(nonatomic,retain)NSDictionary *data;//存图片的一个数组
 
 @property(nonatomic,retain)NSString *neirong;

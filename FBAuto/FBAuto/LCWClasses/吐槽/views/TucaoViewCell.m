@@ -50,9 +50,11 @@
     self.centerImageView.backgroundColor = [ColorModel colorForTucao:[aModel.color intValue]];
     self.centerImageView.height = DEVICE_WIDTH - 20;
     
-    if ([self haveImage:aModel.image]) {
+//    self.contentLabel.backgroundColor = [UIColor orangeColor];
+    
+    if ([self haveImage:aModel.image_ori]) {
         
-        NSString *imageUrl = aModel.image[0][@"link"];
+        NSString *imageUrl = aModel.image_ori[0][@"link"];
         [self.centerImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
         
         //内容描述 图片底部
@@ -61,6 +63,8 @@
         self.contentLabel.top = self.centerImageView.bottom + 5;
         self.contentLabel.width = DEVICE_WIDTH - 20;
         _contentLabel.height = [LCWTools heightForText:aModel.content width:DEVICE_WIDTH - 20 font:17];
+        
+        self.contentLabel.width = self.centerImageView.width;
         
     }else
     {
@@ -75,7 +79,7 @@
     }
     
     //有图片但是没有文字
-    if ([self haveImage:aModel.image] && aModel.content.length > 0 ) {
+    if ([self haveImage:aModel.image_ori] && aModel.content.length > 0 ) {
         
         self.toolsView.top = self.contentLabel.bottom + 5;
         
@@ -104,13 +108,13 @@
     
     CGFloat content_width = DEVICE_WIDTH - 120;
     
-    if ([TucaoViewCell haveImage:aModel.image]) {
+    if ([TucaoViewCell haveImage:aModel.image_ori]) {
         
         content_width = DEVICE_WIDTH - 20;
     }
     
     //有图片但是没有文字
-    if ([TucaoViewCell haveImage:aModel.image] && aModel.content.length > 0 ) {
+    if ([TucaoViewCell haveImage:aModel.image_ori] && aModel.content.length > 0 ) {
         
         
         aHeight = DEVICE_WIDTH - 20 + 25 + 5 + 38 + [LCWTools heightForText:aModel.content width:content_width font:17] + 5 + 40;

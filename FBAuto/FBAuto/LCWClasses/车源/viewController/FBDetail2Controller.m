@@ -239,7 +239,7 @@
 
     NSString *headImage1 = [LCWTools NSStringNotNull:aModel.headimage];
 
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:headImage1] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:headImage1] placeholderImage:DEFAULT_HEAD_IMAGE];
 
     userId = aModel.uid;//用户id
 

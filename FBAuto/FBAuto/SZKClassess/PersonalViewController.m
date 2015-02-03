@@ -39,6 +39,7 @@
 
 #import "UIImageView+WebCache.h"
 
+#import "GuserModel.h"
 
 @interface PersonalViewController ()
 {
@@ -89,12 +90,8 @@
     //头像
     self.userFaceImv = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 45, 45)];
     self.userFaceImv.backgroundColor = RGBCOLOR(180, 180, 180);
-    if ([GlocalUserImage getUserFaceImage]) {
-        [self.userFaceImv setImage:[GlocalUserImage getUserFaceImage]];
-    }else
-    {
-        [self.userFaceImv setImage:[UIImage imageNamed:@"defaultFace"]];
-    }
+
+    [self.userFaceImv sd_setImageWithURL:[NSURL URLWithString:[LCWTools cacheForKey:USER_HEADIMAGE]] placeholderImage:DEFAULT_HEAD_IMAGE];
     
     [self.view addSubview:self.userFaceImv];
     
@@ -121,6 +118,8 @@
     self.nameLabel1.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:self.nameLabel1];
     
+    self.nameLabel.text = [LCWTools cacheForKey:USERNAME];
+    self.nameLabel1.text = [LCWTools cacheForKey:USER_FULLNAME];
     
     
     NSArray *titileArray = @[@"车友",@"消息",@"通知"];
@@ -286,12 +285,6 @@
     personal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:personal animated:YES];
     
-//    GuserZyViewController *personal = [[GuserZyViewController alloc]init];
-//    personal.title = self.nameLabel.text;
-//    personal.userId = [GMAPI getUid];
-//    personal.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:personal animated:YES];
-    
 }
 
 
@@ -303,22 +296,26 @@
             NSLog(@"请求用户信息成功");
             //公司头像
             
-            NSURL *faceImage = [NSURL URLWithString:[dataInfo objectForKey:@"headimage"]];
+            GuserModel *userModel = [[GuserModel alloc]initWithDic:dataInfo];
             
-             [self.userFaceImv sd_setImageWithURL:faceImage placeholderImage:[UIImage imageNamed:@"defaultFace"]];
+            NSURL *faceImage = [NSURL URLWithString:userModel.headimage];
             
-            [FBChatTool cacheUserHeadImage:[dataInfo objectForKey:@"headimage"] forUserId:[GMAPI getUid]];
+             [self.userFaceImv sd_setImageWithURL:faceImage placeholderImage:DEFAULT_HEAD_IMAGE];
+            
+            [LCWTools cache:userModel.headimage ForKey:USER_HEADIMAGE];
+            [LCWTools cache:userModel.name ForKey:USERNAME];
+            [LCWTools cache:userModel.fullname ForKey:USER_FULLNAME];
             
             //公司名称
-            self.nameLabel.text = [dataInfo objectForKey:@"name"];
+            self.nameLabel.text = userModel.name;
             NSLog(@"公司名称：%@",self.nameLabel.text);
-            self.nameLabel1.text = [dataInfo objectForKey:@"fullname"];
+            self.nameLabel1.text = userModel.fullname;
             
             NSLog(@"公司全称：%@",self.nameLabel1.text);
             [self.view reloadInputViews];
         }else{
-            NSLog(@"请求用户信息失败");
-            NSLog(@"%@",errorinfo);
+
+            NSLog(@"请求用户信息失败%@",errorinfo);
         }
     }];
 }

@@ -96,10 +96,10 @@
             kuang.top = 0;
             titielLabel.text = @"主页背景";
             
-            if ([GlocalUserImage getUserFaceImage]) {
+            if ([GlocalUserImage getUserBannerImage]) {
                 touxiangImv.image = [GlocalUserImage getUserBannerImage];
             }else{
-                [touxiangImv sd_setImageWithURL:[NSURL URLWithString:self.delegate.headimage] placeholderImage:[UIImage imageNamed:@"defaultFace"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [touxiangImv sd_setImageWithURL:[NSURL URLWithString:self.delegate.bannerimage] placeholderImage:[UIImage imageNamed:@"defaultFace"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     NSData *data = UIImageJPEGRepresentation(image, 0.5);
                     [GlocalUserImage setUserBannerImageWithData:data];
                 }];

@@ -57,6 +57,10 @@
 
 #define USERNAME @"username"
 
+#define USER_FULLNAME @"userFullname"
+
+#define USER_HEADIMAGE @"userHeadImage"
+
 #define USERAUTHKEY @"userauthkey"
 
 #define DEVICETOKEN @"devicetoken"

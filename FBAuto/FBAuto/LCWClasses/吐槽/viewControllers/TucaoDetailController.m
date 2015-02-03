@@ -80,7 +80,7 @@
     
     __weak typeof(self)weakSelf = self;
     
-    __weak typeof(inputView)weakInput = inputView;
+//    __weak typeof(inputView)weakInput = inputView;
     
     [bottomView setMyBlock:^(CommentTapType aType) {
         NSLog(@"bottom tap : %d",aType);
@@ -93,7 +93,9 @@
         
             NSLog(@"弹出评论框");
             
-            [weakInput.textView becomeFirstResponder];
+//            [weakInput.textView becomeFirstResponder];
+            
+            [weakSelf clickToComment:nil];
         }
         
     }];

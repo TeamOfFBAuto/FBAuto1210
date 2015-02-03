@@ -318,17 +318,30 @@
 
 - (IBAction)clickToAlbum:(id)sender {
     
-    QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
+//    QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.allowsMultipleSelection = YES;
+//    //    imagePickerController.assters = photosArray;
+//    
+//    imagePickerController.limitsMaximumNumberOfSelection = YES;
+//    imagePickerController.maximumNumberOfSelection = 1;
+//    
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+//    
+//    [self presentViewController:navigationController animated:YES completion:NULL];
+    
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
-    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.allowsEditing = YES;
     //    imagePickerController.assters = photosArray;
     
-    imagePickerController.limitsMaximumNumberOfSelection = YES;
-    imagePickerController.maximumNumberOfSelection = 1;
+//    imagePickerController.limitsMaximumNumberOfSelection = YES;
+//    imagePickerController.maximumNumberOfSelection = 1;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
     
-    [self presentViewController:navigationController animated:YES completion:NULL];
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:NULL];
     
 }
 
@@ -376,8 +389,6 @@
             
             self.inputView.bottom = keyboardRect.origin.y - 64;
             
-            self.imageView.bottom = self.inputView.top - 20;
-            
             self.photoButton.top = self.imageView.bottom + 10;
             
             self.placeHolder.textColor = [UIColor lightGrayColor];
@@ -389,7 +400,7 @@
             self.inputView.center = self.imageView.center;
 
         }
-        
+        self.imageView.bottom = self.inputView.top - 20;
         self.placeHolder.center = self.inputView.center;
 
         

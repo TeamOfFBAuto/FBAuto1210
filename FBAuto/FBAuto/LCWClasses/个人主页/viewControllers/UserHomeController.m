@@ -499,6 +499,11 @@ typedef enum {
     
     NSString *sheng = [FBCityData cityNameForId:[userModel.province intValue]];
     NSString *shi = [FBCityData cityNameForId:[userModel.city intValue]];
+    
+    if ([sheng isEqualToString:shi]) {
+        shi = @"";
+    }
+    
     NSString *area = [NSString stringWithFormat:@"%@%@",sheng,shi];
     areaLabel.text = area;
     

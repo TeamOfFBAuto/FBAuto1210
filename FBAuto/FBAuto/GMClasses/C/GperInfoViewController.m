@@ -126,6 +126,12 @@
             s = [FBCityData cityNameForId:shi];
         }
         
+        //如果 省 市一样则不显示市
+        if ([city isEqualToString:province]) {
+            
+            s = @"";
+        }
+        
         if (p != nil && s != nil) {
             self.area = [NSString stringWithFormat:@"%@%@",p,s];
         }
@@ -148,6 +154,9 @@
         
         //头像
         self.headimage = [NSString stringWithFormat:@"%@",[dataInfo objectForKey:@"headimage"]];
+        
+        //banner
+        self.bannerimage = [NSString stringWithFormat:@"%@",[dataInfo objectForKey:@"backgroundimage"]];
         
         [bself hudWasHidden:bhud];
         
