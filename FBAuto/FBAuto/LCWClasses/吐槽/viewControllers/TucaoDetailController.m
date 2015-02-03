@@ -93,8 +93,6 @@
         
             NSLog(@"弹出评论框");
             
-//            [weakInput.textView becomeFirstResponder];
-            
             [weakSelf clickToComment:nil];
         }
         

@@ -389,18 +389,29 @@
             
             self.inputView.bottom = keyboardRect.origin.y - 64;
             
-            self.photoButton.top = self.imageView.bottom + 10;
+//            self.imageView.bottom = self.inputView.top - 20;
+            
+//            self.photoButton.top = self.imageView.bottom + 10;
             
             self.placeHolder.textColor = [UIColor lightGrayColor];
             
         }else
         {
             self.imageView.top = 10;
-            self.imageView.height = DEVICE_HEIGHT - 64 - keyboardRect.size.height - 10 - 10;
+            
+            CGFloat aHeight = DEVICE_HEIGHT - 64 - keyboardRect.size.height - 10 - 10;
+            
+            aHeight = aHeight > imageHeight ? imageHeight : aHeight;
+            
+            self.imageView.height = aHeight;
             self.inputView.center = self.imageView.center;
 
         }
-        self.imageView.bottom = self.inputView.top - 20;
+        
+        self.deleteButton.top = self.imageView.bottom - self.deleteButton.height;
+        
+        self.photoButton.top = self.imageView.bottom + 10;
+
         self.placeHolder.center = self.inputView.center;
 
         
@@ -439,7 +450,7 @@
                          
                          self.placeHolder.center = self.inputView.center;
                          
-                         
+                         self.deleteButton.top = self.imageView.bottom - self.deleteButton.height;
                          
                      } completion:nil];
     
@@ -503,7 +514,7 @@
             
             self.inputView.bottom = current_KeyBoard_Y - 64 - 20;
             
-            self.imageView.bottom = self.inputView.top - 20;
+//            self.imageView.bottom = self.inputView.top - 20;
             
             self.photoButton.top = self.imageView.bottom + 10;
             
