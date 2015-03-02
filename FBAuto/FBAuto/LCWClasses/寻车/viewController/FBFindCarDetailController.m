@@ -125,9 +125,9 @@
         
         [self labelWithTag:111].text  =[self showForText:area] ;
         [self labelWithTag:112].text  = [self showForText:[dic objectForKey:@"carfrom"]];
-        [self labelWithTag:113].text  = [self showForText:[dic objectForKey:@"spot_future"]];
-        [self labelWithTag:114].text  = [self showForText:[dic objectForKey:@"color_out"]];
-        [self labelWithTag:115].text  = [self showForText:[dic objectForKey:@"color_in"]];
+//        [self labelWithTag:113].text  = [self showForText:[dic objectForKey:@"spot_future"]];
+        [self labelWithTag:114 - 1].text  = [self showForText:[dic objectForKey:@"color_out"]];
+        [self labelWithTag:115 - 1].text  = [self showForText:[dic objectForKey:@"color_in"]];
 //        [self labelWithTag:114].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
         
         NSString *des = [dic objectForKey:@"cardiscrib"];
@@ -141,11 +141,11 @@
         
         NSString *description = des;
         
-        [self labelWithTag:116].text  = description;
+        [self labelWithTag:116 - 1].text  = description;
         
-        [self labelWithTag:116].numberOfLines = 0;
-        [self labelWithTag:116].lineBreakMode = NSLineBreakByCharWrapping;
-        [self labelWithTag:116].height = [LCWTools heightForText:[self labelWithTag:116].text width:DEVICE_WIDTH - 120 font:14];
+        [self labelWithTag:116 - 1].numberOfLines = 0;
+        [self labelWithTag:116 - 1].lineBreakMode = NSLineBreakByCharWrapping;
+        [self labelWithTag:116 - 1].height = [LCWTools heightForText:[self labelWithTag:116 - 1].text width:DEVICE_WIDTH - 120 font:14];
 //        [self labelWithTag:114].backgroundColor = [UIColor orangeColor];
         
         for (int i = 1; i < 7; i ++) {
@@ -156,7 +156,7 @@
             label2.top += dis;
         }
         
-        bgScrollView.contentSize = CGSizeMake(self.view.width, [self labelWithTag:116].bottom + 10);
+        bgScrollView.contentSize = CGSizeMake(self.view.width, [self labelWithTag:116 - 1].bottom + 10);
         
         //商家信息
         
@@ -247,7 +247,12 @@
     
     [self.view addSubview:bgScrollView];
     
-    NSArray *items = @[@"车       型:",@"地       区:",@"版       本:",@"库       存:",@"外  观 色:",@"内  饰 色:",@"详细描述:"];
+//    NSArray *items = @[@"车       型:",@"地       区:",@"版       本:",@"库       存:",@"外  观 色:",@"内  饰 色:",@"详细描述:"];
+    
+    //去掉库存
+    
+    NSArray *items = @[@"车       型:",@"地       区:",@"版       本:",@"外  观 色:",@"内  饰 色:",@"详细描述:"];
+    
     for (int i = 0; i < items.count; i ++) {
         UILabel *aLabel = [self createLabelFrame:CGRectMake(10, 25 + (20 + 15) * i, 92, 20) text:[items objectAtIndex:i] alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]];
         aLabel.font = [UIFont boldSystemFontOfSize:14];

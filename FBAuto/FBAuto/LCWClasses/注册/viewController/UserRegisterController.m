@@ -41,9 +41,9 @@
     
     
     //用户名、手机号、密码
-    NSArray *nameArr = @[@"zhuce_yonghu38_38",@"zhuce_phone28_40",@"zhuce_mima38_40"];
-    NSArray *placeHolders = @[@"用户名",@"手机号",@"密码"];
-    for (int i = 0; i < 3; i ++) {
+    NSArray *nameArr = @[@"zhuce_yonghu38_38",@"zhuce_phone28_40",@"zhuce_mima38_40",@"zhuce_mima38_40"];
+    NSArray *placeHolders = @[@"用户名",@"手机号",@"密码",@"重复密码"];
+    for (int i = 0; i < 4; i ++) {
         UIColor *color = [UIColor colorWithHexString:@"9b9b9b"];
         UIKeyboardType type = UIKeyboardTypeDefault;
         BOOL isPass = NO;
@@ -54,7 +54,7 @@
         if (i == 1) {
             type  = UIKeyboardTypeNumberPad;
         }
-        if (i == 2) {
+        if (i == 2 || i == 3) {
             isPass = YES;
         }
         
@@ -64,9 +64,11 @@
     
     [self textFieldForTag:100].returnKeyType = UIReturnKeyNext;
     [self textFieldForTag:101].returnKeyType = UIReturnKeyNext;
-    [self textFieldForTag:102].returnKeyType = UIReturnKeyDone;
+    [self textFieldForTag:102].returnKeyType = UIReturnKeyNext;
+    [self textFieldForTag:103].returnKeyType = UIReturnKeyDone;
+
     
-    UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 20 + 44 * 3 + 18, DEVICE_WIDTH - 20, 15)];
+    UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 20 + 44 * 4 + 18, DEVICE_WIDTH - 20, 15)];
     hint.font = [UIFont systemFontOfSize:14];
     hint.textAlignment = NSTextAlignmentCenter;
     hint.textColor = [UIColor colorWithHexString:@"b0b0b0"];
@@ -96,15 +98,15 @@
         
     }
     
-    NSArray *arr = @[@"普通个人请选择买家个人注册,",@"商家与销售请选择商家注册。"];
-    for (int i = 0; i < 2;  i ++) {
-        UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 594/2.f + 10 + (15 + 15)*i, DEVICE_WIDTH - 20, 15)];
-        hint.font = [UIFont systemFontOfSize:14];
-        hint.textAlignment = NSTextAlignmentLeft;
-        hint.textColor = [UIColor colorWithHexString:@"b0b0b0"];
-        hint.text = arr[i];
-        [self.view addSubview:hint];
-    }
+//    NSArray *arr = @[@"普通个人请选择买家个人注册,",@"商家与销售请选择商家注册。"];
+//    for (int i = 0; i < 2;  i ++) {
+//        UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 594/2.f + 10 + (15 + 15)*i, DEVICE_WIDTH - 20, 15)];
+//        hint.font = [UIFont systemFontOfSize:14];
+//        hint.textAlignment = NSTextAlignmentLeft;
+//        hint.textColor = [UIColor colorWithHexString:@"b0b0b0"];
+//        hint.text = arr[i];
+//        [self.view addSubview:hint];
+//    }
     
     //底部 tools
     
@@ -149,8 +151,14 @@
         
     }else if (textField.tag == 102){
         
+//        [textField resignFirstResponder];
+        [[self textFieldForTag:103]becomeFirstResponder];
+        
+    }else if (textField.tag == 103){
+        
         [textField resignFirstResponder];
     }
+
     
     return YES;
 }
@@ -159,7 +167,7 @@
 
 - (void)tapToHiddenKeyboard:(UIGestureRecognizer *)ges
 {
-    for (int i = 0; i < 3; i ++) {
+    for (int i = 0; i < 4; i ++) {
         
         UITextField *tf = (UITextField *)[self.view viewWithTag:100 + i];
         [tf resignFirstResponder];
@@ -180,6 +188,7 @@
         UITextField *tf_name = (UITextField *)[self.view viewWithTag:100];
         UITextField *tf_phone = (UITextField *)[self.view viewWithTag:101];
         UITextField *tf_pass = (UITextField *)[self.view viewWithTag:102];
+        UITextField *tf_pass_2 = (UITextField *)[self.view viewWithTag:103];
         if (tf_name.text.length == 0) {
             
             [LCWTools showMBProgressWithText:@"用户名不能为空" addToView:self.view];
@@ -193,6 +202,10 @@
         }else if (tf_pass.text.length < 6){
             
             [LCWTools showMBProgressWithText:@"密码不能少于6位" addToView:self.view];
+            return;
+        }else if (![tf_pass.text isEqualToString:tf_pass_2.text]){
+            
+            [LCWTools showMBProgressWithText:@"两次密码不一致" addToView:self.view];
             return;
         }
 

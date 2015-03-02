@@ -107,7 +107,10 @@
 //    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观色",@"内饰色"];
     
     //外观 内饰 合为一
-    NSArray *titles2 = @[@"地区",@"版本",@"库存",@"外观、内饰"];
+//    NSArray *titles2 = @[@"求购地区",@"版本",@"库存",@"外观、内饰"];
+    
+    //去掉 库存
+    NSArray *titles2 = @[@"求购地区",@"版本",@"外观、内饰"];
 
     
     UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
@@ -274,13 +277,13 @@
             title = @"版本";
         }
             break;
+//        case 103:
+//        {
+//            aStyle = Data_Timelimit;
+//            title = @"库存";
+//        }
+//            break;
         case 103:
-        {
-            aStyle = Data_Timelimit;
-            title = @"库存";
-        }
-            break;
-        case 104:
         {
             aStyle = Data_Color_Out;
             title = @"外观颜色";
@@ -571,8 +574,8 @@
         [self labelWithTag:100 + 2].text  = [self showForText:[dic objectForKey:@"carfrom"]];
         _carfrom = (int)[MENU_STANDARD indexOfObject:[dic objectForKey:@"carfrom"]];
         
-        [self labelWithTag:101 + 2].text  = [self showForText:[dic objectForKey:@"spot_future"]];
-        _spot_future = (int)[MENU_TIMELIMIT indexOfObject:[dic objectForKey:@"spot_future"]];
+//        [self labelWithTag:101 + 2].text  = [self showForText:[dic objectForKey:@"spot_future"]];
+//        _spot_future = (int)[MENU_TIMELIMIT indexOfObject:[dic objectForKey:@"spot_future"]];
         
 //        [self labelWithTag:102 + 2].text  = [self showForText:[dic objectForKey:@"color_out"]];
 //        _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
@@ -583,13 +586,13 @@
         
         //前外 后 内
         NSString *color_Out_In = [NSString stringWithFormat:@"%@,%@",[dic objectForKey:@"color_out"],[dic objectForKey:@"color_in"]];
-        [self labelWithTag:102 + 2].text = color_Out_In;
+        [self labelWithTag:102 + 2 - 1].text = color_Out_In;
         
         _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
         _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
         
         
-        [self labelWithTag:104 + 2].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
+        [self labelWithTag:104 + 2 - 1].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
         _deposit = [[dic objectForKey:@"deposit"]intValue];
         
         descriptionTF.text = [[dic objectForKey:@"cardiscrib"] isEqualToString:@""] ? @"无" : [dic objectForKey:@"cardiscrib"];

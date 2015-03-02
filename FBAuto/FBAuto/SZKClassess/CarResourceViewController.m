@@ -1106,7 +1106,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.row % 2 == 0) {
+    if (indexPath.row % 2 != 0) {
         cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
     }else
     {

@@ -861,7 +861,15 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
+    
+    if (indexPath.row % 2 != 0) {
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+    }else
+    {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
+    
+//    cell.backgroundColor = [UIColor colorWithHexString:@"eeeeee"];
     
     if (indexPath.row < _table.dataArray.count) {
         CarSourceClass *aCar = [_table.dataArray objectAtIndex:indexPath.row];

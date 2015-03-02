@@ -32,7 +32,7 @@
     NSMutableString *car_name = [NSMutableString stringWithString:aCar.car_name];
     
     contentText = [LCWTools NSStringRemoveLineAndSpace:car_name];
-    self.contentLabel.text = [NSString stringWithFormat:@"寻%@",contentText];;
+    self.contentLabel.text = [NSString stringWithFormat:@"求购%@",contentText];;
     
 //    NSString *area = [NSString stringWithFormat:@"发%@%@",aCar.province];
 //    
@@ -41,10 +41,10 @@
 //    }
     NSString *area;
     if ([aCar.province isEqualToString:@"不限"]) {
-        area = @"发全国";
+        area = @"地区全国";
     }else
     {
-        area = [NSString stringWithFormat:@"发%@",aCar.province];
+        area = [NSString stringWithFormat:@"地区%@",aCar.province];
     }
     
     self.toAddressLabel.text = area;

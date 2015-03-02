@@ -41,6 +41,10 @@
 
 #import "GuserModel.h"
 
+#import "RCIM.h"
+
+#import "FBChatViewController.h"
+
 @interface PersonalViewController ()
 {
     MBProgressHUD *loading;
@@ -454,10 +458,19 @@
             
         }
         else if (index == 7){//联系我们
-            [self.navigationController pushViewController:[[GlxwmViewController alloc]init] animated:YES];
+//            [self.navigationController pushViewController:[[GlxwmViewController alloc]init] animated:YES];
             //测试
             //[self.navigationController pushViewController:[[GyhzyViewController alloc]init] animated:YES];
             
+            
+            // 创建客服聊天视图控制器。
+            FBChatViewController *chatViewController = (FBChatViewController *)[[RCIM sharedRCIM]createCustomerService:RONG_SERVICE_ID title:@"在线客服" completion:^(){
+            }];
+            
+            // 把客服聊天视图控制器添加到导航栈。
+            chatViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:chatViewController animated:YES];
+
             
         }else if (index == 8){//消息设置
             [self.navigationController pushViewController:[[GMessageSViewController alloc]init]animated:YES];

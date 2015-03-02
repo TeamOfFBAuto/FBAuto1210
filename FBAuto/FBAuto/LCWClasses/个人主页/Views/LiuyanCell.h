@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (strong, nonatomic) IBOutlet UILabel *contenLabel;
 @property (strong, nonatomic) IBOutlet UIView *bottomLine;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 - (void)setCellWithModel:(LiuyanModel *)aModel;
 

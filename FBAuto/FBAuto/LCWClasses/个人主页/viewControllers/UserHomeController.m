@@ -421,7 +421,9 @@ typedef enum {
     [btn_liuyan setTitle:@"留言" forState:UIControlStateNormal];
     btn_liuyan.frame = CGRectMake(25, 20, DEVICE_WIDTH - 50, 50);
     btn_liuyan.layer.cornerRadius = 3.f;
-    btn_liuyan.backgroundColor = [UIColor colorWithHexString:@"222222"];
+//    btn_liuyan.backgroundColor = [UIColor colorWithHexString:@"222222"];
+    btn_liuyan.backgroundColor = COLOR_NORMAL;
+
     [liuyan addSubview:btn_liuyan];
     
     [btn_liuyan addTarget:self action:@selector(clickToLiuyan:) forControlEvents:UIControlEventTouchUpInside];
@@ -816,12 +818,12 @@ typedef enum {
                 
                 //根据文字变
                 NSString *text = userModel.intro;
-                CGFloat aHeight = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:16];
+                CGFloat aHeight = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:14];
                 
-                return 44 + (aHeight + (text.length > 0 ? 18 : 0));
+                return 20 + (aHeight + (text.length > 0 ? 18 : 0));
             }
             
-            return 44;
+            return 20;
         }else if (indexPath.section == 1){
             
             if (isCarsource) {
@@ -997,13 +999,13 @@ typedef enum {
                 cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:normal];
                 UILabel *leftLabel = [[UILabel alloc]init];
                 leftLabel.textAlignment = NSTextAlignmentLeft;
-                leftLabel.font = [UIFont systemFontOfSize:16];
+                leftLabel.font = [UIFont systemFontOfSize:14];
                 leftLabel.textColor = [UIColor colorWithHexString:@"383838"];
                 [cell.contentView addSubview:leftLabel];
                 leftLabel.tag = 100 + indexPath.row;
                 
                 UILabel *rightLabel = [[UILabel alloc]init];
-                rightLabel.font = [UIFont systemFontOfSize:16];
+                rightLabel.font = [UIFont systemFontOfSize:14];
                 rightLabel.textColor = [UIColor colorWithHexString:@"888888"];
                 [cell.contentView addSubview:rightLabel];
                 rightLabel.tag = 1000 + indexPath.row;
@@ -1016,20 +1018,20 @@ typedef enum {
             [cell.contentView addSubview:line];
             
             UILabel *label = (UILabel *)[cell viewWithTag:100 + indexPath.row];
-            label.frame = CGRectMake(10, 0, 70, 44);
+            label.frame = CGRectMake(10, 0, 70, 20);
             label.text = titles[indexPath.row];
             
             UILabel *label2 = (UILabel *)[cell viewWithTag:1000 + indexPath.row];
             
             if (indexPath.row == 3) {
                 
-                label2.frame = CGRectMake(10, label.bottom, DEVICE_WIDTH - 20, 44);
+                label2.frame = CGRectMake(10, label.bottom, DEVICE_WIDTH - 20, 20);
                 
                 label2.backgroundColor = [UIColor whiteColor];
                 //根据文字变
                 NSString *text = userModel.intro;
                 
-                label2.height = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:16];
+                label2.height = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:14];
                 
                 label2.text = text;
                 
@@ -1038,7 +1040,7 @@ typedef enum {
             }else
             {
                 CGFloat aWidth = DEVICE_WIDTH - label.right - 10 - 10;
-                label2.frame = CGRectMake(DEVICE_WIDTH - 10 - aWidth, 0,aWidth, 44);
+                label2.frame = CGRectMake(DEVICE_WIDTH - 10 - aWidth, 0,aWidth, 20);
                 
                 if (indexPath.row == 0) {
                     label2.text = userModel.fullname;
@@ -1084,7 +1086,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.f;
+    return 20;
 }
 
 

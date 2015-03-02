@@ -30,6 +30,8 @@
     CGFloat aHeight = [LCWTools heightForText:aModel.content width:aWidth font:15];
     self.contenLabel.height = aHeight;
     
+    self.timeLabel.text = [LCWTools timechange2:aModel.dateline];
+    
 //    self.bottomLine.top = [LiuyanCell heightWithContent:aModel.content] - 0.5f;
 }
 

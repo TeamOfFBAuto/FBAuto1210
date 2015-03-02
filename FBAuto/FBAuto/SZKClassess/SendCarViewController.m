@@ -627,7 +627,9 @@
     priceTF.textAlignment = NSTextAlignmentRight;
     [secondBgView addSubview:priceTF];
     
-    [secondBgView addSubview:[self createLabelFrame:CGRectMake(DEVICE_WIDTH - 20 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"c7c7cc"]]];
+//    [secondBgView addSubview:[self createLabelFrame:CGRectMake(DEVICE_WIDTH - 20 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"c7c7cc"]]];
+    
+    [secondBgView addSubview:[self createLabelFrame:CGRectMake(DEVICE_WIDTH - 20 - 35 - 10, 45* titles.count, 35, 45.f) text:@"万元" alignMent:NSTextAlignmentRight textColor:[UIColor redColor]]];
     
     //车源配置
     
@@ -884,6 +886,13 @@
     base.navigationTitle = title;
     base.dataStyle = aStyle;
     base.selectLabel = btn.contentLabel;
+    
+    //版本 需要添加 其他
+    
+    if (aStyle == Data_Standard) {
+        
+        base.haveLimit = YES;
+    }
     
     if (self.actionStyle == Action_Edit) {
         base.rootVC = self;
