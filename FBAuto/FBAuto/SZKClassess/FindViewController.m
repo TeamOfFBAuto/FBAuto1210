@@ -120,7 +120,7 @@
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
-        NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
+        NSLog(@"赞erro%@",[result objectForKey:@"errinfo"]);
         
 //        [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
         

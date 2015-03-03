@@ -22,6 +22,12 @@
 
 #import "JubaoViewController.h"
 
+#import "TucaoModel.h"
+
+#import "TucaoCellSmall.h"
+
+#import "TucaoDetailController.h"
+
 typedef enum {
     Action_Add_Friend = 1, //添加好友
     Action_Add_concern,//添加关注
@@ -89,8 +95,7 @@ typedef enum {
     
     firstLoadData = YES;
     
-    //搜索遮罩
-    [_table showRefreshHeader:YES];
+//    [_table showRefreshHeader:YES];
     
     arr_carsource = [NSMutableArray array];
     arr_liuyan = [NSMutableArray array];
@@ -193,30 +198,55 @@ typedef enum {
 {
     if (isCar) {
         
-        static NSString * identifier = @"CarSourceCell";
-        
-        CarSourceCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
-        if (cell == nil)
-        {
-            cell = [[[NSBundle mainBundle]loadNibNamed:@"CarSourceCell" owner:self options:nil]objectAtIndex:0];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        if (indexPath.row % 2 == 0) {
-            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+        //个人
+        if ([userModel.usertype intValue] == 1) {
+            
+            static NSString * identifier = @"TucaoCellSmall";
+            
+            TucaoCellSmall * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            
+            if (cell == nil)
+            {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"TucaoCellSmall" owner:self options:nil]objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (_table.dataArray.count > indexPath.row) {
+                TucaoModel *aCar = [_table.dataArray objectAtIndex:indexPath.row];
+                [cell setCellWithModel:aCar];
+            }
+            
+            return cell;
+            
+            
         }else
         {
-            cell.contentView.backgroundColor = [UIColor whiteColor];
+            static NSString * identifier = @"CarSourceCell";
+            
+            CarSourceCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            
+            if (cell == nil)
+            {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"CarSourceCell" owner:self options:nil]objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (indexPath.row % 2 == 0) {
+                cell.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+            }else
+            {
+                cell.contentView.backgroundColor = [UIColor whiteColor];
+            }
+            
+            if (_table.dataArray.count > indexPath.row) {
+                CarSourceClass *aCar = [_table.dataArray objectAtIndex:indexPath.row];
+                [cell setCellDataWithModel:aCar];
+            }
+            
+            return cell;
         }
-        
-        if (_table.dataArray.count > indexPath.row) {
-            CarSourceClass *aCar = [_table.dataArray objectAtIndex:indexPath.row];
-            [cell setCellDataWithModel:aCar];
-        }
-        
-        return cell;
         
     }
         
@@ -542,7 +572,21 @@ typedef enum {
         
         [weakSelf createRightButton];//右上角按钮
         
-        titles = @[@"公司",@"地址",@"电话",@"个人简介"];
+        
+        if ([guserModel.usertype integerValue] == 1) {
+            
+            //个人
+            titles = @[@"地区",@"个人签名"];
+
+        }else if([guserModel.usertype intValue] == 2)
+        {
+            //商家
+            
+            titles = @[@"公司",@"地址",@"电话",@"个人简介"];
+
+        }
+        
+        [_table showRefreshHeader:YES];
         
         _table.tableHeaderView = [weakSelf createHeaderView];
         
@@ -559,7 +603,24 @@ typedef enum {
 //获取用户车源信息
 -(void)getCarSourceIsReload:(BOOL)isReload page:(int)page{
     //获取用户车源信息
-    NSString *api = [NSString stringWithFormat:FBAUTO_CARSOURCE_MYSELF,self.userId,page,20];
+    
+    NSString *api;
+
+    
+    if ([userModel.usertype intValue] == 1) {
+        
+        //获取吐槽内容
+        
+        api = [NSString stringWithFormat:FBATUO_TUCAO_LIST,page,KPageSize,[GMAPI getAuthkey]];
+
+    }else
+    {
+        //在售车源
+        
+        api = [NSString stringWithFormat:FBAUTO_CARSOURCE_MYSELF,self.userId,page,20];
+        
+    }
+    
     
     NSLog(@"用户车源信息接口:%@",api);
     
@@ -579,10 +640,22 @@ typedef enum {
         
         for (NSDictionary *aDic in data) {
             
+            //个人的话 是 吐槽
             
-            CarSourceClass *aCar = [[CarSourceClass alloc]initWithDictionary:aDic];
+            if ([userModel.usertype intValue] == 1) {
+                
+                TucaoModel *aModel = [[TucaoModel alloc]initWithDictionary:aDic];
+
+                [arr addObject:aModel];
+
+            }else
+            {
+                CarSourceClass *aCar = [[CarSourceClass alloc]initWithDictionary:aDic];
             
-            [arr addObject:aCar];
+                [arr addObject:aCar];
+
+            }
+            
         }
         
         NSLog(@"车源page %d total %d",page_carsource,total_carsource);
@@ -600,7 +673,6 @@ typedef enum {
         if (isCarsource) {
             
             [_table.dataArray removeAllObjects];
-//            [_table reloadData:arr_carsource total:total];
             
             [_table reloadData:arr_carsource haveMore:(page_carsource < total_carsource ? YES : NO)];
         }
@@ -621,6 +693,55 @@ typedef enum {
         
     }];
 }
+
+
+/**
+ *  获取吐槽列表
+ */
+- (void)getTucaoList
+{
+    
+    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_LIST,_table.pageNum,KPageSize,[GMAPI getAuthkey]];
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"吐槽列表erro%@",[result objectForKey:@"errinfo"]);
+        
+        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+        int total = [[dataInfo objectForKey:@"total"]intValue];
+        
+        NSArray *data = [dataInfo objectForKey:@"data"];
+        
+        NSMutableArray *arr_ = [NSMutableArray arrayWithCapacity:data.count];
+        
+        for (NSDictionary *aDic in data) {
+            
+            TucaoModel *aModel = [[TucaoModel alloc]initWithDictionary:aDic];
+            
+            [arr_ addObject:aModel];
+        }
+        
+        [_table reloadData:arr_ total:total];
+        
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        NSLog(@"failDic %@",failDic);
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+        
+        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
+        if (errocode == 1) {
+            NSLog(@"结果为空");
+            [_table reloadData:nil total:0];
+        }
+        
+        [_table loadFail];
+        
+    }];
+}
+
 
 /**
  *  获取商家留言
@@ -794,14 +915,24 @@ typedef enum {
 {
     if (isCarsource) {
         
-        FBDetail2Controller *fbdetailvc = [[FBDetail2Controller alloc]init];
-        CarSourceClass *car = _table.dataArray[indexPath.row];
-        fbdetailvc.infoId = car.id;
-        fbdetailvc.isHiddenUeserInfo = YES;
-        fbdetailvc.style = Navigation_Special;
-        fbdetailvc.navigationTitle = @"详情";
-        fbdetailvc.carId = car.car;
-        [self.navigationController pushViewController:fbdetailvc animated:YES];
+        if ([userModel.usertype intValue] == 1) {
+            
+            TucaoDetailController *detail = [[TucaoDetailController alloc]init];
+            detail.tucaoModel = _table.dataArray[indexPath.row];
+            
+            [self.navigationController pushViewController:detail animated:YES];
+            
+        }else
+        {
+            FBDetail2Controller *fbdetailvc = [[FBDetail2Controller alloc]init];
+            CarSourceClass *car = _table.dataArray[indexPath.row];
+            fbdetailvc.infoId = car.id;
+            fbdetailvc.isHiddenUeserInfo = YES;
+            fbdetailvc.style = Navigation_Special;
+            fbdetailvc.navigationTitle = @"详情";
+            fbdetailvc.carId = car.car;
+            [self.navigationController pushViewController:fbdetailvc animated:YES];
+        }
         
     }
     
@@ -814,16 +945,29 @@ typedef enum {
         
         if (indexPath.section == 0) {
         
-            if (indexPath.row == 3) {
+            
+            //区分个人 和 商家
+            int row = 1;
+            
+            if ([userModel.usertype intValue] == 1)
+            {
+                row = 1;
+            }else
+            {
+                row = 3;
+            }
+            
+            if (indexPath.row == row) {
                 
                 //根据文字变
                 NSString *text = userModel.intro;
                 CGFloat aHeight = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:14];
                 
-                return 20 + (aHeight + (text.length > 0 ? 18 : 0));
+                return 24 + (aHeight + (text.length > 0 ? 18 : 0));
             }
             
-            return 20;
+            return 24;
+            
         }else if (indexPath.section == 1){
             
             if (isCarsource) {
@@ -863,7 +1007,17 @@ typedef enum {
         NSArray *items_images_normal = @[@"zs_cheyuan_normal",@"x_liuyan_normal"];
         NSArray *items_images_selected = @[@"zs_cheyuan_selected",@"x_liuyan_selected"];
         
-        NSArray *items_names = @[@"在售车源",@"留言"];
+        NSArray *items_names;
+        if ([userModel.usertype intValue] == 1)
+        {
+            items_names = @[@"吐槽内容",@"留言"];
+
+        }else
+        {
+            items_names = @[@"在售车源",@"留言"];
+
+        }
+        
         for (int i = 0; i < 2; i ++) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:items_names[i] forState:UIControlStateNormal];
@@ -1018,20 +1172,35 @@ typedef enum {
             [cell.contentView addSubview:line];
             
             UILabel *label = (UILabel *)[cell viewWithTag:100 + indexPath.row];
-            label.frame = CGRectMake(10, 0, 70, 20);
+            label.frame = CGRectMake(10, 0, 70, 24);
             label.text = titles[indexPath.row];
             
             UILabel *label2 = (UILabel *)[cell viewWithTag:1000 + indexPath.row];
             
-            if (indexPath.row == 3) {
+            
+            int jianjie_row = 1;//判断是第几行需要特殊处理
+            
+            if ([userModel.usertype intValue] == 1) {
                 
-                label2.frame = CGRectMake(10, label.bottom, DEVICE_WIDTH - 20, 20);
+                //个人
+                
+                jianjie_row =1 ;
+            }else
+            {
+                //商家
+                jianjie_row = 3;
+            }
+            
+            
+            if (indexPath.row == jianjie_row) {
+                
+                label2.frame = CGRectMake(10, label.bottom, DEVICE_WIDTH - 20, 24);
                 
                 label2.backgroundColor = [UIColor whiteColor];
                 //根据文字变
                 NSString *text = userModel.intro;
                 
-                label2.height = [LCWTools heightForText:text width:DEVICE_WIDTH - 20 font:14];
+                label2.height = [LCWTools heightForText:text width:DEVICE_WIDTH - 24 font:14];
                 
                 label2.text = text;
                 
@@ -1040,14 +1209,36 @@ typedef enum {
             }else
             {
                 CGFloat aWidth = DEVICE_WIDTH - label.right - 10 - 10;
-                label2.frame = CGRectMake(DEVICE_WIDTH - 10 - aWidth, 0,aWidth, 20);
+                label2.frame = CGRectMake(DEVICE_WIDTH - 10 - aWidth, 0,aWidth, 24);
                 
-                if (indexPath.row == 0) {
-                    label2.text = userModel.fullname;
-                }else if (indexPath.row == 1){
-                    label2.text = userModel.address;
-                }else if (indexPath.row == 2){
-                    label2.text = userModel.phone;
+                
+                //区分 个人还是 商家
+                if ([userModel.usertype intValue] == 1)
+                {
+                   
+                    if (indexPath.row == 0) {
+                        
+                        NSString *sheng = [FBCityData cityNameForId:[userModel.province intValue]];
+                        NSString *shi = [FBCityData cityNameForId:[userModel.city intValue]];
+                        
+                        if ([sheng isEqualToString:shi]) {
+                            shi = @"";
+                        }
+                        
+                        NSString *area = [NSString stringWithFormat:@"%@%@",sheng,shi];
+                        
+                        label2.text = area;//地区
+                    }
+                    
+                }else
+                {
+                    if (indexPath.row == 0) {
+                        label2.text = userModel.fullname;
+                    }else if (indexPath.row == 1){
+                        label2.text = userModel.address;
+                    }else if (indexPath.row == 2){
+                        label2.text = userModel.phone;
+                    }
                 }
                 
                 label2.textAlignment = NSTextAlignmentRight;
@@ -1086,7 +1277,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 20;
+    return 24;
 }
 
 

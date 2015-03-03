@@ -30,6 +30,8 @@
 		135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */; };
 		136787151A4D026000192276 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787141A4D026000192276 /* BaseModel.m */; };
 		136787181A4D027700192276 /* TucaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787171A4D027700192276 /* TucaoModel.m */; };
+		136B14D61AA59FF0000DB09B /* TucaoCellSmall.m in Sources */ = {isa = PBXBuildFile; fileRef = 136B14D41AA59FF0000DB09B /* TucaoCellSmall.m */; };
+		136B14D71AA59FF0000DB09B /* TucaoCellSmall.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136B14D51AA59FF0000DB09B /* TucaoCellSmall.xib */; };
 		136CAD5719C97C7C00E05A2F /* biankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CAD5619C97C7C00E05A2F /* biankuang.png */; };
 		136CE5651A5D140F007D78A7 /* UserRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 136CE5641A5D140F007D78A7 /* UserRegisterController.m */; };
 		136CE5701A5D1B1B007D78A7 /* zhuce_diqu38_38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CE5671A5D1B1B007D78A7 /* zhuce_diqu38_38@2x.png */; };
@@ -570,6 +572,9 @@
 		136787141A4D026000192276 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		136787161A4D027700192276 /* TucaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoModel.h; sourceTree = "<group>"; };
 		136787171A4D027700192276 /* TucaoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoModel.m; sourceTree = "<group>"; };
+		136B14D31AA59FF0000DB09B /* TucaoCellSmall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoCellSmall.h; sourceTree = "<group>"; };
+		136B14D41AA59FF0000DB09B /* TucaoCellSmall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoCellSmall.m; sourceTree = "<group>"; };
+		136B14D51AA59FF0000DB09B /* TucaoCellSmall.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TucaoCellSmall.xib; sourceTree = "<group>"; };
 		136CAD5619C97C7C00E05A2F /* biankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biankuang.png; sourceTree = "<group>"; };
 		136CE5631A5D140F007D78A7 /* UserRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRegisterController.h; sourceTree = "<group>"; };
 		136CE5641A5D140F007D78A7 /* UserRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRegisterController.m; sourceTree = "<group>"; };
@@ -1829,6 +1834,9 @@
 				136DF4451A6655370080C046 /* LiuyanCell.xib */,
 				1394D8FB1A6E2DEE00A79D27 /* LTextView.h */,
 				1394D8FC1A6E2DEE00A79D27 /* LTextView.m */,
+				136B14D31AA59FF0000DB09B /* TucaoCellSmall.h */,
+				136B14D41AA59FF0000DB09B /* TucaoCellSmall.m */,
+				136B14D51AA59FF0000DB09B /* TucaoCellSmall.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3169,6 +3177,7 @@
 				13D5E00A1961758E00804835 /* haoyou_xuanze600_90@2x.png in Resources */,
 				13D5DFE71961758E00804835 /* geren_down46_46@2x.png in Resources */,
 				138B4AFE1966A4BD00B974A5 /* face97.gif in Resources */,
+				136B14D71AA59FF0000DB09B /* TucaoCellSmall.xib in Resources */,
 				138B4ACA1966A4BD00B974A5 /* face5.png in Resources */,
 				138B4AB11966A4BD00B974A5 /* face27.png in Resources */,
 				138B4AEE1966A4BD00B974A5 /* face82.png in Resources */,
@@ -3364,6 +3373,7 @@
 				E351A0C6196FB91800C78CFE /* UILabel+GautoMatchedText.m in Sources */,
 				E3611459197BA8E000F9234E /* DXAlertView.m in Sources */,
 				190BFE21195C362F0098E0F4 /* SzkLoadData.m in Sources */,
+				136B14D61AA59FF0000DB09B /* TucaoCellSmall.m in Sources */,
 				1336BC24196B91F70011B4D9 /* NSString+Emoji.m in Sources */,
 				13BBD0A51A52834700212CB1 /* TucaoDetailController.m in Sources */,
 				13DB41281A78BD96003728C8 /* MBProgressHUD.m in Sources */,
@@ -3646,7 +3656,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3684,7 +3694,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

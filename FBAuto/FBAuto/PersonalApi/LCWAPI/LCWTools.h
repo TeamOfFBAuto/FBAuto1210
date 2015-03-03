@@ -103,6 +103,8 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 +(NSString *)timechange3:(NSString *)placetime;
 +(NSString *)timechangeToDateline;
 
++(NSString *)timechange:(NSString *)placetime withFormat:(NSString *)format;
+
 +(NSString*)timestamp:(NSString*)myTime;
 
 + (NSString *)currentTime;//当前时间 yyyy-mm-dd

@@ -11,6 +11,14 @@
  *  个人主页
  */
 
+
+typedef enum {
+ 
+    User_Gren = 0, //个人
+    User_ShangJia //商家
+    
+}USER_TYPE;///用户类型
+
 typedef void(^CancelPointBlock)(id aModel,NSString *user_Id,BOOL success);
 
 @interface UserHomeController : FBBaseViewController
