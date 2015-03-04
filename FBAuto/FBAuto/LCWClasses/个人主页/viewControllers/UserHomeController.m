@@ -611,7 +611,7 @@ typedef enum {
         
         //获取吐槽内容
         
-        api = [NSString stringWithFormat:FBATUO_TUCAO_LIST,page,KPageSize,[GMAPI getAuthkey]];
+        api = [NSString stringWithFormat:FBATUO_TUCAO_LIST,page,KPageSize,[GMAPI getAuthkey],self.userId];
 
     }else
     {
@@ -687,54 +687,6 @@ typedef enum {
         if (erroCode != 2) { //2 代表数据为空
             
             [LCWTools showMBProgressWithText:[failDic objectForKey:ERROR_INFO] addToView:self.view];
-        }
-        
-        [_table loadFail];
-        
-    }];
-}
-
-
-/**
- *  获取吐槽列表
- */
-- (void)getTucaoList
-{
-    
-    NSString *url = [NSString stringWithFormat:FBATUO_TUCAO_LIST,_table.pageNum,KPageSize,[GMAPI getAuthkey]];
-    
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
-        
-        NSLog(@"吐槽列表erro%@",[result objectForKey:@"errinfo"]);
-        
-        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
-        int total = [[dataInfo objectForKey:@"total"]intValue];
-        
-        NSArray *data = [dataInfo objectForKey:@"data"];
-        
-        NSMutableArray *arr_ = [NSMutableArray arrayWithCapacity:data.count];
-        
-        for (NSDictionary *aDic in data) {
-            
-            TucaoModel *aModel = [[TucaoModel alloc]initWithDictionary:aDic];
-            
-            [arr_ addObject:aModel];
-        }
-        
-        [_table reloadData:arr_ total:total];
-        
-    }failBlock:^(NSDictionary *failDic, NSError *erro) {
-        
-        NSLog(@"failDic %@",failDic);
-        
-        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
-        
-        
-        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
-        if (errocode == 1) {
-            NSLog(@"结果为空");
-            [_table reloadData:nil total:0];
         }
         
         [_table loadFail];

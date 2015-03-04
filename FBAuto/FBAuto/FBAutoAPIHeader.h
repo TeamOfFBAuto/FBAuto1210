@@ -288,8 +288,8 @@ alpha:(a)]
 #define FBAUTO_SHARE_CAR_FIND @"http://fbautotest.fblife.com/index.php?c=web&a=singleXunche&xid=%@" //寻车分享
 
 // 吐槽 ================
-
-#define FBATUO_TUCAO_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getarticle&page=%d&ps=%d&authkey=%@"//吐槽列表
+//有uid则是某个用户的吐槽,不带uid则是全部吐槽
+#define FBATUO_TUCAO_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getarticle&page=%d&ps=%d&authkey=%@&uid=%@"//吐槽列表
 
 #define FBATUO_TUCAO_DETAIL @"http://fbautotest.fblife.com/index.php?c=interface&a=articledetail&artid=%@&ps=%d"//吐槽详情
 
