@@ -421,7 +421,7 @@
     sqlite3 *db = [DataBase openDB];
     sqlite3_stmt *stmt = nil;
     //执行SQL语句
-    int result = sqlite3_prepare_v2(db, "select * from carStyle where parentId = ? order by codeId desc", -1, &stmt, nil);
+    int result = sqlite3_prepare_v2(db, "select * from carStyle where parentId = ? order by name desc", -1, &stmt, nil);
     NSLog(@"All carType result = %d",result);
     NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:1];
     

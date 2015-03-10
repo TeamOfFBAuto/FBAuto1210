@@ -28,6 +28,8 @@
 		135EC58F1A009D2F00A040F1 /* CarUpdateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */; };
 		135EC5991A01043400A040F1 /* fabu92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5971A01043400A040F1 /* fabu92_58@2x.png */; };
 		135EC59A1A01043400A040F1 /* jiahaoyou 92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */; };
+		136770251AAEA1E100397F35 /* LPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 136770241AAEA1E100397F35 /* LPickerView.m */; };
+		136770271AAEDBA000397F35 /* zan_xin_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 136770261AAEDBA000397F35 /* zan_xin_no@2x.png */; };
 		136787151A4D026000192276 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787141A4D026000192276 /* BaseModel.m */; };
 		136787181A4D027700192276 /* TucaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136787171A4D027700192276 /* TucaoModel.m */; };
 		136B14D61AA59FF0000DB09B /* TucaoCellSmall.m in Sources */ = {isa = PBXBuildFile; fileRef = 136B14D41AA59FF0000DB09B /* TucaoCellSmall.m */; };
@@ -568,6 +570,9 @@
 		135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarUpdateClass.m; sourceTree = "<group>"; };
 		135EC5971A01043400A040F1 /* fabu92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fabu92_58@2x.png"; sourceTree = "<group>"; };
 		135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiahaoyou 92_58@2x.png"; sourceTree = "<group>"; };
+		136770231AAEA1E100397F35 /* LPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPickerView.h; sourceTree = "<group>"; };
+		136770241AAEA1E100397F35 /* LPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPickerView.m; sourceTree = "<group>"; };
+		136770261AAEDBA000397F35 /* zan_xin_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zan_xin_no@2x.png"; sourceTree = "<group>"; };
 		136787131A4D026000192276 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		136787141A4D026000192276 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		136787161A4D027700192276 /* TucaoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoModel.h; sourceTree = "<group>"; };
@@ -1351,6 +1356,8 @@
 			children = (
 				1315537D19792FC60044C010 /* LSearchView.h */,
 				1315537E19792FC60044C010 /* LSearchView.m */,
+				136770231AAEA1E100397F35 /* LPickerView.h */,
+				136770241AAEA1E100397F35 /* LPickerView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1745,6 +1752,7 @@
 			children = (
 				136CE5661A5D1B1B007D78A7 /* 注册界面切图 */,
 				138472191A5BD3E800EA017F /* tucao_xin_red@2x.png */,
+				136770261AAEDBA000397F35 /* zan_xin_no@2x.png */,
 				137BD5ED1A5A2FE50057A784 /* daohanglan@2x.png */,
 				13C0B3201A5E1F7100E8328F /* tabbar_bg@2x.png */,
 				13B259A81A591F9100F359CD /* b_cheyuan44_44@2x.png */,
@@ -3072,6 +3080,7 @@
 				13B259CA1A591F9100F359CD /* dl_bg640_904@2x.jpg in Resources */,
 				138B4AA31966A4BD00B974A5 /* face14.png in Resources */,
 				13D5E07B1962B93A00804835 /* hui_button554_90@2x.png in Resources */,
+				136770271AAEDBA000397F35 /* zan_xin_no@2x.png in Resources */,
 				13D5DFF91961758E00804835 /* jiantou_bai10_18@2x.png in Resources */,
 				13D5DFE01961758E00804835 /* geren _bg50_28@2x.png in Resources */,
 				13D5E118196513AF00804835 /* FBDetail2Controller.xib in Resources */,
@@ -3329,6 +3338,7 @@
 				137FEB091974D48100CDBD89 /* CarBrand.m in Sources */,
 				E33ECB08196D230A00DDD72D /* GptzTableViewCell.m in Sources */,
 				135922571A4D6B0B0091E320 /* TucaoPublishController.m in Sources */,
+				136770251AAEA1E100397F35 /* LPickerView.m in Sources */,
 				1394D9061A6E501D00A79D27 /* PeizhiModel.m in Sources */,
 				1394D9021A6E4E5400A79D27 /* PeizhiViewController.m in Sources */,
 				137926FB1987776900377ED5 /* GChangePwViewController.m in Sources */,
@@ -3584,7 +3594,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
+				PROVISIONING_PROFILE = "a74960b1-7ac9-42a7-9731-9ab60e7f9fcc";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s armv64";
 			};
@@ -3619,7 +3629,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "ada9cbec-43cd-4071-8d68-bf9a9ff0c98b";
+				PROVISIONING_PROFILE = "a74960b1-7ac9-42a7-9731-9ab60e7f9fcc";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s armv64";
@@ -3656,7 +3666,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
+				PROVISIONING_PROFILE = "a74960b1-7ac9-42a7-9731-9ab60e7f9fcc";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3694,7 +3704,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
+				PROVISIONING_PROFILE = "a74960b1-7ac9-42a7-9731-9ab60e7f9fcc";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

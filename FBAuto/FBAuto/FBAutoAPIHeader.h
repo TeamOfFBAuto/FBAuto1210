@@ -161,10 +161,14 @@ alpha:(a)]
 #define  FBAUTO_LOG_OUT @"http://fbautotest.fblife.com/index.php?c=interface&a=dologout&uid=%@"
 
 //获取个人信息
-#define FBAUTO_GET_USER_INFORMATION @"http://fbautotest.fblife.com/index.php?c=interface&a=getuser&uid=%@"
+#define FBAUTO_GET_USER_INFORMATION @"http://fbautotest.fblife.com/index.php?c=interface&a=getuserinfo&uid=%@"
 
 //获取个人信息 -- 加用户关系 2.0
-#define FBAUTO_GET_USER_INFORMATION_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=getuser&uid=%@&authkey=%@"
+#define FBAUTO_GET_USER_INFORMATION_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=getuserinfo&uid=%@&authkey=%@"
+
+//对某个用户点赞(uid 被点赞的人)
+
+#define FBAUTO_USER_DIANZAN @"http://fbautotest.fblife.com/index.php?c=interface&a=dianzan_user&authkey=%@=&id=%@"
 
 //修改用户密码
 #define  FBAUTO_MODIFY_PASSWORD @"http://fbautotest.fblife.com/index.php?c=interface&a=edituser&authkey=%@&password=%@&op=pass&phone=%@"
@@ -235,9 +239,9 @@ alpha:(a)]
 
 #define FBAUTO_CARSOURCE_ADD_PIC @"http://fbautotest.fblife.com/index.php?c=interface&a=addpic"//添加图片
 
-#define FBAUTO_CARSOURCE_ADD_SOURCE @"http://fbautotest.fblife.com/index.php?c=interface&a=addcheyuan"//添加车源
+#define FBAUTO_CARSOURCE_ADD_SOURCE @"http://fbautotest.fblife.com/index.php?c=interface&a=addcheyuan_new"//添加车源
 
-#define FBAUTO_CARSOURCE_SINGLE_SOURE @"http://fbautotest.fblife.com/index.php?c=interface&a=getsinglecheyuan&cid=%@&uid=%@"//获取单个车源
+#define FBAUTO_CARSOURCE_SINGLE_SOURE @"http://fbautotest.fblife.com/index.php?c=interface&a=getsinglecheyuan_new&cid=%@&uid=%@"//获取单个车源
 
 #define FBAUTO_CARSOURCE_SEARCH @"http://fbautotest.fblife.com/index.php?c=interface&a=searchcheyuan&keyword=%@&page=%d&ps=%d"//搜索车源
 
@@ -245,7 +249,7 @@ alpha:(a)]
 
 #define FBAUTO_CARSOURCE_DELETE @"http://fbautotest.fblife.com/index.php?c=interface&a=delcheyuan&authkey=%@&cid=%@" //删除车源
 
-#define FBAUTO_CARSOURCE_EDIT @"http://fbautotest.fblife.com/index.php?c=interface&a=editcheyuan"//修改车源信息
+#define FBAUTO_CARSOURCE_EDIT @"http://fbautotest.fblife.com/index.php?c=interface&a=editcheyuan_new"//修改车源信息
 
 #define FBAUTO_CARSOURCE_REFRESH @"http://fbautotest.fblife.com/index.php?c=interface&a=flushcheyuan&cid=%@&authkey=%@"//刷新车源
 
@@ -258,8 +262,10 @@ alpha:(a)]
 #define FBAUTO_FINCAR_MYSELF @"http://fbautotest.fblife.com/index.php?c=interface&a=getmyxunche&uid=%@&page=%d&ps=%d"//我的寻车
 
 #define FBAUTO_FINDCAR_PUBLISH @"http://fbautotest.fblife.com/index.php?c=interface&a=addxunche"//添加寻车信息
+#define FBAUTO_FINDCAR_PUBLISH_NEW @"http://fbautotest.fblife.com/index.php?c=interface&a=addxunche_new"//添加寻车信息新的
 
-#define FBAUTO_FINDCAR_SINGLE @"http://fbautotest.fblife.com/index.php?c=interface&a=getsinglexunche&xid=%@&uid=%@"//单个寻车信息
+
+#define FBAUTO_FINDCAR_SINGLE @"http://fbautotest.fblife.com/index.php?c=interface&a=getsinglexunche_new&xid=%@&uid=%@"//单个寻车信息
 
 #define FBAUTO_FINDCAR_EDIT @"http://fbautotest.fblife.com/index.php?c=interface&a=editxunche"//编辑
 

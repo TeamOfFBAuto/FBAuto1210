@@ -177,6 +177,10 @@
     
             peizhi_select = [arr componentsJoinedByString:@","];
             
+            if ([peizhi_select isEqualToString:@"null"]) {
+                peizhi_select = @"";
+            }
+            
             aLabel.text = peizhi_select;
             
             aLabel.height = [LCWTools heightForText:peizhi_select width:label_Width font:14];

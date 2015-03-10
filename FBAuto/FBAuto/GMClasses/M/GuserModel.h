@@ -34,6 +34,10 @@
 @property(nonatomic,strong)NSString *isdel;//(0:未删除;1:已删除)
 @property(nonatomic,strong)NSString *dateline;//:时间
 
+@property(nonatomic,assign)int dianzan;//是否对当前用户点赞
+
+@property(nonatomic,strong)NSString *zan_num;//赞的个数
+
 
 
 //初始化方法

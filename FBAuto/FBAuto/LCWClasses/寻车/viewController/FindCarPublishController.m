@@ -14,7 +14,7 @@
 #import "FBFindCarDetailController.h"
 #import "DXAlertView.h"
 
-@interface FindCarPublishController ()<UITextViewDelegate>
+@interface FindCarPublishController ()<UITextViewDelegate,UIActionSheetDelegate>
 {
     MBProgressHUD *loadingHub;
     UIScrollView *bigBgScroll;//背景scroll
@@ -40,6 +40,8 @@
     NSString *_color_in_custom;//自定义内饰颜色
     
     NSString *_color_out_custom;//自定义外观颜色
+    
+    int validity; // 有效期，一周=1；两周=2；一个月=4
 }
 
 @end
@@ -110,9 +112,10 @@
 //    NSArray *titles2 = @[@"求购地区",@"版本",@"库存",@"外观、内饰"];
     
     //去掉 库存
-    NSArray *titles2 = @[@"求购地区",@"版本",@"外观、内饰"];
-
+//    NSArray *titles2 = @[@"求购地区",@"版本",@"外观、内饰"];
     
+    NSArray *titles2 = @[@"求购地区",@"版本",@"外观、内饰",@"有效期"];
+
     UILabel *firstLabel = [self createLabelFrame:CGRectMake(10, 0, DEVICE_WIDTH - 20, 45) text:@"必填" alignMent:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"818181"]];
     [bigBgScroll addSubview:firstLabel];
     
@@ -142,7 +145,15 @@
     for (int i = 0; i < titles2.count; i ++) {
         Section_Button *btn = [[Section_Button alloc]initWithFrame:CGRectMake(0, 45 * i, secondBgView.width, 45) title:[titles2 objectAtIndex:i] target:self action:@selector(clickToParams:) sectionStyle:Section_Normal image:nil];
         btn.tag = 100 + i + 2 - 1;
-        btn.contentLabel.text = @"不限";
+        
+        NSString *text = @"不限";
+        
+        if (i == 3) { //有效期
+            
+           text = @"";
+        }
+        
+        btn.contentLabel.text = text;
         [secondBgView addSubview:btn];
     }
     
@@ -249,6 +260,82 @@
     [descriptionTF resignFirstResponder];
 }
 
+#pragma mark - UIActionSheetDelegate <NSObject>
+
+/**
+ *  有效期赋值
+ *
+ *  @param validtity_index 1、2、4  //    validity; // 有效期，一周=1；两周=2；一个月=4
+ */
+- (void)validityWithParam:(int)validtity_index
+{
+    NSString *text;
+    
+    switch (validtity_index) {
+        case 1:
+        {
+            text = @"一周";
+        }
+            break;
+        case 2:
+        {
+            text = @"两周";
+        }
+            break;
+        case 4:
+        {
+            text = @"一月";
+        }
+            break;
+            
+        default:
+            break;
+    }
+
+    Section_Button *btn_time = (Section_Button *)[bigBgScroll viewWithTag:104];
+    
+    btn_time.contentLabel.text = text;
+}
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"----actionSheet index %d",buttonIndex);
+    
+    //validity; // 有效期，一周=1；两周=2；一个月=4
+    
+    switch (buttonIndex) {
+        case 0:
+        {
+            validity = 1;
+        }
+            break;
+        case 1:
+        {
+            validity = 2;
+        }
+            break;
+        case 2:
+        {
+            validity = 4;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self validityWithParam:validity];
+}
+
+// Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
+// If not defined in the delegate, we simulate a click in the cancel button
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet
+{
+    NSLog(@"----actionSheetCancel");
+}
+
+
 
 #pragma - mark 进入发布车源参数页面
 
@@ -289,6 +376,29 @@
             title = @"外观颜色";
         }
             break;
+        case 104:
+        {
+            //有效期选择
+            
+            
+            if (self.actionStyle == Find_Action_Add) {
+                
+                UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"有效期选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"一周",@"两周",@"一月", nil];
+                
+                [sheet showInView:[UIApplication sharedApplication].keyWindow];
+                
+            }else if (self.actionStyle == Find_Action_Edit)
+            {
+                [LCWTools showMBProgressWithText:@"有效期不可以修改" addToView:self.view];
+            }
+            
+            
+            return;
+            
+        }
+            break;
+            
+            
 //        case 105:
 //        {
 //            aStyle = Data_Color_In;
@@ -434,6 +544,12 @@
         return;
     }
     
+    Section_Button *btn_time = (Section_Button *)[bigBgScroll viewWithTag:104];
+    if (btn_time.contentLabel.text == nil || [btn_time.contentLabel.text isEqualToString:@""]) {
+        [self alertText:@"请选择有效期"];
+        return;
+    }
+    
     [self publishCarSource];
         
 }
@@ -472,7 +588,7 @@
         
         //添加颜色自定义
         url = [NSString stringWithFormat:
-               @"%@&authkey=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@&color_out_z=%@&color_in_z=%@",FBAUTO_FINDCAR_PUBLISH,[GMAPI getAuthkey],_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom,_color_out_custom,_color_in_custom];
+               @"%@&authkey=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@&color_out_z=%@&color_in_z=%@&validity=%d",FBAUTO_FINDCAR_PUBLISH_NEW,[GMAPI getAuthkey],_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom,_color_out_custom,_color_in_custom,validity];
         
     }else if (self.actionStyle == Find_Action_Edit) {
         
@@ -549,7 +665,10 @@
             return ;
         }
         
-        NSDictionary *dic = [dataInfo objectAtIndex:0];
+//        NSDictionary *dic = [dataInfo objectAtIndex:0];
+        
+        NSDictionary *dic = (NSDictionary *)dataInfo;
+
         
         //        //参数
         [self labelWithTag:100].text = [dic objectForKey:@"car_name"];
@@ -598,6 +717,12 @@
         descriptionTF.text = [[dic objectForKey:@"cardiscrib"] isEqualToString:@""] ? @"无" : [dic objectForKey:@"cardiscrib"];
         
         descriptionTF.text = [dic objectForKey:@"cardiscrib"];
+        
+        //有效期
+        
+        int validate = [[dic objectForKey:@"validity_week"]intValue];
+        
+        [self validityWithParam:validate];
         
         
         

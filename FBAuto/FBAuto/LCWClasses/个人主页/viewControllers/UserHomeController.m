@@ -68,6 +68,8 @@ typedef enum {
     MBProgressHUD *loading;
     
     BOOL firstLoadData;//第一次加载数据
+    
+    UILabel *zannum_label;//赞个数
 }
 
 @end
@@ -491,15 +493,35 @@ typedef enum {
     UIImageView *image_bg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 256)];
     image_bg.backgroundColor = [UIColor lightGrayColor];
     [header addSubview:image_bg];
-    
+    image_bg.userInteractionEnabled = YES;
     [image_bg sd_setImageWithURL:[NSURL URLWithString:userModel.backgroundimage] placeholderImage:DEFAULT_CAR_IAMGE];
+    
+    //赞 按钮
+    
+    UIButton *zan_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    zan_btn.backgroundColor = [UIColor orangeColor];
+    [zan_btn setImage:[UIImage imageNamed:@"zan_xin_no"] forState:UIControlStateNormal];
+    [zan_btn setImage:[UIImage imageNamed:@"tucao_xin_red"] forState:UIControlStateSelected];
+    CGFloat aHeight = 15 + 10 * 2;
+    zan_btn.frame = CGRectMake(10, image_bg.height - aHeight, 17 + 10 * 2, aHeight);
+    [zan_btn addTarget:self action:@selector(clickToZanAction:) forControlEvents:UIControlEventTouchUpInside];
+    [image_bg addSubview:zan_btn];
+    zan_btn.selected = userModel.dianzan == 1 ? NO : YES;
+    
+    UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(zan_btn.right, zan_btn.top, 50, aHeight)];
+    numLabel.font = [UIFont systemFontOfSize:14];
+    numLabel.textColor = [UIColor whiteColor];
+    [image_bg addSubview:numLabel];
+    numLabel.text = userModel.zan_num;
+    zannum_label = numLabel;
+    
+    //头像 边框
     
     UIImageView *kuang_view = [[UIImageView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 10 - 75, 206, 75, 75)];
     kuang_view.layer.borderWidth = 0.5f;
     kuang_view.layer.borderColor = [UIColor colorWithHexString:@"d9d9d9"].CGColor;
     kuang_view.backgroundColor = [UIColor whiteColor];
     [header addSubview:kuang_view];
-                                                                          
     
     //头像
     UIImageView *image_Head = [[UIImageView alloc]initWithFrame:CGRectMake(2, 2, 75 - 4, 75 - 4)];
@@ -544,6 +566,42 @@ typedef enum {
 }
 
 #pragma - mark 网络请求
+
+- (void)clickToZanAction:(UIButton *)zanButton
+{
+    if (zanButton.selected) {
+        
+        NSLog(@"已赞");
+        
+        return;
+    }
+    
+    NSString *api = [NSString stringWithFormat:FBAUTO_USER_DIANZAN,[GMAPI getAuthkey],self.userId];
+    
+    NSLog(@"添加赞 api === %@",api);
+    
+//    __weak typeof (self)weakSelf = self;
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        int dianzan = [result[@"errcode"]intValue];
+        if (dianzan == 0) {
+            //点赞成功
+            
+            zanButton.selected = YES;
+            
+            zannum_label.text = NSStringFromInt([userModel.zan_num intValue] + 1);
+        }
+        
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        NSString *str = [failDic objectForKey:ERROR_INFO];
+        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [al show];
+    }];
+
+}
 
 //获取用户信息
 -(void)prepareUeserInfo{
