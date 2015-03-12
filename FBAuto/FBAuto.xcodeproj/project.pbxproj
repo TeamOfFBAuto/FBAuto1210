@@ -239,6 +239,9 @@
 		139F60281A6FA8AE008A6CD2 /* btn_color_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 139F60261A6FA8AE008A6CD2 /* btn_color_selected.png */; };
 		13A1A9421980AC7A00E09666 /* LShareSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9411980AC7A00E09666 /* LShareSheetView.m */; };
 		13A1A9451980ADB100E09666 /* LImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9441980ADB100E09666 /* LImageButton.m */; };
+		13A365131AB182C5001FE599 /* 用户注册协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13A365121AB182C5001FE599 /* 用户注册协议.txt */; };
+		13A365171AB184E6001FE599 /* XieyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A365151AB184E6001FE599 /* XieyiViewController.m */; };
+		13A365181AB184E6001FE599 /* XieyiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13A365161AB184E6001FE599 /* XieyiViewController.xib */; };
 		13A37C881A1DCCBD00AECDB9 /* shoucang_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A37C871A1DCCBD00AECDB9 /* shoucang_cancel@2x.png */; };
 		13A5B0D61A397644006E2C4C /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A5B0D51A397644006E2C4C /* FindViewController.m */; };
 		13A61BD319FE4F37007BF353 /* SRMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A61BD219FE4F37007BF353 /* SRMonthPicker.m */; };
@@ -848,6 +851,10 @@
 		13A1A9411980AC7A00E09666 /* LShareSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LShareSheetView.m; sourceTree = "<group>"; };
 		13A1A9431980ADB100E09666 /* LImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LImageButton.h; sourceTree = "<group>"; };
 		13A1A9441980ADB100E09666 /* LImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LImageButton.m; sourceTree = "<group>"; };
+		13A365121AB182C5001FE599 /* 用户注册协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "用户注册协议.txt"; sourceTree = "<group>"; };
+		13A365141AB184E6001FE599 /* XieyiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XieyiViewController.h; sourceTree = "<group>"; };
+		13A365151AB184E6001FE599 /* XieyiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XieyiViewController.m; sourceTree = "<group>"; };
+		13A365161AB184E6001FE599 /* XieyiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XieyiViewController.xib; sourceTree = "<group>"; };
 		13A37C871A1DCCBD00AECDB9 /* shoucang_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoucang_cancel@2x.png"; sourceTree = "<group>"; };
 		13A5B0D41A397644006E2C4C /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindViewController.h; sourceTree = "<group>"; };
 		13A5B0D51A397644006E2C4C /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
@@ -1435,6 +1442,7 @@
 		136CE5621A5D13B0007D78A7 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
+				13A365121AB182C5001FE599 /* 用户注册协议.txt */,
 				136CE5631A5D140F007D78A7 /* UserRegisterController.h */,
 				136CE5641A5D140F007D78A7 /* UserRegisterController.m */,
 				136CE57D1A5D356D007D78A7 /* UserRegisterTwoController.h */,
@@ -1443,6 +1451,9 @@
 				136CE5811A5D35A3007D78A7 /* UserRegisterThreeController.m */,
 				13C0B3221A5E697100E8328F /* LSecurityCode.h */,
 				13C0B3231A5E697100E8328F /* LSecurityCode.m */,
+				13A365141AB184E6001FE599 /* XieyiViewController.h */,
+				13A365151AB184E6001FE599 /* XieyiViewController.m */,
+				13A365161AB184E6001FE599 /* XieyiViewController.xib */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -3174,6 +3185,7 @@
 				13CEEC8C1A36CF0300A4725D /* ShareSDKLocalizable.strings in Resources */,
 				136CAD5719C97C7C00E05A2F /* biankuang.png in Resources */,
 				13D5DFF51961758E00804835 /* sousuokuang_.png in Resources */,
+				13A365131AB182C5001FE599 /* 用户注册协议.txt in Resources */,
 				13AC96E61A75E9E100464D9C /* new22_30@2x.png in Resources */,
 				138B4AA61966A4BD00B974A5 /* face17.png in Resources */,
 				13D5DFF31961758E00804835 /* fasong_botton116_48@2x.png in Resources */,
@@ -3222,6 +3234,7 @@
 				13D5DFDF1961758E00804835 /* fenxiang42_42@2x.png in Resources */,
 				13D5DFE81961758E00804835 /* geren_up46_46@2x.png in Resources */,
 				13D5E0081961758E00804835 /* haoyou_dianhua40_46@2x.png in Resources */,
+				13A365181AB184E6001FE599 /* XieyiViewController.xib in Resources */,
 				13D5DFEC1961758E00804835 /* xiala_sanjiao_up14_8@2x.png in Resources */,
 				138B4AFD1966A4BD00B974A5 /* face96.gif in Resources */,
 				13B259D21A591F9100F359CD /* tucao_add@2x.png in Resources */,
@@ -3403,6 +3416,7 @@
 				13D5E0881963AAF100804835 /* PhotoImageView.m in Sources */,
 				E359273F1988D0C800A3F1B0 /* GtzDetailViewController.m in Sources */,
 				13DB41161A789417003728C8 /* ASIS3BucketObject.m in Sources */,
+				13A365171AB184E6001FE599 /* XieyiViewController.m in Sources */,
 				1391EF0A1977A1FF00FDC52A /* GloadingView.m in Sources */,
 				138B4B141966A65E00B974A5 /* MarkupParser.m in Sources */,
 				137926FE1987776900377ED5 /* GjjxxViewController.m in Sources */,

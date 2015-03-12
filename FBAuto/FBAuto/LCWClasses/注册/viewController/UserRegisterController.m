@@ -9,6 +9,8 @@
 #import "UserRegisterController.h"
 #import "UserRegisterTwoController.h"
 #import "UserRegisterThreeController.h"
+#import "XieyiViewController.h"
+#import "FBHelper.h"
 
 @interface UserRegisterController ()<UITextFieldDelegate>
 
@@ -70,10 +72,44 @@
     
     UILabel *hint = [[UILabel alloc]initWithFrame:CGRectMake(10, 20 + 44 * 4 + 18, DEVICE_WIDTH - 20, 15)];
     hint.font = [UIFont systemFontOfSize:14];
-    hint.textAlignment = NSTextAlignmentCenter;
+    hint.textAlignment = NSTextAlignmentLeft;
     hint.textColor = [UIColor colorWithHexString:@"b0b0b0"];
     hint.text = @"为保护您的账户安全,请勿设置过于简单的密码";
     [self.view addSubview:hint];
+    
+    UIButton *xieyi_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    xieyi_btn.frame = CGRectMake(10, hint.bottom + 10, 50, 15);
+    [xieyi_btn setTitle:@"协议" forState:UIControlStateNormal];
+    xieyi_btn.backgroundColor = [UIColor redColor];
+    [xieyi_btn addTarget:self action:@selector(clickToXieyi:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:xieyi_btn];
+    
+    UILabel *hint1 = [[UILabel alloc]initWithFrame:CGRectMake(xieyi_btn.right + 5, hint.bottom + 10, 0, 15)];
+    hint1.font = [UIFont systemFontOfSize:14];
+    hint1.textAlignment = NSTextAlignmentLeft;
+    hint1.textColor = [UIColor colorWithHexString:@"b0b0b0"];
+    hint1.text = @"我已阅读并同意";
+    [self.view addSubview:hint1];
+    hint1.width = [LCWTools widthForText:@"我已阅读并同意" font:14];
+    
+    
+    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:@"今日车市用户协议"];
+    NSRange contentRange = {0, [content length]};
+    [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:contentRange];
+    
+    UIButton *xieyi_content = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    xieyi_content.frame = CGRectMake(hint1.right, hint1.top, 150, 15);
+    [xieyi_content addTarget:self action:@selector(clickToXieyi:) forControlEvents:UIControlEventTouchUpInside];
+    [xieyi_content setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    xieyi_content.titleLabel.textColor = [UIColor blueColor];
+    [xieyi_content.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [xieyi_content setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [xieyi_content setAttributedTitle:content forState:UIControlStateNormal];
+    [self.view addSubview:xieyi_content];
+    
+    
+    
+    
     
     NSArray *titles = @[@"个人",@"商家"];
     for (int i = 0; i < 2; i ++) {
@@ -164,6 +200,13 @@
 }
 
 #pragma mark 事件处理
+
+- (void)clickToXieyi:(UIButton *)sender
+{
+    //协议页面
+    XieyiViewController *xieyi = [[XieyiViewController alloc]init];
+    [self.navigationController pushViewController:xieyi animated:YES];
+}
 
 - (void)tapToHiddenKeyboard:(UIGestureRecognizer *)ges
 {
