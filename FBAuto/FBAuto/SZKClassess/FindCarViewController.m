@@ -131,6 +131,11 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateAllParams:) name:UPDATE_FINDCAR_PARAMS object:nil];
     
+    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
+    [saveButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
+    [self.view addSubview:saveButton];
+    
     statesBarView = [[UIView alloc]initWithFrame:CGRectMake(0, -20, self.view.width, 20)];
     statesBarView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     [self.view addSubview:statesBarView];
@@ -270,16 +275,25 @@
     navigationView.backgroundColor = [UIColor clearColor];
     
     //编辑按钮
-    editButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 46 - 5,5+3,46,29)];
-    [editButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
-//    editButton.backgroundColor = [UIColor orangeColor];
-    [editButton setImage:[UIImage imageNamed:@"fabu92_58"] forState:UIControlStateNormal];
-    [navigationView addSubview:editButton];
+//    editButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 46 - 5,5+3,46,29)];
+//    [editButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
+////    editButton.backgroundColor = [UIColor orangeColor];
+//    [editButton setImage:[UIImage imageNamed:@"fabu92_58"] forState:UIControlStateNormal];
+//    [navigationView addSubview:editButton];
     
     [self.navigationController.navigationBar addSubview:navigationView];
     
+    //    //搜索
+//    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, DEVICE_WIDTH - 3 * 10 - 22 - 6 - 5 - 5, 30) placeholder:@"请输入求购车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+//        
+//        [self searchStyle:actionStyle searchText:searchText];
+//        
+//    }];
+    
     //搜索
-    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, DEVICE_WIDTH - 3 * 10 - 22 - 6 - 5 - 5, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+    CGFloat aWidth = DEVICE_WIDTH - 45;
+
+    searchView = [[LSearchView alloc]initWithFrame:CGRectMake((DEVICE_WIDTH - aWidth) / 2.0, (44 - 30)/2.0, aWidth, 30) placeholder:@"请输入求购车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
         
         [self searchStyle:actionStyle searchText:searchText];
         
@@ -288,7 +302,7 @@
     [navigationView addSubview:searchView];
     
     //取消按钮
-    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(searchView.right + 5,0,44,44)];
+    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 44 - 10,0,44,44)];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton addTarget:self action:@selector(clickToCancel:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -313,6 +327,28 @@
 
 #pragma - mark 处理搜索框事件
 
+- (void)updateSearchViewNormal:(BOOL)isNormal
+{
+    cancelButton.hidden = isNormal;
+    
+    CGFloat aWidth = DEVICE_WIDTH - 45;
+    CGRect aFrame = searchView.frame;
+    if (isNormal) {
+        
+        aFrame.origin.x = (DEVICE_WIDTH - aWidth) / 2.0;
+        aFrame.size.width = aWidth;
+        
+    }else
+    {
+        aFrame.origin.x = 10.f;
+        aFrame.size.width = DEVICE_WIDTH - 3 * 10 - 44;
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        searchView.frame = aFrame;
+    }];
+}
+
 - (void)searchStyle:(SearchStyle)aStyle searchText:(NSString *)text
 {
     if (aStyle == Search_BeginEdit)
@@ -320,6 +356,8 @@
         //显示取消按钮、隐藏编辑按钮
         cancelButton.hidden = NO;
         editButton.hidden = YES;
+        
+        [self updateSearchViewNormal:NO];
         
     }else if (aStyle == Search_Search)
     {
@@ -337,11 +375,14 @@
             [self clearSearchCondition];
             
             [_table showRefreshHeader:YES];
+            
+            [self updateSearchViewNormal:YES];
 
         }
         
     }else if (aStyle == Search_Cancel)
     {
+        [self updateSearchViewNormal:YES];
         cancelButton.hidden = YES;
         editButton.hidden = NO;
         searchView.searchField.text = @"";

@@ -105,7 +105,7 @@
         
         [LCWTools showMBProgressWithText:result[@"errinfo"] addToView:self.view];
         
-        [weakSelf performSelector:@selector(clickToBack:) withObject:nil afterDelay:1.5];
+        [weakSelf performSelector:@selector(publishSuccessBack:) withObject:nil afterDelay:1.5];
         
         
     } failBlock:^(NSDictionary *result, NSError *erro) {
@@ -210,6 +210,17 @@
 
 
 #pragma mark 事件处理
+
+/**
+ *  发布成功直接返回
+ *
+ *  @param sender
+ */
+- (void)publishSuccessBack:(id)sender
+{
+    [self.inputView resignFirstResponder];
+    [super clickToBack:sender];
+}
 
 -(void)clickToBack:(id)sender
 {

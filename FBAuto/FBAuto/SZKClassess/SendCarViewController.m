@@ -887,12 +887,12 @@
     base.dataStyle = aStyle;
     base.selectLabel = btn.contentLabel;
     
-    //版本 需要添加 其他
-    
-    if (aStyle == Data_Standard) {
-        
-        base.haveLimit = YES;
-    }
+//    //版本 需要添加 其他
+//    
+//    if (aStyle == Data_Standard) {
+//        
+//        base.haveLimit = YES;
+//    }
     
     if (self.actionStyle == Action_Edit) {
         base.rootVC = self;

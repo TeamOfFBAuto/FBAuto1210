@@ -52,7 +52,7 @@
     CGFloat height = 0;
     
     
-    NSArray *titleArray = @[@"姓名",@"地区",@"手机号",@"详细地址",@"简介"];
+    NSArray *titleArray = @[@"姓名",@"地区",@"手机号",@"详细地址",@"个人签名"];
     
     
     

@@ -67,7 +67,8 @@
     _table.tableFooterView = [self footerViewForTable];
 
     tucaoDetail = self.tucaoModel;
-//    [self getTucaoDetail];
+    
+    [self getTucaoDetail];
 }
 
 /**
@@ -292,8 +293,8 @@
     
     __weak typeof(_table)weakTable = _table;
     
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+    LCWTools *tool1 = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool1 requestCompletion:^(NSDictionary *result, NSError *erro) {
         
         NSLog(@"寻车列表erro%@",[result objectForKey:@"errinfo"]);
         

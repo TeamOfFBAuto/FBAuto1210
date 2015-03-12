@@ -68,17 +68,17 @@
 //给标题赋值
 -(void)dataWithTitleLableWithIndexPath:(NSIndexPath *)theIndexPatch{
     
-    if (theIndexPatch.row == 0 && theIndexPatch.section == 0) {
+    if (theIndexPatch.row == 3 && theIndexPatch.section == 0) {
         self.titileLabel.text = @"我的资料";
         self.iconImageView.image = [UIImage imageNamed:@"ziliao46_46"];
         
-    }else if (theIndexPatch.row == 1 && theIndexPatch.section == 0){
+    }else if (theIndexPatch.row == 0 && theIndexPatch.section == 0){
         self.titileLabel.text = @"我的车源";
         self.iconImageView.image = [UIImage imageNamed:@"cheyuan46_46"];
-    }else if (theIndexPatch.row == 2 && theIndexPatch.section == 0){
+    }else if (theIndexPatch.row == 1 && theIndexPatch.section == 0){
         self.titileLabel.text = @"我的求购";
         self.iconImageView.image = [UIImage imageNamed:@"xunche46_46"];
-    }else if (theIndexPatch.row == 3 && theIndexPatch.section == 0){
+    }else if (theIndexPatch.row == 2 && theIndexPatch.section == 0){
         self.titileLabel.text = @"我的收藏";
         self.iconImageView.image = [UIImage imageNamed:@"shoucang46_46"];
     }
@@ -86,16 +86,16 @@
     else if (theIndexPatch.row == 0 && theIndexPatch.section == 1){
         self.titileLabel.text = @"修改密码";
         self.iconImageView.image = [UIImage imageNamed:@"gaimi46_46"];
-    }else if (theIndexPatch.row == 1 && theIndexPatch.section == 1){
+    }else if (theIndexPatch.row == 1111 && theIndexPatch.section == 1){ //去掉
         self.titileLabel.text = @"版本检查";
         self.iconImageView.image = [UIImage imageNamed:@"gengxin_46"];
-    }else if (theIndexPatch.row == 2 && theIndexPatch.section == 1){
-        self.titileLabel.text = @"联系我们";
+    }else if (theIndexPatch.row == 1 && theIndexPatch.section == 1){
+        self.titileLabel.text = @"联系客服";
         self.iconImageView.image = [UIImage imageNamed:@"lianxi46_46"];
-    }else if (theIndexPatch.row == 3 && theIndexPatch.section == 1){
+    }else if (theIndexPatch.row == 2 && theIndexPatch.section == 1){
         self.titileLabel.text = @"消息设置";
         self.iconImageView.image = [UIImage imageNamed:@"xiaoshe46_46"];
-    }else if (theIndexPatch.row == 4 && theIndexPatch.section == 1){
+    }else if (theIndexPatch.row == 3 && theIndexPatch.section == 1){
         self.titileLabel.text = @"退出登录";
         self.iconImageView.image = [UIImage imageNamed:@"ziliao46_46"];
     }

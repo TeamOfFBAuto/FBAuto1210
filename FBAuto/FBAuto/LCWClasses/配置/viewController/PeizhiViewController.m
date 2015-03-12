@@ -134,7 +134,10 @@
     
     UIButton *send_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     send_btn.frame = CGRectMake(45/2.f, _textView.bottom + 20, DEVICE_WIDTH - 45, 50);
-    send_btn.backgroundColor = [UIColor colorWithHexString:@"222222"];
+//    send_btn.backgroundColor = [UIColor colorWithHexString:@"222222"];
+    
+    send_btn.backgroundColor = COLOR_NORMAL;
+
     send_btn.layer.cornerRadius = 3.f;
     [send_btn setTitle:@"确定" forState:UIControlStateNormal];
     send_btn.titleLabel.font = [UIFont systemFontOfSize:17];

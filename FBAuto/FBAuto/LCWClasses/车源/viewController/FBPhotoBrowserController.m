@@ -34,12 +34,12 @@
     
     
     
-    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,46,29)];
-    [saveButton addTarget:self action:@selector(clickToSaveToAlbum) forControlEvents:UIControlEventTouchUpInside];
-    [saveButton setImage:[UIImage imageNamed:@"baocun92_58@2x"] forState:UIControlStateNormal];
-    UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
-    
-    self.navigationItem.rightBarButtonItems = @[save_item];
+//    UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,46,29)];
+//    [saveButton addTarget:self action:@selector(clickToSaveToAlbum) forControlEvents:UIControlEventTouchUpInside];
+//    [saveButton setImage:[UIImage imageNamed:@"baocun92_58@2x"] forState:UIControlStateNormal];
+//    UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
+//    
+//    self.navigationItem.rightBarButtonItems = @[save_item];
     
     
     

@@ -153,7 +153,9 @@
         }else if (i == 5){
             aLabel.text = aModel.carfrom;
         }else if (i == 6){
-            aLabel.text = [LCWTools timechange2:aModel.dateline];
+//            aLabel.text = [LCWTools timechange2:aModel.dateline];
+            aLabel.text = aModel.build_time;
+            
         }else if (i == 7){
             
             //车辆配置

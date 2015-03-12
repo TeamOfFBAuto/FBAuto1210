@@ -197,8 +197,8 @@
     head.backgroundColor = [UIColor whiteColor];
     
 //    NSArray *titles = @[@"添加好友",@"按地区查找",@"联系客服"];
-    NSArray *titles = @[@"添加好友",@"联系客服"];
-//     NSArray *titles = @[@"添加好友"];
+//    NSArray *titles = @[@"添加好友",@"联系客服"];
+     NSArray *titles = @[@"添加好友"];
     
 //    NSArray *titles = @[@"添加好友",@"对话CEO"];
     for (int i = 0; i < titles.count; i ++) {

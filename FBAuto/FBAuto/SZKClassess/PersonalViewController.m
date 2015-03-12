@@ -338,7 +338,7 @@
     if (section == 0) {
         num = 4;
     }else if (section == 1){
-        num = 4;
+        num = 4 - 1;//去掉版本检查
     }
     
     return num;
@@ -423,41 +423,42 @@
             
             [self.navigationController pushViewController:[[GChangePwViewController alloc]init] animated:YES];
             
-        }else if (index == 1){//我的资料
+        }else if (index == 4){//我的资料
             [self.navigationController pushViewController:[[GperInfoViewController alloc]init] animated:YES];
             
-        }else if (index == 2){//我的车源
+        }else if (index == 1){//我的车源
             GfindCarViewController *mm = [[GfindCarViewController alloc]init];
             mm.gtype = 2;
             [self.navigationController pushViewController:mm animated:YES];
             
-        }else if (index == 3){//我的寻车
+        }else if (index == 2){//我的寻车
             GfindCarViewController *gg = [[GfindCarViewController alloc]init];
             gg.gtype = 3;
             [self.navigationController pushViewController:gg animated:YES];
             
-        }else if (index == 4){//我的收藏
+        }else if (index == 3){//我的收藏
             GmarkViewController *gmarkvc = [[GmarkViewController alloc]init];
             gmarkvc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:gmarkvc animated:YES];
             
-        }else if (index == 6){ //版本检查
-            
-            [loading show:YES];
-            [[LCWTools shareInstance]versionForAppid:FBAUTO_APPID Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
-                
-                [loading hide:YES];
-                NSLog(@"updateContent %@ %@",updateUrl,updateContent);
-                if (isNewVersion == NO) {
-                    
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"当前已是最新版本!" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alert show];
-                }
-                
-            }];
-            
         }
-        else if (index == 7){//联系我们
+//        else if (index == 6){ //版本检查
+//
+//            [loading show:YES];
+//            [[LCWTools shareInstance]versionForAppid:FBAUTO_APPID Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
+//                
+//                [loading hide:YES];
+//                NSLog(@"updateContent %@ %@",updateUrl,updateContent);
+//                if (isNewVersion == NO) {
+//                    
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"当前已是最新版本!" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alert show];
+//                }
+//                
+//            }];
+//            
+//        }
+        else if (index == 6){//联系我们
 //            [self.navigationController pushViewController:[[GlxwmViewController alloc]init] animated:YES];
             //测试
             //[self.navigationController pushViewController:[[GyhzyViewController alloc]init] animated:YES];
@@ -472,9 +473,9 @@
             [self.navigationController pushViewController:chatViewController animated:YES];
 
             
-        }else if (index == 8){//消息设置
+        }else if (index == 7){//消息设置
             [self.navigationController pushViewController:[[GMessageSViewController alloc]init]animated:YES];
-        }else if (index == 9){//退出登录
+        }else if (index == 8){//退出登录
             
             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [al show];

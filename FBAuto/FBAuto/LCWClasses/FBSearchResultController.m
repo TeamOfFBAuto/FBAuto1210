@@ -15,7 +15,7 @@
 #import "FindCarCell.h"
 //#define KPageSize  10 //每页条数
 
-@interface FBSearchResultController ()
+@interface FBSearchResultController ()<RefreshDelegate>
 {
     RefreshTableView *_table;
     int _searchPage;

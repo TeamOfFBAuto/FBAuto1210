@@ -57,8 +57,10 @@
 
 - (void)hideKeyboard
 {
-    [_searchField resignFirstResponder];
-    maskView.hidden = YES;
+//    [_searchField resignFirstResponder];
+//    maskView.hidden = YES;
+    
+    [self cancelSearch];
 }
 
 
