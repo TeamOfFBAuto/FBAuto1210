@@ -20,6 +20,8 @@
 		1336BC2B196B93CC0011B4D9 /* FBChatImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1336BC2A196B93CC0011B4D9 /* FBChatImage.m */; };
 		133DF6A2197CE7F9006BF9ED /* FBFindCarDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133DF6A0197CE7F9006BF9ED /* FBFindCarDetailController.m */; };
 		133DF6A3197CE7F9006BF9ED /* FBFindCarDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */; };
+		1341F1C21AB2C99000867660 /* xieyi_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1341F1C01AB2C99000867660 /* xieyi_no@2x.png */; };
+		1341F1C31AB2C99000867660 /* xieyi_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1341F1C11AB2C99000867660 /* xieyi_yes@2x.png */; };
 		1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */; };
 		1351C5CC197A704F000F7391 /* FindCarPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5CB197A704F000F7391 /* FindCarPublishController.m */; };
 		135922571A4D6B0B0091E320 /* TucaoPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 135922551A4D6B0B0091E320 /* TucaoPublishController.m */; };
@@ -561,6 +563,8 @@
 		133DF69F197CE7F9006BF9ED /* FBFindCarDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFindCarDetailController.h; sourceTree = "<group>"; };
 		133DF6A0197CE7F9006BF9ED /* FBFindCarDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFindCarDetailController.m; sourceTree = "<group>"; };
 		133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBFindCarDetailController.xib; sourceTree = "<group>"; };
+		1341F1C01AB2C99000867660 /* xieyi_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xieyi_no@2x.png"; sourceTree = "<group>"; };
+		1341F1C11AB2C99000867660 /* xieyi_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xieyi_yes@2x.png"; sourceTree = "<group>"; };
 		1351C5C7197A4F8E000F7391 /* FBSearchResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSearchResultController.h; sourceTree = "<group>"; };
 		1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchResultController.m; sourceTree = "<group>"; };
 		1351C5CA197A704F000F7391 /* FindCarPublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCarPublishController.h; sourceTree = "<group>"; };
@@ -1796,6 +1800,8 @@
 		13BB42661A5F7F1F00B8E78E /* 2.0images */ = {
 			isa = PBXGroup;
 			children = (
+				1341F1C01AB2C99000867660 /* xieyi_no@2x.png */,
+				1341F1C11AB2C99000867660 /* xieyi_yes@2x.png */,
 				13AC96EB1A75F33B00464D9C /* default_backgroud@2x.png */,
 				13DB412B1A78CDE2003728C8 /* jubao40_36@2x.png */,
 				13AC96E11A75E9E100464D9C /* guanzhu56_34@2x.png */,
@@ -3172,6 +3178,7 @@
 				13D5E0E81963E19300804835 /* duihao-doun-46_46@2x.png in Resources */,
 				13D5DFFA1961758E00804835 /* xubxhe_fabu_44_44@2x.png in Resources */,
 				190BFD94195AB15C0098E0F4 /* ios7tabbar@2x.png in Resources */,
+				1341F1C21AB2C99000867660 /* xieyi_no@2x.png in Resources */,
 				13BB426A1A5F7F3100B8E78E /* shangquam182_58@2x.png in Resources */,
 				138B4ADE1966A4BD00B974A5 /* face68.png in Resources */,
 				13D5DFF01961758E00804835 /* dianhua40_48@2x.png in Resources */,
@@ -3269,6 +3276,7 @@
 				136CE5751A5D1B1B007D78A7 /* zhuce_phone28_40@2x.png in Resources */,
 				13BB426B1A5F7F3100B8E78E /* tongzhi182_58@2x.png in Resources */,
 				13D5E05F1962A14E00804835 /* city.plist in Resources */,
+				1341F1C31AB2C99000867660 /* xieyi_yes@2x.png in Resources */,
 				13D5E07A1962B93A00804835 /* bai_button554_90@2x.png in Resources */,
 				190BFD92195AB15C0098E0F4 /* carportselected@2x.png in Resources */,
 				13D5DFED1961758E00804835 /* xunche_down46_46@2x.png in Resources */,

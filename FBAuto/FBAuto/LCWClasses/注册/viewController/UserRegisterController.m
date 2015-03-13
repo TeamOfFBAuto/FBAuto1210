@@ -13,6 +13,9 @@
 #import "FBHelper.h"
 
 @interface UserRegisterController ()<UITextFieldDelegate>
+{
+    UIButton *xieyi_btn;//是否已阅读用户协议
+}
 
 @end
 
@@ -77,11 +80,13 @@
     hint.text = @"为保护您的账户安全,请勿设置过于简单的密码";
     [self.view addSubview:hint];
     
-    UIButton *xieyi_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    xieyi_btn.frame = CGRectMake(10, hint.bottom + 10, 50, 15);
-    [xieyi_btn setTitle:@"协议" forState:UIControlStateNormal];
-    xieyi_btn.backgroundColor = [UIColor redColor];
-    [xieyi_btn addTarget:self action:@selector(clickToXieyi:) forControlEvents:UIControlEventTouchUpInside];
+    xieyi_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    xieyi_btn.frame = CGRectMake(10, hint.bottom + 2.5, 30, 30);
+    
+    [xieyi_btn setImage:[UIImage imageNamed:@"xieyi_yes"] forState:UIControlStateNormal];
+    [xieyi_btn setImage:[UIImage imageNamed:@"xieyi_no"] forState:UIControlStateSelected];
+    
+    [xieyi_btn addTarget:self action:@selector(clickToReadXieyi:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:xieyi_btn];
     
     UILabel *hint1 = [[UILabel alloc]initWithFrame:CGRectMake(xieyi_btn.right + 5, hint.bottom + 10, 0, 15)];
@@ -201,6 +206,11 @@
 
 #pragma mark 事件处理
 
+- (void)clickToReadXieyi:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+}
+
 - (void)clickToXieyi:(UIButton *)sender
 {
     //协议页面
@@ -249,6 +259,14 @@
         }else if (![tf_pass.text isEqualToString:tf_pass_2.text]){
             
             [LCWTools showMBProgressWithText:@"两次密码不一致" addToView:self.view];
+            return;
+        }
+        
+        
+        if (xieyi_btn.selected) {
+            
+            [LCWTools showMBProgressWithText:@"请先阅读用户注册协议" addToView:self.view];
+            
             return;
         }
 
