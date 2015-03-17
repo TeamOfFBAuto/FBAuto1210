@@ -78,7 +78,7 @@
         case Data_Color_In:
         {
             title = @"内饰颜色";
-            self.dataArray = self.haveLimit ? MENU_HIGHT_INSIDE_CORLOR_CUSTOM : MENU_HIGHT_INSIDE_CORLOR_2;
+            self.dataArray = self.haveLimit ? MENU_HIGHT_INSIDE_CORLOR_NEW_V2 : MENU_HIGHT_INSIDE_CORLOR_2_NEW_V2;
         }
             break;
         case Data_Car_Type:
@@ -736,9 +736,11 @@
         {
             row = (int)indexPath.row;
             
-            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
-                row = 12;
-            }
+//            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
+//                row = 12;
+//            }
+            
+            row = [LCWTools colorIdForColorInString:select];
         }
         
     }else //有不限选项
@@ -756,13 +758,16 @@
         {
             row = (int)indexPath.row - 1;
             
-            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
-                row = 12;
-            }
+//            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
+//                row = 12;
+//            }
+            
+            row = [LCWTools colorIdForColorInString:select];
             
         }else
         {
-            row = (int)indexPath.row;
+//            row = (int)indexPath.row;
+            row = [LCWTools colorIdForColorInString:select];
         }
     }
     

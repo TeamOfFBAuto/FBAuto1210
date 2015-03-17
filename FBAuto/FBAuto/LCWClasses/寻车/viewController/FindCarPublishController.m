@@ -708,8 +708,11 @@
         [self labelWithTag:102 + 2 - 1].text = color_Out_In;
         
         _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
-        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
+//        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
         
+        //内饰颜色
+        _color_in = [LCWTools colorIdForColorInString:[dic objectForKey:@"color_in"]];
+
         
         [self labelWithTag:104 + 2 - 1].text  = [self depositWithText:[dic objectForKey:@"deposit"]];
         _deposit = [[dic objectForKey:@"deposit"]intValue];

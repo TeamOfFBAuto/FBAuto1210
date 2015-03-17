@@ -173,7 +173,32 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+//    NSMutableArray *arr = [NSMutableArray arrayWithObjects:@"1",@"7",@"0",@"5",@"8",@"3", nil];
+//    
+//    [self  bubbleSort:arr];
+    
     return YES;
+}
+
+-(void)bubbleSort:(NSMutableArray*)dataSource{
+    
+    
+    NSUInteger count=[dataSource count];
+    for(int i=0;i<count - 1;i++){
+        for (int j=0; j<count-i-1;j++) {
+            
+            NSLog(@"------%d : %@ %@",i,dataSource[j],dataSource[j+1]);
+            
+            if ([dataSource[j] intValue]>[dataSource[j+1] intValue]) {
+                NSString  *temp=dataSource[j];
+                dataSource[j]=dataSource[j+1];
+                dataSource[j+1]=temp;
+                            }
+        }
+    }
+    for (NSInteger i=0; i<[dataSource count]; i++) {
+        NSLog(@"排序--%@",dataSource[i]);
+    }
 }
 
 #pragma mark - 好评推荐

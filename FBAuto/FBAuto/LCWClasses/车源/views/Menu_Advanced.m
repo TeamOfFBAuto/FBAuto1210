@@ -516,13 +516,15 @@
         NSString *colorName = [colorArray objectAtIndex:indexPath.row];
         
         int row = indexPath.row;
-        if ([colorName isEqualToString:@"棕色"] || [colorName isEqualToString:@"米色"]) {
-            row = 12;
-        }
+//        if ([colorName isEqualToString:@"棕色"] || [colorName isEqualToString:@"米色"]) {
+//            row = 12;
+//        }
+//        
+//        if ([colorName isEqualToString:@"其他"]) {
+//            row = 11;
+//        }
         
-        if ([colorName isEqualToString:@"其他"]) {
-            row = 11;
-        }
+        row = [LCWTools colorIdForColorInString:colorName];
         
         selectBlock(blockStyle,colorName,[NSString stringWithFormat:@"%d",row]);
         [self hidden];
@@ -541,7 +543,7 @@
             
             if (contentStyle == Content_In) {
                 
-                [self reloadColorTableWithArray:MENU_HIGHT_INSIDE_CORLOR];
+                [self reloadColorTableWithArray:MENU_HIGHT_INSIDE_CORLOR_NEW_V1];
                 blockStyle = Select_In_Color;
                 
             }else
@@ -555,7 +557,7 @@
         
         if (indexPath.row == 1) {
             NSLog(@"内饰颜色");
-            [self reloadColorTableWithArray:MENU_HIGHT_INSIDE_CORLOR];
+            [self reloadColorTableWithArray:MENU_HIGHT_INSIDE_CORLOR_NEW_V1];
             blockStyle = Select_In_Color;
         }
     }

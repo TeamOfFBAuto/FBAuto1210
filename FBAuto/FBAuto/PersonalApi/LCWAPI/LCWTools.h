@@ -71,8 +71,11 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 +(UIImage *)scaleToSizeWithImage:(UIImage *)img size:(CGSize)size;
 
-+ (UIColor *)colorForColorId:(int)colorId;
++ (UIColor *)colorForColorId:(int)colorId;//吐槽 背景随机颜色
 
+///车源内饰颜色 对应 id
+
++ (int)colorIdForColorInString:(NSString *)string;
 
 #pragma - mark 分享
 

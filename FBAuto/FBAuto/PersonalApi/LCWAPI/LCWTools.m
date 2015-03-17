@@ -367,6 +367,78 @@
     return headImageUrlStr;
 }
 
+///3=>红 、1=>黑、13=>咖啡、12=>米、2=>白、14=>灰、15=>棕
+///车源内饰颜色 对应 id
+
++ (int)colorIdForColorInString:(NSString *)string
+{
+    //'1'=>'黑色','2'=>'白色','3'=>'红色','4'=>'黄色','5'=>'蓝   色','6'=>'绿色','7'=>'紫色','8'=>'银灰色','9'=>'深灰色','10'=>'香槟色','11'=>'其它','12'=>'棕色'
+    if ([string hasPrefix:@"黑"]){
+        
+        return 1;
+    }else if ([string hasPrefix:@"白"]){
+        
+        return 2;
+    }else if ([string hasPrefix:@"红"]) {
+        
+        return 3;
+        
+    }
+    
+    // 4 ~ 10 的颜色在以后版本中弃用,内饰颜色不提供这些颜色的选择
+    
+    else if ([string hasPrefix:@"黄"]) {
+        
+        return 4;
+        
+    }else if ([string hasPrefix:@"蓝"]) {
+        
+        return 5;
+        
+    }else if ([string hasPrefix:@"绿"]) {
+        
+        return 6;
+        
+    }else if ([string hasPrefix:@"紫"]) {
+        
+        return 7;
+        
+    }else if ([string hasPrefix:@"银灰"]) {
+        
+        return 8;
+        
+    }else if ([string hasPrefix:@"深灰"]) {
+        
+        return 9;
+        
+    }else if ([string hasPrefix:@"香槟"]) {
+        
+        return 10;
+        
+    }else if ([string hasPrefix:@"其他"]) {
+        
+        return 11;
+        
+    }else if ([string hasPrefix:@"米"]){
+        
+        return 12;
+        
+    }else if ([string hasPrefix:@"咖啡"]){
+        
+        return 13;
+        
+    }else if ([string hasPrefix:@"灰"]){
+        
+        return 14;
+        
+    }else if ([string hasPrefix:@"棕"]){
+        
+        return 15;
+    }
+    
+    return 0;
+}
+
 + (UIColor *)colorForColorId:(int)colorId
 {
     switch (colorId) {

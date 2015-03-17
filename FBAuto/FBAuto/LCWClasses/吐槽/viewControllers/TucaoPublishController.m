@@ -91,6 +91,12 @@
 - (void)publishTucaoImageId:(NSString *)imageId
 {
     NSString *content = self.inputView.text;
+    
+    if (imageId.length == 0 || imageId == nil) {
+        
+        imageId = @"";
+    }
+    
     NSString *url  = [NSString stringWithFormat:FBAUTO_TUCAO_PUBLISH,[GMAPI getAuthkey],content,colorid,imageId];
     
     __weak typeof(self)weakSelf = self;

@@ -321,7 +321,11 @@
         [weakSelf labelWithTag:103].text = color_Out_In;
         
         _color_out = (int)[MENU_HIGHT_OUTSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_out"]];
-        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
+//        _color_in = (int)[MENU_HIGHT_INSIDE_CORLOR indexOfObject:[dic objectForKey:@"color_in"]];
+        
+        //内饰颜色大修改 2.0
+        
+        _color_in = [LCWTools colorIdForColorInString:[dic objectForKey:@"color_in"]];
         
         [weakSelf labelWithTag:104].text = [dic objectForKey:@"build_time"];
         
