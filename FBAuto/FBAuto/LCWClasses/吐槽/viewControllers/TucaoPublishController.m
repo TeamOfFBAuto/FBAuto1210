@@ -13,8 +13,9 @@
 #import "ASIFormDataRequest.h"
 #import "DXAlertView.h"
 
+#import "MLImageCrop.h"
 
-@interface TucaoPublishController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
+@interface TucaoPublishController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate,MLImageCropDelegate>
 {
     BOOL haveImage;
     
@@ -92,7 +93,7 @@
 {
     NSString *content = self.inputView.text;
     
-    if (imageId.length == 0 || imageId == nil) {
+    if (imageId == nil) {
         
         imageId = @"";
     }
@@ -350,7 +351,7 @@
     
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
+//    imagePickerController.allowsEditing = YES;
     //    imagePickerController.assters = photosArray;
     
 //    imagePickerController.limitsMaximumNumberOfSelection = YES;
@@ -569,14 +570,35 @@
         //将二进制数据生成UIImage
         UIImage *image = [UIImage imageWithData:data];
         
-        [self addPhoto:image];
+//        [self addPhoto:image];
         
+        
+        __weak typeof(self)wealSelf = self;
         [picker dismissViewControllerAnimated:NO completion:^{
             
+            [wealSelf cropImage:image];
             
         }];
         
     }
+}
+
+#pragma - mark 切图
+
+- (void)cropImage:(UIImage *)image
+{
+    MLImageCrop *crop = [[MLImageCrop alloc]init];
+    crop.image = image;
+    crop.delegate = self;
+//    [crop showWithAnimation:YES];
+    [self presentViewController:crop animated:YES completion:nil];
+}
+
+#pragma - mark MLCropImageDelegate
+
+- (void)cropImage:(UIImage*)cropImage forOriginalImage:(UIImage*)originalImage
+{
+    [self addPhoto:cropImage];
 }
 
 #pragma - mark QBImagePicker 代理
