@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class GridView;
 @interface TucaoViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *headImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
@@ -21,7 +22,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *commentLable;
 @property (strong, nonatomic) IBOutlet UIView *lineOne;
 @property (strong, nonatomic) IBOutlet UIView *lineTwo;
-@property (strong, nonatomic) IBOutlet UIView *toolsView;
+@property (strong, nonatomic) IBOutlet UIView *toolsView;//底部工具 背景view
+
+@property (strong, nonatomic) IBOutlet GridView *gridView;//图片九宫格
 
 - (void)setCellWithModel:(id)aModel;
 

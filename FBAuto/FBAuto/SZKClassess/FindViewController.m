@@ -16,6 +16,10 @@
 
 #import "TucaoDetailController.h"
 
+#import "GridView.h"
+
+#import "FBPhotoBrowserController.h"
+
 @interface FindViewController ()<RefreshDelegate,UITableViewDataSource>
 {
     RefreshTableView *_table;
@@ -33,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.text = @"吐糟故事";
+    self.titleLabel.text = @"吐槽故事";
     self.button_back.hidden = YES;
     
     oldTableHeight = self.view.height - 49 - 64;
@@ -68,12 +72,42 @@
     [_table showRefreshHeader:NO];
 }
 
+/**
+ *  图片发布
+ */
 - (void)test
 {
     TucaoPublishController *publishTucao = [[TucaoPublishController alloc]init];
     
     [self PushToViewController:publishTucao animated:YES];
     
+    [self updateViewFrameForShow:YES duration:0.2];
+
+}
+
+/**
+ *  调整至大图
+ *
+ *  @param images     图片url数组
+ *  @param imageIndex 显示图片下标
+ */
+- (void)clickToBigPhotoWithImages:(NSArray *)images showIndex:(int)imageIndex{
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *urlDic in images) {
+        
+        NSMutableString *str = [NSMutableString stringWithString:[urlDic objectForKey:@"link"]];
+        
+        [str replaceOccurrencesOfString:@"small" withString:@"ori" options:0 range:NSMakeRange(0, str.length)];
+        
+        [arr addObject:str];
+        
+    }
+    
+    FBPhotoBrowserController *browser = [[FBPhotoBrowserController alloc]init];
+    browser.imagesArray = arr;
+    browser.showIndex = imageIndex;
+    browser.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:browser animated:YES];
     [self updateViewFrameForShow:YES duration:0.2];
 
 }
@@ -215,7 +249,7 @@
         
         self.tabBarController.tabBar.top = show ? DEVICE_HEIGHT - 49 : DEVICE_HEIGHT;
         
-        NSLog(@"----tabbar %f",self.tabBarController.tabBar.top);
+//        NSLog(@"----tabbar %f",self.tabBarController.tabBar.top);
         
         weakstatesBarView.top = show ? -20 : -64;
         
@@ -231,7 +265,7 @@
 {
     CGFloat offset = scrollView.contentOffset.y;
     
-    NSLog(@"offset %f",offset);
+//    NSLog(@"offset %f",offset);
     
     if (offset > 20 && offset > currentOffsetY) {
         
@@ -344,6 +378,14 @@
     
     cell.likeButton.tag = 1000 + indexPath.row;
     [cell.likeButton addTarget:self action:@selector(clickToZan:) forControlEvents:UIControlEventTouchUpInside];
+    
+    __weak typeof(self)weakSelf = self;
+    
+    //点击图片 进 大图
+    cell.gridView.clickBlock = ^(int imageIndex,NSArray *images){
+        
+        [weakSelf clickToBigPhotoWithImages:images showIndex:imageIndex];
+    };
     
     
     return cell;

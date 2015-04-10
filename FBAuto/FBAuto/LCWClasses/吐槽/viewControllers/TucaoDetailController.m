@@ -51,7 +51,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.text = @"吐糟详情";
+    self.titleLabel.text = @"吐槽详情";
     
     _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 64) showLoadMore:NO];
     

@@ -82,6 +82,8 @@
     self.navigationItem.rightBarButtonItems = @[save_item,save_item2];
     
     self.enablePOI = YES;
+    
+    [self sendDebugRichMessage];
 }
 
 - (void)didReceiveMemoryWarning

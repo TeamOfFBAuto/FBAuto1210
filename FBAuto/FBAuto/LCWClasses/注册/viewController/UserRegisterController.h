@@ -10,8 +10,7 @@
 /**
  *  注册
  */
+
 @interface UserRegisterController : UIViewController
-
-
 
 @end

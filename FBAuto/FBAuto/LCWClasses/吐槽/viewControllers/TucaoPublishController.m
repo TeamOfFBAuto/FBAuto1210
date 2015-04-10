@@ -29,6 +29,12 @@
     
     CGFloat imageHeight;
     
+    QBImagePickerController *imagePickerController;
+    
+    NSMutableArray *photosArray;//存放图片
+    
+    NSString *_photo;//图片id
+    
 }
 
 
@@ -48,8 +54,9 @@
     imageCenter = CGPointMake(DEVICE_WIDTH /2.f, self.imageView.center.y);
     imageHeight = self.imageView.height;
     
-    //随机一个背景颜色
+    photosArray = [NSMutableArray array];//存放多张图片
     
+    //随机一个背景颜色
     colorid = arc4random() % 5 + 1;
     
     self.imageView.backgroundColor = [ColorModel colorForTucao:colorid];
@@ -60,7 +67,7 @@
     
     UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,22,44)];
 //    saveButton.backgroundColor = [UIColor orangeColor];
-    [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setTitle:@"发布" forState:UIControlStateNormal];
     saveButton.titleLabel.font = [UIFont systemFontOfSize:10];
     [saveButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 5, 0)];
@@ -73,10 +80,6 @@
     [self.deleteButton addTarget:self action:@selector(clickToDeletePhoto:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)test
-{
-    [self postImages:self.imageView.image];;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,7 +90,7 @@
 
 
 /**
- *  发布吐槽
+ *  发布吐槽 多张图片
  */
 - (void)publishTucaoImageId:(NSString *)imageId
 {
@@ -216,7 +219,145 @@
 }
 
 
+
+/**
+ *  多图上传
+ */
+- (void)postImagesDuotu:(NSArray *)allImages
+{
+    [loadingHub show:YES];
+    
+    
+    //挑选 imageId 和 image
+    
+    NSMutableArray *images = [NSMutableArray array];
+    
+    for (int i = 0; i < allImages.count; i ++) {
+        id aObject = [allImages objectAtIndex:i];
+        
+        if ([aObject isKindOfClass:[UIImage class]]) {
+            
+            NSLog(@"aObject %@",aObject);
+            [images addObject:aObject];
+        }
+    }
+    
+    
+    NSString* url = [NSString stringWithFormat:FBAUTO_TUCAO_UPLOAD_IMAGE];
+    
+    ASIFormDataRequest *uploadImageRequest= [ ASIFormDataRequest requestWithURL : [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [uploadImageRequest setStringEncoding:NSUTF8StringEncoding];
+    
+    [uploadImageRequest setRequestMethod:@"POST"];
+    
+    [uploadImageRequest setResponseEncoding:NSUTF8StringEncoding];
+    
+    [uploadImageRequest setPostValue:[GMAPI getAuthkey] forKey:@"authkey"];
+    
+    [uploadImageRequest setPostFormat:ASIMultipartFormDataPostFormat];
+    
+    for (int i = 0;i < allImages.count; i ++)
+        
+    {
+        UIImage *eImage  = [allImages objectAtIndex:i];
+        
+        
+        UIImage * newImage = [SzkAPI scaleToSizeWithImage:eImage size:CGSizeMake(eImage.size.width>1024?1024:eImage.size.width,eImage.size.width>1024?eImage.size.height*1024/eImage.size.width:eImage.size.height)];
+        
+        NSData *imageData=UIImageJPEGRepresentation(newImage,0.5);
+        
+        NSString *photoName=[NSString stringWithFormat:@"tucao%d.png",i];
+        
+        NSLog(@"photoName:%@",photoName);
+        
+        [uploadImageRequest addData:imageData withFileName:photoName andContentType:@"image/png" forKey:@"photo[]"];
+        
+        NSLog(@"---%u",imageData.length/1024/1024);
+    }
+    
+    [uploadImageRequest setDelegate : self ];
+    
+    [uploadImageRequest startAsynchronous];
+    
+    __weak typeof(ASIFormDataRequest *)weakRequst = uploadImageRequest;
+    //完成
+    [uploadImageRequest setCompletionBlock:^{
+        
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:weakRequst.responseData options:0 error:nil];
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            int erroCode = [[result objectForKey:@"errcode"]intValue];
+            NSString *erroInfo = [result objectForKey:@"errinfo"];
+            
+            [loadingHub hide:YES];
+            
+            if (erroCode != 0) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:erroInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+                
+                return ;
+            }
+            
+            NSArray *dataInfo = [result objectForKey:@"datainfo"];
+            NSMutableArray *imageIdArr = [NSMutableArray arrayWithCapacity:dataInfo.count];
+            
+            for (NSDictionary *imageDic in dataInfo) {
+                NSString *imageId = [imageDic objectForKey:@"imageid"];
+                [imageIdArr addObject:imageId];
+            }
+            
+            _photo = [imageIdArr componentsJoinedByString:@","];
+            
+            __weak typeof(self)weakSelf = self;
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                [weakSelf publishTucaoImageId:_photo];
+            });
+        }
+        
+        
+    }];
+    
+    //失败
+    [uploadImageRequest setFailedBlock:^{
+        
+        NSLog(@"uploadFail %@",weakRequst.responseString);
+        
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:weakRequst.responseData options:0 error:nil];
+        
+        NSString *erroInfo = [result objectForKey:@"errinfo"];
+        
+        
+        
+        [loadingHub hide:YES];
+        
+//        [LCWTools showDXAlertViewWithText:@"上传失败，重新发布"];
+        
+        [LCWTools showDXAlertViewWithText:erroInfo];
+
+        
+    }];
+    
+}
+
+
 #pragma mark 事件处理
+
+/**
+ *  点击去发布
+ *
+ *  @param sender
+ */
+- (void)clickToPublish:(UIButton *)sender
+{
+//    [self postImages:self.imageView.image]; //单张图
+    
+    [self postImagesDuotu:photosArray];
+    
+}
 
 /**
  *  发布成功直接返回
@@ -321,7 +462,9 @@
         {
             NSLog(@"相册");
             
-            [weakSelf clickToAlbum:nil];
+//            [weakSelf clickToAlbum:nil];
+            
+            [weakSelf clickToAlbum2:nil];
         }
         
     }];
@@ -383,6 +526,38 @@
         [alert show];
     }
 }
+
+//打开相册
+
+- (IBAction)clickToAlbum2:(id)sender {
+    
+    
+    if (photosArray.count >= 9) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"最多选择9张图片" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        return;
+    }
+    
+    if (!imagePickerController)
+    {
+        imagePickerController = nil;
+    }
+    
+    
+    imagePickerController = [[QBImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.assters = photosArray;
+    imagePickerController.limitsMaximumNumberOfSelection = YES;
+    imagePickerController.maximumNumberOfSelection = 9;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+    
+    [self presentViewController:navigationController animated:YES completion:NULL];
+    
+}
+
 
 #pragma mark -- 代理
 
@@ -615,6 +790,7 @@
 {
     NSArray *mediaInfoArray = (NSArray *)info;
     
+    NSMutableArray * allImageArray = [NSMutableArray array];
     
     //    NSMutableArray * allAssesters = [[NSMutableArray alloc] init];
     
@@ -623,9 +799,11 @@
         UIImage * image = [[mediaInfoArray objectAtIndex:i] objectForKey:@"UIImagePickerControllerOriginalImage"];
         
         UIImage * newImage = image;
+        [allImageArray addObject:newImage];
         
-        [self addPhoto:newImage];
     }
+    
+    [photosArray addObjectsFromArray:allImageArray];
     
     [self dismissViewControllerAnimated:YES completion:^{
         

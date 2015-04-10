@@ -82,10 +82,10 @@
  *********/
 
 //#define RCIM_APPKEY @"cpj2xarlj0xdn" //融云appkey
-//#define RCIM_APPSECRET @"BJs1fiJAvGtqAy" //appSecret  （）
+//#define RCIM_APPSECRET @"BJs1fiJAvGtqAy" //appSecret
 
 #define RCIM_APPKEY @"pgyu6atqyd6xu" //融云appkey
-#define RCIM_APPSECRET @"K8J5FQ5JS151l" //appSecret  （）
+#define RCIM_APPSECRET @"K8J5FQ5JS151l" //appSecret
 
 
 @implementation AppDelegate

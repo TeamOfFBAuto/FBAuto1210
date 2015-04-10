@@ -31,6 +31,9 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     }
+    
+    UIColor *color = [UIColor orangeColor];
+    
 }
 
 
