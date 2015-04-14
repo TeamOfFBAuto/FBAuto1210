@@ -20,6 +20,10 @@
 
 #import "LInputView.h"
 
+#import "GridView.h"
+
+#import "FBPhotoBrowserController.h"
+
 @interface TucaoDetailController ()<RefreshDelegate,UITableViewDataSource>
 {
     RefreshTableView *_table;
@@ -123,6 +127,32 @@
 }
 
 #pragma mark - 事件处理
+
+
+/**
+ *  调整至大图
+ *
+ *  @param images     图片url数组
+ *  @param imageIndex 显示图片下标
+ */
+- (void)clickToBigPhotoWithImages:(NSArray *)images showIndex:(int)imageIndex{
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *urlDic in images) {
+        
+        NSMutableString *str = [NSMutableString stringWithString:[urlDic objectForKey:@"link"]];
+        
+        [str replaceOccurrencesOfString:@"small" withString:@"ori" options:0 range:NSMakeRange(0, str.length)];
+        
+        [arr addObject:str];
+        
+    }
+    
+    FBPhotoBrowserController *browser = [[FBPhotoBrowserController alloc]init];
+    browser.imagesArray = arr;
+    browser.showIndex = imageIndex;
+    [self.navigationController pushViewController:browser animated:YES];
+    
+}
 
 //- (void)addLocalComment:(NSString *)text
 //{
@@ -502,6 +532,13 @@
         
         [cell_detail.likeButton addTarget:self action:@selector(clickToZan:) forControlEvents:UIControlEventTouchUpInside];
         [cell_detail.commentButton addTarget:self action:@selector(clickToComment:) forControlEvents:UIControlEventTouchUpInside];
+        
+        __weak typeof(self)weakSelf = self;
+        //点击图片 进 大图
+        cell_detail.gridView.clickBlock = ^(int imageIndex,NSArray *images){
+            
+            [weakSelf clickToBigPhotoWithImages:images showIndex:imageIndex];
+        };
         
         return cell_detail;
     }

@@ -280,6 +280,7 @@
 		13B259D51A591F9100F359CD /* yonghu38_38@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B259BE1A591F9100F359CD /* yonghu38_38@2x.png */; };
 		13B626D219CC04DB008FB162 /* defaultFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B626D119CC04DB008FB162 /* defaultFace.png */; };
 		13B666931AD7BE8100B39A31 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B666921AD7BE8100B39A31 /* GridView.m */; };
+		13B857FA1ADBC80700FAD23F /* TucaoPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B857F91ADBC80700FAD23F /* TucaoPublish.m */; };
 		13BB425B1A5F7C2400B8E78E /* cheyuan46_46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB42531A5F7C2400B8E78E /* cheyuan46_46@2x.png */; };
 		13BB425C1A5F7C2400B8E78E /* gaimi46_46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB42541A5F7C2400B8E78E /* gaimi46_46@2x.png */; };
 		13BB425D1A5F7C2400B8E78E /* lianxi46_46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BB42551A5F7C2400B8E78E /* lianxi46_46@2x.png */; };
@@ -901,6 +902,8 @@
 		13B626D119CC04DB008FB162 /* defaultFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultFace.png; sourceTree = "<group>"; };
 		13B666911AD7BE8100B39A31 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		13B666921AD7BE8100B39A31 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		13B857F81ADBC80700FAD23F /* TucaoPublish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TucaoPublish.h; sourceTree = "<group>"; };
+		13B857F91ADBC80700FAD23F /* TucaoPublish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TucaoPublish.m; sourceTree = "<group>"; };
 		13BB42531A5F7C2400B8E78E /* cheyuan46_46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cheyuan46_46@2x.png"; sourceTree = "<group>"; };
 		13BB42541A5F7C2400B8E78E /* gaimi46_46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gaimi46_46@2x.png"; sourceTree = "<group>"; };
 		13BB42551A5F7C2400B8E78E /* lianxi46_46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianxi46_46@2x.png"; sourceTree = "<group>"; };
@@ -2563,6 +2566,8 @@
 				135922561A4D6B0B0091E320 /* TucaoPublishController.xib */,
 				13BBD0A31A52834700212CB1 /* TucaoDetailController.h */,
 				13BBD0A41A52834700212CB1 /* TucaoDetailController.m */,
+				13B857F81ADBC80700FAD23F /* TucaoPublish.h */,
+				13B857F91ADBC80700FAD23F /* TucaoPublish.m */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -3384,6 +3389,7 @@
 				138074FB196E317700AD3D03 /* SzkAPI.m in Sources */,
 				13BB42751A5FD4CB00B8E78E /* UserHomeController.m in Sources */,
 				13D5E0771962B2B000804835 /* UIColor+ConvertColor.m in Sources */,
+				13B857FA1ADBC80700FAD23F /* TucaoPublish.m in Sources */,
 				13D5E0601962A14E00804835 /* City.m in Sources */,
 				138B4B111966A51700B974A5 /* SCGIFImageView.m in Sources */,
 				E31F5398197405DC00540124 /* GlocalUserImage.m in Sources */,

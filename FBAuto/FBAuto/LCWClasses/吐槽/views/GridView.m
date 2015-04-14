@@ -72,7 +72,10 @@
 
 - (void)clickImageIndex:(UIButton *)button
 {
-    _aBlock(button.tag - 100,_images);
+    if (_aBlock) {
+        _aBlock(button.tag - 100,_images);
+    }
+    
 }
 
 @end

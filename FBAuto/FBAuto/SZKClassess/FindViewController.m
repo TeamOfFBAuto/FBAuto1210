@@ -14,6 +14,8 @@
 
 #import "TucaoPublishController.h"
 
+#import "TucaoPublish.h"
+
 #import "TucaoDetailController.h"
 
 #import "GridView.h"
@@ -55,7 +57,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateTucaoList:) name:NOTIFICATION_PUBLISHTUCAO_SUCCESS object:nil];
     
     UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 50 - 10,self.view.height - 64 - 49 - 50 - 10,50,50)];
-    [saveButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton addTarget:self action:@selector(clickToPublishTucao) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setImage:[UIImage imageNamed:@"tucao_add"] forState:UIControlStateNormal];
     
     [self.view addSubview:saveButton];
@@ -73,14 +75,18 @@
 }
 
 /**
- *  图片发布
+ *  发布吐槽
  */
-- (void)test
+- (void)clickToPublishTucao
 {
-    TucaoPublishController *publishTucao = [[TucaoPublishController alloc]init];
+//    TucaoPublishController *publishTucao = [[TucaoPublishController alloc]init];
+//    
+//    [self PushToViewController:publishTucao animated:YES];
+//    
+//    [self updateViewFrameForShow:YES duration:0.2];
     
+    TucaoPublish *publishTucao = [[TucaoPublish alloc]init];
     [self PushToViewController:publishTucao animated:YES];
-    
     [self updateViewFrameForShow:YES duration:0.2];
 
 }
